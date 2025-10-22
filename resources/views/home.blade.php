@@ -14,6 +14,11 @@
     <title>Favy | smk-connect</title>
 </head>
 <body>
-    <h1 class="text-8xl">halooo</h1>
+    @include('component.navbar')
+    <section class="bg-gradient-br from-[#2CC295] to-[#03624C] p-30">
+        <div class="container">
+            <h1 class="text-6xl font-extrabold text-white">Welcome to Favy</h1>
+        </div>
+    </section>
 </body>
 </html>
