@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('applications', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
-            $table->foreignId('worker_id')->constrained('users')->cascadeOnDelete();
+            $table->id('id_application');
+            $table->unsignedBigInteger('task_id');
+            $table->unsignedBigInteger('user_id');
             $table->text('pesan')->nullable();
-            $table->enum('status', ['pending','accepted','rejected','completed'])->default('pending');
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
 
+            $table->foreign('task_id')->references('id_task')->on('tasks')->onDelete('cascade');
+            $table->foreign('user_id')->references('id_users')->on('users')->onDelete('cascade');
         });
+
     }
 
     /**

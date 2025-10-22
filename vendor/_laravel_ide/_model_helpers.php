@@ -308,6 +308,22 @@ namespace App\Models {
     /**
      * App\Models\Review
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property string|null $komentar
+     * @property bool $rating
+     * @property mixed $task_id
+     * @property mixed $to_user_id
+     * @property mixed $from_user_id
+     * @property mixed $id_review
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereIdReview($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereFromUserId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereToUserId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereTaskId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereRating($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereKomentar($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Review>|Review query()
@@ -918,28 +934,26 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string|null $remember_token
-     * @property mixed $jurusan_id
      * @property string|null $bio
-     * @property float|null $rating
+     * @property mixed $jurusan_id
      * @property string|null $foto_profil
      * @property mixed $role
      * @property string $password
      * @property \Illuminate\Support\Carbon|null $email_verified_at
      * @property string $email
      * @property string $nama
-     * @property int $id
+     * @property mixed $id_users
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
      * @property-read int|null $notifications_count
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereIdUsers($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereNama($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereEmail($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereEmailVerifiedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePassword($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRole($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereFotoProfil($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRating($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereBio($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereJurusanId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereBio($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRememberToken($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereUpdatedAt($value)
@@ -1247,6 +1261,20 @@ namespace App\Models {
     /**
      * App\Models\applications
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property mixed $status
+     * @property string|null $pesan
+     * @property mixed $user_id
+     * @property mixed $task_id
+     * @property mixed $id_application
+     * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications whereIdApplication($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications whereTaskId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications whereUserId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications wherePesan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications whereStatus($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<applications>|applications query()
@@ -1550,6 +1578,16 @@ namespace App\Models {
     /**
      * App\Models\jurusan
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property string|null $deskripsi
+     * @property string $nama_jurusan
+     * @property mixed $id_jurusan
+     * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereIdJurusan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereNamaJurusan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereDeskripsi($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan query()

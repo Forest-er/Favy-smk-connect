@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jurusan', function (Blueprint $table) {
-            $table->id();
+        Schema::create('jurusans', function (Blueprint $table) {
+            $table->engine='innoDB';
+            $table->id('id_jurusan');
             $table->string('nama_jurusan', 100);
             $table->text('deskripsi')->nullable();
             $table->timestamps();
