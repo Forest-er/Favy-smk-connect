@@ -942,7 +942,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $email_verified_at
      * @property string $email
      * @property string $nama
-     * @property mixed $id_users
+     * @property int $id_users
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
      * @property-read int|null $notifications_count
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereIdUsers($value)
