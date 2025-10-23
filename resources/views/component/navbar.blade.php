@@ -1,6 +1,6 @@
     <nav
         class="bg-white/60 backdrop-blur-2xl z-10 rounded-b-2xl dark:bg-gray-900 fixed w-full shadow-lg border-b border-gray-200">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <span class="self-center text-4xl font-bold whitespace-nowrap dark:text-white">Favy</span>
             </a>

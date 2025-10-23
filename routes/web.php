@@ -3,7 +3,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FreelancerController;
-
+use App\Http\Controllers\HomeController;
+    
 Route::get('/', function () { return view('tester'); });
 
 // Auth
@@ -19,6 +20,7 @@ Route::get('/register/{role}', function ($role) {
 
 Route::post('/register/client', [RegisterController::class, 'registerClient'])->name('register.client');
 Route::post('/register/freelancer', [RegisterController::class, 'registerFreelancer'])->name('register.freelancer');
+Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
 
 // Dashboard Client
 Route::middleware(['auth', 'role:client'])->group(function () {
