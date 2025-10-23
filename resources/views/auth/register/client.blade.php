@@ -122,10 +122,10 @@
                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
             </svg>
           </div>
-          <input type="password" required id="password" placeholder="Masukkan password" name="password"
+          <input type="password" required id="password" name="password" placeholder="Masukkan password"
             class="w-full pl-12 pr-12 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all">
-          <button type="submit"
-            onclick="const input = document.getElementById('password'); input.type = input.type === 'password' ? 'text' : 'password';"
+          <button type="button"
+            onclick="const p=document.getElementById('password');p.type=p.type==='password'?'text':'password';"
             class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-rose-600 transition-colors">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -137,6 +137,33 @@
         </div>
         <p class="mt-1 text-xs text-gray-500">Password harus minimal 8 karakter</p>
       </div>
+
+      <!-- Konfirmasi Password -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Konfirmasi Password</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <input type="password" required id="password_confirmation" name="password_confirmation"
+            placeholder="Ulangi password"
+            class="w-full pl-12 pr-12 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all">
+          <button type="button"
+            onclick="const c=document.getElementById('password_confirmation');c.type=c.type==='password'?'text':'password';"
+            class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-rose-600 transition-colors">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
 
       <!-- Terms -->
       <div class="flex items-start">
