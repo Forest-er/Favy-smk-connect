@@ -57,86 +57,58 @@
         </div>
 
         <!-- Category Icons Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-10">
+        <div class="container mb-10 w-full flex flex-row items-center space-x-6 overflow-x-auto py-10 scrollbar-hide">
 
-            <!-- Design (Blue) -->
-            <div
-                class="group bg-white rounded-xl shadow p-4 flex flex-col items-center justify-center hover:-translate-y-1 transition cursor-pointer hover:shadow-[0_6px_20px_rgba(122,200,255,0.6)]">
-                <div class="rounded-full w-12 h-12 flex items-center justify-center mb-2 transition-all group-hover:brightness-110"
-                    style="background:#7ac8ff; color:#0f3a4b;">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                        <path
-                            d="M16.862 4.487l1.687 1.688a1.875 1.875 0 010 2.652L7.5 19.875 3 21l1.125-4.5 11.05-11.05a1.875 1.875 0 012.652 0z" />
-                    </svg>
+            @php
+                $styles = [
+                    [
+                        'bg' => '#ffe2a8',
+                        'color' => '#7a4a00',
+                        'shadow' => 'hover:shadow-[0_6px_20px_rgba(255,226,168,0.7)]',
+                        'icon' => '<path d="M8.25 15L3.75 12l4.5-3m7.5 6l4.5-3-4.5-3m-3.75-3.75L9 21" />'
+                    ],
+                    [
+                        'bg' => '#eaa7f1',
+                        'color' => '#6d005f',
+                        'shadow' => 'hover:shadow-[0_6px_20px_rgba(234,167,241,0.7)]',
+                        'icon' => '<path d="M8.25 8.25l7.5-2.25v9l-7.5 2.25v-9zM19.5 12a3 3 0 11-6 0" />'
+                    ],
+                    [
+                        'bg' => '#7ac8ff',
+                        'color' => '#0f3a4b',
+                        'shadow' => 'hover:shadow-[0_6px_20px_rgba(122,200,255,0.6)]',
+                        'icon' => '<path d="M12 4.5v15m-7.5-7.5h15" />'
+                    ],
+                ];
+            @endphp
+
+            @foreach ($jurusans as $index => $jurusan)
+                @php
+                    $style = $styles[$index % count($styles)];
+                @endphp
+
+                <div class="group bg-white rounded-xl shadow flex flex-col items-center justify-center 
+                    hover:-translate-y-1 transition cursor-pointer shrink-0 {{ $style['shadow'] }}"
+                    style="width: 200px; height: 140px; min-width: 140px;">
+
+                    <div class="rounded-full w-12 h-12 flex items-center justify-center mb-3 transition-all 
+                        group-hover:brightness-110"
+                        style="background:{{ $style['bg'] }}; color:{{ $style['color'] }};">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            {!! $style['icon'] !!}
+                        </svg>
+                    </div>
+
+                    <p class="text-sm font-medium text-gray-700 text-center px-2 leading-tight">
+                        {{ $jurusan->nama_jurusan }}
+                    </p>
                 </div>
-                <p class="text-sm font-medium text-gray-700">Design</p>
-            </div>
-
-            <!-- Programming (Yellow) -->
-            <div
-                class="group bg-white rounded-xl shadow p-4 flex flex-col items-center justify-center hover:-translate-y-1 transition cursor-pointer hover:shadow-[0_6px_20px_rgba(255,226,168,0.7)]">
-                <div class="rounded-full w-12 h-12 flex items-center justify-center mb-2 transition-all group-hover:brightness-110"
-                    style="background:#ffe2a8; color:#7a4a00;">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                        <path d="M8.25 15L3.75 12l4.5-3m7.5 6l4.5-3-4.5-3m-3.75-3.75L9 21" />
-                    </svg>
-                </div>
-                <p class="text-sm font-medium text-gray-700">Programming</p>
-            </div>
-
-            <!-- Marketing (Pink) -->
-            <div
-                class="group bg-white rounded-xl shadow p-4 flex flex-col items-center justify-center hover:-translate-y-1 transition cursor-pointer hover:shadow-[0_6px_20px_rgba(234,167,241,0.7)]">
-                <div class="rounded-full w-12 h-12 flex items-center justify-center mb-2 transition-all group-hover:brightness-110"
-                    style="background:#eaa7f1; color:#6d005f;">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                        <path d="M8.25 8.25l7.5-2.25v9l-7.5 2.25v-9zM19.5 12a3 3 0 11-6 0" />
-                    </svg>
-                </div>
-                <p class="text-sm font-medium text-gray-700">Marketing</p>
-            </div>
-
-            <!-- Writing (Blue) -->
-            <div
-                class="group bg-white rounded-xl shadow p-4 flex flex-col items-center justify-center hover:-translate-y-1 transition cursor-pointer hover:shadow-[0_6px_20px_rgba(122,200,255,0.6)]">
-                <div class="rounded-full w-12 h-12 flex items-center justify-center mb-2 transition-all group-hover:brightness-110"
-                    style="background:#7ac8ff; color:#0f3a4b;">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                        <path d="M12 4.5v15m-7.5-7.5h15" />
-                    </svg>
-                </div>
-                <p class="text-sm font-medium text-gray-700">Writing</p>
-            </div>
-
-            <!-- Video (Yellow) -->
-            <div
-                class="group bg-white rounded-xl shadow p-4 flex flex-col items-center justify-center hover:-translate-y-1 transition cursor-pointer hover:shadow-[0_6px_20px_rgba(255,226,168,0.7)]">
-                <div class="rounded-full w-12 h-12 flex items-center justify-center mb-2 transition-all group-hover:brightness-110"
-                    style="background:#ffe2a8; color:#7a4a00;">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                        <path d="M15.75 10.5l4.5-2.25v7.5L15.75 13.5M4.5 6h9v12h-9z" />
-                    </svg>
-                </div>
-                <p class="text-sm font-medium text-gray-700">Video</p>
-            </div>
-
-            <!-- Business (Pink) -->
-            <div
-                class="group bg-white rounded-xl shadow p-4 flex flex-col items-center justify-center hover:-translate-y-1 transition cursor-pointer hover:shadow-[0_6px_20px_rgba(234,167,241,0.7)]">
-                <div class="rounded-full w-12 h-12 flex items-center justify-center mb-2 transition-all group-hover:brightness-110"
-                    style="background:#eaa7f1; color:#6d005f;">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                        <path d="M3.75 21h16.5M4.5 21V8.25h15V21m-10.5-9h6" />
-                    </svg>
-                </div>
-                <p class="text-sm font-medium text-gray-700">Business</p>
-            </div>
-
+            @endforeach
         </div>
 
 
         <!-- Freelancer populer-->
-        <section class="w-full mb-10">
+        <section class="w-full mb-10 px-6">
             <h2 class="text-lg font-semibold text-pink-400 flex items-center gap-1 mb-1">
                 Freelancer Terpopuler <span>🔥</span>
             </h2>

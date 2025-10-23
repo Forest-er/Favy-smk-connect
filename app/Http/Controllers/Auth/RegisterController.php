@@ -27,7 +27,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('freelancer.dashboard');
+        return redirect()->route('role.dashboard', ['role' => $user->role]);
     }
 
     public function registerClient(Request $request)
@@ -47,6 +47,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('client.dashboard');
+        return redirect()->route('role.dashboard', ['role' => $user->role]);
     }
 }

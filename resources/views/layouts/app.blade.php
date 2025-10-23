@@ -23,6 +23,7 @@
         <a href="/" class="hover:text-pink-500">Beranda</a>
         <a href="/choose-role" class="hover:text-pink-500">Daftar</a>
         <a href="/auth" class="hover:text-pink-500">Masuk</a>
+        <a href="/logout" class="bg-red-600 text-white rounded-lg p-2 hover:bg-red-200">Logout</a>
       </nav>
     </div>
   </header>

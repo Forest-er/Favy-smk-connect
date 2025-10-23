@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('tester');
@@ -30,10 +31,28 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-// ===== Dashboard Routes =====
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/{role}/dashboard', function ($role) {
+        $user = auth()->user();
+
+        // Cegah akses ke role lain
+        if ($user->role !== $role) {
+            abort(403, 'Kamu tidak memiliki akses ke halaman ini.');
+        }
+
+        // Arahkan ke dashboard sesuai role
+        switch ($role) {
+            case 'worker':
+                return app(FreelancerController::class)->dashboard();
+            case 'client':
+                return app(ClientController::class)->dashboard();
+            case 'admin':
+                return redirect()->route('admin.dashboard');
+            default:
+                abort(404);
+        }
+    })->name('user.dashboard');
+});
 
 // ===== Client Routes =====
 Route::middleware(['auth', 'role:client'])->group(function () {
@@ -56,5 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/{role}/dashboard', [App\Http\Controllers\JurusanController::class, 'index'])->name('role.dashboard');
+
 
 require __DIR__.'/auth.php';
