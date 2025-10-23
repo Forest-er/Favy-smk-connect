@@ -25,6 +25,7 @@ Route::get('/register/{role}', function ($role) {
 
 Route::post('/register/client', [RegisterController::class, 'registerClient'])->name('register.client');
 Route::post('/register/freelancer', [RegisterController::class, 'registerFreelancer'])->name('register.freelancer');
+Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
 
 // ===== Auth Routes =====
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
