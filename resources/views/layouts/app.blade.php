@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@yield('title', 'Freelance SMK')</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+  {{-- Navbar --}}
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-lg font-bold text-gray-800">Freelance SMK</h1>
+      <nav class="space-x-6 text-sm font-medium text-gray-600">
+        <a href="/" class="hover:text-pink-500">Beranda</a>
+        <a href="/choose-role" class="hover:text-pink-500">Daftar</a>
+        <a href="/auth" class="hover:text-pink-500">Masuk</a>
+      </nav>
+    </div>
+  </header>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+  {{-- Konten utama --}}
+  <main class="py-10">
+    @yield('content')
+  </main>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+  {{-- Footer --}}
+  <footer class="text-center text-gray-500 text-sm py-6 border-t mt-12">
+    &copy; {{ date('Y') }} Freelance SMK. Semua hak dilindungi.
+  </footer>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-        </div>
-    </body>
+</body>
 </html>
