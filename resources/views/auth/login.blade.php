@@ -286,15 +286,22 @@
       <h2 class="text-3xl font-bold text-gray-900 mb-2">Masuk ke Akun</h2>
       <p class="text-gray-600">
         Belum punya akun?
-        <a href="{{ route('choose.role') }}" class="text-blue-500 font-semibold hover:text-blue-600 transition">
+        {{-- <a href="{{ route('choose.role') }}" class="text-blue-500 font-semibold hover:text-blue-600 transition">
   Daftar gratis
-</a>
+</a> --}}
 
       </p>
     </div>
 
+     @if(session('error'))
+    <div class="p-3 mb-4 text-sm text-red-600 bg-red-100 rounded-xl">
+    {{ session('error') }}
+    </div>
+    @endif
     <!-- Form -->
-    <form class="space-y-5">
+    <form method="POST" action="{{ route('login') }}" class="space-y-5">
+    @csrf
+
       <!-- Email -->
       <div>
         <label class="block text-sm font-semibold text-gray-700 mb-2" for="email">Email atau Username</label>
@@ -305,8 +312,12 @@
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
             </svg>
           </div>
-          <input type="text" id="email" placeholder="Masukkan email atau username"
-                 class="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:border-blue-400 focus:outline-none bg-white text-gray-900">
+            <input type="text" id="email" name="email" value="{{ old('email') }}" 
+                placeholder="Masukkan email atau username"
+                class="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:border-blue-400 focus:outline-none bg-white text-gray-900">
+            @error('email')
+            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+            @enderror          
         </div>
       </div>
 
@@ -320,8 +331,12 @@
                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
           </div>
-          <input type="password" id="password" placeholder="Masukkan password"
-                 class="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:border-blue-400 focus:outline-none bg-white text-gray-900">
+            <input type="password" id="password" name="password"
+                placeholder="Masukkan password"
+                class="w-full pl-12 pr-4 py-3.5 border border-gray-300 rounded-xl focus:border-blue-400 focus:outline-none bg-white text-gray-900">
+            @error('password')
+            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+            @enderror
           <button type="button"
                   class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -337,8 +352,7 @@
       <!-- Remember & Forgot -->
       <div class="flex items-center justify-between">
         <label class="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox"
-                 class="w-4 h-4 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-400">
+          <input type="checkbox" name="remember" class="w-4 h-4 rounded border-gray-300 text-blue-500 focus:ring-2 focus:ring-blue-400">
           <span class="text-sm text-gray-700">Remember Me</span>
         </label>
         <a href="#" class="text-sm font-semibold text-blue-500 hover:text-blue-600 transition">

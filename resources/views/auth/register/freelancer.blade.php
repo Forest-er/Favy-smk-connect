@@ -40,29 +40,30 @@
         <a href="{{ route('login') }}" class="text-blue-600 font-semibold hover:underline">Masuk</a>
       </p>
 
-      <form class="space-y-5">
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-          <input type="text" placeholder="Masukkan nama lengkap"
-            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none transition">
-        </div>
+      <form class="space-y-5" action="{{ route('register.freelancer') }}" method="POST">
+        @csrf
+        <div class="mb-4">
+            <label for="nama" class="block text-sm font-medium">Nama Lengkap</label>
+            <input type="text" name="nama" id="nama" value="{{ old('nama') }}" class="w-full border rounded px-3 py-2" required>
+            @error('nama') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+          </div>
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-          <input type="email" placeholder="Masukkan email aktif"
-            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none transition">
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium">Email</label>
+          <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full border rounded px-3 py-2" required>
+          @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input type="password" placeholder="Buat password"
-              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none transition">
+            <input type="password" name="password" id="password" class="w-full border rounded px-3 py-2" required>
+            @error('password') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi</label>
-            <input type="password" placeholder="Ulangi password"
-              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none transition">
+            <input type="password" name="password_confirmation" id="password_confirmation" class="w-full border rounded px-3 py-2" required>
+            @error('password_confirmation') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
           </div>
         </div>
 
