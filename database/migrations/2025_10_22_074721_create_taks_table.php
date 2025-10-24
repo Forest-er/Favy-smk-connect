@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_task');
             $table->foreignId('users_id')->references('id_users')->on('users')->cascadeOnDelete();
             $table->string('judul');
+            $table->string('foto')->nullable();
             $table->text('deskripsi')->nullable();
             $table->foreignId('jurusan_id')->references('id_jurusan')->on('jurusans')->cascadeOnDelete();
             $table->date('deadline')->nullable();

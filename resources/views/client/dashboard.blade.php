@@ -11,7 +11,20 @@
 
             <div class="relative z-10 max-w-7xl mx-auto">
                 <!-- Greeting -->
-                <h1 class="text-3xl md:text-4xl font-bold mb-4">Welcome back, Jijul 👋</h1>
+                @php
+                    $hour = now()->format('H');
+                    if ($hour < 12) {
+                        $greeting = 'Good morning';
+                    } elseif ($hour < 18) {
+                        $greeting = 'Good afternoon';
+                    } else {
+                        $greeting = 'Good evening';
+                    }
+                @endphp
+
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">
+                    {{ $greeting }}, {{ Auth::user()->nama }} 👋
+                </h1>
                 <p class="mb-6 text-blue-100">Find projects, freelancers, and more!</p>
 
                 <!-- Search / Filter -->
@@ -22,11 +35,13 @@
 
                     <!-- Search Input with Icon -->
                     <div class="relative w-[50%]">
-                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
-                            <i class="bi bi-search"></i>
-                        </span>
-                        <input type="text" placeholder="Search projects..."
-                            class="w-full pl-12 p-3 border border-gray-300 rounded-full text-gray-800 focus:outline-none focus:border-blue-500">
+                        <form>
+                        <div class="flex flex-row">
+                        <input type="text" placeholder="Search projects..." name="keyword"
+                            class="w-full pl-12 p-3 border border-y-gray-300 rounded-l-full text-gray-800 focus:outline-none focus:border-blue-500">
+                        <button type="submit" class=" bg-white text-black py-3 px-5 rounded-r-full"><i class="bi bi-search"></i></button>
+                        </div>
+                        </form>
                     </div>
 
                 </div>
@@ -57,7 +72,7 @@
         </div>
 
         <!-- Category Icons Grid -->
-        <div class="container mb-10 w-full flex flex-row items-center space-x-6 overflow-x-auto py-10 scrollbar-hide">
+        <div class="container mb-10 w-full flex flex-row items-center space-x-6 overflow-x-auto pb-10 scrollbar-thin scrollbar-hide scrollbar-thumb-gray-300">
 
             @php
                 $styles = [
@@ -110,9 +125,9 @@
         <!-- Freelancer populer-->
         <section class="w-full mb-10 px-6">
             <h2 class="text-lg font-semibold text-pink-400 flex items-center gap-1 mb-1">
-                Freelancer Terpopuler <span>🔥</span>
+                Rekomendasi Project<span>🔥</span>
             </h2>
-            <p class="text-gray-400 mb-6 text-sm">Talent-talent terbaik minggu ini</p>
+            <p class="text-gray-400 mb-6 text-sm">project terbaru minggu ini</p>
              <div class="flex space-x-2">
                 <button
                     class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow hover:bg-gray-100 transition">
@@ -130,129 +145,53 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <!-- CARD 1 -->
+                 @forelse ($tasks as $task)
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
                     <div class="relative">
-                        <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
+                        <img src="{{ asset('storage/' . $task->foto) }}"
+                            onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
                             class="w-full h-40 object-cover">
                         <span
-                            class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-purple-500">Web
-                            Developer</span>
-                        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">⭐
-                            4.9</span>
+                            class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-purple-500">
+                            {{ $task->jurusan->nama_jurusan ?? 'Unknown' }}
+                        </span>
+                        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">
+                            ⭐ {{ rand(4,5) }}.{{ rand(0,9) }}
+                        </span>
                     </div>
-                    <div class="p-4">
-                        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">John Doe</h3>
-                        <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
-                            <span class="flex items-center gap-1"><i class="bi bi-briefcase"></i> 25 Projects</span>
-                            <span class="flex items-center gap-1"><i class="bi bi-people"></i> 185 Clients</span>
-                        </div>
-                        <div class="flex items-center justify-between mb-4">
-                            <p class="text-lg font-bold text-gray-800">$560.00/hr</p>
-                            <div class="flex items-center gap-2">
-                                <img src="https://i.pravatar.cc/150?img=1" class="w-7 h-7 rounded-full border">
-                                <span class="text-xs text-gray-600">Top Rated</span>
-                            </div>
-                        </div>
-                        <button
-                            class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-                            Hire Now
-                        </button>
-                    </div>
-                </div>
 
-                <!-- CARD 2 -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
-                    <div class="relative">
-                        <img src="https://images.pexels.com/photos/6779531/pexels-photo-6779531.jpeg"
-                            class="w-full h-40 object-cover">
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-pink-500">UI/UX
-                            Designer</span>
-                        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">⭐
-                            5.0</span>
-                    </div>
                     <div class="p-4">
-                        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">Jane Smith</h3>
+                        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">
+                            {{ $task->judul }}
+                        </h3>
                         <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
-                            <span class="flex items-center gap-1"><i class="bi bi-briefcase"></i> 8 Projects</span>
-                            <span class="flex items-center gap-1"><i class="bi bi-people"></i> 400 Clients</span>
+                            <span class="flex items-center gap-1"><i class="bi bi-calendar"></i> Deadline:
+                                {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</span>
+                            <span class="flex items-center gap-1"><i class="bi bi-clock"></i>
+                                {{ $task->waktu_estimasi }}</span>
                         </div>
-                        <div class="flex items-center justify-between mb-4">
-                            <p class="text-lg font-bold text-gray-800">$160.00/hr</p>
-                            <div class="flex items-center gap-2">
-                                <img src="https://i.pravatar.cc/150?img=2" class="w-7 h-7 rounded-full border">
-                                <span class="text-xs text-gray-600">Top Rated</span>
-                            </div>
-                        </div>
-                        <button
-                            class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-                            Hire Now
-                        </button>
-                    </div>
-                </div>
 
-                <!-- CARD 3 -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
-                    <div class="relative">
-                        <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg"
-                            class="w-full h-40 object-cover">
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-blue-500">Data
-                            Scientist</span>
-                        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">⭐
-                            4.8</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">Alex Taylor</h3>
-                        <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
-                            <span class="flex items-center gap-1"><i class="bi bi-briefcase"></i> 12 Projects</span>
-                            <span class="flex items-center gap-1"><i class="bi bi-people"></i> 350 Clients</span>
-                        </div>
                         <div class="flex items-center justify-between mb-4">
-                            <p class="text-lg font-bold text-gray-800">$432.00/hr</p>
+                            <p class="text-lg font-bold text-gray-800">
+                                Rp{{ number_format($task->budget, 0, ',', '.') }}
+                            </p>
                             <div class="flex items-center gap-2">
-                                <img src="https://i.pravatar.cc/150?img=3" class="w-7 h-7 rounded-full border">
-                                <span class="text-xs text-gray-600">Top Rated</span>
+                                <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-7 h-7 rounded-full border">
+                                <span class="text-xs text-gray-600">
+                                    {{ $task->user->nama ?? 'Freelancer' }}
+                                </span>
                             </div>
                         </div>
-                        <button
-                            class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-                            Hire Now
-                        </button>
-                    </div>
-                </div>
 
-                <!-- CARD 4 -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
-                    <div class="relative">
-                        <img src="https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg"
-                            class="w-full h-40 object-cover">
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-green-500">Digital
-                            Marketer</span>
-                        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">⭐
-                            4.7</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">Sara Lee</h3>
-                        <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
-                            <span class="flex items-center gap-1"><i class="bi bi-briefcase"></i> 20 Projects</span>
-                            <span class="flex items-center gap-1"><i class="bi bi-people"></i> 300 Clients</span>
-                        </div>
-                        <div class="flex items-center justify-between mb-4">
-                            <p class="text-lg font-bold text-gray-800">$280.00/hr</p>
-                            <div class="flex items-center gap-2">
-                                <img src="https://i.pravatar.cc/150?img=4" class="w-7 h-7 rounded-full border">
-                                <span class="text-xs text-gray-600">Top Rated</span>
-                            </div>
-                        </div>
                         <button
                             class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-                            Hire Now
+                            Lihat Detail
                         </button>
                     </div>
                 </div>
-            </div>
+                @empty
+                <p class="text-gray-500">Tugas yang Anda cari tidak ditemukan.</p>
+            @endforelse
         </section>
 
 

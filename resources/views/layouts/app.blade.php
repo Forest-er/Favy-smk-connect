@@ -16,20 +16,6 @@
 </head>
 
 <body class="bg-gray-50 text-gray-800">
-
-  {{-- Navbar --}}
-  <!-- <header class="bg-white shadow-sm sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <h1 class="text-lg font-bold text-gray-800">Freelance SMK</h1>
-      <nav class="space-x-6 text-sm font-medium text-gray-600">
-        <a href="/" class="hover:text-pink-500">Beranda</a>
-        <a href="/choose-role" class="hover:text-pink-500">Daftar</a>
-        <a href="/auth" class="hover:text-pink-500">Masuk</a>
-        <a href="/logout" class="bg-red-600 text-white rounded-lg p-2 hover:bg-red-200">Logout</a>
-      </nav>
-    </div>
-  </header> -->
-<!-- Pastikan CDN Bootstrap Icons sudah ada -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <nav id="mainNavbar" class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
@@ -40,6 +26,7 @@
 
   <!-- Search Bar Gabungan: Input + Kotak Ikon Hitam -->
   <div class="flex-1 max-w-2xl mx-6">
+    <form>
     <div class="flex border border-gray-300 rounded-none overflow-hidden">
       <!-- Input teks -->
       <input
@@ -48,10 +35,11 @@
         class="flex-1 py-2 pl-4 pr-3 text-sm focus:outline-none focus:ring-0"
       >
       <!-- Kotak ikon: memenuhi tinggi, background hitam -->
-      <div class="bg-black w-10 flex items-center justify-center">
+      <button class="bg-black w-10 flex items-center justify-center">
         <i class="bi bi-search text-white text-base"></i>
-      </div>
+      </button  >
     </div>
+    </form>
   </div>
 
   <div class="flex items-center space-x-6 text-sm font-bold">

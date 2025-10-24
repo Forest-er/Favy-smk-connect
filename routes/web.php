@@ -7,9 +7,11 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
-    return view('tester');
+    return view('page-guest.home');
 });
 
 // ===== Register Routes =====
@@ -77,7 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/{role}/dashboard', [App\Http\Controllers\JurusanController::class, 'index'])->name('role.dashboard');
-
+Route::get('/{role}/dashboard', [DashboardController::class, 'dataview'])->name('role.dashboard');
+Route::get('/insert/task', [DashboardController::class, 'insertTask'])->name('client.orders.task');
 
 require __DIR__.'/auth.php';
