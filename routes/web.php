@@ -83,3 +83,5 @@ Route::get('/{role}/dashboard', [DashboardController::class, 'dataview'])->name(
 Route::get('/insert/task', [DashboardController::class, 'insertTask'])->name('client.orders.task');
 
 require __DIR__.'/auth.php';
+Route::get('/freelancers', [FreelancerController::class, 'index'])->name('freelancer.index');
+Route::get('/freelancer/{id}', [FreelancerController::class, 'show'])->name('freelancer.show');
