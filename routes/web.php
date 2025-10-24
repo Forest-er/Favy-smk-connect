@@ -14,16 +14,15 @@ Route::get('/', function () {
     return view('page-guest.home');
 });
 
-// ===== Register Routes =====
-Route::get('/register/{role}', function ($role) {
-    if ($role === 'freelancer') {
-        return view('auth.register.freelancer');
-    } elseif ($role === 'client') {
-        return view('auth.register.client');
-    } else {
-        abort(404);
-    }
-})->name('register.role');
+// Untuk freelancer
+Route::get('/register/freelancer', [FreelancerController::class, 'jurusRegist'])
+    ->name('auth.register.freelancer');
+
+// Untuk client
+Route::get('/register/client', function () {
+    return view('auth.register.client');
+})->name('auth.register.client');
+
 
 Route::post('/register/client', [RegisterController::class, 'registerClient'])->name('register.client');
 Route::post('/register/freelancer', [RegisterController::class, 'registerFreelancer'])->name('register.freelancer');
@@ -35,6 +34,8 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/insert/task', [TaskController::class, 'create'])->name('client.orders.task');
+    Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.task');
     Route::get('/{role}/dashboard', function ($role) {
         $user = auth()->user();
 

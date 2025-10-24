@@ -130,10 +130,11 @@
                     $style = $styles[$index % count($styles)];
                 @endphp
 
-                <div class="group bg-white rounded-xl shadow flex flex-col items-center justify-center 
-                    hover:-translate-y-1 transition cursor-pointer shrink-0 {{ $style['shadow'] }}"
-                    style="width: 200px; height: 140px; min-width: 140px;">
-
+                <a href="{{ route('client.dashboard', ['jurusan_id' => $jurusan->id_jurusan]) }}"
+                class="group bg-white rounded-xl shadow flex flex-col items-center justify-center 
+                        hover:-translate-y-1 transition cursor-pointer shrink-0 {{ $style['shadow'] }}"
+                style="width: 200px; height: 140px; min-width: 140px; text-decoration: none;">
+                
                     <div class="rounded-full w-12 h-12 flex items-center justify-center mb-3 transition-all 
                         group-hover:brightness-110"
                         style="background:{{ $style['bg'] }}; color:{{ $style['color'] }};">
@@ -145,7 +146,7 @@
                     <p class="text-sm font-medium text-gray-700 text-center px-2 leading-tight">
                         {{ $jurusan->nama_jurusan }}
                     </p>
-                </div>
+                </a>
             @endforeach
         </div>
 

@@ -16,6 +16,7 @@ class RegisterController extends Controller
             'nama' => 'required|string|max:100',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'jurusan_id' => 'required|exists:jurusans,id_jurusan',
         ]);
 
         $user = User::create([
@@ -23,6 +24,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'worker', // role otomatis worker
+            'jurusan_id' => $request->jurusan_id,
         ]);
 
         Auth::login($user);
