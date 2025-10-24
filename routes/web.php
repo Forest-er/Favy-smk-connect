@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FreelancerController;
 
+
 Route::get('/', function () { return view('tester'); });
 
 // Auth
@@ -38,3 +39,5 @@ Route::middleware(['auth', 'role:freelancer'])->group(function () {
 Route::get('/client-dashboard', function () {
     return view('client.dashboard'); // memanggil resources/views/client/dashboard.blade.php
 });
+Route::get('/freelancers', [FreelancerController::class, 'index'])->name('freelancer.index');
+Route::get('/freelancer/{id}', [FreelancerController::class, 'show'])->name('freelancer.show');
