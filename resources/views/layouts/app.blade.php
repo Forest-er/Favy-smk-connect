@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
     body {
       font-family: 'Inter', sans-serif;
     }
@@ -16,32 +17,38 @@
 </head>
 
 <body class="bg-gray-50 text-gray-800">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-<nav id="mainNavbar" class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
-  <div class="flex items-center space-x-4">
-    <img src="{{ asset('images/smkbm3.png') }}" alt="SMK BM3 Logo" class="h-10">
-    <h1 class="text-lg font-bold text-gray-800">SMK Connect</h1>
-  </div>
+  <nav id="mainNavbar"
+    class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
 
-  <div class="flex items-center space-x-6 text-sm font-bold">
-    <div class="relative group">
-      <button class="flex items-center space-x-1 hover:text-gray-700">
-        <span>Jelajah</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
+    <!-- Logo -->
+    <div class="flex items-center space-x-4">
+      <img src="{{ asset('images/smkbm3.png') }}" alt="SMK BM3 Logo" class="h-10">
+      <h1 class="text-lg font-bold text-gray-800">SMK Connect</h1>
+    </div>
+
+    <!-- Profile Dropdown -->
+    <div class="relative" x-data="{ open: false }">
+      <button onclick="toggleDropdown()" id="profileButton"
+        class="focus:outline-none flex items-center space-x-2">
+        <img src="{{ asset('images/profile.jpg') }}" alt="Profile"
+          class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
       </button>
-      <div class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block">
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kategori</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Trending</a>
+
+      <!-- Dropdown -->
+      <div id="profileDropdown"
+        class="hidden absolute right-0 mt-3 w-40 bg-white border rounded-lg shadow-lg py-2 transition-all duration-200">
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+        <form action="{{ route('logout') }}" method="POST" class="block">
+          @csrf
+          <button type="submit"
+            class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+        </form>
       </div>
     </div>
 
-    <a href="#" class="hover:text-gray-700">Beranda</a>
-    <button class="border border-gray-300 rounded-md px-4 py-1 hover:bg-gray-50">Akun</button>
-  </div>
-</nav>
+  </nav>
 
   {{-- Konten utama --}}
   <main class="">
@@ -142,7 +149,22 @@
 
     </div>
   </footer>
+  <script>
+    // Simple toggle dropdown
+    function toggleDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('hidden');
+    }
 
+    // Tutup dropdown jika klik di luar area
+    window.addEventListener('click', function(e) {
+      const button = document.getElementById('profileButton');
+      const dropdown = document.getElementById('profileDropdown');
+      if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 
 </html>
