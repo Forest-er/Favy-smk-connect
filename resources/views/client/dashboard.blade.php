@@ -77,6 +77,39 @@
         </script>
 
 
+<!-- Freelancer Stats Section -->
+<section class="max-w-7xl mx-auto mb-16 px-4-ml-1">
+  <h2 class="text-2xl font-bold mb-6 text-gray-900">Client Stats</h2>
+
+  <div class="flex flex-col md:flex-row gap-4">
+    <!-- Projects Posted -->
+    <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-purple-50 to-white border border-gray-100 hover:shadow-md transition">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm text-gray-500">Projects Posted</span>
+        <i class="bi bi-folder2-open text-purple-500 text-lg"></i>
+      </div>
+      <p class="text-3xl font-bold text-gray-800">8</p>
+    </div>
+
+    <!-- Total Spent -->
+    <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-green-50 to-white border border-gray-100 hover:shadow-md transition">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm text-gray-500">Total Spent</span>
+        <i class="bi bi-cash-stack text-green-500 text-lg"></i>
+      </div>
+      <p class="text-3xl font-bold text-gray-800">Rp5.000.000</p>
+    </div>
+
+    <!-- Active Freelancers -->
+    <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-yellow-50 to-white border border-gray-100 hover:shadow-md transition">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm text-gray-500">Active Freelancers</span>
+        <i class="bi bi-people text-yellow-500 text-lg"></i>
+      </div>
+      <p class="text-3xl font-bold text-gray-800">7</p>
+    </div>
+  </div>
+</section>
 
 
         <!-- Categories Section -->
@@ -153,25 +186,11 @@
 
 
         <!-- Freelancer populer-->
-        <section class="w-full mb-10 px-6">
-            <h2 class="text-lg font-semibold text-pink-400 flex items-center gap-1 mb-1">
+       <section class="w-full -mt-10 mb-10 px-1 -ml-1">
+            <h2 class="text-lg font-semibold text-pink-400 flex items-center gap-1 mb-1 text-2xl font-bold text-gray-900">
                 Rekomendasi Project<span>🔥</span>
             </h2>
             <p class="text-gray-400 mb-6 text-sm">project terbaru minggu ini</p>
-            <div class="flex space-x-2">
-                <button
-                    class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow hover:bg-gray-100 transition">
-                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button
-                    class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow hover:bg-gray-100 transition">
-                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <!-- CARD 1 -->
                  @forelse ($tasks as $task)
@@ -225,7 +244,7 @@
         </section>
 
    <!-- Gigs You May Like Section -->
-<section class="max-w-7xl mx-auto mb-16 px-4">
+<section class="max-w-7xl mx-auto mb-16 px-4-ml-3">
   <div class="flex items-center justify-between mb-6">
     <h2 class="text-2xl font-bold text-gray-900">Gigs You May Like</h2>
     <div class="flex items-center space-x-2">
@@ -242,61 +261,95 @@
     </div>
   </div>
 
-  <!-- Grid of Gigs -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <div class="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-5 relative hover:-translate-y-1 cursor-pointer">
-      <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-pink-400 text-white">Best Seller</span>
-      <img src="https://i.pravatar.cc/150?img=1" class="rounded-xl w-full mb-4 h-44 object-cover shadow-sm">
-      <p class="text-gray-700 text-sm mb-4">I will design modern UI/UX for mobile app or website</p>
-    </div>
+    <!-- CARD 1 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 hover:shadow-xl transition relative cursor-pointer">
+      <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-pink-400 text-white z-10">Best Seller</span>
+      <img src="https://i.pravatar.cc/300?img=1" class="w-full h-44 object-cover">
 
-    <div class="bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-5 relative">
-      <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-pink-400 text-white">Best Seller</span>
-      <img src="https://i.pravatar.cc/150?img=1" class="rounded-xl w-full mb-4 h-44 object-cover shadow-sm">
-
-      <div class="flex items-center mb-3">
-        <img src="https://i.pravatar.cc/30?img=1" class="w-10 h-10 rounded-full mr-3 border-2 border-pink-300">
-        <div class="flex flex-col flex-1">
-          <div class="flex items-center justify-between">
+      <div class="p-4">
+        <p class="text-gray-700 text-sm mb-2 truncate">I will design modern UI/UX for mobile app or website</p>
+        <div class="flex items-center mb-3">
+          <img src="https://i.pravatar.cc/30?img=2" class="w-10 h-10 rounded-full border-2 border-pink-300 mr-3">
+          <div class="flex flex-col">
             <p class="text-gray-900 font-semibold text-sm">Sarah Anderson</p>
+            <div class="flex items-center gap-1 text-xs text-gray-500">
+              <i class="bi bi-star-fill text-yellow-400"></i> 4.9 (120)
+            </div>
           </div>
-          <p class="text-3xl font-bold text-gray-800">3</p>
+        </div>
+        <div class="flex items-center justify-between">
+          <p class="text-lg font-bold text-gray-800">$50</p>
+          <button class="bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-1 px-3 rounded-lg transition">Hire</button>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Freelancer Stats Section -->
-<section class="max-w-7xl mx-auto mb-16 px-4">
-  <h2 class="text-2xl font-bold mb-6 text-gray-900">Freelancer Stats</h2>
+    <!-- CARD 2 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 hover:shadow-xl transition relative cursor-pointer">
+      <img src="https://i.pravatar.cc/300?img=3" class="w-full h-44 object-cover">
 
-  <div class="flex flex-col md:flex-row gap-4">
-    <!-- Completed -->
-    <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-blue-50 to-white border border-gray-100 hover:shadow-md transition">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-sm text-gray-500">Completed</span>
-        <i class="bi bi-check-circle text-blue-500 text-lg"></i>
+      <div class="p-4">
+        <p class="text-gray-700 text-sm mb-2 truncate">Custom WordPress website design with responsive layout</p>
+        <div class="flex items-center mb-3">
+          <img src="https://i.pravatar.cc/30?img=4" class="w-10 h-10 rounded-full border-2 border-pink-300 mr-3">
+          <div class="flex flex-col">
+            <p class="text-gray-900 font-semibold text-sm">John Doe</p>
+            <div class="flex items-center gap-1 text-xs text-gray-500">
+              <i class="bi bi-star-fill text-yellow-400"></i> 4.8 (98)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <p class="text-lg font-bold text-gray-800">$75</p>
+          <button class="bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-1 px-3 rounded-lg transition">Hire</button>
+        </div>
       </div>
-      <p class="text-3xl font-bold text-gray-800">12</p>
     </div>
 
-    <!-- Total Spent -->
-    <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-green-50 to-white border border-gray-100 hover:shadow-md transition">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-sm text-gray-500">Total Spent</span>
-        <i class="bi bi-cash-stack text-green-500 text-lg"></i>
+    <!-- CARD 3 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 hover:shadow-xl transition relative cursor-pointer">
+      <span class="absolute top-4 left-4 px-3 py-1 text-xs font-semibold rounded-full bg-pink-400 text-white z-10">Best Seller</span>
+      <img src="https://i.pravatar.cc/300?img=5" class="w-full h-44 object-cover">
+
+      <div class="p-4">
+        <p class="text-gray-700 text-sm mb-2 truncate">I will create professional logo and branding for your business</p>
+        <div class="flex items-center mb-3">
+          <img src="https://i.pravatar.cc/30?img=6" class="w-10 h-10 rounded-full border-2 border-pink-300 mr-3">
+          <div class="flex flex-col">
+            <p class="text-gray-900 font-semibold text-sm">Emily Clark</p>
+            <div class="flex items-center gap-1 text-xs text-gray-500">
+              <i class="bi bi-star-fill text-yellow-400"></i> 5.0 (210)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <p class="text-lg font-bold text-gray-800">$100</p>
+          <button class="bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-1 px-3 rounded-lg transition">Hire</button>
+        </div>
       </div>
-      <p class="text-3xl font-bold text-gray-800">Rp5.000.000</p>
     </div>
 
-    <!-- Freelancers Hired -->
-    <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-yellow-50 to-white border border-gray-100 hover:shadow-md transition">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-sm text-gray-500">Freelancers Hired</span>
-        <i class="bi bi-people text-yellow-500 text-lg"></i>
+    <!-- CARD 4 -->
+    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 hover:shadow-xl transition relative cursor-pointer">
+      <img src="https://i.pravatar.cc/300?img=7" class="w-full h-44 object-cover">
+
+      <div class="p-4">
+        <p class="text-gray-700 text-sm mb-2 truncate">SEO optimization for your website to rank higher on Google</p>
+        <div class="flex items-center mb-3">
+          <img src="https://i.pravatar.cc/30?img=8" class="w-10 h-10 rounded-full border-2 border-pink-300 mr-3">
+          <div class="flex flex-col">
+            <p class="text-gray-900 font-semibold text-sm">Michael Smith</p>
+            <div class="flex items-center gap-1 text-xs text-gray-500">
+              <i class="bi bi-star-fill text-yellow-400"></i> 4.7 (80)
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <p class="text-lg font-bold text-gray-800">$60</p>
+          <button class="bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-1 px-3 rounded-lg transition">Hire</button>
+        </div>
       </div>
-      <p class="text-3xl font-bold text-gray-800">7</p>
     </div>
   </div>
 </section>
@@ -418,11 +471,10 @@
   </div>
 </section>
 
-
-
-        <!-- 🔔 Popup Samping Kanan (Seperti Upwork) -->
-        <!-- 💫 POPUP DETAIL FREELANCER (Lebar 70%) -->
         <!-- 🌑 FREELANCER POPUP DENGAN 1 SCROLL DAN GARIS PEMBATAS SAMPING -->
+         <!-- Overlay -->
+<div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+
         <div id="rightPopup"
             class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl">
             <div class="flex flex-col h-full">
@@ -465,7 +517,7 @@
                             </div>
 
                             <!-- About & Skills Section -->
-                            <section class="px-6 py-12 max-w-5xl mx-auto space-y-16 mt-4 w-[calc(99%+4rem)] -mx-8">
+                            <section class="px-8 py-12 max-w-5xl mx-auto space-y-16 mt-4 w-[calc(99%+4rem)] -mx-8">
 
                                 <!-- About Me -->
                                 <div class="space-y-4">
@@ -805,12 +857,16 @@
 
         <!-- 🧠 Script Popup -->
         <script>
-            function openPopup() {
-                document.getElementById('rightPopup').classList.remove('translate-x-full');
-            }
-            function closePopup() {
-                document.getElementById('rightPopup').classList.add('translate-x-full');
-            }
+          function openPopup() {
+    document.getElementById('rightPopup').classList.remove('translate-x-full');
+    document.getElementById('overlay').classList.remove('hidden');
+}
+
+function closePopup() {
+    document.getElementById('rightPopup').classList.add('translate-x-full');
+    document.getElementById('overlay').classList.add('hidden');
+}
+
         </script>
 
 
