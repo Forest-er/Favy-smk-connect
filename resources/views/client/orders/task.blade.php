@@ -269,7 +269,7 @@
             <div class="lg:col-span-1">
                 <div class="sticky top-24 space-y-6">
                     <!-- Tips Card -->
-                    <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-200">
+                    <div class="bg-linear-to-br from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-200">
                         <div class="flex items-center gap-2 mb-4">
                             <svg class="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
@@ -278,19 +278,19 @@
                         </div>
                         <ul class="space-y-3 text-sm text-gray-700">
                             <li class="flex items-start gap-2">
-                                <span class="text-pink-600 font-bold flex-shrink-0">✓</span>
+                                <span class="text-pink-600 font-bold shrink-0">✓</span>
                                 <span>Tulis judul yang spesifik dan jelas</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <span class="text-pink-600 font-bold flex-shrink-0">✓</span>
+                                <span class="text-pink-600 font-bold shrink-0">✓</span>
                                 <span>Jelaskan requirement secara detail</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <span class="text-pink-600 font-bold flex-shrink-0">✓</span>
+                                <span class="text-pink-600 font-bold shrink-0">✓</span>
                                 <span>Set budget yang realistis</span>
                             </li>
                             <li class="flex items-start gap-2">
-                                <span class="text-pink-600 font-bold flex-shrink-0">✓</span>
+                                <span class="text-pink-600 font-bold shrink-0">✓</span>
                                 <span>Upload reference jika ada</span>
                             </li>
                         </ul>
@@ -310,7 +310,7 @@
                             </div>
                             <div class="pt-4 border-t border-gray-200 space-y-3">
                                 <button type="submit" 
-                                    class="w-full bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 active:scale-95">
+                                    class="w-full bg-linear-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 active:scale-95">
                                     <span class="flex items-center justify-center gap-2">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd"/>

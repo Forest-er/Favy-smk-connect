@@ -7,53 +7,47 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-      * { font-family: 'Inter', sans-serif; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-      /* Animasi halus untuk card */
-      .card {
-        transition: all 0.3s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-      }
-
-      /* Gradasi halus untuk background */
-      body {
-        background: linear-gradient(135deg, #f3f6ff 0%, #eef3ff 100%);
-      }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
   </style>
 </head>
 
 <body class="bg-gray-50 text-gray-800">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-<nav id="mainNavbar" class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
-  <div class="flex items-center space-x-4">
-    <img src="{{ asset('images/smkbm3.png') }}" alt="SMK BM3 Logo" class="h-10">
-    <h1 class="text-lg font-bold text-gray-800">SMK Connect</h1>
-  </div>
+  <nav id="mainNavbar"
+    class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
 
-  <div class="flex items-center space-x-6 text-sm font-bold">
-    <div class="relative group">
-      <button class="flex items-center space-x-1 hover:text-gray-700">
-        <span>Jelajah</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
+    <!-- Logo -->
+    <div class="flex items-center space-x-4">
+      <img src="{{ asset('images/smkbm3.png') }}" alt="SMK BM3 Logo" class="h-10">
+      <h1 class="text-lg font-bold text-gray-800">SMK Connect</h1>
+    </div>
+
+    <!-- Profile Dropdown -->
+    <div class="relative" x-data="{ open: false }">
+      <button onclick="toggleDropdown()" id="profileButton"
+        class="focus:outline-none flex items-center space-x-2">
+        <img src="{{ asset('images/profile.jpg') }}" alt="Profile"
+          class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
       </button>
-      <div class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block">
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kategori</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Trending</a>
+
+      <!-- Dropdown -->
+      <div id="profileDropdown"
+        class="hidden absolute right-0 mt-3 w-40 bg-white border rounded-lg shadow-lg py-2 transition-all duration-200">
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+        <form action="{{ route('logout') }}" method="POST" class="block">
+          @csrf
+          <button type="submit"
+            class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+        </form>
       </div>
     </div>
 
-    <a href="#" class="hover:text-gray-700">Beranda</a>
-    <button class="border border-gray-300 rounded-md px-4 py-1 hover:bg-gray-50">Akun</button>
-  </div>
-</nav>
+  </nav>
 
   {{-- Konten utama --}}
   <main class="my-10">
@@ -66,7 +60,7 @@
   </footer> -->
 
 
-  <footer class="bg-[#0B1D51] text-white pt-12 pb-8">
+  <footer class="relative bg-[#0B1D51] text-white pt-12 pb-8 overflow-hidden">
     <div class="container mx-auto px-6 md:px-12 lg:px-24">
 
       <!-- Main Footer Columns -->
@@ -103,7 +97,7 @@
           </ul>
         </div>
 
-        <!-- Column 4: Company (tanpa sosial media) -->
+        <!-- Column 4: Company -->
         <div>
           <h3 class="text-sm font-semibold uppercase text-white mb-6">Company</h3>
           <ul class="space-y-3">
@@ -118,29 +112,21 @@
 
       </div>
 
-      <!-- === SOCIAL MEDIA SECTION (Baru, di atas copyright) === -->
+      <!-- === SOCIAL MEDIA SECTION === -->
       <div class="mt-10 text-center md:text-left">
         <div class="flex flex-col md:flex-row items-center justify-start gap-4 text-white">
           <span class="text-sm">Ikuti kami di:</span>
           <div class="flex space-x-4">
-            <a href="#" class="text-white hover:text-gray-100 transition">
-              <i class="bi bi-facebook text-xl"></i>
-            </a>
-            <a href="#" class="text-white hover:text-gray-100 transition">
-              <i class="bi bi-linkedin text-xl"></i>
-            </a>
-            <a href="#" class="text-white hover:text-gray-100 transition">
-              <i class="bi bi-instagram text-xl"></i>
-            </a>
-            <a href="#" class="text-white hover:text-gray-100 transition">
-              <i class="bi bi-twitter-x"></i>
-            </a>
+            <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-facebook text-xl"></i></a>
+            <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-linkedin text-xl"></i></a>
+            <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-instagram text-xl"></i></a>
+            <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-twitter-x"></i></a>
           </div>
         </div>
       </div>
 
       <!-- Footer Bottom -->
-      <div class="border-t border-gray-white mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white">
+      <div class="border-t border-gray-400 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white">
         <div>
           &copy; {{ date('Y') }} SMK Connect. All rights reserved.
         </div>
@@ -153,8 +139,46 @@
       </div>
 
     </div>
+
+    <!-- ===== Hiasan Dekoratif Background ===== -->
+    <!-- Circle besar kiri atas -->
+    <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+
+    <!-- Circle sedang kanan bawah -->
+    <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-white/10 rounded-full blur-2xl"></div>
+
+    <!-- Dot pattern -->
+    <div class="absolute top-10 right-1/4 w-3 h-3 bg-white/30 rounded-full"></div>
+    <div class="absolute top-20 right-1/3 w-2 h-2 bg-white/40 rounded-full"></div>
+    <div class="absolute bottom-24 left-1/4 w-3 h-3 bg-white/30 rounded-full"></div>
+    <div class="absolute bottom-32 left-1/3 w-2 h-2 bg-white/40 rounded-full"></div>
+
+    <!-- Geometric shapes -->
+    <div class="absolute top-1/4 left-10 w-12 h-12 border-2 border-white/20 rounded-lg rotate-12"></div>
+    <div class="absolute bottom-1/4 right-16 w-16 h-16 border-2 border-white/20 rounded-full"></div>
+
+    <!-- Wave pattern -->
+    <svg class="absolute bottom-0 left-0 w-full opacity-10" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C150,50 350,0 600,30 C850,60 1050,10 1200,40 L1200,120 L0,120 Z" fill="white" />
+    </svg>
   </footer>
 
+  <script>
+    // Simple toggle dropdown
+    function toggleDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('hidden');
+    }
+
+    // Tutup dropdown jika klik di luar area
+    window.addEventListener('click', function(e) {
+      const button = document.getElementById('profileButton');
+      const dropdown = document.getElementById('profileDropdown');
+      if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 
 </html>

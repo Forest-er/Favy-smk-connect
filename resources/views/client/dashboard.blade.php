@@ -134,7 +134,7 @@
 
         <!-- Category Icons Grid -->
         <div
-            class="container mb-10 w-full flex flex-row items-center space-x-6 overflow-x-auto pb-10 scrollbar-thin scrollbar-hide scrollbar-thumb-gray-300">
+            class="mb-10 w-full flex flex-row items-center space-x-6 overflow-x-auto pb-10 scrollbar-thin scrollbar-hide scrollbar-thumb-gray-300">
 
             @php
                 $styles = [
@@ -171,7 +171,7 @@
                 
                     <div class="rounded-full w-12 h-12 flex items-center justify-center mb-3 transition-all 
                                                 group-hover:brightness-110"
-                        style="background:{{ $style['bg'] }}; color:{{ $style['color'] }};">
+                        style="background: {{ $style['bg'] }}; color: {{ $style['color'] }};">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                             {!! $style['icon'] !!}
                         </svg>
@@ -401,7 +401,7 @@
     <!-- Item 1 -->
     <div class="relative group cursor-pointer row-span-2 overflow-hidden rounded-xl">
       <img src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/delivery/asset/d1a6f869830256edfbd3d2c7b887659b-1745375528/JAKEREID687.jpg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
+      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
         <div class="w-full flex justify-between items-center text-white text-sm p-3">
           <div>
             <p class="font-semibold">Featured in: Illustration</p>
@@ -420,7 +420,7 @@
     <!-- Item 2 -->
     <div class="relative group cursor-pointer overflow-hidden rounded-xl">
       <img src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto,t_delivery_web_tile/v1/attachments/delivery/asset/ab4ff21f481dd694e39d66b620a9f940-1746012415/Wedding%20no%20word.png" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
+      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
         <div class="text-white text-sm p-3">
           <p class="font-semibold">Featured in: Illustration</p>
           <p>by: banbanns</p>
@@ -434,7 +434,7 @@
     <!-- Item 3 -->
     <div class="relative group cursor-pointer col-span-1 overflow-hidden rounded-xl">
       <img src="https://images.unsplash.com/photo-1610878180933-92a6a20389d5?auto=format&fit=crop&w=800&q=60" class="w-full h-[150px] object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
+      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
         <div class="text-white text-sm p-3">
           <p class="font-semibold">Featured in: Concept Art</p>
           <p>by: rayyaa</p>
@@ -448,7 +448,7 @@
     <!-- Item 4 -->
     <div class="relative group cursor-pointer row-span-2 overflow-hidden rounded-xl">
       <img src="https://images.unsplash.com/photo-1606761568499-6f1a76e3b25d?auto=format&fit=crop&w=800&q=60" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
+      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
         <div class="text-white text-sm p-3">
           <p class="font-semibold">Featured in: Fantasy</p>
           <p>by: zahrah</p>
@@ -462,7 +462,7 @@
     <!-- Item 5 -->
     <div class="relative group cursor-pointer overflow-hidden rounded-xl">
       <img src="https://images.unsplash.com/photo-1598387993441-73b8e3b6c4f5?auto=format&fit=crop&w=800&q=60" class="w-full h-[170px] object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
+      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
         <div class="text-white text-sm p-3">
           <p class="font-semibold">Featured in: Painting</p>
           <p>by: azizah</p>
@@ -476,7 +476,7 @@
     <!-- Item 6 -->
     <div class="relative group cursor-pointer row-span-2 overflow-hidden rounded-xl">
       <img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?auto=format&fit=crop&w=800&q=60" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
+      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
         <div class="text-white text-sm p-3">
           <p class="font-semibold">Featured in: Digital Art</p>
           <p>by: nurazizah</p>
@@ -541,7 +541,7 @@
                                 <!-- About Me -->
                                 <div class="space-y-4">
                                     <h2
-                                        class="text-xl font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+                                        class="text-xl font-semibold bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
                                         About Me
                                     </h2>
                                     <p class="text-gray-700 text-[16px] leading-relaxed">
@@ -556,7 +556,7 @@
                                 <!-- Skills & Expertise -->
                                 <div style="margin-top: 20px;" class="space-y-4">
                                     <h2
-                                        class="text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+                                        class="text-lg font-semibold bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
                                         Skills & Expertise
                                     </h2>
 
@@ -565,7 +565,7 @@
                                         <p class="text-gray-500 uppercase text-sm tracking-wider">Required Skills</p>
                                         <div class="flex flex-wrap gap-4">
                                             <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-gradient-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
+                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500"
                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -574,7 +574,7 @@
                                                 HTML
                                             </span>
                                             <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-gradient-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
+                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500"
                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -591,7 +591,7 @@
                                             Skills</p>
                                         <div class="flex flex-wrap gap-4">
                                             <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-gradient-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
+                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500"
                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -600,7 +600,7 @@
                                                 CSS
                                             </span>
                                             <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-gradient-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
+                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500"
                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -619,28 +619,28 @@
                             <!-- Portfolio -->
                             <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
                                 <h5
-                                    class="font-semibold text-lg mb-3 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+                                    class="font-semibold text-lg mb-3 bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
                                     Portfolio</h5>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                                     <div class="relative overflow-hidden rounded-lg group">
                                         <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
                                             class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
                                         <div
-                                            class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white text-xs p-2">
+                                            class="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/60 to-transparent text-white text-xs p-2">
                                             Landing Page • Web</div>
                                     </div>
                                     <div class="relative overflow-hidden rounded-lg group">
                                         <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg"
                                             class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
                                         <div
-                                            class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white text-xs p-2">
+                                            class="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/60 to-transparent text-white text-xs p-2">
                                             Mobile UI • App</div>
                                     </div>
                                     <div class="relative overflow-hidden rounded-lg group">
                                         <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
                                             class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
                                         <div
-                                            class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white text-xs p-2">
+                                            class="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/60 to-transparent text-white text-xs p-2">
                                             Branding Project</div>
                                     </div>
                                 </div>
@@ -652,7 +652,7 @@
 
                                 <!-- Judul -->
                                 <h5
-                                    class="text-lg font-semibold mb-6 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+                                    class="text-lg font-semibold mb-6 bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
                                     Client Reviews
                                 </h5>
 
@@ -748,7 +748,7 @@
                                     <input type="text" placeholder="Add a comment..."
                                         class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-300 focus:border-transparent">
                                     <button
-                                        class="bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                                        class="bg-linear-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
                                         Send
                                     </button>
                                 </div>
@@ -759,15 +759,15 @@
 
                         <!-- Divider -->
                         <div id="divider"
-                            class="w-[2px] bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 rounded-full">
+                            class="w-[2px] bg-linear-to-b from-pink-300 via-purple-300 to-blue-300 rounded-full">
                         </div>
 
                         <!-- SIDE PANEL (tanpa card) -->
                         <div id="sidePanel" class="w-[300px] p-6 pt-0">
                             <!-- Info Card -->
                             <div
-                                class="flex items-start gap-3 bg-gradient-to-br from-blue-100 via-pink-100 to-yellow-100 p-4 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition mb-4 mt-0">
-                                <div class="flex-shrink-0">
+                                class="flex items-start gap-3 bg-linear-to-br from-blue-100 via-pink-100 to-yellow-100 p-4 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition mb-4 mt-0">
+                                <div class="shrink-0">
                                     <i class="bi bi-megaphone text-pink-500 text-xl"></i>
                                 </div>
                                 <div class="space-y-1">
@@ -779,7 +779,7 @@
 
 
                             <button
-                                class="w-full bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white font-semibold py-2.5 rounded-lg mb-3 transition">Request
+                                class="w-full bg-linear-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white font-semibold py-2.5 rounded-lg mb-3 transition">Request
                                 to order</button>
                             <button
                                 class="w-full border border-pink-400 text-pink-600 hover:bg-pink-50 font-medium py-2.5 rounded-lg flex items-center justify-center gap-2 transition"><i
@@ -822,7 +822,7 @@
                                 </ul>
 
                                 <div
-                                    class="bg-gradient-to-r from-pink-100 to-blue-100 rounded-xl p-4 border border-pink-200">
+                                    class="bg-linear-to-r from-pink-100 to-blue-100 rounded-xl p-4 border border-pink-200">
                                     <p class="text-sm text-gray-800">
                                         “Sarah exceeded my expectations. The designs were stunning and perfectly aligned
                                         with my brand vision.”

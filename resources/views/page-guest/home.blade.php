@@ -29,101 +29,123 @@
     @include('page-guest.footerguest')
 
     <script>
-        // Carousel
-        document.querySelectorAll('[id$="Carousel"]').forEach(carouselContainer => {
-            const slides = carouselContainer.querySelectorAll('.carousel-slide');
-            const navButtons = carouselContainer.querySelectorAll('.carousel-nav-btn');
-            navButtons.forEach(button => {
-                button.addEventListener('mousedown', (e) => {
-                    if (e.button !== 0) return;
-                    const targetIndex = parseInt(button.getAttribute('data-slide'));
-                    if (targetIndex >= 0 && targetIndex < slides.length) {
-                        slides.forEach((slide, i) => {
-                            slide.classList.toggle('active', i === targetIndex);
-                        });
-                    }
+        document.addEventListener('DOMContentLoaded', () => {
+            // === CAROUSEL ===
+            document.querySelectorAll('[id$="Carousel"]').forEach(carouselContainer => {
+                const slides = carouselContainer.querySelectorAll('.carousel-slide');
+                const navButtons = carouselContainer.querySelectorAll('.carousel-nav-btn');
+                navButtons.forEach(button => {
+                    button.addEventListener('mousedown', (e) => {
+                        if (e.button !== 0) return;
+                        const targetIndex = parseInt(button.getAttribute('data-slide'));
+                        if (targetIndex >= 0 && targetIndex < slides.length) {
+                            slides.forEach((slide, i) => {
+                                slide.classList.toggle('active', i === targetIndex);
+                            });
+                        }
+                    });
                 });
             });
-        });
 
-        // Toggle How It Works
-        document.addEventListener('DOMContentLoaded', () => {
+            // === HOW IT WORKS TOGGLE ===
             const toggleHiring = document.getElementById('toggleHiring');
             const toggleFinding = document.getElementById('toggleFinding');
+
+            // Gunakan asset() dari Laravel untuk path gambar
+            const imageUrl = "{{ asset('images/smkbm3.png') }}";
 
             const content = {
                 hiring: {
                     card1: {
-                        image: '<span class="text-white text-xl font-bold text-center p-4">all in one place</span>',
-                        title: 'Posting jobs is always free',
-                        desc: 'Post your project for free and get proposals from top freelancers.'
+                        title: 'Post jobs for free',
+                        desc: 'List your project at no cost and receive offers from top talent.'
                     },
                     card2: {
-                        image: '<img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Get proposals" class="w-full h-full object-cover">',
-                        title: 'Get proposals and hire',
-                        desc: 'Review proposals, interview candidates, and hire the perfect match.'
+                        title: 'Review & hire',
+                        desc: 'Compare proposals, interview, and hire the right freelancer.'
                     },
                     card3: {
-                        image: '<img src="https://images.unsplash.com/photo-1581091580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pay when done" class="w-full h-full object-cover">',
-                        title: 'Pay when work is done',
-                        desc: 'Only pay for completed work you’re happy with — no surprises.'
+                        title: 'Pay securely',
+                        desc: 'Release payment only when you’re happy with the result.'
                     }
                 },
                 finding: {
                     card1: {
-                        image: '<span class="text-white text-xl font-bold text-center p-4">find your next gig</span>',
-                        title: 'Create your profile',
-                        desc: 'Showcase your skills, experience, and portfolio to attract clients.'
+                        title: 'Build your profile',
+                        desc: 'Highlight your skills and portfolio to attract clients.'
                     },
                     card2: {
-                        image: '<img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Get hired" class="w-full h-full object-cover">',
-                        title: 'Get hired fast',
-                        desc: 'Browse projects, submit proposals, and land your next job quickly.'
+                        title: 'Apply & get hired',
+                        desc: 'Send proposals and land jobs that match your expertise.'
                     },
                     card3: {
-                        image: '<img src="https://images.unsplash.com/photo-1581091580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Get paid" class="w-full h-full object-cover">',
-                        title: 'Get paid securely',
-                        desc: 'Receive payments safely through our platform — no delays, no hassle.'
+                        title: 'Get paid safely',
+                        desc: 'Receive payments securely through our trusted platform.'
                     }
                 }
             };
 
             function updateContent(mode) {
-                const {
-                    card1,
-                    card2,
-                    card3
-                } = content[mode];
-                document.getElementById('card1Image').innerHTML = card1.image;
-                document.getElementById('card1Title').textContent = card1.title;
-                document.getElementById('card1Desc').textContent = card1.desc;
+                const data = content[mode];
 
-                document.getElementById('card2Image').outerHTML = `<div id="card2Image">${card2.image}</div>`;
-                document.getElementById('card2Title').textContent = card2.title;
-                document.getElementById('card2Desc').textContent = card2.desc;
+                for (let i = 1; i <= 3; i++) {
+                    const title = document.getElementById(`card${i}Title`);
+                    const desc = document.getElementById(`card${i}Desc`);
+                    const image = document.getElementById(`card${i}Image`);
 
-                document.getElementById('card3Image').outerHTML = `<div id="card3Image">${card3.image}</div>`;
-                document.getElementById('card3Title').textContent = card3.title;
-                document.getElementById('card3Desc').textContent = card3.desc;
+                    if (title && desc && image) {
+                        // 🔥 Terapkan gaya wrap secara eksplisit — ini kunci agar teks selalu multiline
+                        title.style.whiteSpace = 'normal';
+                        title.style.wordWrap = 'break-word';
+                        title.style.overflowWrap = 'break-word';
+                        title.style.maxWidth = '100%';
+
+                        desc.style.whiteSpace = 'normal';
+                        desc.style.wordWrap = 'break-word';
+                        desc.style.overflowWrap = 'break-word';
+                        desc.style.maxWidth = '100%';
+
+                        // Fade out
+                        title.classList.add('opacity-0');
+                        desc.classList.add('opacity-0');
+
+                        setTimeout(() => {
+                            title.textContent = data[`card${i}`].title;
+                            desc.textContent = data[`card${i}`].desc;
+                            image.src = imageUrl;
+
+                            // Fade in
+                            title.classList.remove('opacity-0');
+                            desc.classList.remove('opacity-0');
+                        }, 200);
+                    }
+                }
             }
 
-            toggleHiring.addEventListener('click', () => {
-                toggleHiring.classList.add('bg-white', 'border-b-2', 'border-blue-500');
-                toggleFinding.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
-                toggleFinding.classList.add('bg-gray-100');
-                updateContent('hiring');
-            });
+            // === EVENT LISTENER ===
+            if (toggleHiring && toggleFinding) {
+                toggleHiring.addEventListener('click', () => {
+                    toggleHiring.classList.add('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleHiring.classList.remove('bg-gray-100');
+                    toggleFinding.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleFinding.classList.add('bg-gray-100');
+                    updateContent('hiring');
+                });
 
-            toggleFinding.addEventListener('click', () => {
-                toggleFinding.classList.add('bg-white', 'border-b-2', 'border-blue-500');
-                toggleHiring.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
-                toggleHiring.classList.add('bg-gray-100');
-                updateContent('finding');
-            });
+                toggleFinding.addEventListener('click', () => {
+                    toggleFinding.classList.add('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleFinding.classList.remove('bg-gray-100');
+                    toggleHiring.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleHiring.classList.add('bg-gray-100');
+                    updateContent('finding');
+                });
 
-            toggleHiring.click();
+                // Default: tampilkan mode "hiring"
+                toggleHiring.click();
+            }
         });
     </script>
+
 </body>
 
 </html>

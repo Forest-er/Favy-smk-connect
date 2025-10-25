@@ -18,7 +18,7 @@
             <div class="bg-gray-50 rounded-xl p-6 shadow-md hover:shadow-lg transition">
                 <div class="flex items-start gap-4">
                     <!-- Ikon kecil sebagai pengganti gambar -->
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <div class="shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M9 11a2 2 0 11-4 0m8 0a2 2 0 11-4 0m8 0a2 2 0 11-4 0" />
                         </svg>
@@ -33,7 +33,7 @@
             <!-- Card 2 -->
             <div class="bg-gray-50 rounded-xl p-6 shadow-md hover:shadow-lg transition">
                 <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <div class="shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -48,7 +48,7 @@
             <!-- Card 3 -->
             <div class="bg-gray-50 rounded-xl p-6 shadow-md hover:shadow-lg transition">
                 <div class="flex items-start gap-4">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                    <div class="shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-6 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
