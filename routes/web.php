@@ -27,6 +27,8 @@ Route::get('/register/client', function () {
 Route::post('/register/client', [RegisterController::class, 'registerClient'])->name('register.client');
 Route::post('/register/freelancer', [RegisterController::class, 'registerFreelancer'])->name('register.freelancer');
 Route::get('/homepage', [HomeController::class, 'homepage'])->name('homepage');
+Route::get('/register/freelancer', [FreelancerController::class, 'jurusRegist'])
+    ->name('auth.register.freelancer');
 
 // ===== Auth Routes =====
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -66,6 +68,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/orders', [ClientController::class, 'orders'])->name('client.orders');
     Route::get('/client/messages', [ClientController::class, 'messages'])->name('client.messages');
     Route::get('/client/settings', [ClientController::class, 'settings'])->name('client.settings');
+    Route::get('/client/profile', [ClientController::class, 'profile'])->name('client.profile');
 });
 
 // ===== Freelancer Routes =====
