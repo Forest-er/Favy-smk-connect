@@ -14,16 +14,10 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
             <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition group">
-                <div class="relative h-48 bg-black flex items-center justify-center">
-                    <div id="card1Image" class="text-white text-xl font-bold text-center p-4">
-                        all in one place
-                    </div>
-                    <div class="absolute bottom-3 right-3 bg-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
+                <div class="relative h-48 bg-gray-100 flex items-center justify-center">
+                    <img id="card1Image" src="{{ asset('images/smkbm3.png') }}" alt="All in one place" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6">
                     <h3 id="card1Title" class="font-semibold text-gray-900 mb-2">Posting jobs is always free</h3>
@@ -31,9 +25,10 @@
                 </div>
             </div>
 
+            <!-- Card 2 -->
             <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition group">
                 <div class="relative h-48 bg-gray-100 flex items-center justify-center">
-                    <img id="card2Image" src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Get proposals" class="w-full h-full object-cover">
+                    <img id="card2Image" src="{{ asset('images/smkbm3.png') }}" alt="Get proposals" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6">
                     <h3 id="card2Title" class="font-semibold text-gray-900 mb-2">Get proposals and hire</h3>
@@ -41,9 +36,10 @@
                 </div>
             </div>
 
+            <!-- Card 3 -->
             <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition group">
                 <div class="relative h-48 bg-gray-100 flex items-center justify-center">
-                    <img id="card3Image" src="https://images.unsplash.com/photo-1581091580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pay when done" class="w-full h-full object-cover">
+                    <img id="card3Image" src="{{ asset('images/smkbm3.png') }}" alt="Pay when done" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6">
                     <h3 id="card3Title" class="font-semibold text-gray-900 mb-2">Pay when work is done</h3>

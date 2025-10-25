@@ -5,7 +5,6 @@
   </div>
 
   <div class="flex items-center space-x-6 text-sm font-medium">
-        <a href="#" class="hover:text-gray-700">Sign in</a>
-        <button class="border border-gray-300 rounded-md px-4 py-1 hover:bg-gray-50">Join</button>
+        <button class="border border-gray-300 rounded-md px-4 py-1 hover:bg-gray-50">Ayo Daftar!</button>
     </div>
 </nav>

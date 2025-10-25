@@ -46,83 +46,97 @@
             });
         });
 
-        // Toggle How It Works
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleHiring = document.getElementById('toggleHiring');
-            const toggleFinding = document.getElementById('toggleFinding');
+            document.addEventListener('DOMContentLoaded', () => {
+                const toggleHiring = document.getElementById('toggleHiring');
+                const toggleFinding = document.getElementById('toggleFinding');
 
-            const content = {
-                hiring: {
-                    card1: {
-                        image: '<span class="text-white text-xl font-bold text-center p-4">all in one place</span>',
-                        title: 'Posting jobs is always free',
-                        desc: 'Post your project for free and get proposals from top freelancers.'
+                // Pastikan assetUrl sudah didefinisikan di Blade
+                const imageUrl = window.assetUrl || '/images/smkbm3.png';
+
+                const content = {
+                    hiring: {
+                        card1: {
+                            image: `<img src="${imageUrl}" alt="All in one place" class="w-full h-full object-cover">`,
+                            title: 'Posting jobs is always free',
+                            desc: 'Post your project for free and get proposals from top freelancers.'
+                        },
+                        card2: {
+                            image: `<img src="${imageUrl}" alt="Get proposals" class="w-full h-full object-cover">`,
+                            title: 'Get proposals and hire',
+                            desc: 'Review proposals, interview candidates, and hire the perfect match.'
+                        },
+                        card3: {
+                            image: `<img src="${imageUrl}" alt="Pay when done" class="w-full h-full object-cover">`,
+                            title: 'Pay when work is done',
+                            desc: 'Only pay for completed work you’re happy with — no surprises.'
+                        }
                     },
-                    card2: {
-                        image: '<img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Get proposals" class="w-full h-full object-cover">',
-                        title: 'Get proposals and hire',
-                        desc: 'Review proposals, interview candidates, and hire the perfect match.'
-                    },
-                    card3: {
-                        image: '<img src="https://images.unsplash.com/photo-1581091580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pay when done" class="w-full h-full object-cover">',
-                        title: 'Pay when work is done',
-                        desc: 'Only pay for completed work you’re happy with — no surprises.'
+                    finding: {
+                        card1: {
+                            image: `<img src="${imageUrl}" alt="Find your next gig" class="w-full h-full object-cover">`,
+                            title: 'Create your profile',
+                            desc: 'Showcase your skills, experience, and portfolio to attract clients.'
+                        },
+                        card2: {
+                            image: `<img src="${imageUrl}" alt="Get hired" class="w-full h-full object-cover">`,
+                            title: 'Get hired fast',
+                            desc: 'Browse projects, submit proposals, and land your next job quickly.'
+                        },
+                        card3: {
+                            image: `<img src="${imageUrl}" alt="Get paid" class="w-full h-full object-cover">`,
+                            title: 'Get paid securely',
+                            desc: 'Receive payments safely through our platform — no delays, no hassle.'
+                        }
                     }
-                },
-                finding: {
-                    card1: {
-                        image: '<span class="text-white text-xl font-bold text-center p-4">find your next gig</span>',
-                        title: 'Create your profile',
-                        desc: 'Showcase your skills, experience, and portfolio to attract clients.'
-                    },
-                    card2: {
-                        image: '<img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Get hired" class="w-full h-full object-cover">',
-                        title: 'Get hired fast',
-                        desc: 'Browse projects, submit proposals, and land your next job quickly.'
-                    },
-                    card3: {
-                        image: '<img src="https://images.unsplash.com/photo-1581091580497-e0d23cbdf1dc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Get paid" class="w-full h-full object-cover">',
-                        title: 'Get paid securely',
-                        desc: 'Receive payments safely through our platform — no delays, no hassle.'
-                    }
+                };
+
+                function updateContent(mode) {
+                    const {
+                        card1,
+                        card2,
+                        card3
+                    } = content[mode];
+
+                    // Card 1: innerHTML karena sekarang juga gambar
+                    document.getElementById('card1Image').innerHTML = card1.image;
+
+                    // Card 2 & 3: ganti seluruh elemen karena sebelumnya <img> langsung
+                    const card2Container = document.getElementById('card2Image').closest('div.relative');
+                    card2Container.innerHTML = `<img id="card2Image" src="${imageUrl}" alt="${card2.title}" class="w-full h-full object-cover">`;
+
+                    const card3Container = document.getElementById('card3Image').closest('div.relative');
+                    card3Container.innerHTML = `<img id="card3Image" src="${imageUrl}" alt="${card3.title}" class="w-full h-full object-cover">`;
+
+                    // Update teks
+                    document.getElementById('card1Title').textContent = card1.title;
+                    document.getElementById('card1Desc').textContent = card1.desc;
+
+                    document.getElementById('card2Title').textContent = card2.title;
+                    document.getElementById('card2Desc').textContent = card2.desc;
+
+                    document.getElementById('card3Title').textContent = card3.title;
+                    document.getElementById('card3Desc').textContent = card3.desc;
                 }
-            };
 
-            function updateContent(mode) {
-                const {
-                    card1,
-                    card2,
-                    card3
-                } = content[mode];
-                document.getElementById('card1Image').innerHTML = card1.image;
-                document.getElementById('card1Title').textContent = card1.title;
-                document.getElementById('card1Desc').textContent = card1.desc;
+                toggleHiring.addEventListener('click', () => {
+                    toggleHiring.classList.add('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleHiring.classList.remove('bg-gray-100');
+                    toggleFinding.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleFinding.classList.add('bg-gray-100');
+                    updateContent('hiring');
+                });
 
-                document.getElementById('card2Image').outerHTML = `<div id="card2Image">${card2.image}</div>`;
-                document.getElementById('card2Title').textContent = card2.title;
-                document.getElementById('card2Desc').textContent = card2.desc;
+                toggleFinding.addEventListener('click', () => {
+                    toggleFinding.classList.add('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleFinding.classList.remove('bg-gray-100');
+                    toggleHiring.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
+                    toggleHiring.classList.add('bg-gray-100');
+                    updateContent('finding');
+                });
 
-                document.getElementById('card3Image').outerHTML = `<div id="card3Image">${card3.image}</div>`;
-                document.getElementById('card3Title').textContent = card3.title;
-                document.getElementById('card3Desc').textContent = card3.desc;
-            }
-
-            toggleHiring.addEventListener('click', () => {
-                toggleHiring.classList.add('bg-white', 'border-b-2', 'border-blue-500');
-                toggleFinding.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
-                toggleFinding.classList.add('bg-gray-100');
-                updateContent('hiring');
+                // Trigger default
+                toggleHiring.click();
             });
-
-            toggleFinding.addEventListener('click', () => {
-                toggleFinding.classList.add('bg-white', 'border-b-2', 'border-blue-500');
-                toggleHiring.classList.remove('bg-white', 'border-b-2', 'border-blue-500');
-                toggleHiring.classList.add('bg-gray-100');
-                updateContent('finding');
-            });
-
-            toggleHiring.click();
-        });
     </script>
 </body>
 
