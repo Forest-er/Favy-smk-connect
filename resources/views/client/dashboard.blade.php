@@ -368,21 +368,19 @@
   ];
 @endphp
 
-    <div class="w-full overflow-x-auto scrollbar-hide mb-8">
+  <div class="w-full overflow-x-auto scrollbar-hide mb-8">
     <div class="flex gap-4 text-[14px] font-medium min-w-max">
-        @foreach ($jurusans as $index => $jurusan)
+      @foreach ($jurusans as $index => $jurusan)
         @php
-            // Pilih kombinasi warna berdasarkan index
-            $gradient = $gradients[$index % count($gradients)];
+          $gradient = $gradients[$index % count($gradients)];
         @endphp
-
-    <button onclick="openPopup({{ $task->id }}); event.stopPropagation();"
-        class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-        Hire Now
-    </button>
-        @endforeach
+        <button 
+          class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:{{ implode(' ', $gradient) }} hover:shadow-md whitespace-nowrap">
+          {{ $jurusan->nama_jurusan }}
+        </button>
+      @endforeach
     </div>
-    </div>
+  </div>
 
 
   <style>
