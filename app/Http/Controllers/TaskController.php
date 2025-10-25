@@ -94,7 +94,7 @@ class TaskController extends Controller
    public function show($id)
 {
     $task = Task::findOrFail($id); // Ambil 1 task berdasarkan id
-    return view('client.tasks.show', compact('task')); // Kirim ke view
+    return view('client.task-detail', compact('task')); // Kirim ke view
 }
 
 }

@@ -73,7 +73,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/profile', [ClientController::class, 'profile'])->name('client.profile');
     Route::put('/client/profile', [ClientController::class, 'update'])->name('client.update');
     Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('task.show');
-    Route::get('/task/{id}', [App\Http\Controllers\TaskController::class, 'showJson'])->name('task.showJson');
+    Route::get('/api/task/{id}', [TaskController::class, 'showJson'])->name('task.showJson');
 
 });
 
@@ -96,8 +96,6 @@ require __DIR__.'/auth.php';
 Route::get('/freelancers', [FreelancerController::class, 'index'])->name('freelancer.index');
 Route::get('/freelancer/{id}', [FreelancerController::class, 'show'])->name('freelancer.show');
 
-// Ambil detail task by ID (AJAX)
-Route::get('/task/{id}', [App\Http\Controllers\TaskController::class, 'show'])->name('task.show');
 
 
 
