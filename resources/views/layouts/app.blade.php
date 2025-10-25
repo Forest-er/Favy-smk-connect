@@ -44,7 +44,7 @@
 </nav>
 
   {{-- Konten utama --}}
-  <main class="py-10">
+  <main class="">
     @yield('content')
   </main>
 

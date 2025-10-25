@@ -27,28 +27,42 @@ class DashboardController extends Controller
                 abort(403, 'Role tidak diizinkan.');
         }
     }
-    public function dataview(Request $request){
+    public function dataview(Request $request)
+    {
         $search = $request->keyword;
+        $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
 
         $tasks = Task::with(['jurusan', 'user'])
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })
-            ->get(); // ambil data task + relasi
+            ->when($jurusanId, function ($query, $jurusanId) {
+                $query->where('jurusan_id', $jurusanId);
+            })
+            ->get();
+
         $jurusans = Jurusan::all();
-        return view('client.dashboard', compact('jurusans', 'tasks'));
-        return view('client.orders.task', compact('jurusans', 'tasks'));
+
+        return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId'));
     }
-    public function insertTask(Request $request){
+
+    public function insertTask(Request $request)
+    {
         $search = $request->keyword;
+        $jurusanId = $request->jurusan_id;
 
         $tasks = Task::with(['jurusan', 'user'])
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })
-            ->get(); // ambil data task + relasi
+            ->when($jurusanId, function ($query, $jurusanId) {
+                $query->where('jurusan_id', $jurusanId);
+            })
+            ->get();
+
         $jurusans = Jurusan::all();
-        return view('client.orders.task', compact('jurusans', 'tasks'));
+
+        return view('client.orders.task', compact('jurusans', 'tasks', 'jurusanId'));
     }
 }
 

@@ -14,17 +14,15 @@ Route::get('/', function () {
     return view('page-guest.home');
 });
 
-Route::get('/', function () { return view('tester'); });
-// ===== Register Routes =====
-Route::get('/register/{role}', function ($role) {
-    if ($role === 'freelancer') {
-        return view('auth.register.freelancer');
-    } elseif ($role === 'client') {
-        return view('auth.register.client');
-    } else {
-        abort(404);
-    }
-})->name('register.role');
+// Untuk freelancer
+Route::get('/register/freelancer', [FreelancerController::class, 'jurusRegist'])
+    ->name('auth.register.freelancer');
+
+// Untuk client
+Route::get('/register/client', function () {
+    return view('auth.register.client');
+})->name('auth.register.client');
+
 
 Route::post('/register/client', [RegisterController::class, 'registerClient'])->name('register.client');
 Route::post('/register/freelancer', [RegisterController::class, 'registerFreelancer'])->name('register.freelancer');
@@ -36,6 +34,8 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/insert/task', [TaskController::class, 'create'])->name('client.orders.task');
+    Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.task');
     Route::get('/{role}/dashboard', function ($role) {
         $user = auth()->user();
 
@@ -86,6 +86,7 @@ Route::get('/insert/task', [DashboardController::class, 'insertTask'])->name('cl
 require __DIR__.'/auth.php';
 Route::get('/freelancers', [FreelancerController::class, 'index'])->name('freelancer.index');
 Route::get('/freelancer/{id}', [FreelancerController::class, 'show'])->name('freelancer.show');
+<<<<<<< HEAD
 // ===== Client Routes =====
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/dashboard', [ClientController::class, 'dashboard'])->name('client.dashboard');
@@ -100,3 +101,5 @@ Route::middleware(['auth', 'role:client'])->group(function () {
         return view('client.profile');
     })->name('client.profile');
 });
+=======
+>>>>>>> bc2e848c37fc805182432a6d644a26617fa1a743
