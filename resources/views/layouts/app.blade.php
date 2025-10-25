@@ -28,17 +28,22 @@
     </div>
 
     <!-- Profile Dropdown -->
+
     <div class="relative" x-data="{ open: false }">
       <button onclick="toggleDropdown()" id="profileButton"
         class="focus:outline-none flex items-center space-x-2">
-        <img src="{{ asset('images/profile.jpg') }}" alt="Profile"
+        <img 
+          src="{{ Auth::user()->foto 
+                ? asset('storage/' . Auth::user()->foto) 
+                : asset('images/profile.jpeg') }}" 
+          alt="Profile"
           class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
       </button>
 
       <!-- Dropdown -->
       <div id="profileDropdown"
         class="hidden absolute right-0 mt-3 w-40 bg-white border rounded-lg shadow-lg py-2 transition-all duration-200">
-        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+        <a href="/client/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
         <form action="{{ route('logout') }}" method="POST" class="block">
           @csrf
           <button type="submit"

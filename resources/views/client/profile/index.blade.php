@@ -11,17 +11,22 @@
             <div class="flex flex-col items-center">
 
                 <!-- Kotak Profil -->
-                <div class="rounded-2xl p-8 shadow-sm border border-pink-100 bg-white w-full">
+                <div class="rounded-2xl p-8 shadow-sm border border-pink-200 bg-white w-full">
+                    @php
+                        $users = Auth::user();
+                    @endphp
                     <div class="flex flex-col items-center">
                         <!-- Avatar -->
-                        <div
+                        <img 
+                            src="{{ $users->foto 
+                                    ? asset('storage/' . $users->foto) 
+                                    : asset('images/profile.jpeg') }}" 
+                            alt="Profile"
                             class="w-28 h-28 rounded-full bg-gradient-to-br from-pink-300 via-pink-400 to-rose-400 flex items-center justify-center text-white text-5xl font-bold shadow-md">
-                            A
-                        </div>
 
                         <!-- Name -->
-                        <h2 class="mt-5 text-xl font-semibold text-gray-800">Your Fiverr Name</h2>
-                        <p class="text-gray-500 text-[15px]">@azizah_raw</p>
+                        <h2 class="mt-5 text-xl font-semibold text-gray-800">{{ $users->nama }}</h2>
+                        <p class="text-gray-500 text-[15px]">{{ $users->email }}</p>
                     </div>
 
                     <hr class="my-6 border-pink-100">
@@ -29,26 +34,21 @@
                     <!-- Info List -->
                     <div class="space-y-4 text-[15px] mb-6">
                         <div class="flex items-center gap-3 text-gray-700">
-                            <i class="bi bi-geo-alt text-[18px] text-pink-500"></i>
-                            Located in Indonesia
+                            <i class="bi bi-person-circle text-[18px] text-pink-500"></i>
+                            {{ $users->role }}
                         </div>
                         <div class="flex items-center gap-3 text-gray-700">
                             <i class="bi bi-calendar3 text-[18px] text-pink-500"></i>
-                            Joined in October 2025
+                            {{ $users->created_at }}
                         </div>
-                        <div class="flex items-center gap-3 text-gray-400">
+                        <div class="flex items-center gap-3 text-gray-700">
                             <i class="bi bi-briefcase text-[18px] text-pink-400"></i>
-                            Your industry
-                        </div>
-                        <div class="flex items-center gap-3 text-gray-400">
-                            <i class="bi bi-translate text-[18px] text-pink-400"></i>
-                            Preferred languages
+                            {{ $users->places }}
                         </div>
                     </div>
 
                     <p class="text-gray-500 text-sm leading-relaxed text-center">
-                        You're currently on your buyer profile. To access your freelancer profile,
-                        <a href="#" class="text-pink-500 hover:underline font-medium">switch to seller mode</a>.
+                        {{ $users->bio?? "tidak ada bio" }}
                     </p>
                 </div>
 
@@ -71,21 +71,20 @@
 
                 <!-- Info Box -->
                 <div
-                    class="border border-pink-100 bg-gradient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
+                    class="border border-pink-200 bg-gradient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
                     <div class="flex gap-3">
                         <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
                         <div>
                             <p class="text-[15px] font-medium text-gray-800">
-                                This is your profile when ordering services.
+                                This is your client profile
                             </p>
                             <p class="text-gray-600 text-[14px]">
                                 For your freelancer profile click
                                 <a href="{{ route('auth.register.freelancer') }}"
-                                    class="text-pink-500 hover:underline">here</a>.
+                                    class="text-pink-500 hover:underline">here</a>. or <a href="{{ route('login')}}" class="text-blue-500 hover:underline"> login </a>
                             </p>
                         </div>
                     </div>
-                    <button class="text-[13px] text-gray-400 hover:text-gray-600">Dismiss</button>
                 </div>
 
                 <!-- Breadcrumb -->
@@ -109,28 +108,11 @@
                 </div>
 
                 <!-- Profile Checklist -->
-                <div class="border border-pink-100 rounded-2xl p-6 bg-white shadow-sm">
-                    <h3 class="text-[17px] font-semibold text-gray-800 mb-5">Profile checklist</h3>
-
-                    <!-- Progress bar -->
-                    <div class="w-full bg-pink-100 h-2.5 rounded-full mb-2">
-                        <div class="bg-gradient-to-r from-pink-400 to-rose-500 h-2.5 rounded-full w-[25%]"></div>
-                    </div>
-                    <p class="text-gray-500 text-[13px] mb-4">25%</p>
+                <div class="border border-pink-200 rounded-2xl p-6 bg-white shadow-sm">
+                    <h3 class="text-[17px] font-semibold text-gray-800 mb-5">Hai!!!, hari ini mau ngapain?</h3>
 
                     <!-- Checklist Cards -->
                     <div class="space-y-4">
-                        <div
-                            class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-gray-800 font-medium text-[15px]">Share how you plan to use Fiverr</p>
-                                <span class="text-pink-500 text-[13px]">75%</span>
-                            </div>
-                            <p class="text-gray-500 text-[13px]">
-                                Tell us if you're here to find services or offer them.
-                            </p>
-                        </div>
-
                         <div
                             class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
                             <div class="flex justify-between items-center mb-1">
@@ -183,83 +165,76 @@
             <div class="bg-white border border-gray-200 rounded-xl shadow-md p-6">
                 <!-- Avatar -->
                 <div class="flex flex-col items-center mb-8">
-                    <div
-                        class="relative w-20 h-20 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-3xl font-semibold shadow-sm">
-                        A
-                        <div
-                            class="absolute bottom-0 right-1.5 bg-white rounded-full p-1 shadow cursor-pointer border border-gray-200 hover:bg-gray-50">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-1.5A2.25 2.25 0 0118 8.25l.75.75a2.25 2.25 0 010 3.182l-7.5 7.5a2.25 2.25 0 01-1.591.659H6a.75.75 0 01-.75-.75v-3.659a2.25 2.25 0 01.659-1.591l7.5-7.5z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="mt-3 text-gray-700 font-medium text-sm">@azizah_raw</p>
+                    <div class="relative w-20 h-20">
+                    <img 
+                        src="{{ $users->foto_profil ? asset('storage/' . $users->foto_profil) : asset('images/profile.jpeg') }}" 
+                        alt="Foto Profil"
+                        class="w-full h-full rounded-full object-cover shadow-md border-2 border-white"
+                    >
+
+                    <!-- Tombol edit -->
+                    <button 
+                        class="absolute bottom-0 right-0 bg-white p-1.5 rounded-full shadow hover:bg-gray-100 border border-gray-200 transition"
+                        title="Ubah foto profil"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.232 5.232l3.536 3.536m-2.036-1.5A2.25 2.25 0 0118 8.25l.75.75a2.25 2.25 0 010 3.182l-7.5 7.5a2.25 2.25 0 01-1.591.659H6a.75.75 0 01-.75-.75v-3.659a2.25 2.25 0 01.659-1.591l7.5-7.5z" />
+                        </svg>
+                    </button>
+                </div>
+
+                    
+                    <p class="mt-3 text-gray-700 font-medium text-sm">{{ $users->email }}</p>
                 </div>
 
                 <!-- Form -->
-                <form class="space-y-6">
+                <form class="space-y-6" 
+                    action="{{ route('client.update') }}" 
+                    method="POST" 
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
                     <!-- Display Name -->
                     <div>
-                        <label class="block text-gray-800 font-medium text-sm mb-1">How would you like to be called?</label>
-                        <input type="text" placeholder="e.g. John D."
+                        <label class="block text-gray-800 font-medium text-sm mb-1">Lebih suka dipanggil siapa??</label>
+                        <input type="text" 
+                            name="nama" 
+                            value="{{ old('nama', $users->nama) }}"
+                            placeholder="Masukkan nama panggilan"
                             class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">
-                        <p class="text-gray-400 text-xs mt-1">Use your first name and initial for a friendly touch.</p>
                     </div>
 
                     <!-- Description -->
                     <div>
-                        <label class="block text-gray-800 font-medium text-sm mb-1">How would you describe your
-                            business?</label>
-                        <textarea placeholder="Write about your business focus and what makes it unique..."
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 h-24 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition"></textarea>
+                        <label class="block text-gray-800 font-medium text-sm mb-1">Tulis bio kamu disini</label>
+                        <textarea name="bio" 
+                                placeholder="bio kamu..."
+                                class="w-full border border-gray-300 rounded-lg px-3 py-2 h-24 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">{{ old('bio', $users->bio) }}</textarea>
                     </div>
 
                     <!-- Divider -->
-                    <div class="border-t border-gray-100 pt-6">
-                        <h2 class="text-base font-semibold text-gray-800 mb-4">Business Information</h2>
-
+                    <div class="border-t border-gray-100 pt-4">
                         <!-- Industry -->
                         <div class="mb-4">
-                            <label class="block text-gray-800 font-medium text-sm mb-1">What's your business's
-                                industry?</label>
-                            <input type="text" placeholder="Start typing to select from a list"
+                            <label class="block text-gray-800 font-medium text-sm mb-1">Nama kantor kamu</label>
+                            <input type="text" 
+                                name="places"
+                                value="{{ old('places', $users->places) }}"
+                                placeholder="PT Contoh ..."
                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">
-                        </div>
-
-                        <!-- Business Name -->
-                        <div class="mb-4">
-                            <label class="block text-gray-800 font-medium text-sm mb-1">What's your business's name?</label>
-                            <input type="text" placeholder="Add name here"
-                                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">
-                        </div>
-
-                        <!-- URL -->
-                        <div>
-                            <label class="block text-gray-800 font-medium text-sm mb-1">Add your business's main URL</label>
-                            <input type="text" placeholder="(website, social page, blog, etc.)"
-                                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">
-                            <div class="flex items-center mt-2">
-                                <input id="no-url" type="checkbox"
-                                    class="w-4 h-4 text-pink-500 border-gray-300 rounded focus:ring-pink-400">
-                                <label for="no-url" class="ml-2 text-gray-600 text-xs">Don’t have one yet</label>
-                            </div>
                         </div>
                     </div>
 
-                    <!-- Footer -->
-                    <div class="flex justify-end border-t border-gray-100 pt-6 mt-6">
-                        <button type="button" onclick="closeModal()"
-                            class="px-4 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 font-medium mr-2 text-sm transition">
-                            Cancel
-                        </button>
-                        <button type="submit"
-                            class="px-5 py-1.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-lg font-medium shadow hover:from-pink-600 hover:to-rose-600 text-sm transition">
-                            Done
-                        </button>
-                    </div>
+                    <!-- Submit -->
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white py-2.5 rounded-lg font-semibold hover:opacity-90 transition">
+                        Simpan Perubahan
+                    </button>
                 </form>
+
             </div>
         </div>
     </div>
