@@ -370,21 +370,18 @@
 
   <div class="w-full overflow-x-auto scrollbar-hide mb-8">
     <div class="flex gap-4 text-[14px] font-medium min-w-max">
-        @foreach ($jurusans as $index => $jurusan)
-            @php
-                $gradient = $gradients[$index % count($gradients)];
-                $tasksPerJurusan = $jurusan->tasks; // pastikan relasi di model Jurusan: tasks()
-            @endphp
-
-            @foreach ($tasksPerJurusan as $task)
-                <button onclick="openPopup({{ $task->id_task }}); event.stopPropagation();"
-                    class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-                    Hire Now
-                </button>
-            @endforeach
-        @endforeach
+      @foreach ($jurusans as $index => $jurusan)
+        @php
+          $gradient = $gradients[$index % count($gradients)];
+        @endphp
+        <button 
+          class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:{{ implode(' ', $gradient) }} hover:shadow-md whitespace-nowrap">
+          {{ $jurusan->nama_jurusan }}
+        </button>
+      @endforeach
     </div>
   </div>
+
 
   <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -435,158 +432,180 @@
         <!-- 🌑 FREELANCER POPUP DENGAN 1 SCROLL DAN GARIS PEMBATAS SAMPING -->
          <!-- Overlay -->
 <!-- 🌑 FREELANCER POPUP PROFESIONAL DENGAN SCROLL & PANEL SAMPING (DINAMIS + FALLBACK) --> <!-- Overlay --> <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div> <!-- Popup Container --> <div id="rightPopup" class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl"> <div class="flex flex-col h-full">
-<!-- Header -->
-<div class="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 z-10 bg-white shadow-sm rounded-tl-3xl">
-  <h3 class="text-xl font-semibold text-gray-800">Freelancer Profile</h3>
-  <button onclick="closePopup()" class="text-gray-400 hover:text-gray-600 text-2xl transition">&times;</button>
+<!-- HEADER -->
+<div class="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 z-10 bg-white shadow-sm rounded-t-3xl">
+  <h3 class="text-xl font-semibold text-gray-800">Project</h3>
+  <button onclick="window.history.back()" class="text-gray-400 hover:text-gray-600 text-2xl transition">&times;</button>
 </div>
 
-<!-- Konten Scrollable -->
+<!-- KONTEN SCROLLABLE -->
+<!-- MAIN SCROLL -->
 <div id="mainScroll" class="flex-1 overflow-y-auto bg-white">
-  <div id="profileLayout" class="flex gap-8 p-8">
+  <div id="profileLayout" class="flex flex-col md:flex-row gap-8 p-8">
 
     <!-- BAGIAN KIRI -->
-    <div class="flex-1 space-y-6">
+    <div class="flex-1 space-y-8">
 
-      <!-- PROFIL -->
-      <div class="flex items-center gap-6 bg-white border border-gray-100 rounded-2xl p-6 shadow-md">
+      <!-- PROFIL FREELANCER -->
+      <div class="flex items-center gap-5 bg-white border border-gray-100 rounded-2xl p-5 shadow-md">
         <img src="{{ $task->user->foto ? asset('storage/' . $task->user->foto) : 'https://i.pravatar.cc/150?img=' . rand(1, 70) }}"
-          class="w-28 h-28 rounded-full border-4 border-white shadow-md object-cover">
+          class="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover">
+
         <div class="flex flex-col flex-1">
           <div class="flex items-center gap-2">
-            <h4 class="text-2xl font-bold text-black">{{ $task->user->nama ?? 'Anonim' }}</h4>
+            <h4 class="text-xl font-semibold text-black">{{ $task->user->nama ?? 'Anonim' }}</h4>
             <span class="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
               {{ ($task->user->rating ?? 4.5) >= 4.5 ? 'Top Rated' : 'Active Freelancer' }}
             </span>
           </div>
-          <p class="text-gray-500 text-sm">{{ $task->jurusan->nama_jurusan ?? 'General Freelancer' }}</p>
+
+          <p class="text-gray-500 text-sm mt-0.5">{{ $task->jurusan->nama_jurusan ?? 'General Freelancer' }}</p>
+
           <div class="flex items-center gap-1 text-yellow-500 mt-1">
             @for ($i = 1; $i <= 5; $i++)
               <i class="bi {{ $i <= round($task->user->rating ?? 4.5) ? 'bi-star-fill' : 'bi-star' }}"></i>
             @endfor
             <span class="text-gray-500 ml-2 text-sm">({{ number_format($task->user->rating ?? 4.5, 1) }})</span>
           </div>
+
           <p class="text-green-600 text-sm mt-1">
             {{ $task->user->status_online ?? true ? 'Available Now' : 'Offline' }} • Response: {{ $task->user->response_time ?? '1h' }}
           </p>
         </div>
       </div>
 
-      <!-- ABOUT & SKILLS -->
-      <section class="space-y-10 mt-8">
+      <!-- DETAIL PROJECT -->
+      <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm space-y-5">
+        <h2 class="text-2xl font-semibold text-gray-900">{{ $task->judul }}</h2>
 
-        <!-- Tentang -->
-        <div class="space-y-4">
-          <h2 class="text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          <p class="text-gray-700 leading-relaxed text-[16px]">
-            {{ $task->user->bio ?? 'I’m a passionate freelancer ready to help clients achieve their goals through creative and efficient solutions.' }}
-          </p>
-        </div>
+        <img src="{{ asset('storage/' . $task->foto) }}" alt="Project Image"
+          class="rounded-xl w-full h-64 object-cover shadow-md">
 
-        <!-- Skills -->
-        <div class="space-y-4">
-          <h2 class="text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-            Skills & Expertise
-          </h2>
+        <p class="text-gray-700 leading-relaxed mt-4">{{ $task->deskripsi }}</p>
 
-          <div class="space-y-2">
-            <p class="text-gray-500 uppercase text-sm tracking-wider">Skills</p>
-            <div class="flex flex-wrap gap-3">
-              @php
-                $skills = $task->user->skills ? explode(',', $task->user->skills) : ['Communication', 'Teamwork', 'Creativity'];
-              @endphp
-              @foreach ($skills as $skill)
-                <span class="px-4 py-1 bg-gradient-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
-                  {{ trim($skill) }}
-                </span>
-              @endforeach
-            </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm mt-6">
+          <div>
+            <p class="text-gray-500">Deadline</p>
+            <p class="font-semibold text-gray-800">{{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</p>
+          </div>
+          <div>
+            <p class="text-gray-500">Estimasi Waktu</p>
+            <p class="font-semibold text-gray-800">{{ $task->waktu_estimasi }}</p>
+          </div>
+          <div>
+            <p class="text-gray-500">Budget</p>
+            <p class="font-semibold text-gray-800">Rp {{ number_format($task->budget, 0, ',', '.') }}</p>
           </div>
         </div>
-      </section>
 
-      <!-- PORTFOLIO -->
-      <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-        <h5 class="font-semibold text-lg mb-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-          Portfolio
-        </h5>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          @if (isset($task->user->portfolio) && $task->user->portfolio->count() > 0)
-            @foreach ($task->user->portfolio as $item)
-              <div class="relative overflow-hidden rounded-lg group">
-                <img src="{{ asset('storage/' . $item->gambar) }}"
-                  class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
-                <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white text-xs p-2">
-                  {{ $item->judul }}
-                </div>
-              </div>
-            @endforeach
-          @else
-            <!-- Contoh Portfolio Default -->
-            @foreach ([
-                ['judul' => 'Landing Page • Web', 'img' => 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'],
-                ['judul' => 'Mobile UI • App', 'img' => 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg'],
-                ['judul' => 'Dashboard Design', 'img' => 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg'],
-            ] as $demo)
-              <div class="relative overflow-hidden rounded-lg group">
-                <img src="{{ $demo['img'] }}"
-                  class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
-                <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white text-xs p-2">
-                  {{ $demo['judul'] }}
-                </div>
-              </div>
-            @endforeach
-          @endif
-        </div>
+        <span class="inline-block mt-4 px-4 py-1 rounded-full text-sm font-medium 
+          {{ $task->status === 'open' ? 'bg-green-100 text-green-700' : 
+             ($task->status === 'in_progress' ? 'bg-yellow-100 text-yellow-700' : 'bg-blue-100 text-blue-700') }}">
+          {{ ucfirst($task->status) }}
+        </span>
       </div>
 
+      <!-- KOMENTAR -->
+      <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mt-8">
+        <h5 class="font-semibold text-lg mb-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+          Comments & Feedback
+        </h5>
+
+        <div class="space-y-4">
+          @foreach ([['nama' => 'Rizky H.', 'komentar' => 'Freelancer-nya keren banget! Hasil cepat dan rapi.', 'waktu' => '2 days ago'],
+                     ['nama' => 'Aulia N.', 'komentar' => 'Kerja profesional dan komunikatif, recommended banget.', 'waktu' => '1 week ago'],
+                     ['nama' => 'Farel P.', 'komentar' => 'Desainnya sesuai ekspektasi, bakal order lagi nanti.', 'waktu' => '3 weeks ago']] as $dummy)
+            <div class="flex items-start gap-4 border-b border-gray-100 pb-3">
+              <img src="https://i.pravatar.cc/100?u={{ $dummy['nama'] }}" class="w-10 h-10 rounded-full object-cover shadow-sm">
+              <div class="flex-1">
+                <div class="flex items-center justify-between">
+                  <h6 class="font-semibold text-gray-900">{{ $dummy['nama'] }}</h6>
+                  <span class="text-xs text-gray-500">{{ $dummy['waktu'] }}</span>
+                </div>
+                <p class="text-gray-700 text-sm mt-1">{{ $dummy['komentar'] }}</p>
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </div>
     </div>
 
-    <!-- GARIS PEMBATAS -->
-    <div id="divider" class="w-[2px] bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 rounded-full"></div>
+    <!-- PEMBATAS -->
+    <div class="hidden md:block w-[2px] bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 rounded-full"></div>
 
-    <!-- PANEL SAMPING -->
-    <div id="sidePanel" class="w-[300px] p-6 space-y-6">
+    <!-- SIDE PANEL -->
+    <div id="sidePanel" class="w-full md:w-[300px] p-6 space-y-6">
 
-      <!-- Info -->
+      <!-- CONNECT INFO -->
       <div class="bg-gradient-to-br from-blue-100 via-pink-100 to-yellow-100 p-4 rounded-2xl shadow-sm border border-gray-200">
         <p class="font-semibold text-gray-900">You'll need Connects to bid</p>
         <p class="text-gray-600 text-sm">They show clients you’re serious.</p>
         <a href="#" class="text-blue-600 text-sm font-medium hover:underline">Learn more</a>
       </div>
 
-      <!-- Buttons -->
-      <button
-        class="w-full bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white font-semibold py-2.5 rounded-lg transition">
+      <button class="w-full bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white font-semibold py-2.5 rounded-lg transition">
         Request to Order
       </button>
-      <button
-        class="w-full border border-pink-400 text-pink-600 hover:bg-pink-50 font-medium py-2.5 rounded-lg flex items-center justify-center gap-2 transition">
+
+      <button class="w-full border border-pink-400 text-pink-600 hover:bg-pink-50 font-medium py-2.5 rounded-lg flex items-center justify-center gap-2 transition">
         <i class="bi bi-heart"></i> Save Job
       </button>
 
-      <!-- About Client -->
+      <!-- ABOUT ME (DIPINDAHKAN KE SINI) -->
+      <div class="pt-4 border-t border-gray-200 space-y-5">
+        <div>
+          <h5 class="text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            About Me
+          </h5>
+          <p class="text-gray-700 text-sm mt-2">
+            {{ $task->user->bio ?? 'I’m a passionate freelancer ready to help clients achieve their goals through creative and efficient solutions.' }} 
+          </p>
+          <a href="/client/explore.show" class="text-red-600 text-sm font-medium underline hover:text-red-800 transition mt-1 inline-block">
+            See details
+          </a>
+        </div>
+
+        <div>
+          <h5 class="text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            Skills & Expertise
+          </h5>
+          <div class="flex flex-wrap gap-2 mt-2">
+            @php
+              $skills = $task->user->skills ? explode(',', $task->user->skills) : ['Communication', 'Teamwork', 'Creativity'];
+            @endphp
+            @foreach ($skills as $skill)
+              <span class="px-3 py-1 bg-gradient-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-xs font-medium">
+                {{ trim($skill) }}
+              </span>
+            @endforeach
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT CLIENT -->
       <div class="pt-4 border-t border-gray-200">
         <h5 class="font-semibold text-gray-900 mb-2">About the Client</h5>
-        <p class="text-green-600 flex items-center gap-1 mb-1"><i class="bi bi-check-circle-fill"></i> Payment verified</p>
-        <p class="text-green-600 flex items-center gap-1 mb-3"><i class="bi bi-telephone-fill"></i> Phone verified</p>
+        <p class="text-green-600 flex items-center gap-1 mb-1">
+          <i class="bi bi-check-circle-fill"></i> Payment verified
+        </p>
+        <p class="text-green-600 flex items-center gap-1 mb-3">
+          <i class="bi bi-telephone-fill"></i> Phone verified
+        </p>
         <div class="flex items-center gap-1 text-yellow-500 mb-1">
-          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
           <span class="text-gray-600 ml-1">5.0 (51 reviews)</span>
         </div>
         <p class="text-gray-700 text-sm">Indonesia • {{ now()->format('H:i') }}</p>
         <p class="text-gray-500 text-xs mt-1">Member since {{ $task->user->created_at->format('M Y') }}</p>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
-
-</div> </div> <!-- JS --> <script> function openPopup() { document.getElementById('overlay').classList.remove('hidden'); document.getElementById('rightPopup').classList.remove('translate-x-full'); } function closePopup() { document.getElementById('overlay').classList.add('hidden'); document.getElementById('rightPopup').classList.add('translate-x-full'); } </script>
-
-
 
 
         <script>
