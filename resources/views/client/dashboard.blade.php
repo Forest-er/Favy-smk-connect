@@ -172,43 +172,56 @@
                     </svg>
                 </button>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <!-- CARD 1 -->
-                @forelse ($tasks as $task)
-                    <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
-                        <div class="relative">
-                            <img src="{{ asset('storage/' . $task->foto) }}"
-                                onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
-                                class="w-full h-40 object-cover">
-                            <span
-                                class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-purple-500">
-                                {{ $task->jurusan->nama_jurusan ?? 'Unknown' }}
-                            </span>
-                            <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">
-                                ⭐ {{ rand(4, 5) }}.{{ rand(0, 9) }}
-                            </span>
+                 @forelse ($tasks as $task)
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
+                    <div class="relative">
+                        <img src="{{ asset('storage/' . $task->foto) }}"
+                            onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
+                            class="w-full h-40 object-cover">
+                        <span
+                            class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-purple-500">
+                            {{ $task->jurusan->nama_jurusan ?? 'Unknown' }}
+                        </span>
+                        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">
+                            ⭐ {{ rand(4,5) }}.{{ rand(0,9) }}
+                        </span>
+                    </div>
+
+                    <div class="p-4">
+                        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">
+                            {{ $task->judul }}
+                        </h3>
+                        <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
+                            <span class="flex items-center gap-1"><i class="bi bi-calendar"></i> Deadline:
+                                {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</span>
+                            <span class="flex items-center gap-1"><i class="bi bi-clock"></i>
+                                {{ $task->waktu_estimasi }}</span>
                         </div>
 
-                        <div class="p-4">
-                            <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">
-                                {{ $task->judul }}
-                            </h3>
-                            <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
-                                <span class="flex items-center gap-1"><i class="bi bi-calendar"></i> Deadline:
-                                    {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</span>
-                                <span class="flex items-center gap-1"><i class="bi bi-clock"></i>
-                                    {{ $task->waktu_estimasi }}</span>
+                        <div class="flex items-center justify-between mb-4">
+                            <p class="text-lg font-bold text-gray-800">
+                                Rp{{ number_format($task->budget, 0, ',', '.') }}
+                            </p>
+                            <div class="flex items-center gap-2">
+                                <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-7 h-7 rounded-full border">
+                                <span class="text-xs text-gray-600">
+                                    {{ $task->user->nama ?? 'Freelancer' }}
+                                </span>
                             </div>
+                        </div>
 
                         <button onclick="openPopup(); event.stopPropagation();"
                             class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
                             Hire Now
                         </button>
                     </div>
+                </div>
                 @empty
-                    <p class="text-gray-500">Tugas yang Anda cari tidak ditemukan.</p>
-                @endforelse
+                <p class="text-gray-500">Tugas yang Anda cari tidak ditemukan.</p>
+            @endforelse
+            </div>
         </section>
 
    <!-- Gigs You May Like Section -->
