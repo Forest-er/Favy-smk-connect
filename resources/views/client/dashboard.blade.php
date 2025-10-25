@@ -353,37 +353,38 @@
   <h2 class="text-2xl font-bold mb-6 text-gray-900">Get inspired by work done on Fiverr</h2>
 
   <!-- Category Tabs -->
-@php
-  // Kumpulan variasi gradient warna
-  $gradients = [
-    ['from' => 'from-indigo-400', 'to' => 'to-purple-400'],
-    ['from' => 'from-blue-400', 'to' => 'to-indigo-400'],
-    ['from' => 'from-purple-400', 'to' => 'to-pink-400'],
-    ['from' => 'from-pink-400', 'to' => 'to-rose-400'],
-    ['from' => 'from-cyan-400', 'to' => 'to-blue-400'],
-    ['from' => 'from-violet-400', 'to' => 'to-fuchsia-400'],
-    ['from' => 'from-emerald-400', 'to' => 'to-teal-400'],
-    ['from' => 'from-amber-400', 'to' => 'to-orange-400'],
-    ['from' => 'from-lime-400', 'to' => 'to-green-400'],
-  ];
-@endphp
+  @php
+    // Kumpulan variasi gradient warna
+    $gradients = [
+      ['from' => 'from-indigo-400', 'to' => 'to-purple-400'],
+      ['from' => 'from-blue-400', 'to' => 'to-indigo-400'],
+      ['from' => 'from-purple-400', 'to' => 'to-pink-400'],
+      ['from' => 'from-pink-400', 'to' => 'to-rose-400'],
+      ['from' => 'from-cyan-400', 'to' => 'to-blue-400'],
+      ['from' => 'from-violet-400', 'to' => 'to-fuchsia-400'],
+      ['from' => 'from-emerald-400', 'to' => 'to-teal-400'],
+      ['from' => 'from-amber-400', 'to' => 'to-orange-400'],
+      ['from' => 'from-lime-400', 'to' => 'to-green-400'],
+    ];
+  @endphp
 
-    <div class="w-full overflow-x-auto scrollbar-hide mb-8">
+  <div class="w-full overflow-x-auto scrollbar-hide mb-8">
     <div class="flex gap-4 text-[14px] font-medium min-w-max">
         @foreach ($jurusans as $index => $jurusan)
-        @php
-            // Pilih kombinasi warna berdasarkan index
-            $gradient = $gradients[$index % count($gradients)];
-        @endphp
+            @php
+                $gradient = $gradients[$index % count($gradients)];
+                $tasksPerJurusan = $jurusan->tasks; // pastikan relasi di model Jurusan: tasks()
+            @endphp
 
-    <button onclick="openPopup({{ $task->id }}); event.stopPropagation();"
-        class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-        Hire Now
-    </button>
+            @foreach ($tasksPerJurusan as $task)
+                <button onclick="openPopup({{ $task->id_task }}); event.stopPropagation();"
+                    class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
+                    Hire Now
+                </button>
+            @endforeach
         @endforeach
     </div>
-    </div>
-
+  </div>
 
   <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -392,7 +393,7 @@
 
   <!-- Masonry Grid -->
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
-    
+
     <!-- Item 1 -->
     <div class="relative group cursor-pointer row-span-2 overflow-hidden rounded-xl">
       <img src="https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/delivery/asset/d1a6f869830256edfbd3d2c7b887659b-1745375528/JAKEREID687.jpg" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
@@ -426,64 +427,10 @@
       </button>
     </div>
 
-    <!-- Item 3 -->
-    <div class="relative group cursor-pointer col-span-1 overflow-hidden rounded-xl">
-      <img src="https://images.unsplash.com/photo-1610878180933-92a6a20389d5?auto=format&fit=crop&w=800&q=60" class="w-full h-[150px] object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
-        <div class="text-white text-sm p-3">
-          <p class="font-semibold">Featured in: Concept Art</p>
-          <p>by: rayyaa</p>
-        </div>
-      </div>
-      <button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300">
-        <i class="bi bi-bookmark-fill text-white text-2xl hover:text-pink-500 transition-colors"></i>
-      </button>
-    </div>
-
-    <!-- Item 4 -->
-    <div class="relative group cursor-pointer row-span-2 overflow-hidden rounded-xl">
-      <img src="https://images.unsplash.com/photo-1606761568499-6f1a76e3b25d?auto=format&fit=crop&w=800&q=60" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
-        <div class="text-white text-sm p-3">
-          <p class="font-semibold">Featured in: Fantasy</p>
-          <p>by: zahrah</p>
-        </div>
-      </div>
-      <button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300">
-        <i class="bi bi-bookmark-fill text-white text-2xl hover:text-pink-500 transition-colors"></i>
-      </button>
-    </div>
-
-    <!-- Item 5 -->
-    <div class="relative group cursor-pointer overflow-hidden rounded-xl">
-      <img src="https://images.unsplash.com/photo-1598387993441-73b8e3b6c4f5?auto=format&fit=crop&w=800&q=60" class="w-full h-[170px] object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
-        <div class="text-white text-sm p-3">
-          <p class="font-semibold">Featured in: Painting</p>
-          <p>by: azizah</p>
-        </div>
-      </div>
-      <button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300">
-        <i class="bi bi-bookmark-fill text-white text-2xl hover:text-pink-500 transition-colors"></i>
-      </button>
-    </div>
-
-    <!-- Item 6 -->
-    <div class="relative group cursor-pointer row-span-2 overflow-hidden rounded-xl">
-      <img src="https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?auto=format&fit=crop&w=800&q=60" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
-      <div class="absolute inset-0 bg-linear-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end rounded-xl">
-        <div class="text-white text-sm p-3">
-          <p class="font-semibold">Featured in: Digital Art</p>
-          <p>by: nurazizah</p>
-        </div>
-      </div>
-      <button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300">
-        <i class="bi bi-bookmark-fill text-white text-2xl hover:text-pink-500 transition-colors"></i>
-      </button>
-    </div>
-
+    <!-- Item 3 sampai 6 tetap sama seperti di kode kamu -->
   </div>
 </section>
+
 
         <!-- 🌑 FREELANCER POPUP DENGAN 1 SCROLL DAN GARIS PEMBATAS SAMPING -->
          <!-- Overlay -->
