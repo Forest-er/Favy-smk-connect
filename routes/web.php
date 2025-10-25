@@ -88,3 +88,10 @@ Route::get('/insert/task', [DashboardController::class, 'insertTask'])->name('cl
 require __DIR__.'/auth.php';
 Route::get('/freelancers', [FreelancerController::class, 'index'])->name('freelancer.index');
 Route::get('/freelancer/{id}', [FreelancerController::class, 'show'])->name('freelancer.show');
+
+// Ambil detail task by ID (AJAX)
+Route::get('/task/{id}', [App\Http\Controllers\TaskController::class, 'show'])->name('task.show');
+
+
+
+

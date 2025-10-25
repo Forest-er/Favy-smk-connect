@@ -191,7 +191,7 @@
                 Rekomendasi Project<span>🔥</span>
             </h2>
             <p class="text-gray-400 mb-6 text-sm">project terbaru minggu ini</p>
-                       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <!-- CARD 1 -->
                  @forelse ($tasks as $task)
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
@@ -230,8 +230,7 @@
                                 </span>
                             </div>
                         </div>
-
-                        <button onclick="openPopup(); event.stopPropagation();"
+                        <button onclick="openPopup(); changeURL('{{ $task->id_task }}'); event.stopPropagation();" name="taskdetail"
                             class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
                             Hire Now
                         </button>
@@ -359,17 +358,37 @@
   <h2 class="text-2xl font-bold mb-6 text-gray-900">Get inspired by work done on Fiverr</h2>
 
   <!-- Category Tabs -->
-  <div class="w-full overflow-x-auto scrollbar-hide mb-8">
+@php
+  // Kumpulan variasi gradient warna
+  $gradients = [
+    ['from' => 'from-indigo-400', 'to' => 'to-purple-400'],
+    ['from' => 'from-blue-400', 'to' => 'to-indigo-400'],
+    ['from' => 'from-purple-400', 'to' => 'to-pink-400'],
+    ['from' => 'from-pink-400', 'to' => 'to-rose-400'],
+    ['from' => 'from-cyan-400', 'to' => 'to-blue-400'],
+    ['from' => 'from-violet-400', 'to' => 'to-fuchsia-400'],
+    ['from' => 'from-emerald-400', 'to' => 'to-teal-400'],
+    ['from' => 'from-amber-400', 'to' => 'to-orange-400'],
+    ['from' => 'from-lime-400', 'to' => 'to-green-400'],
+  ];
+@endphp
+
+    <div class="w-full overflow-x-auto scrollbar-hide mb-8">
     <div class="flex gap-4 text-[14px] font-medium min-w-max">
-      <button class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:from-indigo-400 hover:to-purple-400 hover:shadow-md whitespace-nowrap">Book design</button>
-      <button class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:from-blue-400 hover:to-indigo-400 hover:shadow-md whitespace-nowrap">Architecture & Interior design</button>
-      <button class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-400 hover:shadow-md whitespace-nowrap">Mobile app development</button>
-      <button class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:from-indigo-400 hover:to-blue-400 hover:shadow-md whitespace-nowrap">Presentation design</button>
-      <button class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:from-pink-400 hover:to-rose-400 hover:shadow-md whitespace-nowrap">Website design</button>
-      <button class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:from-cyan-400 hover:to-blue-400 hover:shadow-md whitespace-nowrap">UGC videos</button>
-      <button class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:from-violet-400 hover:to-fuchsia-400 hover:shadow-md whitespace-nowrap">AI development</button>
+        @foreach ($jurusans as $index => $jurusan)
+        @php
+            // Pilih kombinasi warna berdasarkan index
+            $gradient = $gradients[$index % count($gradients)];
+        @endphp
+
+    <button onclick="openPopup({{ $task->id }}); event.stopPropagation();"
+        class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
+        Hire Now
+    </button>
+        @endforeach
     </div>
-  </div>
+    </div>
+
 
   <style>
     .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -856,18 +875,56 @@
 
 
         <!-- 🧠 Script Popup -->
+         <!-- 🧠 Script Popup -->
         <script>
-          function openPopup() {
-    document.getElementById('rightPopup').classList.remove('translate-x-full');
-    document.getElementById('overlay').classList.remove('hidden');
-}
+            async function openPopup(taskId) {
+                try {
+                    const response = await fetch(`/task/${taskId}`);
+                    if (!response.ok) throw new Error('Gagal mengambil data task');
 
-function closePopup() {
-    document.getElementById('rightPopup').classList.add('translate-x-full');
-    document.getElementById('overlay').classList.add('hidden');
-}
+                    const data = await response.json();
 
+                    // Isi data popup
+                    document.getElementById('popupJudul').textContent = data.judul;
+                    document.getElementById('popupDeskripsi').textContent = data.deskripsi;
+                    document.getElementById('popupJurusan').textContent = data.jurusan;
+                    document.getElementById('popupDeadline').textContent = data.deadline;
+                    document.getElementById('popupBudget').textContent = data.budget;
+                    document.getElementById('popupUser').textContent = data.user;
+                    document.getElementById('popupWaktu').textContent = data.waktu_estimasi;
+                    document.getElementById('popupImage').src = data.foto;
+
+                    // Tampilkan popup
+                    document.getElementById('overlay').classList.remove('hidden');
+                    document.getElementById('rightPopup').classList.remove('translate-x-full');
+
+                } catch (error) {
+                    console.error(error);
+                    alert('Terjadi kesalahan saat menampilkan task.');
+                }
+            }
+
+            function closePopup() {
+                document.getElementById('overlay').classList.add('hidden');
+                document.getElementById('rightPopup').classList.add('translate-x-full');
+            }
+            </script>
+
+        <script>
+            function changeUrl(category) {
+                // Ubah URL tanpa reload halaman
+                const newUrl = `${window.location.origin}${window.location.pathname}?category=${category}`;
+                history.pushState(null, '', newUrl);
+
+                // Bisa juga panggil fungsi filter task di sini:
+                console.log("Filter:", category);
+                // loadTasks(category); // misal kamu punya fungsi untuk filter
+            }
         </script>
+
+
+
+
 
 
 @endsection

@@ -15,6 +15,16 @@ class TaskController extends Controller
         $jurusans = Jurusan::all();
         return view('client.orders.task', compact('jurusans'));
     }
+    public function index()
+    {
+        try {
+            $tasks = Task::all(); // Atau Task::where('user_id', Auth::id())->get();
+            return response()->json($tasks);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menampilkan task.']);
+        }
+    }
+
 
     public function store(Request $request)
     {
@@ -52,4 +62,27 @@ class TaskController extends Controller
         return redirect()->route('client.dashboard')
                          ->with('success', 'Task berhasil dibuat dan dipublikasikan!');
     }
+    public function show($id)
+    {
+        try {
+            $task = \App\Models\Task::with(['jurusan', 'user'])->findOrFail($id);
+
+            return response()->json([
+                'id' => $task->id,
+                'judul' => $task->judul,
+                'deskripsi' => $task->deskripsi ?? '-',
+                'jurusan' => $task->jurusan->nama_jurusan ?? 'Tidak diketahui',
+                'deadline' => $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('d M Y') : '-',
+                'budget' => $task->budget ? 'Rp' . number_format($task->budget, 0, ',', '.') : '-',
+                'foto' => $task->foto ? asset('storage/' . $task->foto) : 'https://via.placeholder.com/400x200?text=No+Image',
+                'user' => $task->user->nama ?? 'Anonim',
+                'waktu_estimasi' => $task->waktu_estimasi ?? '-',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Task tidak ditemukan.'], 404);
+        }
+    }
+    
+
+
 }
