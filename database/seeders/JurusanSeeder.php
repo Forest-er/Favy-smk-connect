@@ -11,100 +11,52 @@ class JurusanSeeder extends Seeder
     {
         DB::table('jurusans')->insert([
             [
-                'nama_jurusan' => 'Teknik Informatika',
-                'deskripsi' => 'Mempelajari pengembangan perangkat lunak, algoritma, basis data, dan pemrograman komputer.',
-            ],
-            [
                 'nama_jurusan' => 'Rekayasa Perangkat Lunak (RPL)',
-                'deskripsi' => 'Fokus pada pembuatan, pengujian, dan pemeliharaan aplikasi serta sistem berbasis komputer.',
+                'deskripsi' => 'Mempelajari cara membuat, mengembangkan, dan menguji perangkat lunak. Cocok untuk menjadi web developer, mobile app developer, atau game developer freelance.',
             ],
             [
                 'nama_jurusan' => 'Teknik Komputer dan Jaringan (TKJ)',
-                'deskripsi' => 'Mempelajari instalasi, konfigurasi, dan pengelolaan jaringan komputer serta perangkat keras.',
-            ],
-            [
-                'nama_jurusan' => 'Multimedia',
-                'deskripsi' => 'Berfokus pada desain grafis, animasi, editing video, dan produksi konten digital.',
-            ],
-            [
-                'nama_jurusan' => 'Akuntansi dan Keuangan Lembaga',
-                'deskripsi' => 'Mempelajari pembukuan, audit, dan manajemen keuangan dalam lembaga atau perusahaan.',
-            ],
-            [
-                'nama_jurusan' => 'Manajemen Bisnis',
-                'deskripsi' => 'Mempelajari strategi bisnis, manajemen sumber daya manusia, dan kewirausahaan.',
-            ],
-            [
-                'nama_jurusan' => 'Perbankan dan Keuangan',
-                'deskripsi' => 'Mempelajari operasional bank, investasi, dan manajemen keuangan modern.',
+                'deskripsi' => 'Fokus pada perakitan komputer, instalasi sistem operasi, serta pengelolaan jaringan. Cocok untuk menjadi teknisi komputer atau network administrator freelance.',
             ],
             [
                 'nama_jurusan' => 'Desain Komunikasi Visual (DKV)',
-                'deskripsi' => 'Fokus pada visual branding, ilustrasi, desain media, dan komunikasi visual kreatif.',
+                'deskripsi' => 'Mempelajari seni visual dan desain digital. Cocok untuk menjadi desainer grafis, ilustrator, atau UI/UX freelancer.',
             ],
             [
-                'nama_jurusan' => 'Teknik Elektronika Industri',
-                'deskripsi' => 'Mempelajari sistem elektronik, otomatisasi, dan perawatan mesin industri.',
+                'nama_jurusan' => 'Multimedia',
+                'deskripsi' => 'Mempelajari pengolahan video, animasi, dan audio digital. Banyak lulusan bekerja sebagai editor video, animator, atau content creator freelance.',
             ],
             [
-                'nama_jurusan' => 'Teknik Otomotif',
-                'deskripsi' => 'Fokus pada perawatan, perbaikan, dan rekayasa kendaraan bermotor.',
+                'nama_jurusan' => 'Game Development',
+                'deskripsi' => 'Mempelajari cara membuat game dari konsep, desain, hingga pemrograman. Cocok untuk menjadi game developer atau game artist freelance.',
             ],
             [
-                'nama_jurusan' => 'Teknik Listrik',
-                'deskripsi' => 'Mempelajari sistem tenaga listrik, instalasi, dan distribusi energi listrik.',
+                'nama_jurusan' => 'Digital Marketing',
+                'deskripsi' => 'Belajar strategi pemasaran melalui media digital. Cocok untuk menjadi digital marketer, social media manager, atau SEO specialist freelance.',
             ],
             [
-                'nama_jurusan' => 'Teknik Sipil',
-                'deskripsi' => 'Berfokus pada perancangan, pembangunan, dan perawatan infrastruktur fisik seperti gedung dan jalan.',
+                'nama_jurusan' => 'Desain UI/UX',
+                'deskripsi' => 'Mempelajari desain antarmuka dan pengalaman pengguna digital. Cocok untuk UI/UX designer freelance di startup atau agensi luar negeri.',
             ],
             [
-                'nama_jurusan' => 'Farmasi',
-                'deskripsi' => 'Mempelajari obat-obatan, kimia farmasi, dan pelayanan kesehatan.',
+                'nama_jurusan' => 'Artificial Intelligence',
+                'deskripsi' => 'Fokus pada pembelajaran mesin, neural network, dan otomatisasi. Cocok untuk menjadi AI engineer atau data consultant.',
             ],
             [
-                'nama_jurusan' => 'Kesehatan dan Keperawatan',
-                'deskripsi' => 'Mempelajari pelayanan medis dasar, perawatan pasien, dan etika keperawatan.',
+                'nama_jurusan' => 'Internet of Things (IoT)',
+                'deskripsi' => 'Belajar membuat sistem yang menghubungkan perangkat fisik ke internet. Cocok untuk IoT developer atau embedded system engineer freelance.',
             ],
             [
-                'nama_jurusan' => 'Pariwisata dan Perhotelan',
-                'deskripsi' => 'Fokus pada pelayanan tamu, manajemen hotel, dan industri pariwisata.',
+                'nama_jurusan' => 'Teknologi Rekayasa Internet',
+                'deskripsi' => 'Fokus pada pengembangan aplikasi berbasis web dan cloud. Cocok untuk menjadi web engineer atau backend developer freelance.',
             ],
             [
-                'nama_jurusan' => 'Tata Boga',
-                'deskripsi' => 'Mempelajari seni memasak, penyajian makanan, dan manajemen dapur.',
+                'nama_jurusan' => 'Produksi Film dan Televisi',
+                'deskripsi' => 'Belajar sinematografi, penyuntingan, dan efek visual. Cocok untuk menjadi video editor, VFX artist, atau cinematographer freelance.',
             ],
             [
-                'nama_jurusan' => 'Tata Busana',
-                'deskripsi' => 'Mempelajari desain pakaian, pola jahit, dan produksi busana.',
-            ],
-            [
-                'nama_jurusan' => 'Perikanan dan Kelautan',
-                'deskripsi' => 'Berfokus pada budidaya ikan, konservasi laut, dan teknologi perikanan.',
-            ],
-            [
-                'nama_jurusan' => 'Agribisnis dan Pertanian',
-                'deskripsi' => 'Mempelajari pengelolaan hasil pertanian, pemasaran, dan kewirausahaan agribisnis.',
-            ],
-            [
-                'nama_jurusan' => 'Bahasa dan Sastra Indonesia',
-                'deskripsi' => 'Mempelajari bahasa Indonesia, sastra, linguistik, dan penulisan kreatif.',
-            ],
-            [
-                'nama_jurusan' => 'Bahasa Inggris',
-                'deskripsi' => 'Fokus pada keterampilan berbahasa Inggris, linguistik, dan komunikasi global.',
-            ],
-            [
-                'nama_jurusan' => 'Hukum',
-                'deskripsi' => 'Mempelajari sistem hukum, peraturan, dan keadilan di masyarakat.',
-            ],
-            [
-                'nama_jurusan' => 'Psikologi',
-                'deskripsi' => 'Fokus pada studi perilaku manusia, kepribadian, dan kesehatan mental.',
-            ],
-            [
-                'nama_jurusan' => 'Pendidikan Guru Sekolah Dasar (PGSD)',
-                'deskripsi' => 'Mempersiapkan tenaga pendidik profesional untuk jenjang sekolah dasar.',
+                'nama_jurusan' => 'Creative Media Production',
+                'deskripsi' => 'Menggabungkan produksi konten kreatif dan storytelling digital. Cocok untuk creative producer atau motion designer freelance.',
             ],
         ]);
     }

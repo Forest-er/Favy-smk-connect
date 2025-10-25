@@ -1,6 +1,6 @@
 <!-- POPULAR SERVICES CARD LAYOUT -->
 <section class="py-16 bg-white relative">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 opacity-30 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-linear-to-br from-blue-50 to-indigo-50 opacity-30 pointer-events-none"></div>
     <div class="container mx-auto px-4 relative z-10">
         <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Explore a Thousand Of New Job Everyday</h2>
 
@@ -19,7 +19,7 @@
                 @endphp
 
                 @foreach($services as $index => $service)
-                <div class="flex-shrink-0 w-64 sm:w-72 p-10 rounded-xl shadow-lg {{ $service['color'] }} transform transition-all duration-300 hover:scale-105 hover:-translate-y-2.5 hover:z-50 hover:shadow-2xl cursor-pointer relative"
+                <div class="shrink-0 w-64 sm:w-72 p-10 rounded-xl shadow-lg {{ $service['color'] }} transform transition-all duration-300 hover:scale-105 hover:-translate-y-2.5 hover:z-50 hover:shadow-2xl cursor-pointer relative"
                     style="transform: rotate({{ ($index % 2 == 0) ? '-3deg' : '3deg' }});"
                     data-index="{{ $index }}">
                     <div class="flex items-center justify-between mb-4">
