@@ -71,6 +71,9 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/messages', [ClientController::class, 'messages'])->name('client.messages');
     Route::get('/client/settings', [ClientController::class, 'settings'])->name('client.settings');
     Route::get('/client/profile', [ClientController::class, 'profile'])->name('client.profile');
+Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('task.show');
+Route::get('/task/{id}', [App\Http\Controllers\TaskController::class, 'showJson'])->name('task.showJson');
+
 });
 
 // ===== Freelancer Routes =====

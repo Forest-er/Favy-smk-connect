@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Jurusan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
@@ -15,16 +14,6 @@ class TaskController extends Controller
         $jurusans = Jurusan::all();
         return view('client.orders.task', compact('jurusans'));
     }
-    public function index()
-    {
-        try {
-            $tasks = Task::all(); // Atau Task::where('user_id', Auth::id())->get();
-            return response()->json($tasks);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan saat menampilkan task.']);
-        }
-    }
-
 
     public function store(Request $request)
     {
@@ -40,49 +29,47 @@ class TaskController extends Controller
 
         $data = $request->all();
 
-        // Handle upload file
         if ($request->hasFile('foto')) {
-            $path = $request->file('foto')->store('tasks', 'public');
-            $data['foto'] = $path;
+            $data['foto'] = $request->file('foto')->store('tasks', 'public');
         }
 
-        // Simpan ke database
         $task = new Task();
-        $task->judul = $data['judul'];
-        $task->jurusan_id = $data['jurusan_id'];
-        $task->deskripsi = $data['deskripsi'] ?? null;
-        $task->budget = $data['budget'] ?? null;
-        $task->deadline = $data['deadline'] ?? null;
-        $task->waktu_estimasi = $data['waktu_estimasi'] ?? null;
-        $task->foto = $data['foto'] ?? null;
-        $task->status = 'open';
-        $task->users_id = Auth::id(); // task milik user yang login
+        $task->fill([
+            'judul' => $data['judul'],
+            'jurusan_id' => $data['jurusan_id'],
+            'deskripsi' => $data['deskripsi'] ?? null,
+            'budget' => $data['budget'] ?? null,
+            'deadline' => $data['deadline'] ?? null,
+            'waktu_estimasi' => $data['waktu_estimasi'] ?? null,
+            'foto' => $data['foto'] ?? null,
+            'status' => 'open',
+            'users_id' => Auth::id(),
+        ]);
         $task->save();
 
-        return redirect()->route('client.dashboard')
-                         ->with('success', 'Task berhasil dibuat dan dipublikasikan!');
+        return redirect()->route('client.dashboard')->with('success', 'Task berhasil dibuat!');
     }
-    public function show($id)
-    {
-        try {
-            $task = \App\Models\Task::with(['jurusan', 'user'])->findOrFail($id);
 
-            return response()->json([
-                'id' => $task->id,
-                'judul' => $task->judul,
-                'deskripsi' => $task->deskripsi ?? '-',
-                'jurusan' => $task->jurusan->nama_jurusan ?? 'Tidak diketahui',
-                'deadline' => $task->deadline ? \Carbon\Carbon::parse($task->deadline)->format('d M Y') : '-',
-                'budget' => $task->budget ? 'Rp' . number_format($task->budget, 0, ',', '.') : '-',
-                'foto' => $task->foto ? asset('storage/' . $task->foto) : 'https://via.placeholder.com/400x200?text=No+Image',
-                'user' => $task->user->nama ?? 'Anonim',
-                'waktu_estimasi' => $task->waktu_estimasi ?? '-',
-            ]);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Task tidak ditemukan.'], 404);
-        }
+   public function showApi($id)
+{
+    $task = Task::with(['jurusan', 'user'])->find($id);
+
+    if (!$task) {
+        return response()->json(['error' => 'Task tidak ditemukan'], 404);
     }
-    
 
+    return response()->json([
+        'id' => $task->id_task,
+        'judul' => $task->judul,
+        'deskripsi' => $task->deskripsi,
+        'budget' => 'Rp' . number_format($task->budget, 0, ',', '.'),
+        'deadline' => \Carbon\Carbon::parse($task->deadline)->format('d M Y'),
+        'jurusan' => $task->jurusan->nama_jurusan ?? 'Tidak diketahui',
+        'user' => $task->user->nama ?? 'Anonim',
+        'foto' => $task->foto ? asset('storage/' . $task->foto) : 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg',
+        'skills' => $task->user->skills ? explode(',', $task->user->skills) : [],
+    ]);
+}
 
 }
+    

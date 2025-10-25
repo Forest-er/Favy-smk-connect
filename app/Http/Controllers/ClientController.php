@@ -35,4 +35,10 @@ class ClientController extends Controller
     {
         return view('auth.register.freelancer');
     }
+public function getTaskDetail($id)
+{
+    $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
+    return view('client.partials.task_popup', compact('task'));
+}
+
 }

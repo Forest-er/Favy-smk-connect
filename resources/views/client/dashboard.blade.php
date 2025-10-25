@@ -193,52 +193,47 @@
             <p class="text-gray-400 mb-6 text-sm">project terbaru minggu ini</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <!-- CARD 1 -->
-                 @forelse ($tasks as $task)
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
-                    <div class="relative">
-                        <img src="{{ asset('storage/' . $task->foto) }}"
-                            onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
-                            class="w-full h-40 object-cover">
-                        <span
-                            class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-purple-500">
-                            {{ $task->jurusan->nama_jurusan ?? 'Unknown' }}
-                        </span>
-                        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">
-                            ⭐ {{ rand(4,5) }}.{{ rand(0,9) }}
-                        </span>
-                    </div>
+             @forelse ($tasks as $task)
+<div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
+    <div class="relative">
+        <img src="{{ asset('storage/' . $task->foto) }}"
+            onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
+            class="w-full h-40 object-cover">
+        <span class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-purple-500">
+            {{ $task->jurusan->nama_jurusan ?? 'Unknown' }}
+        </span>
+        <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">
+            ⭐ {{ rand(4,5) }}.{{ rand(0,9) }}
+        </span>
+    </div>
 
-                    <div class="p-4">
-                        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">
-                            {{ $task->judul }}
-                        </h3>
-                        <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
-                            <span class="flex items-center gap-1"><i class="bi bi-calendar"></i> Deadline:
-                                {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</span>
-                            <span class="flex items-center gap-1"><i class="bi bi-clock"></i>
-                                {{ $task->waktu_estimasi }}</span>
-                        </div>
+    <div class="p-4">
+        <h3 class="text-base font-semibold text-gray-800 leading-tight mb-2">{{ $task->judul }}</h3>
+        <div class="flex items-center gap-4 text-gray-500 text-xs mb-4">
+            <span class="flex items-center gap-1"><i class="bi bi-calendar"></i> Deadline:
+                {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</span>
+            <span class="flex items-center gap-1"><i class="bi bi-clock"></i>
+                {{ $task->waktu_estimasi }}</span>
+        </div>
 
-                        <div class="flex items-center justify-between mb-4">
-                            <p class="text-lg font-bold text-gray-800">
-                                Rp{{ number_format($task->budget, 0, ',', '.') }}
-                            </p>
-                            <div class="flex items-center gap-2">
-                                <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-7 h-7 rounded-full border">
-                                <span class="text-xs text-gray-600">
-                                    {{ $task->user->nama ?? 'Freelancer' }}
-                                </span>
-                            </div>
-                        </div>
-                        <button onclick="openPopup(); changeURL('{{ $task->id_task }}'); event.stopPropagation();" name="taskdetail"
-                            class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
-                            Hire Now
-                        </button>
-                    </div>
-                </div>
-                @empty
-                <p class="text-gray-500">Tugas yang Anda cari tidak ditemukan.</p>
-            @endforelse
+        <div class="flex items-center justify-between mb-4">
+            <p class="text-lg font-bold text-gray-800">Rp{{ number_format($task->budget, 0, ',', '.') }}</p>
+            <div class="flex items-center gap-2">
+                <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-7 h-7 rounded-full border">
+                <span class="text-xs text-gray-600">{{ $task->user->nama ?? 'Freelancer' }}</span>
+            </div>
+        </div>
+        <button onclick="openPopup({{ $task->id_task }}); event.stopPropagation();"
+            class="w-full bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition">
+            Hire Now
+        </button>
+    </div>
+</div>
+@empty
+<p class="text-gray-500">Tugas yang Anda cari tidak ditemukan.</p>
+@endforelse
+
+
             </div>
         </section>
 
@@ -492,350 +487,158 @@
 
         <!-- 🌑 FREELANCER POPUP DENGAN 1 SCROLL DAN GARIS PEMBATAS SAMPING -->
          <!-- Overlay -->
-<div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+<!-- 🌑 FREELANCER POPUP PROFESIONAL DENGAN SCROLL & PANEL SAMPING (DINAMIS + FALLBACK) --> <!-- Overlay --> <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div> <!-- Popup Container --> <div id="rightPopup" class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl"> <div class="flex flex-col h-full">
+<!-- Header -->
+<div class="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 z-10 bg-white shadow-sm rounded-tl-3xl">
+  <h3 class="text-xl font-semibold text-gray-800">Freelancer Profile</h3>
+  <button onclick="closePopup()" class="text-gray-400 hover:text-gray-600 text-2xl transition">&times;</button>
+</div>
 
-        <div id="rightPopup"
-            class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl">
-            <div class="flex flex-col h-full">
+<!-- Konten Scrollable -->
+<div id="mainScroll" class="flex-1 overflow-y-auto bg-white">
+  <div id="profileLayout" class="flex gap-8 p-8">
 
-                <!-- Header -->
-                <div
-                    class="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 z-10 bg-white shadow-sm rounded-tl-3xl">
+    <!-- BAGIAN KIRI -->
+    <div class="flex-1 space-y-6">
 
-                    <button onclick="closePopup()"
-                        class="text-gray-400 hover:text-gray-600 text-2xl transition">&times;</button>
-                </div>
-
-                <!-- Konten -->
-                <div id="mainScroll" class="flex-1 overflow-y-auto bg-white">
-                    <div id="profileLayout" class="flex gap-8 p-8">
-
-                        <!-- KIRI -->
-                        <div class="flex-1 space-y-6">
-
-                            <!-- Profil -->
-                            <div class="flex items-center gap-6 bg-white border border-gray-100 rounded-2xl p-6 shadow-md">
-                                <img src="https://i.pravatar.cc/150?img=3"
-                                    class="w-28 h-28 rounded-full border-4 border-white shadow-md">
-                                <div class="flex flex-col flex-1">
-                                    <div class="flex items-center gap-2">
-                                        <h4 class="text-2xl font-bold text-black">Sarah Anderson</h4>
-                                        <span
-                                            class="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">Top
-                                            Rated</span>
-                                    </div>
-                                    <p class="text-gray-500 text-sm">UI/UX Designer • Web & Mobile</p>
-                                    <div class="flex items-center gap-1 text-yellow-500 mt-1">
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <span class="text-gray-500 ml-2 text-sm">(4.8)</span>
-                                    </div>
-                                    <p class="text-green-600 text-sm mt-1">Available Now • Response: 1h</p>
-                                </div>
-                            </div>
-
-                            <!-- About & Skills Section -->
-                            <section class="px-8 py-12 max-w-5xl mx-auto space-y-16 mt-4 w-[calc(99%+4rem)] -mx-8">
-
-                                <!-- About Me -->
-                                <div class="space-y-4">
-                                    <h2
-                                        class="text-xl font-semibold bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-                                        About Me
-                                    </h2>
-                                    <p class="text-gray-700 text-[16px] leading-relaxed">
-                                        Experienced UI/UX Designer with 3+ years designing modern, user-centered web &
-                                        mobile interfaces. Passionate about clean design and excellent user experience.
-                                    </p>
-                                    <hr class="border-gray-200 mt-4 w-[calc(99%+4rem)] -mx-8">
-
-                                </div>
-
-
-                                <!-- Skills & Expertise -->
-                                <div style="margin-top: 20px;" class="space-y-4">
-                                    <h2
-                                        class="text-lg font-semibold bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-                                        Skills & Expertise
-                                    </h2>
-
-                                    <!-- Required Skills -->
-                                    <div class="space-y-2">
-                                        <p class="text-gray-500 uppercase text-sm tracking-wider">Required Skills</p>
-                                        <div class="flex flex-wrap gap-4">
-                                            <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pink-500"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 4v16m8-8H4" />
-                                                </svg>
-                                                HTML
-                                            </span>
-                                            <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M5 12h14" />
-                                                </svg>
-                                                HTML5
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Preferred Skills -->
-                                    <div class="space-y-2">
-                                        <p class="text-gray-500 uppercase text-sm tracking-wider">Preferred Additional
-                                            Skills</p>
-                                        <div class="flex flex-wrap gap-4">
-                                            <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 4v16m8-8H4" />
-                                                </svg>
-                                                CSS
-                                            </span>
-                                            <span
-                                                class="flex items-center gap-2 px-4 py-1 bg-linear-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M5 12h14" />
-                                                </svg>
-                                                JavaScript
-                                            </span>
-                                            <hr class="border-gray-200 mt-4 w-[calc(99%+4rem)] -mx-8">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-
-                            <!-- Portfolio -->
-                            <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                                <h5
-                                    class="font-semibold text-lg mb-3 bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-                                    Portfolio</h5>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                    <div class="relative overflow-hidden rounded-lg group">
-                                        <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
-                                            class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
-                                        <div
-                                            class="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/60 to-transparent text-white text-xs p-2">
-                                            Landing Page • Web</div>
-                                    </div>
-                                    <div class="relative overflow-hidden rounded-lg group">
-                                        <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg"
-                                            class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
-                                        <div
-                                            class="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/60 to-transparent text-white text-xs p-2">
-                                            Mobile UI • App</div>
-                                    </div>
-                                    <div class="relative overflow-hidden rounded-lg group">
-                                        <img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg"
-                                            class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
-                                        <div
-                                            class="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/60 to-transparent text-white text-xs p-2">
-                                            Branding Project</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Reviews -->
-                            <!-- Client Reviews Section Premium -->
-                            <section class="px-6 py-10 max-w-4xl mx-auto space-y-10">
-
-                                <!-- Judul -->
-                                <h5
-                                    class="text-lg font-semibold mb-6 bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-                                    Client Reviews
-                                </h5>
-
-                                <!-- Review List -->
-                                <div class="space-y-6">
-                                    <!-- Review 1 -->
-                                    <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition">
-                                        <img src="https://i.pravatar.cc/40?img=10"
-                                            class="w-10 h-10 rounded-full border border-gray-200">
-                                        <div class="flex-1">
-                                            <div class="flex justify-between items-center mb-1">
-                                                <span class="font-medium text-gray-900">Rina Marlina</span>
-                                                <span class="text-gray-400 text-xs">2h ago</span>
-                                            </div>
-                                            <!-- Rating bintang -->
-                                            <div class="flex gap-1 mb-1">
-                                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-gray-700 text-sm leading-relaxed">
-                                                Amazing work! Really impressed with the design.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Review 2 -->
-                                    <div class="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition">
-                                        <img src="https://i.pravatar.cc/40?img=20"
-                                            class="w-10 h-10 rounded-full border border-gray-200">
-                                        <div class="flex-1">
-                                            <div class="flex justify-between items-center mb-1">
-                                                <span class="font-medium text-gray-900">Aditya Putra</span>
-                                                <span class="text-gray-400 text-xs">5h ago</span>
-                                            </div>
-                                            <div class="flex gap-1 mb-1">
-                                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-yellow-400" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                                <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.561-.954L10 0l2.951 5.956 6.561.954-4.756 4.635 1.122 6.545z" />
-                                                </svg>
-                                            </div>
-                                            <p class="text-gray-700 text-sm leading-relaxed">
-                                                Great communication and very fast delivery. Highly recommended!
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Add Comment -->
-                                <div class="flex gap-3 items-start mt-6">
-                                    <img src="https://i.pravatar.cc/40?img=30"
-                                        class="w-10 h-10 rounded-full border border-gray-200">
-                                    <input type="text" placeholder="Add a comment..."
-                                        class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-300 focus:border-transparent">
-                                    <button
-                                        class="bg-linear-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-                                        Send
-                                    </button>
-                                </div>
-
-                            </section>
-
-                        </div>
-
-                        <!-- Divider -->
-                        <div id="divider"
-                            class="w-[2px] bg-linear-to-b from-pink-300 via-purple-300 to-blue-300 rounded-full">
-                        </div>
-
-                        <!-- SIDE PANEL (tanpa card) -->
-                        <div id="sidePanel" class="w-[300px] p-6 pt-0">
-                            <!-- Info Card -->
-                            <div
-                                class="flex items-start gap-3 bg-linear-to-br from-blue-100 via-pink-100 to-yellow-100 p-4 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition mb-4 mt-0">
-                                <div class="shrink-0">
-                                    <i class="bi bi-megaphone text-pink-500 text-xl"></i>
-                                </div>
-                                <div class="space-y-1">
-                                    <p class="font-semibold text-gray-900">You'll need Connects to bid</p>
-                                    <p class="text-gray-600 text-sm">They show clients you’re serious.</p>
-                                    <a href="#" class="text-blue-600 text-sm font-medium hover:underline">Learn more</a>
-                                </div>
-                            </div>
-
-
-                            <button
-                                class="w-full bg-linear-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white font-semibold py-2.5 rounded-lg mb-3 transition">Request
-                                to order</button>
-                            <button
-                                class="w-full border border-pink-400 text-pink-600 hover:bg-pink-50 font-medium py-2.5 rounded-lg flex items-center justify-center gap-2 transition"><i
-                                    class="bi bi-heart"></i> Save Job</button>
-
-                            <div class="pt-4 mt-6">
-                                <h5 class="font-semibold text-gray-900 mb-2">About the Client</h5>
-                                <p class="text-green-600 flex items-center gap-1 mb-1"><i
-                                        class="bi bi-check-circle-fill"></i> Payment verified</p>
-                                <p class="text-green-600 flex items-center gap-1 mb-3"><i class="bi bi-telephone-fill"></i>
-                                    Phone verified</p>
-                                <div class="flex items-center gap-1 text-yellow-500 mb-1">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                    <span class="text-gray-600 ml-1">5.0 (51 reviews)</span>
-                                </div>
-                                <p class="text-gray-700 text-sm">Las Vegas, USA • 8:21 PM</p>
-                                <p class="text-gray-500 text-xs mt-1">Member since Aug 13, 2015</p>
-                            </div>
-
-                            <!-- Tambahan: Tentang Freelancer -->
-                            <div class="pt-6 mt-6 border-t border-gray-200">
-                                <h5 class="font-semibold text-gray-900 mb-3">Freelancer Overview</h5>
-                                <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                                    Sarah is a professional UI/UX designer who specializes in creating engaging and
-                                    modern interfaces for both web and mobile applications. She focuses on crafting
-                                    user-friendly experiences that help businesses grow their online presence.
-                                </p>
-
-                                <ul class="text-sm text-gray-700 space-y-2 mb-4">
-                                    <li><i class="bi bi-check2-circle text-pink-500 mr-2"></i> 3+ years of professional
-                                        design experience</li>
-                                    <li><i class="bi bi-check2-circle text-pink-500 mr-2"></i> Delivered 120+ successful
-                                        projects</li>
-                                    <li><i class="bi bi-check2-circle text-pink-500 mr-2"></i> Expert in Figma, Adobe
-                                        XD, and Webflow</li>
-                                    <li><i class="bi bi-check2-circle text-pink-500 mr-2"></i> Known for fast
-                                        communication and detailed work</li>
-                                </ul>
-
-                                <div
-                                    class="bg-linear-to-r from-pink-100 to-blue-100 rounded-xl p-4 border border-pink-200">
-                                    <p class="text-sm text-gray-800">
-                                        “Sarah exceeded my expectations. The designs were stunning and perfectly aligned
-                                        with my brand vision.”
-                                    </p>
-                                    <p class="text-xs text-gray-500 mt-2">— Client Feedback</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- PROFIL -->
+      <div class="flex items-center gap-6 bg-white border border-gray-100 rounded-2xl p-6 shadow-md">
+        <img src="{{ $task->user->foto ? asset('storage/' . $task->user->foto) : 'https://i.pravatar.cc/150?img=' . rand(1, 70) }}"
+          class="w-28 h-28 rounded-full border-4 border-white shadow-md object-cover">
+        <div class="flex flex-col flex-1">
+          <div class="flex items-center gap-2">
+            <h4 class="text-2xl font-bold text-black">{{ $task->user->nama ?? 'Anonim' }}</h4>
+            <span class="bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
+              {{ ($task->user->rating ?? 4.5) >= 4.5 ? 'Top Rated' : 'Active Freelancer' }}
+            </span>
+          </div>
+          <p class="text-gray-500 text-sm">{{ $task->jurusan->nama_jurusan ?? 'General Freelancer' }}</p>
+          <div class="flex items-center gap-1 text-yellow-500 mt-1">
+            @for ($i = 1; $i <= 5; $i++)
+              <i class="bi {{ $i <= round($task->user->rating ?? 4.5) ? 'bi-star-fill' : 'bi-star' }}"></i>
+            @endfor
+            <span class="text-gray-500 ml-2 text-sm">({{ number_format($task->user->rating ?? 4.5, 1) }})</span>
+          </div>
+          <p class="text-green-600 text-sm mt-1">
+            {{ $task->user->status_online ?? true ? 'Available Now' : 'Offline' }} • Response: {{ $task->user->response_time ?? '1h' }}
+          </p>
         </div>
+      </div>
+
+      <!-- ABOUT & SKILLS -->
+      <section class="space-y-10 mt-8">
+
+        <!-- Tentang -->
+        <div class="space-y-4">
+          <h2 class="text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            About Me
+          </h2>
+          <p class="text-gray-700 leading-relaxed text-[16px]">
+            {{ $task->user->bio ?? 'I’m a passionate freelancer ready to help clients achieve their goals through creative and efficient solutions.' }}
+          </p>
+        </div>
+
+        <!-- Skills -->
+        <div class="space-y-4">
+          <h2 class="text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            Skills & Expertise
+          </h2>
+
+          <div class="space-y-2">
+            <p class="text-gray-500 uppercase text-sm tracking-wider">Skills</p>
+            <div class="flex flex-wrap gap-3">
+              @php
+                $skills = $task->user->skills ? explode(',', $task->user->skills) : ['Communication', 'Teamwork', 'Creativity'];
+              @endphp
+              @foreach ($skills as $skill)
+                <span class="px-4 py-1 bg-gradient-to-r from-pink-100 to-blue-100 text-gray-800 rounded-full text-sm font-medium">
+                  {{ trim($skill) }}
+                </span>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+        <h5 class="font-semibold text-lg mb-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+          Portfolio
+        </h5>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          @if (isset($task->user->portfolio) && $task->user->portfolio->count() > 0)
+            @foreach ($task->user->portfolio as $item)
+              <div class="relative overflow-hidden rounded-lg group">
+                <img src="{{ asset('storage/' . $item->gambar) }}"
+                  class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white text-xs p-2">
+                  {{ $item->judul }}
+                </div>
+              </div>
+            @endforeach
+          @else
+            <!-- Contoh Portfolio Default -->
+            @foreach ([
+                ['judul' => 'Landing Page • Web', 'img' => 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'],
+                ['judul' => 'Mobile UI • App', 'img' => 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg'],
+                ['judul' => 'Dashboard Design', 'img' => 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg'],
+            ] as $demo)
+              <div class="relative overflow-hidden rounded-lg group">
+                <img src="{{ $demo['img'] }}"
+                  class="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent text-white text-xs p-2">
+                  {{ $demo['judul'] }}
+                </div>
+              </div>
+            @endforeach
+          @endif
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GARIS PEMBATAS -->
+    <div id="divider" class="w-[2px] bg-gradient-to-b from-pink-300 via-purple-300 to-blue-300 rounded-full"></div>
+
+    <!-- PANEL SAMPING -->
+    <div id="sidePanel" class="w-[300px] p-6 space-y-6">
+
+      <!-- Info -->
+      <div class="bg-gradient-to-br from-blue-100 via-pink-100 to-yellow-100 p-4 rounded-2xl shadow-sm border border-gray-200">
+        <p class="font-semibold text-gray-900">You'll need Connects to bid</p>
+        <p class="text-gray-600 text-sm">They show clients you’re serious.</p>
+        <a href="#" class="text-blue-600 text-sm font-medium hover:underline">Learn more</a>
+      </div>
+
+      <!-- Buttons -->
+      <button
+        class="w-full bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 text-white font-semibold py-2.5 rounded-lg transition">
+        Request to Order
+      </button>
+      <button
+        class="w-full border border-pink-400 text-pink-600 hover:bg-pink-50 font-medium py-2.5 rounded-lg flex items-center justify-center gap-2 transition">
+        <i class="bi bi-heart"></i> Save Job
+      </button>
+
+      <!-- About Client -->
+      <div class="pt-4 border-t border-gray-200">
+        <h5 class="font-semibold text-gray-900 mb-2">About the Client</h5>
+        <p class="text-green-600 flex items-center gap-1 mb-1"><i class="bi bi-check-circle-fill"></i> Payment verified</p>
+        <p class="text-green-600 flex items-center gap-1 mb-3"><i class="bi bi-telephone-fill"></i> Phone verified</p>
+        <div class="flex items-center gap-1 text-yellow-500 mb-1">
+          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <span class="text-gray-600 ml-1">5.0 (51 reviews)</span>
+        </div>
+        <p class="text-gray-700 text-sm">Indonesia • {{ now()->format('H:i') }}</p>
+        <p class="text-gray-500 text-xs mt-1">Member since {{ $task->user->created_at->format('M Y') }}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div> </div> <!-- JS --> <script> function openPopup() { document.getElementById('overlay').classList.remove('hidden'); document.getElementById('rightPopup').classList.remove('translate-x-full'); } function closePopup() { document.getElementById('overlay').classList.add('hidden'); document.getElementById('rightPopup').classList.add('translate-x-full'); } </script>
+
 
 
 
@@ -922,7 +725,35 @@
             }
         </script>
 
+<script>
+   function openPopup(taskId) {
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('rightPopup');
+    const popupContent = document.getElementById('popupContent');
 
+    overlay.classList.remove('hidden');
+    popup.classList.remove('translate-x-full');
+
+    fetch(`/client/task/${taskId}`)
+        .then(res => res.text())
+        .then(html => {
+            popupContent.innerHTML = html;
+        })
+        .catch(err => {
+            popupContent.innerHTML = `<p class="text-red-500">Failed to load data.</p>`;
+            console.error(err);
+        });
+}
+
+function closePopup() {
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('rightPopup');
+
+    overlay.classList.add('hidden');
+    popup.classList.add('translate-x-full');
+}
+
+</script>
 
 
 
