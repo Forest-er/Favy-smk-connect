@@ -6,77 +6,104 @@
   <title>Daftar Freelancer | Freelance SMK</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
-    }
-    .card {
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+      font-family: 'Inter', sans-serif;
     }
   </style>
 </head>
-
-<body class="min-h-screen flex items-center justify-center px-4 py-8">
-  <div class="bg-white card rounded-3xl overflow-hidden flex flex-col lg:flex-row w-full max-w-5xl">
-
-    <!-- Left Illustration -->
-    <div class="lg:w-1/2 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center relative">
-      <div class="absolute inset-0 bg-black/10"></div>
-      <img src="https://cdn3d.iconscout.com/3d/premium/thumb/freelancer-typing-on-laptop-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--working-work-from-home-office-remote-job-pack-illustrations-7150170.png"
-           alt="Freelancer Illustration"
-           class="w-80 z-10">
-      <div class="absolute bottom-6 left-6 text-white/90">
-        <h3 class="text-lg font-semibold">Bergabung Bersama Freelancer SMK</h3>
-        <p class="text-sm text-white/70">Bangun portofolio, tingkatkan skill, dan dapatkan proyek nyata.</p>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl w-full grid md:grid-cols-2 gap-8 items-center">
+    
+    <!-- Left Side - Illustration & Info -->
+    <div class="hidden md:block space-y-8 px-8">
+      <div class="space-y-4">
+        <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+          Platform Freelance Terpercaya
+        </div>
+        <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+          Mulai Karir<br/>
+          <span class="text-blue-600">Freelance</span> Anda<br/>
+          Bersama Kami
+        </h1>
+        <p class="text-gray-600 text-lg leading-relaxed">
+          Bergabunglah dengan ribuan freelancer SMK yang telah mengembangkan skill dan mendapatkan penghasilan melalui platform kami.
+        </p>
+      </div>
+      <!-- Feature List -->
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">Proyek Real dari Client</h3>
+            <p class="text-gray-600 text-sm">Dapatkan pengalaman nyata dengan proyek-proyek berkualitas</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">Penghasilan Fleksibel</h3>
+            <p class="text-gray-600 text-sm">Tentukan sendiri waktu kerja dan penghasilan Anda</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">Portofolio Profesional</h3>
+            <p class="text-gray-600 text-sm">Bangun portofolio yang menarik perhatian client</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Right Form -->
-    <div class="lg:w-1/2 p-10 lg:p-14">
-      <h2 class="text-3xl font-bold text-gray-900 mb-2">Daftar Sebagai Freelancer</h2>
-      <p class="text-gray-600 mb-8">
-        Sudah punya akun?
-        <a href="{{ route('login') }}" class="text-blue-600 font-semibold hover:underline">Masuk</a>
-      </p>
+    <!-- Right Side - Registration Form -->
+    <div class="relative flex justify-center">
+      <img src="/images/register_freelancer.png" alt="Ilustrasi freelancer" class="hidden md:block absolute -right-[43px] top-1/2 -translate-y-1/2 w-40 drop-shadow-lg">
 
-      <form class="space-y-5" action="{{ route('register.freelancer') }}" method="POST">
-        @csrf
-        <div class="mb-4">
-            <label for="nama" class="block text-sm font-medium">Nama Lengkap</label>
-            <input type="text" name="nama" id="nama" value="{{ old('nama') }}" class="w-full border rounded px-3 py-2" required>
-            @error('nama') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-          </div>
-
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-medium">Email</label>
-          <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full border rounded px-3 py-2" required>
-          @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+      <div class="bg-white rounded-3xl shadow-xl p-6 lg:p-8 border border-blue-100 relative z-10 max-w-md w-full mx-auto">
+        <div class="mb-5 text-left">
+          <h2 class="text-2xl font-bold text-gray-900 mb-1">Daftar Sebagai Freelancer</h2>
+          <p class="text-gray-600 text-sm">
+            Sudah punya akun?
+            <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 transition-colors">Masuk di sini</a>
+          </p>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input type="password" name="password" id="password" class="w-full border rounded px-3 py-2" required>
-            @error('password') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi</label>
-            <input type="password" name="password_confirmation" id="password_confirmation" class="w-full border rounded px-3 py-2" required>
-            @error('password_confirmation') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-          </div>
-        </div>
+        <form action="{{ route('register.freelancer') }}" method="POST" class="space-y-4">
+          @csrf
+          <input type="text" name="nama" placeholder="Nama Lengkap" class="w-full border rounded px-3 py-2" required>
+          <input type="email" name="email" placeholder="Email" class="w-full border rounded px-3 py-2" required>
+          <input type="tel" name="telepon" placeholder="Nomor Telepon" class="w-full border rounded px-3 py-2" required>
+          <input type="text" name="keahlian" placeholder="Keahlian Utama" class="w-full border rounded px-3 py-2" required>
+          <input type="password" name="password" placeholder="Password" class="w-full border rounded px-3 py-2" required>
+          <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" class="w-full border rounded px-3 py-2" required>
 
-        <button type="submit"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition transform hover:scale-[1.02] shadow-lg">
-          Daftar Sekarang
-        </button>
-      </form>
+          <div class="flex items-start">
+            <input type="checkbox" id="terms" required class="mt-0.5 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+            <label for="terms" class="ml-2 text-sm text-gray-600">
+              Saya menyetujui <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Syarat & Ketentuan</a> serta <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Kebijakan Privasi</a>
+            </label>
+          </div>
 
-      <p class="text-center text-xs text-gray-400 mt-6">
-        Dengan mendaftar, kamu menyetujui <span class="text-blue-500 hover:underline cursor-pointer">Syarat & Ketentuan</span>.
-      </p>
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
+            Daftar Sekarang
+          </button>
+        </form>
+      </div>
     </div>
+
   </div>
 </body>
 </html>

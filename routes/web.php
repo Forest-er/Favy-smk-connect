@@ -14,6 +14,7 @@ Route::get('/', function () {
     return view('page-guest.home');
 });
 
+Route::get('/', function () { return view('tester'); });
 // ===== Register Routes =====
 Route::get('/register/{role}', function ($role) {
     if ($role === 'freelancer') {
@@ -83,3 +84,19 @@ Route::get('/{role}/dashboard', [DashboardController::class, 'dataview'])->name(
 Route::get('/insert/task', [DashboardController::class, 'insertTask'])->name('client.orders.task');
 
 require __DIR__.'/auth.php';
+Route::get('/freelancers', [FreelancerController::class, 'index'])->name('freelancer.index');
+Route::get('/freelancer/{id}', [FreelancerController::class, 'show'])->name('freelancer.show');
+// ===== Client Routes =====
+Route::middleware(['auth', 'role:client'])->group(function () {
+    Route::get('/client/dashboard', [ClientController::class, 'dashboard'])->name('client.dashboard');
+    Route::get('/client/explore', [ClientController::class, 'explore'])->name('client.explore');
+    Route::get('/client/explore/{id}', [ClientController::class, 'showFreelancer'])->name('client.explore.show');
+    Route::get('/client/orders', [ClientController::class, 'orders'])->name('client.orders');
+    Route::get('/client/messages', [ClientController::class, 'messages'])->name('client.messages');
+    Route::get('/client/settings', [ClientController::class, 'settings'])->name('client.settings');
+
+    // 🔹 Tambahkan route profil client di sini
+    Route::get('/client/profile', function () {
+        return view('client.profile');
+    })->name('client.profile');
+});
