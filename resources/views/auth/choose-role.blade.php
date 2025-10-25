@@ -37,9 +37,9 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
       <!-- Freelancer Card -->
-      <a href="{{ route('register.role', ['role' => 'freelancer']) }}"
+      <a href="/register/freelancer"
          class="card border border-gray-200 rounded-2xl p-8 hover:border-blue-500 group bg-gradient-to-b from-white to-blue-50">
-        <img src="{{ asset('images/freelancer 2.png') }}" alt="Freelancer"
+        <img src="{{ asset('images/Freelancer2.png') }}" alt="Freelancer"
              class="w-24 mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
         <h2 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
           Freelancer
@@ -50,9 +50,9 @@
       </a>
 
       <!-- Client Card -->
-      <a href="{{ route('register.role', ['role' => 'client']) }}"
+      <a href="/register/client"
          class="card border border-gray-200 rounded-2xl p-8 hover:border-purple-500 group bg-gradient-to-b from-white to-purple-50">
-        <img src="{{ asset('images/client 2.png') }}" alt="Client"
+        <img src="{{ asset('images/client2.png') }}" alt="Client"
              class="w-24 mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">
         <h2 class="text-xl font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
           Client

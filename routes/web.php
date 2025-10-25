@@ -14,6 +14,8 @@ Route::get('/', function () {
     return view('page-guest.home');
 });
 
+Route::get('/choose_role', function(){return view('auth.choose-role');});
+
 // Untuk freelancer
 Route::get('/register/freelancer', [FreelancerController::class, 'jurusRegist'])
     ->name('auth.register.freelancer');
