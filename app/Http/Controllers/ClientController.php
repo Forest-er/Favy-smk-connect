@@ -28,4 +28,11 @@ class ClientController extends Controller
     public function settings() {
         return view('client.settings.index');
     }
+    public function profile() {
+        return view('client.profile.index');
+    }
+     public function freelancer()
+    {
+        return view('auth.register.freelancer');
+    }
 }
