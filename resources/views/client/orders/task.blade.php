@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- Main Content -->
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+<div class="container mx-auto sm:px-6 lg:px-8 py-6 sm:py-8 ">
     <!-- Breadcrumb -->
     <nav class="flex mb-6 sm:mb-8" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
