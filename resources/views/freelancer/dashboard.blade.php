@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Client')
+@section('title', 'Dashboard Freelancer')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-1">
@@ -21,7 +21,7 @@
                 $greeting = $hour < 12 ? 'Good morning' : ($hour < 18 ? 'Good afternoon' : 'Good evening');
             @endphp
             <h1 class="text-3xl md:text-4xl font-bold mb-4 text-white">{{ $greeting }}, {{ Auth::user()->nama }} 👋</h1>
-            <p class="mb-6 text-white/80">Find projects, freelancers, and more!</p>
+            <p class="mb-6 text-white/80">Discover exciting projects and grow your freelance career!</p>
 
             <div class="relative flex flex-col md:flex-row gap-3 mt-12">
                 <img src="/images/duduk.png" class="absolute -top-[60px] right-[650px] w-40 z-20 select-none">
@@ -29,7 +29,7 @@
                     <form>
                         <div class="flex flex-row">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"><i class="bi bi-search"></i></span>
-                            <input type="text" placeholder="Search projects..." name="keyword"
+                            <input type="text" placeholder="Search projects to work on..." name="keyword"
                                 class="w-full pl-12 p-3 border border-gray-300 rounded-l-full text-gray-800 focus:outline-none focus:border-blue-500">
                             <button type="submit" class="bg-white text-black py-3 px-5 rounded-r-full z-99"><i class="bi bi-search"></i></button>
                         </div>
@@ -51,37 +51,44 @@
         }, 4000);
     </script>
 
-    <!-- Client Stats Section -->
+    <!-- Freelancer Stats Section -->
     <section class="max-w-7xl mx-auto mb-16 px-4-ml-1">
-        <h2 class="text-2xl font-bold mb-6 text-gray-900">Client Stats</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-900">Your Performance test</h2>
         <div class="flex flex-col md:flex-row gap-4">
-            <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-purple-50 to-white border border-gray-100 hover:shadow-md transition">
+            <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-blue-50 to-white border border-gray-100 hover:shadow-md transition">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm text-gray-500">Projects Posted</span>
-                    <i class="bi bi-folder2-open text-purple-500 text-lg"></i>
+                    <span class="text-sm text-gray-500">Active Projects</span>
+                    <i class="bi bi-briefcase text-blue-500 text-lg"></i>
                 </div>
-                <p class="text-3xl font-bold text-gray-800">8</p>
+                <p class="text-3xl font-bold text-gray-800">5</p>
             </div>
             <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-green-50 to-white border border-gray-100 hover:shadow-md transition">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm text-gray-500">Total Spent</span>
-                    <i class="bi bi-cash-stack text-green-500 text-lg"></i>
+                    <span class="text-sm text-gray-500">Total Earned</span>
+                    <i class="bi bi-wallet2 text-green-500 text-lg"></i>
                 </div>
-                <p class="text-3xl font-bold text-gray-800">Rp5.000.000</p>
+                <p class="text-3xl font-bold text-gray-800">Rp12.500.000</p>
+            </div>
+            <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-purple-50 to-white border border-gray-100 hover:shadow-md transition">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-500">Completed Projects</span>
+                    <i class="bi bi-check-circle text-purple-500 text-lg"></i>
+                </div>
+                <p class="text-3xl font-bold text-gray-800">23</p>
             </div>
             <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-yellow-50 to-white border border-gray-100 hover:shadow-md transition">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm text-gray-500">Active Freelancers</span>
-                    <i class="bi bi-people text-yellow-500 text-lg"></i>
+                    <span class="text-sm text-gray-500">Success Rate</span>
+                    <i class="bi bi-star text-yellow-500 text-lg"></i>
                 </div>
-                <p class="text-3xl font-bold text-gray-800">7</p>
+                <p class="text-3xl font-bold text-gray-800">98%</p>
             </div>
         </div>
     </section>
 
     <!-- Explore Categories -->
     <div class="mb-10 flex items-center justify-between">
-        <h2 class="text-2xl font-bold">Explore Categories</h2>
+        <h2 class="text-2xl font-bold">Browse by Expertise</h2>
         <div class="flex space-x-2">
             <button class="w-8 h-8 flex items-center justify-center bg-white rounded-full shadow hover:bg-gray-100 transition">
                 <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,7 +114,7 @@
 
         @foreach ($jurusans as $index => $jurusan)
             @php $style = $styles[$index % count($styles)]; @endphp
-            <a href="{{ route('client.dashboard', ['jurusan_id' => $jurusan->id_jurusan]) }}"
+            <a href="{{ route('freelancer.dashboard', ['jurusan_id' => $jurusan->id_jurusan]) }}"
                 class="group bg-white rounded-xl shadow flex flex-col items-center justify-center hover:-translate-y-1 transition cursor-pointer shrink-0 {{ $style['shadow'] }}"
                 style="width: 200px; height: 140px; min-width: 140px; text-decoration: none;">
                 <div class="rounded-full w-12 h-12 flex items-center justify-center mb-3 transition-all group-hover:brightness-110"
@@ -119,12 +126,12 @@
         @endforeach
     </div>
 
-    <!-- Rekomendasi Project -->
+    <!-- Available Projects -->
     <section class="w-full -mt-10 mb-10 px-1 -ml-1">
-        <h2 class="text-lg font-semibold text-pink-400 flex items-center gap-1 mb-1 text-2xl font-bold text-gray-900">
-            Populer Project<span>🔥</span>
+        <h2 class="text-lg font-semibold text-blue-500 flex items-center gap-1 mb-1 text-2xl font-bold text-gray-900">
+            Available Projects<span>💼</span>
         </h2>
-        <p class="text-gray-400 mb-6 text-sm">project terbaru minggu ini</p>
+        <p class="text-gray-400 mb-6 text-sm">Fresh opportunities waiting for you</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             @forelse ($tasks as $task)
                 <div class="bg-white rounded-2xl shadow-md overflow-hidden transform hover:-translate-y-1 transition">
@@ -132,7 +139,7 @@
                         <img src="{{ asset('storage/' . $task->foto) }}"
                             onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
                             class="w-full h-40 object-cover">
-                        <span class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-purple-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full text-white bg-blue-500">
                             {{ $task->jurusan->nama_jurusan ?? 'Unknown' }}
                         </span>
                         <span class="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-md bg-white shadow">
@@ -149,24 +156,24 @@
                             <p class="text-lg font-bold text-gray-800">Rp{{ number_format($task->budget, 0, ',', '.') }}</p>
                             <div class="flex items-center gap-2">
                                 <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-7 h-7 rounded-full border">
-                                <span class="text-xs text-gray-600">{{ $task->user->nama ?? 'Freelancer' }}</span>
+                                <span class="text-xs text-gray-600">{{ $task->user->nama ?? 'Client' }}</span>
                             </div>
                         </div>
                       <button onclick="openPopup({{ $task->id_task }}); event.stopPropagation();"
-                              class="bg-pink-500 hover:bg-pink-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition w-full">
-                          Hire Now
+                              class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold py-2 px-4 rounded-lg transition w-full">
+                          Apply Now
                       </button>
                     </div>
                 </div>
             @empty
-                <p class="text-gray-500">Tugas yang Anda cari tidak ditemukan.</p>
+                <p class="text-gray-500">No projects available at the moment.</p>
             @endforelse
         </div>
     </section>
 
-  <!-- Inspired Works Section -->
+  <!-- Portfolio Gallery Section -->
 <section class="max-w-7xl mx-auto mb-16 px-1">
-  <h2 class="text-2xl font-bold mb-6 text-gray-900 px-1">Get inspired by work done on Fiverr</h2>
+  <h2 class="text-2xl font-bold mb-6 text-gray-900 px-1">Featured Freelancer Portfolios</h2>
 
   <!-- Category Tabs -->
   @php
@@ -206,16 +213,16 @@
         <div class="w-full flex justify-between items-center text-white text-sm p-3">
           <div>
             <p class="font-semibold">{{ $task->judul }}</p>
-            <p>by: {{ $task->user->nama ?? 'Freelancer' }}</p>
+            <p>Client: {{ $task->user->nama ?? 'Anonymous' }}</p>
           </div>
           <button class="opacity-0 group-hover:opacity-100 transition duration-300">
-            <i class="bi bi-three-dots text-white text-xl hover:text-pink-400"></i>
+            <i class="bi bi-three-dots text-white text-xl hover:text-blue-400"></i>
           </button>
         </div>
       </div>
 
       <button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300">
-        <i class="bi bi-bookmark-fill text-white text-2xl hover:text-pink-500 transition-colors"></i>
+        <i class="bi bi-bookmark-fill text-white text-2xl hover:text-blue-500 transition-colors"></i>
       </button>
     </div>
   @endforeach
@@ -223,7 +230,7 @@
 </section>
 
 
-    <!-- Masih ada bagian Gigs, Inspired Works, Popup dsb... -->
+    <!-- Popup Elements -->
      <!-- Overlay -->
 <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
 
@@ -243,7 +250,7 @@
       document.getElementById('rightPopup').classList.remove('translate-x-full');
 
       // Ambil data task secara dinamis lewat route Laravel
-      fetch(`/client/task/${taskId}`)
+      fetch(`/freelancer/task/${taskId}`)
         .then(response => response.text())
         .then(html => {
           // Masukkan HTML task ke dalam popup
@@ -257,7 +264,7 @@
       document.getElementById('rightPopup').classList.add('translate-x-full');
     }
 
-    // Script untuk drag panel (biarkan tetap)
+    // Script untuk drag panel
     const sidePanel = document.getElementById('sidePanel');
     let isDragging = false;
 
