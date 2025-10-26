@@ -169,7 +169,7 @@
 <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
 
 <!-- Popup Container -->
-<div id="rightPopup" class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl">
+<div id="rightPopup" class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl overflow-y-auto max-h-screen">
     <div class="flex flex-col h-full">
       <div id="rightPopupContent" class="p-4">
         <!-- Konten popup akan dimuat di sini -->
@@ -178,25 +178,25 @@
 </div>
 
   <script>
-    function openPopup(taskId) {
-      // Tampilkan popup
+   function openPopup(taskId) {
+      document.body.style.overflow = 'hidden'; // 🔒 kunci scroll body
       document.getElementById('overlay').classList.remove('hidden');
       document.getElementById('rightPopup').classList.remove('translate-x-full');
 
-      // Ambil data task secara dinamis lewat route Laravel
       fetch(`/client/task/${taskId}`)
         .then(response => response.text())
         .then(html => {
-          // Masukkan HTML task ke dalam popup
           document.getElementById('rightPopupContent').innerHTML = html;
         })
         .catch(error => console.error('Error:', error));
     }
 
     function closePopup() {
+      document.body.style.overflow = ''; // 🔓 aktifkan scroll lagi
       document.getElementById('overlay').classList.add('hidden');
       document.getElementById('rightPopup').classList.add('translate-x-full');
     }
+
 
     // Script untuk drag panel (biarkan tetap)
     const sidePanel = document.getElementById('sidePanel');
