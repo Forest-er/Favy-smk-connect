@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
     body {
       font-family: 'Inter', sans-serif;
     }
@@ -17,6 +16,8 @@
 
 <body class="bg-gray-50 text-gray-800">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  @php $user = Auth::user(); @endphp
 
   <nav id="mainNavbar"
     class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
@@ -28,19 +29,17 @@
     </div>
 
     <!-- Profile Dropdown -->
-
     <div class="relative" x-data="{ open: false }">
       <button onclick="toggleDropdown()" id="profileButton"
         class="focus:outline-none flex items-center space-x-2">
         <img 
-          src="{{ Auth::user()->foto 
-                ? asset('storage/' . Auth::user()->foto) 
-                : asset('images/profile.jpeg') }}" 
+          src="{{ $user && $user->foto ? asset('storage/' . $user->foto) : asset('images/profile.jpeg') }}" 
           alt="Profile"
           class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
       </button>
 
-      <!-- Dropdown -->
+      {{-- Dropdown hanya muncul kalau user login --}}
+      @if($user)
       <div id="profileDropdown"
         class="hidden absolute right-0 mt-3 w-40 bg-white border rounded-lg shadow-lg py-2 transition-all duration-200">
         <a href="/client/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
@@ -50,6 +49,7 @@
             class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
         </form>
       </div>
+      @endif
     </div>
 
   </nav>
@@ -60,18 +60,11 @@
   </main>
 
   {{-- Footer --}}
-  <!-- <footer class="text-center text-gray-500 text-sm py-6 border-t mt-12">
-    &copy; {{ date('Y') }} Freelance SMK. Semua hak dilindungi.
-  </footer> -->
-
-
   <footer class="relative bg-[#0B1D51] text-white pt-12 pb-8 overflow-hidden">
     <div class="container mx-auto px-6 md:px-12 lg:px-24">
 
       <!-- Main Footer Columns -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-
-        <!-- Column 1: For Clients -->
         <div>
           <h3 class="text-sm font-semibold uppercase text-white mb-6">For Clients</h3>
           <ul class="space-y-3">
@@ -81,7 +74,6 @@
           </ul>
         </div>
 
-        <!-- Column 2: For Talent -->
         <div>
           <h3 class="text-sm font-semibold uppercase text-white mb-6">For Talent</h3>
           <ul class="space-y-3">
@@ -92,7 +84,6 @@
           </ul>
         </div>
 
-        <!-- Column 3: Resources -->
         <div>
           <h3 class="text-sm font-semibold uppercase text-white mb-6">Resources</h3>
           <ul class="space-y-3">
@@ -102,7 +93,6 @@
           </ul>
         </div>
 
-        <!-- Column 4: Company -->
         <div>
           <h3 class="text-sm font-semibold uppercase text-white mb-6">Company</h3>
           <ul class="space-y-3">
@@ -114,10 +104,9 @@
             <li><a href="#" class="text-sm hover:text-gray-100 transition">Partners</a></li>
           </ul>
         </div>
-
       </div>
 
-      <!-- === SOCIAL MEDIA SECTION === -->
+      <!-- Social Media -->
       <div class="mt-10 text-center md:text-left">
         <div class="flex flex-col md:flex-row items-center justify-start gap-4 text-white">
           <span class="text-sm">Ikuti kami di:</span>
@@ -125,7 +114,7 @@
             <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-facebook text-xl"></i></a>
             <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-linkedin text-xl"></i></a>
             <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-instagram text-xl"></i></a>
-            <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-twitter-x text-xl"></i></a>
           </div>
         </div>
       </div>
@@ -145,24 +134,15 @@
 
     </div>
 
-    <!-- ===== Hiasan Dekoratif Background ===== -->
-    <!-- Circle besar kiri atas -->
+    <!-- Decorative Backgrounds -->
     <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-
-    <!-- Circle sedang kanan bawah -->
     <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-white/10 rounded-full blur-2xl"></div>
-
-    <!-- Dot pattern -->
     <div class="absolute top-10 right-1/4 w-3 h-3 bg-white/30 rounded-full"></div>
     <div class="absolute top-20 right-1/3 w-2 h-2 bg-white/40 rounded-full"></div>
     <div class="absolute bottom-24 left-1/4 w-3 h-3 bg-white/30 rounded-full"></div>
     <div class="absolute bottom-32 left-1/3 w-2 h-2 bg-white/40 rounded-full"></div>
-
-    <!-- Geometric shapes -->
     <div class="absolute top-1/4 left-10 w-12 h-12 border-2 border-white/20 rounded-lg rotate-12"></div>
     <div class="absolute bottom-1/4 right-16 w-16 h-16 border-2 border-white/20 rounded-full"></div>
-
-    <!-- Wave pattern -->
     <svg class="absolute bottom-0 left-0 w-full opacity-10" viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path d="M0,0 C150,50 350,0 600,30 C850,60 1050,10 1200,40 L1200,120 L0,120 Z" fill="white" />
     </svg>
@@ -185,5 +165,4 @@
     });
   </script>
 </body>
-
 </html>
