@@ -35,7 +35,7 @@
             <div id="carouselTrack" class="flex flex-nowrap gap-4 md:gap-8 scroll-smooth">
                 @php
                 $colors = ['bg-pink-200','bg-blue-200','bg-orange-200','bg-green-200','bg-purple-200','bg-yellow-200'];
-                $jurusans = \DB::table('kategori_jurusan')->get(); // ambil semua jurusan
+                $jurusans = DB::table('jurusans')->get(); // ambil semua jurusan
                 @endphp
 
                 @foreach($jurusans as $index => $jurusan)
@@ -88,7 +88,7 @@
                     </div>
 
                     <!-- Nama jurusan -->
-                    <h3 class="font-bold text-gray-900 text-lg mb-2 relative z-10">{{ $jurusan->jurusan }}</h3>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2 relative z-10">{{ $jurusan->nama_jurusan }}</h3>
 
                     <!-- Badge -->
                     <div class="mb-3 w-full relative z-10">

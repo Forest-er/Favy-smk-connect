@@ -63,6 +63,6 @@ class DashboardController extends Controller
         $jurusans = Jurusan::all();
 
         return view('client.orders.task', compact('jurusans', 'tasks', 'jurusanId'));
-    }
+        }
 }
 
