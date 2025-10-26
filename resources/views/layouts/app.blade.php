@@ -42,11 +42,11 @@
       @if($user)
       <div id="profileDropdown"
         class="hidden absolute right-0 mt-3 w-40 bg-white border rounded-lg shadow-lg py-2 transition-all duration-200">
-        <a href="/client/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+        <a href="/client/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings <i class="bi bi-gear"></i> </a>
         <form action="{{ route('logout') }}" method="POST" class="block">
           @csrf
           <button type="submit"
-            class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+            class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout <i class="bi bi-box-arrow-right"></i></button>
         </form>
       </div>
       @endif

@@ -31,6 +31,7 @@ class DashboardController extends Controller
     {
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
+        $totalTasks = Task::where('users_id', auth()->id())->count();
 
         $tasks = Task::with(['jurusan', 'user'])
             ->when($search, function ($query) use ($search) {
@@ -42,8 +43,9 @@ class DashboardController extends Controller
             ->get();
 
         $jurusans = Jurusan::all();
+        $myTasks = Task::where('users_id', auth()->id())->get();
 
-        return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId'));
+        return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks'));
     }
 
     public function insertTask(Request $request)

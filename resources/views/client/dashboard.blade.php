@@ -60,7 +60,7 @@
                     <span class="text-sm text-gray-500">Projects Posted</span>
                     <i class="bi bi-folder2-open text-purple-500 text-lg"></i>
                 </div>
-                <p class="text-3xl font-bold text-gray-800">8</p>
+                <p class="text-3xl font-bold text-gray-800">{{ $totalTasks }}</p>
             </div>
             <div class="flex-1 p-6 rounded-xl bg-gradient-to-br from-green-50 to-white border border-gray-100 hover:shadow-md transition">
                 <div class="flex items-center justify-between mb-2">
@@ -162,6 +162,30 @@
                 <p class="text-gray-500">Tugas yang Anda cari tidak ditemukan.</p>
             @endforelse
         </div>
+    </section>
+    <section>
+      <h1 class="text-3xl font-bold mb-5">My Tasks</h1>
+      <div class="container flex flex-row overflow-x-auto my-5 space-x-6">
+      @foreach ($myTasks as $mt)
+       <div class="relative w-64 flex-shrink-0 rounded-xl overflow-hidden shadow-lg group cursor-pointer">
+        <img 
+          src="{{ asset('storage/' . $mt->foto) }}" 
+          alt="{{ $mt->judul }}" 
+          class="w-full h-40 object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
+        >
+        
+        <!-- Overlay hitam halus -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+        <!-- Judul muncul saat hover -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <h2 class="text-white text-lg font-semibold text-center px-3">
+            {{ $mt->judul }}
+          </h2>
+        </div>
+      </div>
+      @endforeach
+      </div>
     </section>
 
     <!-- Masih ada bagian Gigs, Inspired Works, Popup dsb... -->
