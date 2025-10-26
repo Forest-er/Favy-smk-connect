@@ -122,7 +122,7 @@
     <!-- Rekomendasi Project -->
     <section class="w-full -mt-10 mb-10 px-1 -ml-1">
         <h2 class="text-lg font-semibold text-pink-400 flex items-center gap-1 mb-1 text-2xl font-bold text-gray-900">
-            Rekomendasi Project<span>🔥</span>
+            Populer Project<span>🔥</span>
         </h2>
         <p class="text-gray-400 mb-6 text-sm">project terbaru minggu ini</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -163,6 +163,65 @@
             @endforelse
         </div>
     </section>
+
+  <!-- Inspired Works Section -->
+<section class="max-w-7xl mx-auto mb-16 px-4">
+  <h2 class="text-2xl font-bold mb-6 text-gray-900">Get inspired by work done on Fiverr</h2>
+
+  <!-- Category Tabs -->
+  @php
+    $gradients = [
+      ['from' => 'from-blue-400', 'via' => 'via-purple-400', 'to' => 'to-pink-400'],
+      ['from' => 'from-emerald-400', 'via' => 'via-teal-400', 'to' => 'to-cyan-400'],
+      ['from' => 'from-amber-400', 'via' => 'via-orange-400', 'to' => 'to-rose-300'],
+    ];
+  @endphp
+
+  <div class="w-full overflow-x-auto scrollbar-hide mb-8">
+    <div class="flex gap-4 text-[14px] font-medium min-w-max">
+      @foreach ($jurusans as $index => $jurusan)
+        @php
+          $gradient = $gradients[$index % count($gradients)];
+        @endphp
+        <button 
+          class="px-5 py-2.5 rounded-2xl text-gray-800 border border-gray-300 bg-transparent transition-all duration-500 ease-in-out
+                 hover:text-white hover:border-transparent hover:bg-gradient-to-r hover:{{ $gradient['from'] }} hover:{{ $gradient['via'] }} hover:{{ $gradient['to'] }} hover:shadow-md whitespace-nowrap">
+          {{ $jurusan->nama_jurusan }}
+        </button>
+      @endforeach
+    </div>
+  </div>
+
+ <div class="grid grid-cols-2 md:grid-cols-4 gap-6 auto-rows-[200px]">
+  @foreach ($tasks as $task)
+    <div class="relative group cursor-pointer rounded-xl overflow-hidden 
+                @if($loop->index % 5 == 0) row-span-2 @endif"
+         onclick="openPopup({{ $task->id_task }});">
+
+      <img src="{{ asset('storage/' . $task->foto) }}" 
+           onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'" 
+           class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
+
+      <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-end rounded-xl">
+        <div class="w-full flex justify-between items-center text-white text-sm p-3">
+          <div>
+            <p class="font-semibold">{{ $task->judul }}</p>
+            <p>by: {{ $task->user->nama ?? 'Freelancer' }}</p>
+          </div>
+          <button class="opacity-0 group-hover:opacity-100 transition duration-300">
+            <i class="bi bi-three-dots text-white text-xl hover:text-pink-400"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition duration-300">
+        <i class="bi bi-bookmark-fill text-white text-2xl hover:text-pink-500 transition-colors"></i>
+      </button>
+    </div>
+  @endforeach
+</div>
+</section>
+
 
     <!-- Masih ada bagian Gigs, Inspired Works, Popup dsb... -->
      <!-- Overlay -->
