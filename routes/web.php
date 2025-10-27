@@ -62,10 +62,6 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('client.task.show');
 });
 
-    // HAPUS route umum yang bikin konflik:
-    # ❌ Route::get('/{role}/dashboard', [DashboardController::class, 'dataview'])->name('role.dashboard');
-
-
 // ===== Profile Routes =====
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -73,7 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/client/dashboard', [DashboardController::class, 'dataview'])->name('role.dashboard');
+// Route::get('/client/dashboard', [DashboardController::class, 'dataview'])->name('role.dashboard');
 Route::get('/insert/task', [DashboardController::class, 'insertTask'])->name('client.orders.task');
 
 require __DIR__.'/auth.php';
