@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profil Freelancer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body class="bg-white min-h-screen text-gray-800">
-
+@extends('layouts.app');
+@section('title', 'profile|worker');
+@section('content')
   <!-- Container -->
   <div class="max-w-[1100px] mx-auto px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
 
@@ -20,13 +12,13 @@
         <div class="flex flex-col items-center">
           <!-- Avatar -->
           <img 
-            src="images/profile.jpeg"
+            src="{{ $user->foto ? asset('storage/' . $user->foto) : asset('images/profile.jpeg') }}"
             alt="Profile"
             class="w-28 h-28 rounded-full bg-gradient-to-br from-pink-300 via-pink-400 to-rose-400 flex items-center justify-center text-white text-5xl font-bold shadow-md">
 
           <!-- Name -->
-          <h2 class="mt-5 text-xl font-semibold text-gray-800">Nama Freelancer</h2>
-          <p class="text-gray-500 text-[15px]">freelancer@email.com</p>
+          <h2 class="mt-5 text-xl font-semibold text-gray-800">{{ $user->nama }}</h2>
+          <p class="text-gray-500 text-[15px]">{{ $user->email }}</p>
         </div>
 
         <hr class="my-6 border-pink-100">
@@ -35,11 +27,11 @@
         <div class="space-y-4 text-[15px] mb-6">
           <div class="flex items-center gap-3 text-gray-700">
             <i class="bi bi-briefcase text-[18px] text-pink-500"></i>
-            Freelancer
+            {{ $user->role }}
           </div>
           <div class="flex items-center gap-3 text-gray-700">
             <i class="bi bi-calendar3 text-[18px] text-pink-500"></i>
-            Bergabung sejak 27 Okt 2025
+            Bergabung sejak {{ $user->created_at }}
           </div>
           <div class="flex items-center gap-3 text-gray-700">
             <i class="bi bi-geo-alt text-[18px] text-pink-400"></i>
@@ -48,13 +40,13 @@
         </div>
 
         <p class="text-gray-500 text-sm leading-relaxed text-center">
-          Belum ada bio. Ceritakan sedikit tentang dirimu!
+          {{ $user->bio ?? 'Belum ada bio yang ditambahkan.' }}
         </p>
       </div>
 
       <!-- Tombol -->
       <button
-        onclick="window.location.href='dashboard.html'"
+        onclick="window.location.href='{{ route(Auth::user()->role . '.dashboard') }}'"
         class="mt-6 w-full py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition text-gray-800 font-medium flex items-center justify-center gap-2 shadow-sm">
         <i class="bi bi-speedometer2"></i> Kembali ke Dashboard
       </button>
@@ -69,7 +61,7 @@
           <i class="bi bi-stars text-pink-500 text-xl mt-[2px]"></i>
           <div>
             <p class="text-[15px] font-medium text-gray-800">
-              Hai, selamat datang di profil freelancermu ✨
+              Hai {{ $user->nama }}, selamat datang di profil freelancermu ✨
             </p>
             <p class="text-gray-600 text-[14px]">
               Lengkapi profilmu agar klien bisa lebih mudah mengenal keahlianmu.
@@ -81,9 +73,9 @@
       <!-- Breadcrumb -->
       <div class="flex justify-between items-center text-[14px] text-gray-500 mb-4">
         <div>
-          <a href="dashboard.html" class="text-gray-500 font-medium hover:text-gray-800">Home</a> /
-          <a href="profile.html" class="text-gray-500 font-medium hover:text-gray-800">My Profile</a> /
-          <a href="projects.html" class="text-gray-500 font-medium hover:text-gray-800">My Projects</a>
+          <a href="{{ route(Auth::user()->role . '.dashboard') }}" class="text-gray-500 font-medium hover:text-gray-800">Home</a> /
+          <a href="{{ route(Auth::user()->role . '.profile') }}" class="text-gray-500 font-medium hover:text-gray-800">My Profile</a> /
+          <a href="{{ route(Auth::user()->role . '.projects') }}" class="text-gray-500 font-medium hover:text-gray-800">My Projects</a>
         </div>
       </div>
 
@@ -165,4 +157,4 @@
   </script>
 
 </body>
-</html>
+@endsection

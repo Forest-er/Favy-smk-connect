@@ -66,8 +66,15 @@ class FreelancerController extends Controller
         $freelancers = user::all();
         $totalFreelancers = $freelancers->count();
         $OrderedTask = task::where('status', 'ordered')->where('users_id', Auth::id())->count();
+        $CompletedTask = task::where('status', 'done')->where('users_id', Auth::id())->count();
 
         // Kalau kamu mau tampilkan task, tinggal tambahkan logicnya nanti
-        return view('freelancer.dashboard', compact('freelancers', 'totalFreelancers', 'jurusans', 'tasks', 'OrderedTask'));
+        return view('freelancer.dashboard', compact('freelancers', 'totalFreelancers', 'jurusans', 'tasks', 'OrderedTask', 'CompletedTask'));
+    }
+    public function profile()
+    {
+        $user = Auth::user();
+
+        return view('freelancer.profile', compact('user'));
     }
 }
