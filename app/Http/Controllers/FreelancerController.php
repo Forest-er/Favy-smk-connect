@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Jurusan; // ✅ tambahkan baris ini
 use Illuminate\Support\Facades\DB;
 use App\Models\task;
+use Illuminate\Support\Facades\Auth;
 
 class FreelancerController extends Controller
 {
@@ -48,14 +49,25 @@ class FreelancerController extends Controller
         $jurusans = DB::table('jurusans')->get();
         return view('auth.register.freelancer', compact('jurusans'));
     }
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        $tasks = task::all();
+        $search = $request->keyword;
+        $jurusanId = $request->jurusan_id;
+        $tasks = Task::with(['jurusan', 'user'])
+            ->when($search, function ($query) use ($search) {
+                $query->where('judul', 'like', "%{$search}%");
+            })
+            ->when($jurusanId, function ($query, $jurusanId) {
+                $query->where('jurusan_id', $jurusanId);
+            })
+            ->get();
+
         $jurusans = Jurusan::all();
         $freelancers = user::all();
         $totalFreelancers = $freelancers->count();
+        $OrderedTask = task::where('status', 'ordered')->where('users_id', Auth::id())->count();
 
         // Kalau kamu mau tampilkan task, tinggal tambahkan logicnya nanti
-        return view('freelancer.dashboard', compact('freelancers', 'totalFreelancers', 'jurusans', 'tasks'));
+        return view('freelancer.dashboard', compact('freelancers', 'totalFreelancers', 'jurusans', 'tasks', 'OrderedTask'));
     }
 }

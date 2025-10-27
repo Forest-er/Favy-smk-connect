@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         if ($user->role === 'worker') {
             return redirect()->route('freelancer.dashboard');
         } elseif ($user->role === 'client') {
-            return redirect()->route('client.dashboard');
+            return redirect()->route('client.dataview');
         } elseif ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
