@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Task;
+use App\Models\Jurusan;
 
 
 class ClientController extends Controller
@@ -80,6 +82,26 @@ public function getTaskDetail($id)
         $user->save();
 
         return back()->with('success', 'Profile photo updated successfully!');
+    }
+    public function dataview(Request $request)
+    {
+        $search = $request->keyword;
+        $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
+        $totalTasks = Task::where('users_id', auth()->id())->count();
+
+        $tasks = Task::with(['jurusan', 'user'])
+            ->when($search, function ($query) use ($search) {
+                $query->where('judul', 'like', "%{$search}%");
+            })
+            ->when($jurusanId, function ($query, $jurusanId) {
+                $query->where('jurusan_id', $jurusanId);
+            })
+            ->get();
+
+        $jurusans = Jurusan::all();
+        $myTasks = Task::where('users_id', auth()->id())->get();
+
+        return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks'));
     }
 
 }

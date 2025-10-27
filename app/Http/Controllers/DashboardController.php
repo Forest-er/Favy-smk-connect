@@ -27,26 +27,7 @@ class DashboardController extends Controller
                 abort(403, 'Role tidak diizinkan.');
         }
     }
-    public function dataview(Request $request)
-    {
-        $search = $request->keyword;
-        $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
-        $totalTasks = Task::where('users_id', auth()->id())->count();
-
-        $tasks = Task::with(['jurusan', 'user'])
-            ->when($search, function ($query) use ($search) {
-                $query->where('judul', 'like', "%{$search}%");
-            })
-            ->when($jurusanId, function ($query, $jurusanId) {
-                $query->where('jurusan_id', $jurusanId);
-            })
-            ->get();
-
-        $jurusans = Jurusan::all();
-        $myTasks = Task::where('users_id', auth()->id())->get();
-
-        return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks'));
-    }
+    
 
     public function insertTask(Request $request)
     {

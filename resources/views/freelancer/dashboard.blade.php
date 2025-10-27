@@ -1,118 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Freelancer Professional</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-    
-    * { font-family: 'Inter', sans-serif; }
-    
-    .slide { transition: opacity 1.5s ease-in-out; }
-    
-    .card-hover {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-    }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-    }
-    
-    .stat-card {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.1) 50%);
-      border-radius: 0 0 0 100%;
-    }
-    
-    .project-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-    
-    .shimmer {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .shimmer::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      animation: shimmer 3s infinite;
-    }
-    
-    @keyframes shimmer {
-      to { left: 100%; }
-    }
-  </style>
-</head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
-
-  <!-- Navbar -->
-  <nav class="glass-effect border-b border-gray-200 sticky top-0 z-30 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 py-4">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center gap-8">
-          <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
-            FreelanceHub
-          </h1>
-          <div class="hidden md:flex gap-6">
-            <a href="#" class="text-gray-700 hover:text-purple-600 font-medium transition">Dashboard</a>
-            <a href="#" class="text-gray-500 hover:text-purple-600 font-medium transition">Projects</a>
-            <a href="#" class="text-gray-500 hover:text-purple-600 font-medium transition">Messages</a>
-            <a href="#" class="text-gray-500 hover:text-purple-600 font-medium transition">Analytics</a>
-          </div>
-        </div>
-        
-        <div class="flex items-center gap-5">
-          <div class="relative">
-            <i class="bi bi-bell text-xl text-gray-600 hover:text-purple-600 cursor-pointer transition"></i>
-            <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-          </div>
-          <div class="flex items-center gap-3 cursor-pointer group">
-            <img src="https://i.pravatar.cc/40?img=13" class="w-10 h-10 rounded-full ring-2 ring-purple-200 group-hover:ring-purple-400 transition">
-            <div class="hidden md:block">
-              <p class="text-sm font-semibold text-gray-800">Azizah Rahman</p>
-              <p class="text-xs text-gray-500">Premium Member</p>
-            </div>
-            <i class="bi bi-chevron-down text-sm text-gray-500"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+@extends('layouts.app')
+@section('title', 'SMK-connect|freelancer')
+@section('content')
 
   <div class="max-w-7xl mx-auto px-6 py-8">
 
@@ -131,8 +19,8 @@
             <div class="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm mb-4">
               <i class="bi bi-sun"></i> Good Morning
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Welcome back, Azizah! 👋</h1>
-            <p class="text-white/90 text-lg">You have 3 active projects and 5 new opportunities waiting</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Haloww, {{ Auth::user()->nama }} 👋</h1>
+            <p class="text-white/90 text-lg">Kamu punya {{ $OrderedTask }} projek yang lagi dikerjain nihh</p>
           </div>
           
           <div class="flex flex-col gap-3">
@@ -146,11 +34,13 @@
 
         <div class="mt-8 flex gap-3">
           <div class="relative flex-1">
-            <i class="bi bi-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-lg"></i>
-            <input type="text" placeholder="Search projects, clients, or skills..." 
-              class="w-full pl-14 pr-5 py-4 rounded-2xl border-0 focus:ring-2 focus:ring-purple-400 shadow-lg text-gray-700">
+            <form action="GET" >
+              <i class="bi bi-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-lg"></i>
+              <input type="text" placeholder="Search projects, clients, or skills..." name="keyword"
+                class="w-full pl-14 pr-5 py-4 rounded-2xl border-0 focus:ring-2 focus:ring-purple-400 shadow-lg text-gray-700">
+            </form>
           </div>
-          <button class="bg-white hover:bg-gray-50 text-purple-700 font-semibold px-8 py-4 rounded-2xl shadow-lg transition flex items-center gap-2">
+          <button type="submit" class="bg-white hover:bg-gray-50 text-purple-700 font-semibold px-8 py-4 rounded-2xl shadow-lg transition flex items-center gap-2">
             <i class="bi bi-funnel"></i> Filters
           </button>
         </div>
@@ -180,13 +70,7 @@
             <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">+2 this week</span>
           </div>
           <p class="text-gray-500 text-sm mb-1 font-medium">Active Projects</p>
-          <p class="text-4xl font-bold text-gray-900 mb-2">5</p>
-          <div class="flex items-center text-xs text-gray-500">
-            <div class="flex-1 bg-gray-100 rounded-full h-1.5">
-              <div class="bg-blue-500 h-1.5 rounded-full" style="width: 60%"></div>
-            </div>
-            <span class="ml-2">60% capacity</span>
-          </div>
+          <p class="text-4xl font-bold text-gray-900 mb-2">{{ $OrderedTask }}</p>
         </div>
 
         <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
@@ -247,12 +131,16 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @forelse ($tasks as $task)
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100">
           <div class="relative">
-            <img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg" class="w-full h-48 object-cover">
+           <img src="{{ asset('storage/' . $task->foto) }}"
+             onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
+             class="w-full h-48 object-cover">
+
             <div class="absolute top-4 right-4">
               <span class="project-badge bg-purple-600 text-white">
-                <i class="bi bi-lightning-charge-fill"></i> Featured
+                <i class="bi bi-lightning-charge-fill"></i> {{ $task->jurusan->nama_jurusan }}
               </span>
             </div>
           </div>
@@ -260,7 +148,7 @@
             <div class="flex items-center gap-2 mb-3">
               <img src="https://i.pravatar.cc/30?img=1" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
               <div>
-                <p class="text-sm font-semibold text-gray-800">Nova Tech</p>
+                <p class="text-sm font-semibold text-gray-800">{{ $task->user->nama }}</p>
                 <div class="flex items-center text-xs text-gray-500">
                   <i class="bi bi-star-fill text-yellow-400 text-[10px]"></i>
                   <span class="ml-1">4.9</span>
@@ -270,132 +158,34 @@
               </div>
             </div>
             
-            <h3 class="font-bold text-lg mb-2 text-gray-900">UI/UX Design for Mobile App</h3>
-            <p class="text-sm text-gray-600 mb-4 line-clamp-2">Design a clean, minimal, and modern mobile app interface for product launch...</p>
+            <h3 class="font-bold text-lg mb-2 text-gray-900">{{ $task->judul }}</h3>
+            <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ $task->deskripsi }}</p>
             
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">UI/UX</span>
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Figma</span>
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Mobile</span>
+u              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_2 }}</span>
+              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_3 }}</span>
             </div>
             
             <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
               <div>
                 <p class="text-xs text-gray-500">Budget</p>
-                <p class="text-xl font-bold text-gray-900">Rp2.000.000</p>
+                <p class="text-xl font-bold text-gray-900">{{ $task->budget }}</p>
               </div>
               <div class="text-right">
                 <p class="text-xs text-gray-500">Deadline</p>
-                <p class="text-sm font-semibold text-gray-800">20 Nov 2025</p>
+                <p class="text-sm font-semibold text-gray-800">{{ $task->deadline }}</p>
               </div>
             </div>
             
             <button onclick="openPopup('UI/UX Design for Mobile App', 'Nova Tech', '20 Nov 2025', 'Rp2.000.000')" 
-              class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-purple-200">
+              class="w-full bg-gradient-to-r from-purple-600 bottom-0 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-purple-200">
               Apply Now
             </button>
           </div>
         </div>
-
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100">
-          <div class="relative">
-            <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg" class="w-full h-48 object-cover">
-            <div class="absolute top-4 right-4">
-              <span class="project-badge bg-green-600 text-white">
-                <i class="bi bi-clock-history"></i> Urgent
-              </span>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-3">
-              <img src="https://i.pravatar.cc/30?img=5" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
-              <div>
-                <p class="text-sm font-semibold text-gray-800">StartupHub</p>
-                <div class="flex items-center text-xs text-gray-500">
-                  <i class="bi bi-star-fill text-yellow-400 text-[10px]"></i>
-                  <span class="ml-1">5.0</span>
-                  <span class="mx-1">•</span>
-                  <span>Singapore</span>
-                </div>
-              </div>
-            </div>
-            
-            <h3 class="font-bold text-lg mb-2 text-gray-900">Landing Page Development</h3>
-            <p class="text-sm text-gray-600 mb-4 line-clamp-2">Create a responsive landing page with modern design and smooth animations...</p>
-            
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">React</span>
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Tailwind</span>
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Frontend</span>
-            </div>
-            
-            <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-              <div>
-                <p class="text-xs text-gray-500">Budget</p>
-                <p class="text-xl font-bold text-gray-900">Rp3.500.000</p>
-              </div>
-              <div class="text-right">
-                <p class="text-xs text-gray-500">Deadline</p>
-                <p class="text-sm font-semibold text-gray-800">5 Dec 2025</p>
-              </div>
-            </div>
-            
-            <button onclick="openPopup('Landing Page Development', 'StartupHub', '5 Dec 2025', 'Rp3.500.000')" 
-              class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-purple-200">
-              Apply Now
-            </button>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100">
-          <div class="relative">
-            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg" class="w-full h-48 object-cover">
-            <div class="absolute top-4 right-4">
-              <span class="project-badge bg-blue-600 text-white">
-                <i class="bi bi-gem"></i> Premium
-              </span>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center gap-2 mb-3">
-              <img src="https://i.pravatar.cc/30?img=8" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
-              <div>
-                <p class="text-sm font-semibold text-gray-800">DigitalCorp</p>
-                <div class="flex items-center text-xs text-gray-500">
-                  <i class="bi bi-star-fill text-yellow-400 text-[10px]"></i>
-                  <span class="ml-1">4.8</span>
-                  <span class="mx-1">•</span>
-                  <span>Malaysia</span>
-                </div>
-              </div>
-            </div>
-            
-            <h3 class="font-bold text-lg mb-2 text-gray-900">Brand Identity Design</h3>
-            <p class="text-sm text-gray-600 mb-4 line-clamp-2">Complete brand identity package including logo, color palette, and guidelines...</p>
-            
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Branding</span>
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Illustrator</span>
-              <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">Design</span>
-            </div>
-            
-            <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-              <div>
-                <p class="text-xs text-gray-500">Budget</p>
-                <p class="text-xl font-bold text-gray-900">Rp5.000.000</p>
-              </div>
-              <div class="text-right">
-                <p class="text-xs text-gray-500">Deadline</p>
-                <p class="text-sm font-semibold text-gray-800">15 Dec 2025</p>
-              </div>
-            </div>
-            
-            <button onclick="openPopup('Brand Identity Design', 'DigitalCorp', '15 Dec 2025', 'Rp5.000.000')" 
-              class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-purple-200">
-              Apply Now
-            </button>
-          </div>
-        </div>
+        @empty
+            <p class="text-gray-500">No available projects at the moment. Please check back later.</p>
+        @endforelse
       </div>
     </section>
 
@@ -604,6 +394,4 @@
       }, 300);
     }
   </script>
-
-</body>
-</html>
+@endsection
