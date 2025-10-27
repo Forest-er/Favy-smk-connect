@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penawaran Freelancer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-pink-50 via-white to-rose-50 text-gray-800">
+
+  <!-- Container -->
+  <div class="max-w-6xl mx-auto px-6 py-10 fade-in">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+        <i class="bi bi-send-check text-pink-500"></i> Penawaran (Bids/Offers)
+      </h1>
+      <button class="px-4 py-2 text-sm bg-pink-500 hover:bg-pink-600 text-white rounded-xl shadow-md transition">
+        <i class="bi bi-plus-lg"></i> Tambah Penawaran
+      </button>
+    </div>
+
+    <!-- Daftar Penawaran -->
+    <div class="bg-white rounded-2xl border border-pink-100 shadow-sm p-6 space-y-5">
+
+      <!-- Card 1 -->
+      <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">Desain Landing Page Novel</h2>
+            <p class="text-sm text-gray-500">Client: <span class="font-medium text-gray-700">Rayya Mahira</span></p>
+            <p class="text-sm text-gray-600 mt-2">Menawarkan desain halaman depan modern untuk website eBook menggunakan Tailwind CSS.</p>
+          </div>
+          <div class="mt-4 md:mt-0 flex flex-col items-end">
+            <span class="text-sm bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">Menunggu</span>
+            <p class="text-sm text-gray-400 mt-1">Dikirim: 25 Oktober 2025</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">UI Dashboard Kasir Zahrah</h2>
+            <p class="text-sm text-gray-500">Client: <span class="font-medium text-gray-700">Nurazizah Zahrah</span></p>
+            <p class="text-sm text-gray-600 mt-2">Membuat desain antarmuka profesional dengan elemen interaktif untuk aplikasi kasir.</p>
+          </div>
+          <div class="mt-4 md:mt-0 flex flex-col items-end">
+            <span class="text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full">Diterima</span>
+            <p class="text-sm text-gray-400 mt-1">Dikirim: 21 Oktober 2025</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">Desain Sistem Perpustakaan Digital</h2>
+            <p class="text-sm text-gray-500">Client: <span class="font-medium text-gray-700">Ariana Grande</span></p>
+            <p class="text-sm text-gray-600 mt-2">Menawarkan pengembangan sistem manajemen buku berbasis web dengan PHP dan MySQL.</p>
+          </div>
+          <div class="mt-4 md:mt-0 flex flex-col items-end">
+            <span class="text-sm bg-red-100 text-red-700 px-3 py-1 rounded-full">Ditolak</span>
+            <p class="text-sm text-gray-400 mt-1">Dikirim: 19 Oktober 2025</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Info tambahan -->
+    <p class="text-center text-sm text-gray-500 mt-8">
+      Kamu dapat mengirim penawaran baru untuk proyek yang tersedia di halaman <a href="#" class="text-pink-600 hover:underline font-medium">Daftar Proyek</a>.
+    </p>
+
+  </div>
+
+</body>
+</html>
