@@ -16,6 +16,9 @@ return new class extends Migration
             $table->id('id_jurusan');
             $table->string('nama_jurusan', 100);
             $table->text('deskripsi')->nullable();
+            $table->string('deskripsi_1', 50)->nullable();
+            $table->string('deskripsi_2', 50)->nullable();
+            $table->string('deskripsi_3', 50)->nullable();
             $table->timestamps();
         });
 

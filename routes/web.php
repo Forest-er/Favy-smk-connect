@@ -40,31 +40,18 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 Route::middleware(['auth'])->group(function () {
     Route::get('/insert/task', [TaskController::class, 'create'])->name('client.orders.task');
     Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.task');
-    Route::get('/{role}/dashboard', function ($role) {
-        $user = auth()->user();
+    
+});
 
-        // Cegah akses ke role lain
-        if ($user->role !== $role) {
-            abort(403, 'Kamu tidak memiliki akses ke halaman ini.');
-        }
-
-        // Arahkan ke dashboard sesuai role
-        switch ($role) {
-            case 'worker':
-                return app(FreelancerController::class)->dashboard();
-            case 'client':
-                return app(ClientController::class)->dashboard();
-            case 'admin':
-                return redirect()->route('admin.dashboard');
-            default:
-                abort(404);
-        }
-    })->name('user.dashboard');
+// ===== Freelancer Routes =====
+Route::middleware(['auth', 'role:worker'])->group(function () {
+    Route::get('/worker/dashboard', [FreelancerController::class, 'dashboard'])->name('freelancer.dashboard');
+    Route::get('/worker/task/{id}', [TaskController::class, 'show'])->name('freelancer.task.show');
 });
 
 // ===== Client Routes =====
 Route::middleware(['auth', 'role:client'])->group(function () {
-    Route::get('/client/dashboard', [ClientController::class, 'dashboard'])->name('client.dashboard');
+    Route::get('/client/dashboard', [ClientController::class, 'dataview'])->name('client.dashboard');
     Route::get('/client/explore', [ClientController::class, 'explore'])->name('client.explore');
     Route::get('/client/explore/{id}', [ClientController::class, 'showFreelancer'])->name('client.explore.show');
     Route::get('/client/orders', [ClientController::class, 'orders'])->name('client.orders');
@@ -72,15 +59,12 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/settings', [ClientController::class, 'settings'])->name('client.settings');
     Route::get('/client/profile', [ClientController::class, 'profile'])->name('client.profile');
     Route::put('/client/profile', [ClientController::class, 'update'])->name('client.update');
-    Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('task.show');
-    Route::get('/api/task/{id}', [TaskController::class, 'showJson'])->name('task.showJson');
-
+    Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('client.task.show');
 });
 
-// ===== Freelancer Routes =====
-Route::middleware(['auth', 'role:freelancer'])->group(function () {
-    Route::get('/freelancer/dashboard', [FreelancerController::class, 'dashboard'])->name('freelancer.dashboard');
-});
+    // HAPUS route umum yang bikin konflik:
+    # ❌ Route::get('/{role}/dashboard', [DashboardController::class, 'dataview'])->name('role.dashboard');
+
 
 // ===== Profile Routes =====
 Route::middleware('auth')->group(function () {
@@ -89,14 +73,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/{role}/dashboard', [DashboardController::class, 'dataview'])->name('role.dashboard');
+Route::get('/client/dashboard', [DashboardController::class, 'dataview'])->name('role.dashboard');
 Route::get('/insert/task', [DashboardController::class, 'insertTask'])->name('client.orders.task');
 
 require __DIR__.'/auth.php';
 Route::get('/freelancers', [FreelancerController::class, 'index'])->name('freelancer.index');
 Route::get('/freelancer/{id}', [FreelancerController::class, 'show'])->name('freelancer.show');
 
-Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('task.show');
 
 
 

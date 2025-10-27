@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Freelancer;
+use App\Models\User;
 use App\Models\Jurusan; // ✅ tambahkan baris ini
 use Illuminate\Support\Facades\DB;
+use App\Models\task;
 
 class FreelancerController extends Controller
 {
     public function index()
     {
-        $freelancers = Freelancer::all();
+        $freelancers = user::where('role', 'worker')->get();
         return view('client.dashboard', compact('freelancers'));
     }
 
     public function show($id)
     {
-        $freelancer = Freelancer::findOrFail($id);
+        $freelancer = user::findOrFail($id);
         return view('client.freelancer-detail', compact('freelancer'));
     }
 
@@ -45,5 +47,15 @@ class FreelancerController extends Controller
     {
         $jurusans = DB::table('jurusans')->get();
         return view('auth.register.freelancer', compact('jurusans'));
+    }
+    public function dashboard()
+    {
+        $tasks = task::all();
+        $jurusans = Jurusan::all();
+        $freelancers = user::all();
+        $totalFreelancers = $freelancers->count();
+
+        // Kalau kamu mau tampilkan task, tinggal tambahkan logicnya nanti
+        return view('freelancer.dashboard', compact('freelancers', 'totalFreelancers', 'jurusans', 'tasks'));
     }
 }
