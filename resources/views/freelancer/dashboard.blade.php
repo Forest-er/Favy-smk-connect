@@ -186,7 +186,7 @@
             </div>
           </div>
 
-          <button onclick="openPopup('{{ $task->judul }}', '{{ $task->user->nama }}', '{{ $task->deadline }}', '{{ $task->budget }}')"
+          <button onclick="openPopup('{{ $task->judul }}', '{{ $task->user->nama }}', '{{ $task->deadline }}', '{{ $task->budget }}', '{{ $task->deskripsi }}', '{{ $task->jurusan->deskripsi_1 }}', '{{ $task->jurusan->deskripsi_2 }}', '{{ $task->jurusan->deskripsi_3 }}')"
             class="w-full bg-gradient-to-r from-purple-600 bottom-0 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-purple-200">
             Apply Now
           </button>
@@ -326,33 +326,9 @@
       <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
         <i class="bi bi-file-text text-purple-600"></i> Project Description
       </h4>
-      <p class="text-gray-600 leading-relaxed">
+      <p id="popupDesc" class="text-gray-600 leading-relaxed">
         Design a clean, minimal, and modern mobile app interface for our new product launch. The project requires creating user flows, wireframes, and high-fidelity mockups. Applicants must have prior experience in UI/UX design with a strong portfolio showcasing mobile app designs.
       </p>
-    </div>
-
-    <div class="mb-6">
-      <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-        <i class="bi bi-check-square text-purple-600"></i> Requirements
-      </h4>
-      <ul class="space-y-2">
-        <li class="flex items-start gap-2 text-gray-600">
-          <i class="bi bi-check-circle-fill text-green-500 mt-1"></i>
-          <span>3+ years experience in UI/UX design</span>
-        </li>
-        <li class="flex items-start gap-2 text-gray-600">
-          <i class="bi bi-check-circle-fill text-green-500 mt-1"></i>
-          <span>Proficiency in Figma and Adobe XD</span>
-        </li>
-        <li class="flex items-start gap-2 text-gray-600">
-          <i class="bi bi-check-circle-fill text-green-500 mt-1"></i>
-          <span>Strong portfolio of mobile app designs</span>
-        </li>
-        <li class="flex items-start gap-2 text-gray-600">
-          <i class="bi bi-check-circle-fill text-green-500 mt-1"></i>
-          <span>Ability to work independently and meet deadlines</span>
-        </li>
-      </ul>
     </div>
 
     <div class="mb-6">
@@ -360,11 +336,9 @@
         <i class="bi bi-tag text-purple-600"></i> Skills Required
       </h4>
       <div class="flex flex-wrap gap-2">
-        <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UI Design</span>
-        <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UX Design</span>
-        <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Figma</span>
-        <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Adobe XD</span>
-        <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Mobile Design</span>
+        <span id="popupDesc_1" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UI Design</span>
+        <span id="popupDesc_2" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UX Design</span>
+        <span id="popupDesc_3" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Figma</span>
       </div>
     </div>
 
@@ -390,11 +364,15 @@
 </div>
 
 <script>
-  function openPopup(title, client, deadline, budget) {
+  function openPopup(title, client, deadline, budget, deskripsi, desc_1, desc_2, desc_3) {
     document.getElementById('popupTitle').textContent = title;
     document.getElementById('popupClient').textContent = client;
     document.getElementById('popupDeadline').textContent = deadline;
     document.getElementById('popupBudget').textContent = budget;
+    document.getElementById('popupDesc').textContent = deskripsi;
+    document.getElementById('popupDesc_1').textContent = desc_1;
+    document.getElementById('popupDesc_2').textContent = desc_2;
+    document.getElementById('popupDesc_3').textContent = desc_3;
     document.getElementById('overlay').classList.remove('hidden');
     setTimeout(() => {
       document.getElementById('rightPopup').classList.remove('translate-x-full');

@@ -88,12 +88,22 @@ class FreelancerController extends Controller
         $user = Auth::user();
         return view('freelancer.profile', compact('user'));
     }
-    public function projects()
+    public function projects(Request $request)
     {
         $user = Auth::user();
-        $tasks = Task::where('freelancer_id', $user->id)->get();
-        
+        $tasks = Task::where('freelancer_id', $user->id_users)
+            ->when($request->get('status'), function ($query, $status) {
+                $query->where('status', $status);
+            })
+            ->when($request->get('keyword'), function ($query, $keyword) {
+                $query->where('judul', 'like', "%{$keyword}%");
+            })
+            ->get();
+        $totalTasks = $tasks->count();
+        $progressTasks = $tasks->where('status', 'in_progress')->count();
+        $status = $request->get('status');
+        $search = $request->get('keyword');
 
-        return view('freelancer.projects', compact('tasks'));
+        return view('freelancer.projects', compact('tasks', 'totalTasks', 'progressTasks'));
     }
 }
