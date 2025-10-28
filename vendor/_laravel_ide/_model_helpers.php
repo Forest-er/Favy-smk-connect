@@ -2225,12 +2225,14 @@ namespace App\Models {
      * @property string|null $deskripsi
      * @property string|null $foto
      * @property string $judul
+     * @property mixed $freelancer_id
      * @property mixed $users_id
      * @property int $id_task
      * @property-read \App\Models\jurusan $jurusan
      * @property-read \App\Models\User $user
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereIdTask($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereUsersId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereFreelancerId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereJudul($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereFoto($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereDeskripsi($value)

@@ -1,41 +1,52 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\Jurusan;
 
-
 class ClientController extends Controller
 {
-    public function dashboard() {
+    public function dashboard()
+    {
         return view('client.dashboard');
     }
 
-    public function explore() {
+    public function explore()
+    {
         return view('client.explore.index');
     }
 
-    public function showFreelancer($id) {
+    public function showFreelancer($id)
+    {
         return view('client.explore.show', compact('id'));
     }
 
-    public function orders() {
+    public function orders()
+    {
         return view('client.orders.index');
     }
 
-    public function messages() {
+    public function messages()
+    {
         return view('client.messages.index');
     }
 
-    public function settings() {
+    public function settings()
+    {
         return view('client.settings.index');
     }
-    public function profile() {
+
+    public function profile()
+    {
         return view('client.profile.index');
     }
-     public function freelancer()
+
+    public function freelancer()
     {
         return view('auth.register.freelancer');
     }
@@ -103,11 +114,11 @@ public function getTaskDetail($id)
     {
         
         $search = $request->keyword;
-        $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
+        $jurusanId = $request->jurusan_id;
         $totalTasks = Task::where('users_id', auth()->id())->count();
         $totalFreelancer = User::where('role', 'worker')->where('jurusan_id', $jurusanId)->count();
-
         $tasks = Task::with(['jurusan', 'user'])
+            ->where('status', 'open') // ✅ hanya ambil task yang status-nya "open"
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })
@@ -122,4 +133,8 @@ public function getTaskDetail($id)
         return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks', 'totalFreelancer'));
     }
 
+    public function myTask_show(){
+        $tasks = Task::where('users_id', auth()->id())->get();
+        return view('client/orders/task_show', compact('tasks'));
+    }
 }

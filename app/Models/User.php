@@ -26,11 +26,11 @@ class User extends Authenticatable
         'nama',
         'email',
         'password',
-        'role',
-        'foto_profil',
-        'jurusan_id',
         'bio',
+        'places',
+        'foto_profil',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.

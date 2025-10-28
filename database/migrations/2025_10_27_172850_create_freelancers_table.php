@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('freelancers', function (Blueprint $table) {
-                $table  ->id('id_freelancer');
-                $table->bigInteger('users_id')->references('id_users')->on('users')->onDelete('cascade');
+        if (!Schema::hasTable('freelancers')) {
+            Schema::create('freelancers', function (Blueprint $table) {
+                $table->id('id_freelancer');
+                $table->unsignedBigInteger('users_id');
+                $table->foreign('users_id')->references('id_users')->on('users')->onDelete('cascade');
                 $table->bigInteger('completed_tasks')->default(0);
                 $table->bigInteger('ongoing_tasks')->default(0);
                 $table->timestamps();
-        });
+            });
+        }
     }
 
     /**
