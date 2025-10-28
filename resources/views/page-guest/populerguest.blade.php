@@ -1,12 +1,9 @@
-<!-- Popular Services Carousel -->
 <section class="py-16 px-6 md:px-12 lg:px-24 relative overflow-visible">
-    <!-- Hiasan Dekoratif Background -->
     <div class="absolute top-10 left-6 w-40 h-6 rounded-full blur-2xl" style="background-color: rgba(255, 237, 213, 0.5);"></div>
     <div class="absolute top-1/2 left-10 w-48 h-48 rounded-full blur-2xl" style="background-color: rgba(255, 237, 213, 0.6);"></div>
     <div class="absolute bottom-16 left-6 w-36 h-36 rounded-full blur-2xl" style="background-color: rgba(255, 237, 213, 0.5);"></div>
     <div class="absolute bottom-1/3 left-12 w-40 h-40 rounded-full blur-2xl" style="background-color: rgba(255, 237, 213, 0.6);"></div>
 
-    <!-- Circle blur di KANAN -->
     <div class="absolute top-10 right-6 w-36 h-8 bg-green-400/40 rounded-full blur-2xl"></div>
     <div class="absolute top-1/3 right-10 w-44 h-44 rounded-full blur-2xl" style="background-color: rgba(220, 252, 231, 0.6);"></div>
     <div class="absolute bottom-20 right-6 w-48 h-48 bg-teal-400/40 rounded-full blur-2xl"></div>
@@ -36,7 +33,6 @@
 
     <h2 class="text-2xl font-bold text-gray-900 mb-8 relative z-10">Popular services</h2>
 
-    <!-- DESKTOP: Slide dengan 5 card per slide + tombol navigasi -->
     <div class="hidden md:block relative z-10" id="desktopCarousel">
         @php
         $services = [];
@@ -84,10 +80,9 @@
         @endforeach
     </div>
 
-    <!-- MOBILE: Scroll horizontal manual (1 card per view) -->
     <div class="md:hidden relative z-10 overflow-x-auto scroll-smooth snap-x snap-mandatory flex gap-6 pb-4">
         @foreach ($services as $service)
-            <div class="w-72 flex-shrink-0 snap-start bg-white rounded-xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-transform duration-300 overflow-visible">
+            <div class="w-72 shrink-0 snap-start bg-white rounded-xl shadow-md hover:shadow-2xl hover:-translate-y-2 transition-transform duration-300 overflow-visible">
                 <img src="{{ $service['image'] }}" alt="{{ $service['title'] }}" class="w-full h-40 object-cover rounded-t-xl">
                 <div class="p-4 text-center">
                     <h3 class="font-semibold text-gray-900 truncate">{{ $service['title'] }}</h3>
@@ -97,11 +92,10 @@
     </div>
 </section>
 
-<!-- ✅ HIASAN BAWAH CAROUSEL (FULL WIDTH DENGAN STRUKTUR UTUH) -->
 <div class="relative -mt-4 h-20 overflow-visible w-full">
     <div class="absolute inset-0 w-full overflow-hidden">
-        <div class="absolute left-0 top-0 w-[100vw] overflow-visible">
-            <svg class="absolute top-4 left-0 w-[100vw] h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
+        <div class="absolute left-0 top-0 w-screen overflow-visible">
+            <svg class="absolute top-4 left-0 w-screen h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
                 <circle cx="150" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
                 <circle cx="450" cy="20" r="3" fill="#10b981" opacity="0.5" />
                 <circle cx="750" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
@@ -110,7 +104,7 @@
                 <circle cx="1650" cy="20" r="3" fill="#10b981" opacity="0.5" />
                 <circle cx="1950" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
             </svg>
-            <svg class="absolute top-8 left-0 w-[100vw] h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
+            <svg class="absolute top-8 left-0 w-screen h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
                 <path d="M0,20 Q400,5 800,20 T1600,20"
                       fill="none" stroke="#14b8a6" stroke-width="2"
                       stroke-dasharray="10,8" opacity="0.5" />
@@ -119,7 +113,6 @@
     </div>
 </div>
 
-<!-- JavaScript untuk navigasi desktop -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const carouselSlides = document.querySelectorAll('.carousel-slide');

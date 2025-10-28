@@ -1,4 +1,4 @@
-@extends('component.navbar');
+@extends('component.navbar')
 
 @section('content')
   <!-- Main Content -->
@@ -19,7 +19,7 @@
 
           <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
             Raih Peluang Karir <span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">Sejak SMK</span>
+              class="text-transparent bg-clip-text bg-radient-to-r from-blue-400 to-pink-400">Sejak SMK</span>
           </h1>
 
           <p class="text-lg text-gray-600 leading-relaxed">
@@ -70,7 +70,7 @@
         <div class="card-shadow bg-white rounded-2xl p-6">
           <div class="flex items-start gap-4">
             <div
-              class="w-12 h-12 bg-gradient-to-br from-blue-400 to-pink-400 rounded-full flex items-center justify-center text-white font-bold">
+              class="w-12 h-12 bg-radient-to-br from-blue-400 to-pink-400 rounded-full flex items-center justify-center text-white font-bold">
               AR
             </div>
             <div class="flex-1">
@@ -210,7 +210,7 @@
 
     <!-- Catatan Keamanan -->
     <div class="mt-6 flex items-start gap-2 p-4 bg-blue-50 rounded-xl">
-      <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+      <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor"
            viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>

@@ -5,9 +5,6 @@
 <div class="bg-white min-h-screen text-gray-800">
     <!-- Container -->
     <div class="max-w-[1100px] mx-auto px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
-
-        <!-- Left: Profile Info -->
-        <!-- Wrapper kiri -->
         <div class="flex flex-col items-center">
 
             <!-- Kotak Profil -->
@@ -22,7 +19,7 @@
                                     ? asset('storage/' . $users->foto_profil) 
                                     : asset('images/profile.jpeg') }}"
                         alt="Profile"
-                        class="w-28 h-28 rounded-full bg-gradient-to-br from-pink-300 via-pink-400 to-rose-400 flex items-center justify-center text-white text-5xl font-bold shadow-md">
+                        class="w-28 h-28 rounded-full bg-radient-to-br from-pink-300 via-pink-400 to-rose-400 flex items-center justify-center text-white text-5xl font-bold shadow-md">
 
                     <!-- Name -->
                     <h2 class="mt-5 text-xl font-semibold text-gray-800">{{ $users->nama }}</h2>
@@ -66,7 +63,7 @@
 
             <!-- Info Box -->
             <div
-                class="border border-pink-200 bg-gradient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
+                class="border border-pink-200 bg-radient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
                 <div class="flex gap-3">
                     <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
                     <div>
@@ -109,7 +106,7 @@
                 <!-- Checklist Cards -->
                 <div class="space-y-4">
                     <div
-                        class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
+                        class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-radient-to-br from-white to-pink-50/40">
                         <div class="flex justify-between items-center mb-1">
                             <p class="text-gray-800 font-medium text-[15px]">Add details for your profile</p>
                             <button class="text-pink-500 text-[13px] hover:underline">Add</button>
@@ -120,7 +117,7 @@
                     </div>
 
                     <div
-                        class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
+                        class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-radient-to-br from-white to-pink-50/40">
                         <div class="flex justify-between items-center mb-1">
                             <p class="text-gray-800 font-medium text-[15px]">Set your communication preferences</p>
                             <button class="text-pink-500 text-[13px] hover:underline">Add</button>
@@ -230,7 +227,7 @@
 
                 <!-- Submit -->
                 <button type="submit"
-                    class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white py-2.5 rounded-lg font-semibold hover:opacity-90 transition">
+                    class="w-full bg-radient-to-r from-pink-500 to-rose-500 text-white py-2.5 rounded-lg font-semibold hover:opacity-90 transition">
                     Simpan Perubahan
                 </button>
             </form>
