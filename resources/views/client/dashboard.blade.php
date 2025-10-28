@@ -229,7 +229,7 @@
                             <i class="bi bi-{{ $style['icon'] }} text-2xl" style="color: {{ $style['color'] }};"></i>
                         </div>
                         <p class="text-sm font-semibold text-gray-800 text-center leading-tight">{{ $jurusan->nama_jurusan }}</p>
-                        <p class="text-xs text-gray-500 mt-1">{{ rand(50, 200) }}+ freelancers</p>
+
                     </a>
                 @endforeach
             </div>
@@ -287,8 +287,7 @@
                             <div class="flex items-center gap-2 mb-4">
                                 <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
                                 <div>
-                                    <p class="text-sm font-semibold text-gray-800">{{ $task->user->nama ?? 'Freelancer' }}</p>
-                                    <p class="text-xs text-gray-500">{{$task->jurusan->nama_jurusan ?? 'General Freelancer'  }}</p>
+                                    <p class="text-md text-gray-800">{{ $task->user->nama ?? 'Freelancer' }}</p>
                                 </div>
                             </div>
                             
