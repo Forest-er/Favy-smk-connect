@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
+    protected $table = 'tasks';
     protected $primaryKey = 'id_task';
 
     protected $fillable = [
@@ -23,11 +25,13 @@ class Task extends Model
         'budget'
     ];
 
+    // Relasi ke tabel jurusan
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class, 'jurusan_id', 'id_jurusan');
     }
 
+    // Relasi ke user (client)
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id_users');

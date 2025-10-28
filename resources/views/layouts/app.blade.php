@@ -98,7 +98,7 @@
       <button onclick="toggleDropdown()" id="profileButton"
         class="focus:outline-none flex items-center space-x-2">
         <img 
-          src="{{ $user && $user->foto ? asset('storage/' . $user->foto) : asset('images/profile.jpeg') }}" 
+          src="{{ $user && $user->foto_profil ? asset('storage/' . $user->foto_profil) : asset('images/profile.jpeg') }}" 
           alt="Profile"
           class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
       </button>

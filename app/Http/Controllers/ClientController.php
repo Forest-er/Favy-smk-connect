@@ -1,49 +1,63 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\Jurusan;
 
-
 class ClientController extends Controller
 {
-    public function dashboard() {
+    public function dashboard()
+    {
         return view('client.dashboard');
     }
 
-    public function explore() {
+    public function explore()
+    {
         return view('client.explore.index');
     }
 
-    public function showFreelancer($id) {
+    public function showFreelancer($id)
+    {
         return view('client.explore.show', compact('id'));
     }
 
-    public function orders() {
+    public function orders()
+    {
         return view('client.orders.index');
     }
 
-    public function messages() {
+    public function messages()
+    {
         return view('client.messages.index');
     }
 
-    public function settings() {
+    public function settings()
+    {
         return view('client.settings.index');
     }
-    public function profile() {
+
+    public function profile()
+    {
         return view('client.profile.index');
     }
-     public function freelancer()
+
+    public function freelancer()
     {
         return view('auth.register.freelancer');
     }
-public function getTaskDetail($id)
-{
-    $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
-    return view('client.partials.task_popup', compact('task'));
-}
+
+    public function getTaskDetail($id)
+    {
+        $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
+        return view('client.partials.task_popup', compact('task'));
+    }
+
+    // ✅ UPDATE PROFIL (dengan upload foto)
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -52,41 +66,30 @@ public function getTaskDetail($id)
             'nama' => 'nullable|string|max:100',
             'bio' => 'nullable|string',
             'places' => 'nullable|string|max:255',
+            'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Update data ke database
-        $user->update([
-            'nama' => $request->nama ?? $user->nama,
-            'bio' => $request->bio ?? $user->bio,
-            'places' => $request->places ?? $user->places,
-        ]);
+        // Upload foto baru
+        if ($request->hasFile('foto')) { // bukan 'foto_profil'
+            if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+                Storage::disk('public')->delete($user->foto);
+            }
+            $path = $request->file('foto')->store('profile_photos', 'public');
+            $user->foto = $path; // bukan foto_profil
+        }
+
+        $user->nama = $request->nama ?? $user->nama;
+        $user->bio = $request->bio ?? $user->bio;
+        $user->places = $request->places ?? $user->places;
+        $user->save();
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
 
-
-    public function uploadPhoto(Request $request)
-    {
-        $request->validate([
-            'foto_profil' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
-
-        $user = Auth::user();
-
-        if ($user->foto_profil && Storage::exists('public/'.$user->foto_profil)) {
-            Storage::delete('public/'.$user->foto_profil);
-        }
-
-        $path = $request->file('foto_profil')->store('profile_photos', 'public');
-        $user->foto_profil = $path;
-        $user->save();
-
-        return back()->with('success', 'Profile photo updated successfully!');
-    }
     public function dataview(Request $request)
     {
         $search = $request->keyword;
-        $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
+        $jurusanId = $request->jurusan_id;
         $totalTasks = Task::where('users_id', auth()->id())->count();
 
         $tasks = Task::with(['jurusan', 'user'])
@@ -103,5 +106,4 @@ public function getTaskDetail($id)
 
         return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks'));
     }
-
 }
