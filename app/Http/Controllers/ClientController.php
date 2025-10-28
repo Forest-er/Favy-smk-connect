@@ -132,4 +132,9 @@ public function getTaskDetail($id)
 
         return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks', 'totalFreelancer'));
     }
+
+    public function myTask_show(){
+        $tasks = Task::where('users_id', auth()->id())->get();
+        return view('task_show.blade.php', compact('tasks'));
+    }
 }

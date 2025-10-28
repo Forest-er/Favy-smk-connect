@@ -64,6 +64,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('client.task.show');
     Route::put('/client/update', [ClientController::class, 'update'])->name('client.update');
 Route::post('/client/upload-photo', [ClientController::class, 'uploadPhoto'])->name('client.upload.photo');
+    Route::get('client/task_show', [ClientController::class, 'myTask_show'])->name('client.task_show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/client/client-profile', [ClientController::class, 'profile'])->name('client.profile'); 
