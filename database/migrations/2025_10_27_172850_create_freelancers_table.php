@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('freelancers', function (Blueprint $table) {
-            $table->id('id_freelancer');
-            $table->biginteger('users_id')->references('id_users')->on('users')->onDelete('cascade');
-            $table->biginterger('completed_tasks')->default(0);
-            $table->biginterger('ongoing_tasks')->default(0);
-            $table->biginterger('saved_task')->references('id_task')->on('tasks')->onDelete('cascade');
-            $table->timestamps();
+                $table  ->id('id_freelancer');
+                $table->bigInteger('users_id')->references('id_users')->on('users')->onDelete('cascade');
+                $table->bigInteger('completed_tasks')->default(0);
+                $table->bigInteger('ongoing_tasks')->default(0);
+                $table->timestamps();
         });
     }
 

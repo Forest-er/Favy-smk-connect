@@ -632,6 +632,7 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property string|null $remember_token
      * @property mixed $status
+     * @property string|null $portfolio
      * @property string|null $bio
      * @property mixed $jurusan_id
      * @property string|null $foto_profil
@@ -652,6 +653,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereFotoProfil($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereJurusanId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereBio($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePortfolio($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRememberToken($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereCreatedAt($value)
@@ -1282,10 +1284,12 @@ namespace App\Models {
      * @property string|null $deskripsi_3
      * @property string|null $deskripsi_2
      * @property string|null $deskripsi_1
+     * @property string|null $deskripsi
      * @property string $nama_jurusan
      * @property mixed $id_jurusan
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereIdJurusan($value)
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereNamaJurusan($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereDeskripsi($value)
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereDeskripsi1($value)
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereDeskripsi2($value)
      * @method static \Illuminate\Database\Eloquent\Builder<jurusan>|jurusan whereDeskripsi3($value)
@@ -1899,8 +1903,12 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property int $id
-     * @method static \Illuminate\Database\Eloquent\Builder<liked_task>|liked_task whereId($value)
+     * @property mixed $task_id
+     * @property mixed $user_id
+     * @property mixed $id_liked_tasks
+     * @method static \Illuminate\Database\Eloquent\Builder<liked_task>|liked_task whereIdLikedTasks($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<liked_task>|liked_task whereUserId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<liked_task>|liked_task whereTaskId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<liked_task>|liked_task whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<liked_task>|liked_task whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<liked_task>|liked_task newModelQuery()
