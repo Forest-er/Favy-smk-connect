@@ -30,7 +30,7 @@ class RegisterController extends Controller
         Auth::login($user);
 
         // ✅ Redirect sesuai role
-        return redirect()->route('freelancer.dashboard');
+        return redirect()->route('worker.dashboard');
     }
 
     public function registerClient(Request $request)

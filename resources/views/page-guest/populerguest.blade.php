@@ -97,21 +97,30 @@
         </div>
     </section>
 
-    <!-- Garis dekoratif di bawah carousel -->
-    <div class="relative -mt-4 h-20 w-screen left-1/2 -translate-x-1/2 overflow-visible">
-        <!-- Circular dots pattern -->
-        <svg class="absolute top-4 left-0 w-full h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
-            <circle cx="150" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
-            <circle cx="450" cy="20" r="3" fill="#10b981" opacity="0.5" />
-            <circle cx="750" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
-            <circle cx="1050" cy="20" r="3" fill="#10b981" opacity="0.5" />
-            <circle cx="1350" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
-        </svg>
+ <!-- ✅ HIASAN BAWAH CAROUSEL (FULL WIDTH DENGAN STRUKTUR UTUH) -->
+<div class="relative -mt-4 h-20 overflow-visible w-full">
+    <!-- Bungkus absolute untuk full width sejati -->
+    <div class="absolute inset-0 w-full overflow-hidden">
+        <!-- Tambahkan elemen pembungkus supaya SVG bisa meluas penuh -->
+        <div class="absolute left-0 top-0 w-[100vw] overflow-visible">
+            <!-- Circular dots pattern -->
+            <svg class="absolute top-4 left-0 w-[100vw] h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
+                <circle cx="150" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
+                <circle cx="450" cy="20" r="3" fill="#10b981" opacity="0.5" />
+                <circle cx="750" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
+                <circle cx="1050" cy="20" r="3" fill="#10b981" opacity="0.5" />
+                <circle cx="1350" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
+                <!-- Tambahan biar sampai ujung kanan -->
+                <circle cx="1650" cy="20" r="3" fill="#10b981" opacity="0.5" />
+                <circle cx="1950" cy="20" r="3" fill="#14b8a6" opacity="0.5" />
+            </svg>
 
-        <!-- Dashed curved line -->
-        <svg class="absolute top-8 left-0 w-full h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
-            <path d="M0,20 Q400,5 800,20 T1600,20"
-                fill="none" stroke="#14b8a6" stroke-width="2"
-                stroke-dasharray="10,8" opacity="5" />
-        </svg>
+            <!-- Dashed curved line -->
+            <svg class="absolute top-8 left-0 w-[100vw] h-8" viewBox="0 0 1600 40" preserveAspectRatio="none">
+                <path d="M0,20 Q400,5 800,20 T1600,20"
+                    fill="none" stroke="#14b8a6" stroke-width="2"
+                    stroke-dasharray="10,8" opacity="0.5" />
+            </svg>
+        </div>
     </div>
+</div>
