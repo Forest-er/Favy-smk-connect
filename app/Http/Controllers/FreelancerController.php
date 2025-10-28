@@ -77,4 +77,11 @@ class FreelancerController extends Controller
 
         return view('freelancer.profile', compact('user'));
     }
+    public function projects()
+    {
+        $user = Auth::user();
+        $projects = Task::where('freelancer_id', $user->id)->get();
+
+        return view('freelancer.projects', compact('projects'));
+    }
 }
