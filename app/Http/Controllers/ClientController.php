@@ -44,25 +44,38 @@ public function getTaskDetail($id)
     $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
     return view('client.partials.task_popup', compact('task'));
 }
-    public function update(Request $request)
-    {
-        $user = Auth::user();
+   public function update(Request $request)
+{
+    $user = Auth::user();
 
-        $request->validate([
-            'nama' => 'nullable|string|max:100',
-            'bio' => 'nullable|string',
-            'places' => 'nullable|string|max:255',
-        ]);
+    $request->validate([
+        'nama' => 'nullable|string|max:100',
+        'bio' => 'nullable|string',
+        'places' => 'nullable|string|max:255',
+        'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        // Update data ke database
-        $user->update([
-            'nama' => $request->nama ?? $user->nama,
-            'bio' => $request->bio ?? $user->bio,
-            'places' => $request->places ?? $user->places,
-        ]);
+    // Simpan data dasar
+    $user->nama = $request->nama ?? $user->nama;
+    $user->bio = $request->bio ?? $user->bio;
+    $user->places = $request->places ?? $user->places;
 
-        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
+    // Kalau user upload foto baru
+    if ($request->hasFile('foto_profil')) {
+        // Hapus foto lama jika ada
+        if ($user->foto_profil && file_exists(storage_path('app/public/' . $user->foto_profil))) {
+            unlink(storage_path('app/public/' . $user->foto_profil));
+        }
+
+        // Simpan foto baru
+        $path = $request->file('foto_profil')->store('profile_pictures', 'public');
+        $user->foto_profil = $path;
     }
+
+    $user->save();
+
+    return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
+}
 
 
     public function uploadPhoto(Request $request)
@@ -88,9 +101,11 @@ public function getTaskDetail($id)
 
     public function dataview(Request $request)
     {
+        
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
         $totalTasks = Task::where('users_id', auth()->id())->count();
+        $totalFreelancer = User::where('role', 'worker')->where('jurusan_id', $jurusanId)->count();
 
         $tasks = Task::with(['jurusan', 'user'])
             ->when($search, function ($query) use ($search) {
@@ -104,7 +119,7 @@ public function getTaskDetail($id)
         $jurusans = Jurusan::all();
         $myTasks = Task::where('users_id', auth()->id())->get();
 
-        return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks'));
+        return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks', 'totalFreelancer'));
     }
 
 }
