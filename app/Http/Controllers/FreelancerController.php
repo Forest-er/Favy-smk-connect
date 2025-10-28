@@ -57,6 +57,7 @@ class FreelancerController extends Controller
 
         // 🔹 Pagination ditambahkan di sini
         $tasks = Task::with(['jurusan', 'user'])
+            ->where('status', 'open')
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })
