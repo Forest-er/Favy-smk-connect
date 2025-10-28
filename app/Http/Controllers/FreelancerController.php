@@ -7,20 +7,20 @@ use App\Models\Freelancer;
 use App\Models\User;
 use App\Models\Jurusan; // ✅ tambahkan baris ini
 use Illuminate\Support\Facades\DB;
-use App\Models\task;
+use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
 class FreelancerController extends Controller
 {
     public function index()
     {
-        $freelancers = user::where('role', 'worker')->get();
+        $freelancers = User::where('role', 'worker')->get();
         return view('client.dashboard', compact('freelancers'));
     }
 
     public function show($id)
     {
-        $freelancer = user::findOrFail($id);
+        $freelancer = User::findOrFail($id);
         return view('client.freelancer-detail', compact('freelancer'));
     }
 
@@ -49,10 +49,13 @@ class FreelancerController extends Controller
         $jurusans = DB::table('jurusans')->get();
         return view('auth.register.freelancer', compact('jurusans'));
     }
+
     public function dashboard(Request $request)
     {
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id;
+
+        // 🔹 Pagination ditambahkan di sini
         $tasks = Task::with(['jurusan', 'user'])
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
@@ -60,21 +63,28 @@ class FreelancerController extends Controller
             ->when($jurusanId, function ($query, $jurusanId) {
                 $query->where('jurusan_id', $jurusanId);
             })
-            ->get();
+            ->latest()
+            ->paginate(9); // ✅ hanya 9 data per halaman
 
         $jurusans = Jurusan::all();
-        $freelancers = user::all();
+        $freelancers = User::all();
         $totalFreelancers = $freelancers->count();
-        $OrderedTask = task::where('status', 'ordered')->where('users_id', Auth::id())->count();
-        $CompletedTask = task::where('status', 'done')->where('users_id', Auth::id())->count();
+        $OrderedTask = Task::where('status', 'ordered')->where('users_id', Auth::id())->count();
+        $CompletedTask = Task::where('status', 'done')->where('users_id', Auth::id())->count();
 
-        // Kalau kamu mau tampilkan task, tinggal tambahkan logicnya nanti
-        return view('freelancer.dashboard', compact('freelancers', 'totalFreelancers', 'jurusans', 'tasks', 'OrderedTask', 'CompletedTask'));
+        return view('freelancer.dashboard', compact(
+            'freelancers',
+            'totalFreelancers',
+            'jurusans',
+            'tasks',
+            'OrderedTask',
+            'CompletedTask'
+        ));
     }
+
     public function profile()
     {
         $user = Auth::user();
-
         return view('freelancer.profile', compact('user'));
     }
     public function projects()
