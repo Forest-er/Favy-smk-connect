@@ -106,8 +106,8 @@ public function getTaskDetail($id)
         $jurusanId = $request->jurusan_id; // ambil id jurusan dari query string
         $totalTasks = Task::where('users_id', auth()->id())->count();
         $totalFreelancer = User::where('role', 'worker')->where('jurusan_id', $jurusanId)->count();
-
         $tasks = Task::with(['jurusan', 'user'])
+            ->where('status', 'open') // ✅ hanya ambil task yang status-nya "open"
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })

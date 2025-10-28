@@ -265,7 +265,8 @@
                 @forelse ($tasks as $task)
                     <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100">
                         <div class="relative">
-                            <img src="{{ asset('storage/' . $task->foto) }}"
+                           <img 
+                                src="{{ asset('storage/' . $task->foto) }}"
                                 onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
                                 class="w-full h-48 object-cover">
                             <div class="absolute top-4 left-4">
