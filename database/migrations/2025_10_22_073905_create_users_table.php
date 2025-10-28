@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('foto_profil')->nullable();
             $table->bigInteger('jurusan_id')->unsigned()->nullable();
             $table->text('bio')->nullable();
+            $table->string('portfolio', 255)->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();
             $table->timestamps();

@@ -17,7 +17,11 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
             <div class="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm mb-4">
-              <i class="bi bi-sun"></i> Good Morning
+              @php
+                $hour = now()->format('H');
+                $greeting = $hour < 12 ? 'Good Morning' : ($hour < 18 ? 'Good Afternoon' : 'Good Evening');
+              @endphp
+              <i class="bi bi-sun"></i> {{ $greeting }}
             </div>
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Haloww, {{ Auth::user()->nama }} 👋</h1>
             <p class="text-white/90 text-lg">Kamu punya {{ $OrderedTask }} projek yang lagi dikerjain nihh</p>
@@ -34,10 +38,12 @@
 
         <div class="mt-8 flex gap-3">
           <div class="relative flex-1">
-            <form action="GET" >
-              <i class="bi bi-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-lg"></i>
+            <form method="GET">
+              <div class="flex flex-row">
               <input type="text" placeholder="Search projects, clients, or skills..." name="keyword"
-                class="w-full pl-14 pr-5 py-4 rounded-2xl border-0 focus:ring-2 focus:ring-purple-400 shadow-lg text-gray-700">
+                class="w-full pl-14 pr-5 py-4 rounded-l-2xl border-0 focus:ring-2 focus:ring-purple-400 shadow-lg text-gray-700">
+                <button type="submit" class="rounded-r-2xl bg-white text-white px-4 py-2 hover:bg-purple-600 transition"><i class="bi bi-search left-5 top-1/2 -translate-y-1/2 text-gray-400 text-lg"></i></button>
+              </div>
             </form>
           </div>
           <button type="submit" class="bg-white hover:bg-gray-50 text-purple-700 font-semibold px-8 py-4 rounded-2xl shadow-lg transition flex items-center gap-2">
@@ -93,7 +99,7 @@
             <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">All time</span>
           </div>
           <p class="text-gray-500 text-sm mb-1 font-medium">Completed</p>
-          <p class="text-4xl font-bold text-gray-900 mb-2">23</p>
+          <p class="text-4xl font-bold text-gray-900 mb-2">{{ $CompletedTask }}</p>
           <p class="text-xs text-gray-500">100% on-time delivery</p>
         </div>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClientProfileController;
 
 Route::get('/', function () {
     return view('page-guest.home');
@@ -45,8 +46,10 @@ Route::middleware(['auth'])->group(function () {
 
 // ===== Freelancer Routes =====
 Route::middleware(['auth', 'role:worker'])->group(function () {
-    Route::get('/worker/dashboard', [FreelancerController::class, 'dashboard'])->name('freelancer.dashboard');
-    Route::get('/worker/task/{id}', [TaskController::class, 'show'])->name('freelancer.task.show');
+    Route::get('/worker/dashboard', [FreelancerController::class, 'dashboard'])->name('worker.dashboard');
+    Route::get('/worker/task/{id}', [TaskController::class, 'show'])->name('worker.task.show');
+    Route::get('/worker/profile', [FreelancerController::class, 'profile'])->name('worker.profile');
+    Route::get('/worker/projects', [FreelancerController::class, 'projects'])->name('worker.projects');
 });
 
 // ===== Client Routes =====
@@ -57,9 +60,15 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get('/client/orders', [ClientController::class, 'orders'])->name('client.orders');
     Route::get('/client/messages', [ClientController::class, 'messages'])->name('client.messages');
     Route::get('/client/settings', [ClientController::class, 'settings'])->name('client.settings');
-    Route::get('/client/profile', [ClientController::class, 'profile'])->name('client.profile');
-    Route::put('/client/profile', [ClientController::class, 'update'])->name('client.update');
+    Route::get('/client/client-profile', [ClientController::class, 'profile'])->name('client.profile');
+    Route::put('/client/client-profile', [ClientController::class, 'update'])->name('client.update');
     Route::get('/client/task/{id}', [TaskController::class, 'show'])->name('client.task.show');
+    Route::put('/client/update', [ClientController::class, 'update'])->name('client.update');
+Route::post('/client/upload-photo', [ClientController::class, 'uploadPhoto'])->name('client.upload.photo');
+
+Route::post('/client/upload-photo', [ClientProfileController::class, 'uploadPhoto'])
+    ->name('client.upload.photo');
+
 });
 
 // ===== Profile Routes =====
