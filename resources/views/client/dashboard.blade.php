@@ -265,7 +265,8 @@
                 @forelse ($tasks as $task)
                     <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100">
                         <div class="relative">
-                            <img src="{{ asset('storage/' . $task->foto) }}"
+                           <img 
+                                src="{{ asset('storage/' . $task->foto) }}"
                                 onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
                                 class="w-full h-48 object-cover">
                             <div class="absolute top-4 left-4">
@@ -287,7 +288,7 @@
                             <div class="flex items-center gap-2 mb-4">
                                 <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
                                 <div>
-                                    <p class="text-md text-gray-800">{{ $task->user->nama ?? 'Freelancer' }}</p>
+                                    <p class="text-md text-gray-800">{{ $task->user->nama ?? 'Client' }}</p>
                                 </div>
                             </div>
                             

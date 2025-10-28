@@ -59,15 +59,6 @@ class ClientController extends Controller
 
     public function update(Request $request)
     {
-        // 🔍 DEBUG: Mulai logging
-        \Log::info('========== [DEBUG] ClientController@update ==========');
-        \Log::info('User login: ' . Auth::user()?->email . ' (ID: ' . Auth::id() . ')');
-        \Log::info('Request input (tanpa file):', $request->except('foto_profil'));
-        \Log::info('Apakah ada file foto_profil? ' . ($request->hasFile('foto_profil') ? 'YA' : 'TIDAK'));
-        \Log::info('Fillable kolom di model User: ', (new User())->getFillable());
-        \Log::info('Foto lama di DB (foto_profil): ' . (Auth::user()->foto_profil ?? 'KOSONG'));
-        // 🔍 Akhir debug awal
-
         $user = Auth::user();
 
         $request->validate([
@@ -77,20 +68,16 @@ class ClientController extends Controller
             'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Simpan data dasar
         $user->nama = $request->nama ?? $user->nama;
         $user->bio = $request->bio ?? $user->bio;
         $user->places = $request->places ?? $user->places;
 
-        // Kalau user upload foto baru
         if ($request->hasFile('foto_profil')) {
-            // Hapus foto lama jika ada
             if ($user->foto_profil && file_exists(storage_path('app/public/' . $user->foto_profil))) {
                 unlink(storage_path('app/public/' . $user->foto_profil));
                 \Log::info('[DEBUG] Foto lama dihapus: ' . $user->foto_profil);
             }
 
-            // Simpan foto baru
             $path = $request->file('foto_profil')->store('profile_pictures', 'public');
             $user->foto_profil = $path;
             \Log::info('[DEBUG] Foto baru disimpan ke: ' . $path);
@@ -112,12 +99,10 @@ class ClientController extends Controller
 
         $user = Auth::user();
 
-        // Hapus foto lama
         if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
             Storage::disk('public')->delete($user->foto_profil);
         }
 
-        // Simpan foto baru
         $path = $request->file('foto_profil')->store('profile_photos', 'public');
         $user->foto_profil = $path;
         $user->save();
@@ -131,8 +116,8 @@ class ClientController extends Controller
         $jurusanId = $request->jurusan_id;
         $totalTasks = Task::where('users_id', auth()->id())->count();
         $totalFreelancer = User::where('role', 'worker')->where('jurusan_id', $jurusanId)->count();
-
         $tasks = Task::with(['jurusan', 'user'])
+            ->where('status', 'open') 
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })
@@ -145,5 +130,9 @@ class ClientController extends Controller
         $myTasks = Task::where('users_id', auth()->id())->get();
 
         return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks', 'totalFreelancer'));
+    }
+    public function myTask_show(){
+        $tasks = Task::where('users_id', auth()->id())->get();
+        return view('client/orders/task_show', compact('tasks'));
     }
 }
