@@ -50,69 +50,83 @@ class ClientController extends Controller
     {
         return view('auth.register.freelancer');
     }
-public function getTaskDetail($id)
-{
-    $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
-    return view('client.partials.task_popup', compact('task'));
-}
-   public function update(Request $request)
-{
-    $user = Auth::user();
 
-    $request->validate([
-        'nama' => 'nullable|string|max:100',
-        'bio' => 'nullable|string',
-        'places' => 'nullable|string|max:255',
-        'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    public function getTaskDetail($id)
+    {
+        $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
+        return view('client.partials.task_popup', compact('task'));
+    }
 
-    // Simpan data dasar
-    $user->nama = $request->nama ?? $user->nama;
-    $user->bio = $request->bio ?? $user->bio;
-    $user->places = $request->places ?? $user->places;
+    public function update(Request $request)
+    {
+        // 🔍 DEBUG: Mulai logging
+        \Log::info('========== [DEBUG] ClientController@update ==========');
+        \Log::info('User login: ' . Auth::user()?->email . ' (ID: ' . Auth::id() . ')');
+        \Log::info('Request input (tanpa file):', $request->except('foto_profil'));
+        \Log::info('Apakah ada file foto_profil? ' . ($request->hasFile('foto_profil') ? 'YA' : 'TIDAK'));
+        \Log::info('Fillable kolom di model User: ', (new User())->getFillable());
+        \Log::info('Foto lama di DB (foto_profil): ' . (Auth::user()->foto_profil ?? 'KOSONG'));
+        // 🔍 Akhir debug awal
 
-    // Kalau user upload foto baru
-    if ($request->hasFile('foto_profil')) {
-        // Hapus foto lama jika ada
-        if ($user->foto_profil && file_exists(storage_path('app/public/' . $user->foto_profil))) {
-            unlink(storage_path('app/public/' . $user->foto_profil));
+        $user = Auth::user();
+
+        $request->validate([
+            'nama' => 'nullable|string|max:100',
+            'bio' => 'nullable|string',
+            'places' => 'nullable|string|max:255',
+            'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // Simpan data dasar
+        $user->nama = $request->nama ?? $user->nama;
+        $user->bio = $request->bio ?? $user->bio;
+        $user->places = $request->places ?? $user->places;
+
+        // Kalau user upload foto baru
+        if ($request->hasFile('foto_profil')) {
+            // Hapus foto lama jika ada
+            if ($user->foto_profil && file_exists(storage_path('app/public/' . $user->foto_profil))) {
+                unlink(storage_path('app/public/' . $user->foto_profil));
+                \Log::info('[DEBUG] Foto lama dihapus: ' . $user->foto_profil);
+            }
+
+            // Simpan foto baru
+            $path = $request->file('foto_profil')->store('profile_pictures', 'public');
+            $user->foto_profil = $path;
+            \Log::info('[DEBUG] Foto baru disimpan ke: ' . $path);
+        }
+
+        $user->save();
+
+        \Log::info('Setelah save, foto_profil di DB: ' . ($user->foto_profil ?? 'MASIH KOSONG'));
+        \Log::info('========== [DEBUG] Akhir update ==========');
+
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
+    }
+
+    public function uploadPhoto(Request $request)
+    {
+        $request->validate([
+            'foto_profil' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        // Hapus foto lama
+        if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
+            Storage::disk('public')->delete($user->foto_profil);
         }
 
         // Simpan foto baru
-        $path = $request->file('foto_profil')->store('profile_pictures', 'public');
+        $path = $request->file('foto_profil')->store('profile_photos', 'public');
         $user->foto_profil = $path;
+        $user->save();
+
+        return response()->json(['success' => true, 'foto' => asset('storage/' . $path)]);
     }
-
-    $user->save();
-
-    return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
-}
-
-
-    public function uploadPhoto(Request $request)
-{
-    $request->validate([
-        'foto_profil' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
-
-    $user = Auth::user();
-
-    // Hapus foto lama
-    if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
-        Storage::disk('public')->delete($user->foto_profil);
-    }
-
-    // Simpan foto baru
-    $path = $request->file('foto_profil')->store('profile_photos', 'public');
-    $user->foto_profil = $path;
-    $user->save();
-
-    return response()->json(['success' => true, 'foto' => asset('storage/' . $path)]);
-}
 
     public function dataview(Request $request)
     {
-        
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id;
         $totalTasks = Task::where('users_id', auth()->id())->count();

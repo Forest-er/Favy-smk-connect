@@ -27,7 +27,7 @@
 
             <!-- Content dengan flex -->
             <div class="flex flex-col md:flex-row items-center gap-12 relative z-10">
-                <div class="md:w-1/2 space-y-6">
+                <div class="md:w-1/2 space-y-6 text-center md:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold leading-tight text-white">
                         Need help with Vibe coding?
                     </h2>
@@ -35,13 +35,13 @@
                         Get matched with the right expert to keep building and marketing your project.
                     </p>
                     <a href="{{ route('login') }}"
-                        class="bg-white border-0 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition shadow-md mt-6 inline-block">
-                        Find an expert
+                        class="bg-blue-300 text-white font-semibold rounded-lg px-3 py-1.5 md:px-5 md:py-2 text-xs md:text-sm hover:bg-blue-600 hover:shadow-lg transform hover:scale-105 transition-all duration-200 active:scale-95 inline-block mx-auto md:mx-0">
+                        Ayo Daftar!
                     </a>
-
                 </div>
 
-                <div class="md:w-1/2 flex justify-center">
+                <!-- Card dengan class `hidden md:block` -->
+                <div class="md:w-1/2 flex justify-center hidden md:block">
                     <div class="relative w-full max-w-md">
                         <!-- Card dengan gradient kuning/peach -->
                         <div class="rounded-2xl p-8 shadow-2xl" style="background: linear-gradient(180deg, #fff4d6 0%, #ffe2a8 50%, #ffd99b 100%);">
