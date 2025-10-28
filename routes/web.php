@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:worker'])->group(function () {
     Route::get('/worker/task/{id}', [TaskController::class, 'show'])->name('worker.task.show');
     Route::get('/worker/profile', [FreelancerController::class, 'profile'])->name('worker.profile');
     Route::get('/worker/projects', [FreelancerController::class, 'projects'])->name('worker.projects');
+    
 });
 
 // ===== Client Routes =====
