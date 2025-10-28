@@ -141,30 +141,32 @@
 
 
     <!-- Fullscreen Modal -->
-    <div id="addDetailModal"
-        class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
+   <!-- Fullscreen Modal -->
+<div id="addDetailModal"
+    class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
 
-        <!-- Header -->
-        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-semibold text-gray-800">Complete your business profile</h2>
-            <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
+    <!-- Header -->
+    <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+        <h2 class="text-lg font-semibold text-gray-800">Complete your business profile</h2>
+        <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-2xl mx-auto px-5 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">Tell us about your business ✨</h1>
+            <p class="text-gray-500 text-sm">
+                Fill out the details below so we can personalize your experience.
+            </p>
         </div>
 
-        <!-- Content -->
-        <div class="max-w-2xl mx-auto px-5 py-8">
-            <div class="text-center mb-8">
-                <h1 class="text-2xl font-bold text-gray-900 mb-2">Tell us about your business ✨</h1>
-                <p class="text-gray-500 text-sm">
-                    Fill out the details below so we can personalize your experience.
-                </p>
-            </div>
-
-            <!-- Card -->
-            <div class="bg-white border border-gray-200 rounded-xl shadow-md p-6">
-                <!-- Avatar -->
-                <div class="flex flex-col items-center mb-8">
-                    <div class="relative w-20 h-20">
+        <!-- Card -->
+        <div class="bg-white border border-gray-200 rounded-xl shadow-md p-6">
+            <!-- Avatar -->
+            <div class="flex flex-col items-center mb-8">
+                <div class="relative w-20 h-20">
                     <img 
+                        id="previewFoto"
                         src="{{ $users->foto_profil ? asset('storage/' . $users->foto_profil) : asset('images/profile.jpeg') }}" 
                         alt="Foto Profil"
                         class="w-full h-full rounded-full object-cover shadow-md border-2 border-white"
@@ -172,6 +174,8 @@
 
                     <!-- Tombol edit -->
                     <button 
+                        type="button"
+                        onclick="document.getElementById('fotoInput').click()"
                         class="absolute bottom-0 right-0 bg-white p-1.5 rounded-full shadow hover:bg-gray-100 border border-gray-200 transition"
                         title="Ubah foto profil"
                     >
@@ -181,61 +185,85 @@
                                 d="M15.232 5.232l3.536 3.536m-2.036-1.5A2.25 2.25 0 0118 8.25l.75.75a2.25 2.25 0 010 3.182l-7.5 7.5a2.25 2.25 0 01-1.591.659H6a.75.75 0 01-.75-.75v-3.659a2.25 2.25 0 01.659-1.591l7.5-7.5z" />
                         </svg>
                     </button>
+
+                    <!-- Input foto tersembunyi -->
+                    <input 
+                        type="file" 
+                        name="foto_profil" 
+                        id="fotoInput" 
+                        accept="image/*"
+                        class="hidden"
+                        onchange="previewImage(event)"
+                    >
                 </div>
 
-                    
-                    <p class="mt-3 text-gray-700 font-medium text-sm">{{ $users->email }}</p>
+                <p class="mt-3 text-gray-700 font-medium text-sm">{{ $users->email }}</p>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-6" 
+                action="{{ route('client.update') }}" 
+                method="POST" 
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <!-- Display Name -->
+                <div>
+                    <label class="block text-gray-800 font-medium text-sm mb-1">Lebih suka dipanggil siapa??</label>
+                    <input type="text" 
+                        name="nama" 
+                        value="{{ old('nama', $users->nama) }}"
+                        placeholder="Masukkan nama panggilan"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">
                 </div>
 
-                <!-- Form -->
-                <form class="space-y-6" 
-                    action="{{ route('client.update') }}" 
-                    method="POST" 
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+                <!-- Description -->
+                <div>
+                    <label class="block text-gray-800 font-medium text-sm mb-1">Tulis bio kamu disini</label>
+                    <textarea name="bio" 
+                            placeholder="bio kamu..."
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 h-24 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">{{ old('bio', $users->bio) }}</textarea>
+                </div>
 
-                    <!-- Display Name -->
-                    <div>
-                        <label class="block text-gray-800 font-medium text-sm mb-1">Lebih suka dipanggil siapa??</label>
+                <!-- Divider -->
+                <div class="border-t border-gray-100 pt-4">
+                    <!-- Industry -->
+                    <div class="mb-4">
+                        <label class="block text-gray-800 font-medium text-sm mb-1">Nama kantor kamu</label>
                         <input type="text" 
-                            name="nama" 
-                            value="{{ old('nama', $users->nama) }}"
-                            placeholder="Masukkan nama panggilan"
+                            name="places"
+                            value="{{ old('places', $users->places) }}"
+                            placeholder="PT Contoh ..."
                             class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">
                     </div>
+                </div>
 
-                    <!-- Description -->
-                    <div>
-                        <label class="block text-gray-800 font-medium text-sm mb-1">Tulis bio kamu disini</label>
-                        <textarea name="bio" 
-                                placeholder="bio kamu..."
-                                class="w-full border border-gray-300 rounded-lg px-3 py-2 h-24 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">{{ old('bio', $users->bio) }}</textarea>
-                    </div>
-
-                    <!-- Divider -->
-                    <div class="border-t border-gray-100 pt-4">
-                        <!-- Industry -->
-                        <div class="mb-4">
-                            <label class="block text-gray-800 font-medium text-sm mb-1">Nama kantor kamu</label>
-                            <input type="text" 
-                                name="places"
-                                value="{{ old('places', $users->places) }}"
-                                placeholder="PT Contoh ..."
-                                class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-400 focus:outline-none transition">
-                        </div>
-                    </div>
-
-                    <!-- Submit -->
-                    <button type="submit"
-                        class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white py-2.5 rounded-lg font-semibold hover:opacity-90 transition">
-                        Simpan Perubahan
-                    </button>
-                </form>
-
-            </div>
+                <!-- Submit -->
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white py-2.5 rounded-lg font-semibold hover:opacity-90 transition">
+                    Simpan Perubahan
+                </button>
+            </form>
         </div>
     </div>
+</div>
+
+<!-- Script Preview Gambar -->
+<script>
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('previewFoto');
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
+
 
     <!-- Fullscreen Modal -->
     <div id="commModal" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">

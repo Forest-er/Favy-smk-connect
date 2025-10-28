@@ -79,23 +79,26 @@ public function getTaskDetail($id)
 
 
     public function uploadPhoto(Request $request)
-    {
-        $request->validate([
-            'foto_profil' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+{
+    $request->validate([
+        'foto_profil' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        $user = Auth::user();
+    $user = Auth::user();
 
-        if ($user->foto_profil && Storage::exists('public/'.$user->foto_profil)) {
-            Storage::delete('public/'.$user->foto_profil);
-        }
-
-        $path = $request->file('foto_profil')->store('profile_photos', 'public');
-        $user->foto_profil = $path;
-        $user->save();
-
-        return back()->with('success', 'Profile photo updated successfully!');
+    // Hapus foto lama
+    if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
+        Storage::disk('public')->delete($user->foto_profil);
     }
+
+    // Simpan foto baru
+    $path = $request->file('foto_profil')->store('profile_photos', 'public');
+    $user->foto_profil = $path;
+    $user->save();
+
+    return response()->json(['success' => true, 'foto' => asset('storage/' . $path)]);
+}
+
     public function dataview(Request $request)
     {
         
