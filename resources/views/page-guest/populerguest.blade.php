@@ -31,18 +31,22 @@
         <circle cx="50" cy="50" r="5" fill="#14b8a6" />
     </svg>
 
-    <h2 class="text-2xl font-bold text-gray-900 mb-8 relative z-10">Popular services</h2>
+    <h2 class="text-4xl font-bold text-gray-900 mb-8 relative z-10 flex justify-center items-center text-center">Layanan Populer Dari Para Freelancer</h2>
 
     <div class="hidden md:block relative z-10" id="desktopCarousel">
         @php
-        $services = [];
-        for ($i = 1; $i <= 10; $i++) {
-            $services[] = [
-                'id' => $i,
-                'title' => "Service $i",
-                'image' => asset('images/smkbm3.png'),
-            ];
-        }
+        $services = [
+            ['id' => 1, 'title' => 'Desain Logo Profesional', 'image' => asset('images/logo-design.jpg')],
+            ['id' => 2, 'title' => 'Pembuatan Website', 'image' => asset('images/web-dev.jpg')],
+            ['id' => 3, 'title' => 'Editing Video Kreatif', 'image' => asset('images/video-edit.jpg')],
+            ['id' => 4, 'title' => 'Ilustrasi Digital', 'image' => asset('images/digital-art.jpg')],
+            ['id' => 5, 'title' => 'Desain UI/UX Aplikasi', 'image' => asset('images/ui-ux.png')],
+            ['id' => 6, 'title' => 'SEO & Digital Marketing', 'image' => asset('images/seo-marketing.jpg')],
+            ['id' => 7, 'title' => 'Copywriting Menarik', 'image' => asset('images/copywriting.jpg')],
+            ['id' => 8, 'title' => 'Terjemahan Bahasa', 'image' => asset('images/translation.jpeg')],
+            ['id' => 9, 'title' => 'Animasi 2D/3D', 'image' => asset('images/animations.jpeg')],
+            ['id' => 10, 'title' => 'Pengembangan Game', 'image' => asset('images/game-dev.jpeg')],
+        ];
         $slides = array_chunk($services, 5);
         @endphp
 

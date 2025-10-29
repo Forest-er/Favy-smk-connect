@@ -36,9 +36,9 @@
                             <div class="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-inner">
                                 <div class="relative h-40 flex items-end justify-center overflow-visible">
                                     <img
-                                        src="{{ asset('images/thinking-about.png') }}"
+                                        src="{{ asset('images/ilustrasi-pc.png') }}"
                                         alt="SMK Connect Community"
-                                        class="absolute -bottom-4 w-[50%] max-w-none object-contain z-10" />
+                                        class="absolute -bottom-20 w-[150%] max-w-none object-contain z-10" />
                                 </div>
                             </div>
                         </div>
