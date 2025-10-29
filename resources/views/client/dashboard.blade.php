@@ -100,7 +100,7 @@
                             @endphp
                             <i class="bi bi-sun"></i> {{ $greeting }}
                         </div>
-                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Welcome back, {{ Auth::user()->nama }}! 👋</h1>
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">selamat datang, {{ Auth::user()->nama }}! 👋</h1>
                         <p class="text-white/90 text-lg">Find the perfect freelancer for your next project</p>
                     </div>
                     

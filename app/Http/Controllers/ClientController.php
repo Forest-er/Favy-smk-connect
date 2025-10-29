@@ -134,7 +134,9 @@ class ClientController extends Controller
     }
     public function myTask_show(){
         $tasks = Task::where('users_id', auth()->id())->get();
-        $likedTask = LikedTask::where('user_id', auth()->id())->pluck('task_id')->toArray();
-        return view('client/orders/task_show', compact('tasks', 'likedTask'));
+       $likedTaskIds = LikedTask::where('user_id', Auth::id())->pluck('task_id');
+        $likedTask = Task::whereIn('id_task', $likedTaskIds)->get();
+
+        return view('client.orders.task_show', compact('tasks', 'likedTask'));
     }
 }

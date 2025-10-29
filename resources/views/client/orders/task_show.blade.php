@@ -94,9 +94,9 @@
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                        Popular Projects <span class="text-3xl">🔥</span>
+                        Disukai <span class="text-3xl">❤️</span>
                     </h2>
-                    <p class="text-gray-500 text-sm mt-1">Trending projects this week</p>
+                    <p class="text-gray-500 text-sm mt-1">Tugas tugas yang anda sukai</p>
                 </div>
                 <button class="text-pink-600 hover:text-pink-700 font-semibold text-sm flex items-center gap-2 transition">
                     View All <i class="bi bi-arrow-right"></i>
@@ -108,12 +108,12 @@
                     <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100">
                         <div class="relative">
                            <img 
-                                src="{{ asset('storage/' . $LT->task_id->foto) }}"
+                                src="{{ asset('storage/' . $LT->foto) }}"
                                 onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
                                 class="w-full h-48 object-cover">
                             <div class="absolute top-4 left-4">
                                 <span class="px-3 py-1 text-xs font-semibold rounded-full text-white bg-gradient-to-r from-pink-500 to-purple-600 shadow-lg">
-                                    {{ $LT->task_id->jurusan->nama_jurusan ?? 'Unknown' }}
+                                    {{ $LT->jurusan->nama_jurusan ?? 'Unknown' }}
                                 </span>
                             </div>
                             <div class="absolute top-4 right-4">
@@ -125,30 +125,30 @@
                         </div>
                         
                         <div class="p-5">
-                            <h3 class="font-bold text-lg mb-2 text-gray-900 line-clamp-1">{{ $LT->task->judul }}</h3>
+                            <h3 class="font-bold text-lg mb-2 text-gray-900 line-clamp-1">{{ $LT->judul }}</h3>
                             
                             <div class="flex items-center gap-2 mb-4">
-                                <img src="https://i.pravatar.cc/150?u={{ $LT->task_id->users_id }}" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
+                                <img src="https://i.pravatar.cc/150?u={{ $LT->users_id }}" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
                                 <div>
-                                    <p class="text-md text-gray-800">{{ $LT->task_id->user->nama ?? 'Client' }}</p>
+                                    <p class="text-md text-gray-800">{{ $LT->user->nama ?? 'Client' }}</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-center gap-3 text-xs text-gray-500 mb-4">
                                 <span class="flex items-center gap-1">
                                     <i class="bi bi-calendar3"></i>
-                                    {{ \Carbon\Carbon::parse($LT->task_id->deadline)->format('d M Y') }}
+                                    {{ \Carbon\Carbon::parse($LT->deadline)->format('d M Y') }}
                                 </span>
                                 <span class="flex items-center gap-1">
                                     <i class="bi bi-clock"></i>
-                                    {{ $LT->task_id->waktu_estimasi }}
+                                    {{ $LT->waktu_estimasi }}
                                 </span>
                             </div>
                             
                             <div class="flex items-center justify-between mb-4 pb-4 border-t border-gray-100 pt-4">
                                 <div>
                                     <p class="text-xs text-gray-500">Budget</p>
-                                    <p class="text-xl font-bold text-gray-900">Rp{{ number_format($task->budget, 0, ',', '.') }}</p>
+                                    <p class="text-xl font-bold text-gray-900">Rp{{ number_format($LT->budget, 0, ',', '.') }}</p>
                                 </div>
                             </div>
                             
