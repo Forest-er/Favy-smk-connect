@@ -100,7 +100,7 @@
         href="{{ Auth::check() ? route(Auth::user()->role . '.dashboard') : route('login') }}"
         class="flex items-center gap-2">
         <img
-          src="{{ asset('images/smkbm3.png') }}"
+          src="{{ asset('images/LOGO-SMK-CONNECT.png') }}"
           alt="SMK BM3 Logo"
           class="h-10 w-auto object-contain">
         <h1 class="text-lg font-bold text-gray-800 leading-tight translate-y-[1px]">

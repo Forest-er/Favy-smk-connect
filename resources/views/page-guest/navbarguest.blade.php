@@ -3,7 +3,7 @@
   <!-- Logo -->
   <div class="flex items-center space-x-3">
     <a href="/" class="flex items-center space-x-2">
-      <img src="{{ asset('images/smkbm3.png') }}" alt="SMK BM3 Logo" class="h-10 object-contain">
+      <img src="{{ asset('images/LOGO-SMK-CONNECT.png') }}" alt="SMK BM3 Logo" class="h-10 object-contain">
       <h1 class="text-lg font-bold text-gray-800 leading-none">SMK Connect</h1>
     </a>
   </div>
