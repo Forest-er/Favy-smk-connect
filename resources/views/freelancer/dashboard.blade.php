@@ -322,94 +322,87 @@
       <!-- LEFT COLUMN -->
       <div class="flex-1 space-y-6">
 
-        <!-- STEP 1 -->
-        <div id="step1">
-          <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 mb-6">
-            <h2 id="popupTitle" class="text-2xl font-bold text-gray-900 mb-4">UI Design for App</h2>
+      <!-- STEP 1 -->
+<div id="step1">
+  <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 mb-6">
 
-            <div class="flex items-center gap-3 mb-4">
-              <img src="https://i.pravatar.cc/40?img=1" class="w-12 h-12 rounded-full ring-2 ring-white" alt="Client">
-              <div>
-                <p id="popupClient" class="font-semibold text-gray-900">Nova Tech</p>
-                <div class="flex items-center text-sm text-gray-600">
-                  <i class="bi bi-star-fill text-yellow-400 text-xs"></i>
-                  <span class="ml-1">4.9 (120 reviews)</span>
-                </div>
-              </div>
-            </div>
+    <!-- Project Image -->
+    <div class="mb-4">
+      <img src="https://via.placeholder.com/600x300" alt="Project Image" class="w-full h-60 object-cover rounded-2xl">
+    </div>
 
-            <div class="grid grid-cols-2 gap-4">
-              <div class="bg-white rounded-xl p-4">
-                <p class="text-xs text-gray-500 mb-1">Budget</p>
-                <p id="popupBudget" class="text-xl font-bold text-gray-900">Rp2.000.000</p>
-              </div>
-              <div class="bg-white rounded-xl p-4">
-                <p class="text-xs text-gray-500 mb-1">Deadline</p>
-                <p id="popupDeadline" class="text-xl font-bold text-gray-900">20 Nov 2025</p>
-              </div>
-            </div>
-          </div>
+    <!-- Project Title -->
+    <h2 id="popupTitle" class="text-2xl font-bold text-gray-900 mb-4">UI Design for App</h2>
 
-          <!-- DESCRIPTION -->
-          <div class="mb-6">
-            <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <i class="bi bi-file-text text-purple-600"></i> Project Description
-            </h4>
-            <p class="text-gray-600 leading-relaxed">
-              Design a clean, minimal, and modern mobile app interface for our new product launch...
-            </p>
-          </div>
-
-          <!-- REQUIREMENTS -->
-          <div class="mb-6">
-            <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <i class="bi bi-check-square text-purple-600"></i> Requirements
-            </h4>
-            <ul class="space-y-2">
-              <li class="flex items-start gap-2 text-gray-600">
-                <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> 3+ years experience in UI/UX design
-              </li>
-              <li class="flex items-start gap-2 text-gray-600">
-                <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> Proficiency in Figma and Adobe XD
-              </li>
-              <li class="flex items-start gap-2 text-gray-600">
-                <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> Strong portfolio of mobile app designs
-              </li>
-              <li class="flex items-start gap-2 text-gray-600">
-                <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> Ability to work independently and meet
-                deadlines
-              </li>
-            </ul>
-          </div>
-
-          <!-- SKILLS -->
-          <div class="mb-6">
-            <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <i class="bi bi-tag text-purple-600"></i> Skills Required
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UI Design</span>
-              <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UX Design</span>
-              <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Figma</span>
-              <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Adobe XD</span>
-              <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Mobile Design</span>
-            </div>
-          </div>
-
-          <!-- ACTION BUTTONS -->
-          <div class="space-y-3">
-            <button onclick="goToStep2()"
-              class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 
-                     text-white font-semibold py-4 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
-              <i class="bi bi-send"></i> Send Proposal
-            </button>
-
-            <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-4 rounded-xl transition 
-                     flex items-center justify-center gap-2">
-              <i class="bi bi-bookmark"></i> Save for Later
-            </button>
-          </div>
+    <div class="flex items-center gap-3 mb-4">
+      <img src="https://i.pravatar.cc/40?img=1" class="w-12 h-12 rounded-full ring-2 ring-white" alt="Client">
+      <div>
+        <p id="popupClient" class="font-semibold text-gray-900">Nova Tech</p>
+        <div class="flex items-center text-sm text-gray-600">
+          <i class="bi bi-star-fill text-yellow-400 text-xs"></i>
+          <span class="ml-1">4.9 (120 reviews)</span>
         </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-white rounded-xl p-4">
+        <p class="text-xs text-gray-500 mb-1">Budget</p>
+        <p id="popupBudget" class="text-xl font-bold text-gray-900">Rp2.000.000</p>
+      </div>
+      <div class="bg-white rounded-xl p-4">
+        <p class="text-xs text-gray-500 mb-1">Deadline</p>
+        <p id="popupDeadline" class="text-xl font-bold text-gray-900">20 Nov 2025</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="mb-6">
+    <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+      <i class="bi bi-file-text text-purple-600"></i> Project Description
+    </h4>
+    <p class="text-gray-600 leading-relaxed">
+      Design a clean, minimal, and modern mobile app interface for our new product launch...
+    </p>
+  </div>
+
+  <!-- REQUIREMENTS -->
+  <div class="mb-6">
+    <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+      <i class="bi bi-check-square text-purple-600"></i> Requirements
+    </h4>
+    <ul class="space-y-2">
+      <li class="flex items-start gap-2 text-gray-600">
+        <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> 3+ years experience in UI/UX design
+      </li>
+      <li class="flex items-start gap-2 text-gray-600">
+        <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> Proficiency in Figma and Adobe XD
+      </li>
+      <li class="flex items-start gap-2 text-gray-600">
+        <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> Strong portfolio of mobile app designs
+      </li>
+      <li class="flex items-start gap-2 text-gray-600">
+        <i class="bi bi-check-circle-fill text-green-500 mt-1"></i> Ability to work independently and meet
+        deadlines
+      </li>
+    </ul>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="mb-6">
+    <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+      <i class="bi bi-tag text-purple-600"></i> Skills Required
+    </h4>
+    <div class="flex flex-wrap gap-2">
+      <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UI Design</span>
+      <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UX Design</span>
+      <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Figma</span>
+      <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Adobe XD</span>
+      <span class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Mobile Design</span>
+    </div>
+  </div>
+</div>
 
         <!-- STEP 2 -->
         <div id="step2" class="hidden">
@@ -470,7 +463,7 @@
 
         <!-- Actions -->
         <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-3">
-          <button class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 
+          <button onclick="goToStep2()" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 
                          text-white font-bold py-4 rounded-xl transition shadow-lg shadow-purple-200 
                          flex items-center justify-center gap-2">
             <i class="bi bi-send-fill"></i> Request to Order
