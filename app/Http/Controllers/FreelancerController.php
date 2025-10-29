@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Freelancer;
 use App\Models\User;
-use App\Models\Jurusan;
+use App\Models\Jurusan; // ✅ tambahkan baris ini
+use Illuminate\Support\Facades\DB;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class FreelancerController extends Controller
 {
@@ -55,6 +55,7 @@ class FreelancerController extends Controller
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id;
 
+        // 🔹 Pagination ditambahkan di sini
         $tasks = Task::with(['jurusan', 'user'])
             ->where('status', 'open')
             ->when($search, function ($query) use ($search) {
@@ -64,29 +65,21 @@ class FreelancerController extends Controller
                 $query->where('jurusan_id', $jurusanId);
             })
             ->latest()
-            ->paginate(9); 
+            ->paginate(9); // ✅ hanya 9 data per halaman
 
         $jurusans = Jurusan::all();
         $freelancers = User::all();
         $totalFreelancers = $freelancers->count();
+        $OrderedTask = Task::where('status', 'ordered')->where('users_id', Auth::id())->count();
+        $CompletedTask = Task::where('status', 'done')->where('users_id', Auth::id())->count();
 
-        $OrderedTask = Task::where('status', 'ordered')
-            ->where('users_id', Auth::id())
-            ->count();
-
-        $CompletedTask = Task::where('status', 'done')
-            ->where('users_id', Auth::id())
-            ->count();
-
-        $totalAvailableTasks = Task::where('status', 'open')->count();
         return view('freelancer.dashboard', compact(
             'freelancers',
             'totalFreelancers',
             'jurusans',
             'tasks',
             'OrderedTask',
-            'CompletedTask',
-            'totalAvailableTasks' // Kirim ke view
+            'CompletedTask'
         ));
     }
 
@@ -98,7 +91,7 @@ class FreelancerController extends Controller
     public function projects(Request $request)
     {
         $user = Auth::user();
-        $tasks = Task::where('users_id', $user->id)
+        $tasks = Task::where('freelancer_id', $user->id_users)
             ->when($request->get('status'), function ($query, $status) {
                 $query->where('status', $status);
             })
@@ -106,9 +99,10 @@ class FreelancerController extends Controller
                 $query->where('judul', 'like', "%{$keyword}%");
             })
             ->get();
-
         $totalTasks = $tasks->count();
         $progressTasks = $tasks->where('status', 'in_progress')->count();
+        $status = $request->get('status');
+        $search = $request->get('keyword');
 
         return view('freelancer.projects', compact('tasks', 'totalTasks', 'progressTasks'));
     }

@@ -117,7 +117,7 @@
           <div class="bg-green-50 border border-green-200 rounded-lg p-2 mb-3">
             <div class="flex items-center justify-between">
               <span class="text-xs text-gray-600">Budget</span>
-              <span class="text-sm font-bold text-green-700">Rp {{ number_format($task->budget / 1000, 0) }}K</span>
+              <span class="text-sm font-bold text-green-700">Rp {{ number_format($task->budget, 0, ',', '.') }}K</span>
             </div>
           </div>
           
@@ -143,7 +143,7 @@
           </div>
 
           <div class="flex items-center gap-2 pt-3 border-t border-gray-100">
-            <button onclick="openPopup({{ $task->id }})" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-2 px-3 rounded-md text-center transition">
+            <button onclick="openPopup({{ $task->id_task }})" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-2 px-3 rounded-md text-center transition">
               Detail
             </button>
             <div class="flex gap-1">
@@ -216,7 +216,7 @@
           $estimasiWaktu = $task->waktu_estimasi ?? ($task->estimasi ?? '-');
         @endphp
         
-        <div id="popupTask{{ $task->id }}" class="hidden p-6">
+        <div id="popupTask{{ $task->id_task }}" class="hidden p-6">
           <div class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-6 mb-6">
             <div class="flex items-start justify-between mb-4">
               <div class="flex-1">
@@ -241,7 +241,7 @@
                 </div>
                 <div>
                   <p class="text-sm text-gray-600 font-semibold mb-1">Budget Proyek</p>
-                  <p class="text-3xl font-bold text-green-700">Rp {{ number_format($task->budget, 0, ',', '.') }}</p>
+                  <p class="text-3xl font-bold text-green-700">Rp {{ number_format($task->budget, 0, ',', '.')  }}</p>
                 </div>
               </div>
             </div>
@@ -340,10 +340,6 @@
       <button onclick="closePopup()" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-xl font-semibold transition shadow-sm">
         Tutup
       </button>
-      <a href="#" id="popupApplyBtn" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl font-semibold transition shadow-md hover:shadow-lg flex items-center gap-2">
-        <i class="bi bi-send-fill"></i>
-        Apply Sekarang
-      </a>
     </div>
   </div>
 </div>
