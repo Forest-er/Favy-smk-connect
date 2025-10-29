@@ -171,4 +171,26 @@ class TaskController extends Controller
 
         return view('freelancer.projects', compact('tasks'));
     }
+    public function like(Task $task)
+{
+    $userId = Auth::id();
+
+    if (!$userId) {
+        return response()->json(['success' => false, 'message' => 'Harus login']);
+    }
+
+    $exists = LikedTask::where('user_id', $userId)
+                        ->where('task_id', $task->id)
+                        ->exists();
+
+    if (!$exists) {
+        LikedTask::create([
+            'user_id' => $userId,
+            'task_id' => $task->id,
+        ]);
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'Sudah disimpan']);
+}
 }

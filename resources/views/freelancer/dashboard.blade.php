@@ -353,10 +353,10 @@
             <i class="bi bi-send-fill"></i> Request to Order
           </button>
 
-          <button class="w-full border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-4 
-                           rounded-xl flex items-center justify-center gap-2 transition">
-            <i class="bi bi-heart"></i> Save Project
-          </button>
+        <button id="saveProjectBtn" class="w-full border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-4 
+          rounded-xl flex items-center justify-center gap-2 transition">
+          <i class="bi bi-heart"></i> Save Project
+        </button>
 
           <button class="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-4 
                            rounded-xl flex items-center justify-center gap-2 transition">
@@ -519,6 +519,38 @@
         }
       }
     });
+document.getElementById('saveProjectBtn').addEventListener('click', function() {
+    const taskId = document.getElementById('task_id').value;
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    if (!taskId) {
+        alert('Task ID tidak tersedia!');
+        return;
+    }
+
+    fetch(`/tasks/${taskId}/like`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token,
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success){
+            // Tampilkan notifikasi atau ubah style tombol
+            alert('Project berhasil disimpan!');
+        } else {
+            alert('Project sudah pernah disimpan.');
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Terjadi kesalahan, silakan coba lagi.');
+    });
+});
   </script>
 
   <style>

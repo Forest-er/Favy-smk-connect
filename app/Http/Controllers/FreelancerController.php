@@ -50,12 +50,11 @@ class FreelancerController extends Controller
         return view('auth.register.freelancer', compact('jurusans'));
     }
 
-    public function dashboard(Request $request)
+     public function dashboard(Request $request)
     {
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id;
 
-        // 🔹 Pagination ditambahkan di sini
         $tasks = Task::with(['jurusan', 'user'])
             ->where('status', 'open')
             ->when($search, function ($query) use ($search) {
@@ -65,21 +64,29 @@ class FreelancerController extends Controller
                 $query->where('jurusan_id', $jurusanId);
             })
             ->latest()
-            ->paginate(9); // ✅ hanya 9 data per halaman
+            ->paginate(9); 
 
         $jurusans = Jurusan::all();
         $freelancers = User::all();
         $totalFreelancers = $freelancers->count();
-        $OrderedTask = Task::where('status', 'ordered')->where('users_id', Auth::id())->count();
-        $CompletedTask = Task::where('status', 'done')->where('users_id', Auth::id())->count();
 
+        $OrderedTask = Task::where('status', 'ordered')
+            ->where('users_id', Auth::id())
+            ->count();
+
+        $CompletedTask = Task::where('status', 'done')
+            ->where('users_id', Auth::id())
+            ->count();
+
+        $totalAvailableTasks = Task::where('status', 'open')->count();
         return view('freelancer.dashboard', compact(
             'freelancers',
             'totalFreelancers',
             'jurusans',
             'tasks',
             'OrderedTask',
-            'CompletedTask'
+            'CompletedTask',
+            'totalAvailableTasks' // Kirim ke view
         ));
     }
 

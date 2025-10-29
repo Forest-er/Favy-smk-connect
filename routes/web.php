@@ -67,6 +67,8 @@ Route::middleware(['auth', 'role:worker'])->group(function () {
     Route::get('/worker/projects', [FreelancerController::class, 'projects'])->name('worker.projects');
     Route::post('/proposal/store', [ProposalController::class, 'store'])->name('proposal.store');
     Route::get('/worker/tasks', [TaskController::class, 'showFreelancerTasks'])->name('worker.tasks');
+    Route::post('/tasks/{task}/like', [TaskController::class, 'like'])->name('tasks.liked');
+
 
     
 });
