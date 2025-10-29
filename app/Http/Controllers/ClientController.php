@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\Jurusan;
+use App\Models\LikedTask;
 
 class ClientController extends Controller
 {
@@ -133,6 +134,9 @@ class ClientController extends Controller
     }
     public function myTask_show(){
         $tasks = Task::where('users_id', auth()->id())->get();
-        return view('client/orders/task_show', compact('tasks'));
+       $likedTaskIds = LikedTask::where('user_id', Auth::id())->pluck('task_id');
+        $likedTask = Task::whereIn('id_task', $likedTaskIds)->get();
+
+        return view('client.orders.task_show', compact('tasks', 'likedTask'));
     }
 }

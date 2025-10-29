@@ -193,20 +193,14 @@
 
             <!-- Action Buttons -->
             <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-3">
-                <button class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-purple-200 flex items-center justify-center gap-2">
-                    <i class="bi bi-send-fill"></i>
-                    Request to Order
-                </button>
-
-                <button class="w-full border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-4 rounded-xl flex items-center justify-center gap-2 transition">
-                    <i class="bi bi-heart"></i>
-                    Save Project
-                </button>
-
-                <button class="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-4 rounded-xl flex items-center justify-center gap-2 transition">
-                    <i class="bi bi-share"></i>
-                    Share
-                </button>
+               <form action="{{ route('tasks.like', $task->id_task) }}" method="POST">
+                @csrf
+                    <button type="submit"
+                        class="w-full border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-4 
+                            rounded-xl flex items-center justify-center gap-2 transition">
+                        <i class="bi bi-heart"></i> Save Project
+                    </button>
+                </form>
             </div>
 
             <!-- About Freelancer -->

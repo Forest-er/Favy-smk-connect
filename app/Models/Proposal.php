@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class liked_task extends Model
+class Proposal extends Model
 {
     //
 }

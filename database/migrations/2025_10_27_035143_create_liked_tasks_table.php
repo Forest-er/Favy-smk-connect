@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('liked_tasks', function (Blueprint $table) {
             $table->id('id_liked_tasks');
             $table->bigInteger('user_id');
-            $table->bigInteger('task_id')->unsigned();
+            $table->bigInteger('task_id');
             $table->timestamps();
+            $table->foreign('task_id')->references('id_task')->on('tasks')->onDelete('cascade');
+            $table->foreign('user_id')->references('id_users')->on('users')->onDelete('cascade'); 
         });
     }
 

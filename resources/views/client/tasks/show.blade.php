@@ -26,7 +26,7 @@
     <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm">
       <h4 class="font-semibold text-gray-800">Client</h4>
       <div class="flex items-center gap-4 mt-2">
-        <img src="{{ $task->user->foto ? asset('storage/' . $task->user->foto) : 'https://i.pravatar.cc/150?img=' . rand(1,70) }}"
+        <img src="{{ $task->user->foto ? asset(w'storage/' . $task->user->foto) : 'https://i.pravatar.cc/150?img=' . rand(1,70) }}"
              class="w-16 h-16 rounded-full object-cover border border-white shadow-sm">
         <div>
           <p class="font-semibold text-gray-800">{{ $task->user->nama ?? 'Anonim' }}</p>
