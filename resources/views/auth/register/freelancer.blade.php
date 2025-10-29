@@ -129,7 +129,7 @@
           </div>
 
           <!-- Email -->
-          <div class="flex flex-row space-x-2">
+          <div class="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
             <div>
               <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
               <div class="relative">
@@ -208,8 +208,8 @@
           </div>
 
           <!-- Password -->
-          <div class="flex flex-row space-x-2">
-            <div>
+          <div class="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
+            <div class="flex-1">
               <label for="password" class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -246,7 +246,7 @@
             </div>
 
             <!-- Konfirmasi Password -->
-            <div>
+            <div class="flex-1">
               <label for="password_confirmation" class="block text-sm font-semibold text-gray-700 mb-1">Konfirmasi Password</label>
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">

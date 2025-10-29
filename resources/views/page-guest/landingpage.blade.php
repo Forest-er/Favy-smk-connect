@@ -28,7 +28,6 @@
     @include('page-guest.footerguest')
 
     <script>
-        // Carousel
         document.querySelectorAll('[id$="Carousel"]').forEach(carouselContainer => {
             const slides = carouselContainer.querySelectorAll('.carousel-slide');
             const navButtons = carouselContainer.querySelectorAll('.carousel-nav-btn');
@@ -45,7 +44,6 @@
             });
         });
 
-        // Toggle How It Works
         document.addEventListener('DOMContentLoaded', () => {
             const toggleHiring = document.getElementById('toggleHiring');
             const toggleFinding = document.getElementById('toggleFinding');

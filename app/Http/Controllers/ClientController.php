@@ -51,75 +51,74 @@ class ClientController extends Controller
     {
         return view('auth.register.freelancer');
     }
-public function getTaskDetail($id)
-{
-    $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
-    return view('client.partials.task_popup', compact('task'));
-}
-   public function update(Request $request)
-{
-    $user = Auth::user();
 
-    $request->validate([
-        'nama' => 'nullable|string|max:100',
-        'bio' => 'nullable|string',
-        'places' => 'nullable|string|max:255',
-        'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    public function getTaskDetail($id)
+    {
+        $task = Task::with('user', 'jurusan', 'skills', 'portfolio')->findOrFail($id);
+        return view('client.partials.task_popup', compact('task'));
+    }
 
-    // Simpan data dasar
-    $user->nama = $request->nama ?? $user->nama;
-    $user->bio = $request->bio ?? $user->bio;
-    $user->places = $request->places ?? $user->places;
+    public function update(Request $request)
+    {
+        $user = Auth::user();
 
-    // Kalau user upload foto baru
-    if ($request->hasFile('foto_profil')) {
-        // Hapus foto lama jika ada
-        if ($user->foto_profil && file_exists(storage_path('app/public/' . $user->foto_profil))) {
-            unlink(storage_path('app/public/' . $user->foto_profil));
+        $request->validate([
+            'nama' => 'nullable|string|max:100',
+            'bio' => 'nullable|string',
+            'places' => 'nullable|string|max:255',
+            'foto_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $user->nama = $request->nama ?? $user->nama;
+        $user->bio = $request->bio ?? $user->bio;
+        $user->places = $request->places ?? $user->places;
+
+        if ($request->hasFile('foto_profil')) {
+            if ($user->foto_profil && file_exists(storage_path('app/public/' . $user->foto_profil))) {
+                unlink(storage_path('app/public/' . $user->foto_profil));
+                \Log::info('[DEBUG] Foto lama dihapus: ' . $user->foto_profil);
+            }
+
+            $path = $request->file('foto_profil')->store('profile_pictures', 'public');
+            $user->foto_profil = $path;
+            \Log::info('[DEBUG] Foto baru disimpan ke: ' . $path);
         }
 
-        // Simpan foto baru
-        $path = $request->file('foto_profil')->store('profile_pictures', 'public');
-        $user->foto_profil = $path;
+        $user->save();
+
+        \Log::info('Setelah save, foto_profil di DB: ' . ($user->foto_profil ?? 'MASIH KOSONG'));
+        \Log::info('========== [DEBUG] Akhir update ==========');
+
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
-
-    $user->save();
-
-    return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
-}
-
 
     public function uploadPhoto(Request $request)
-{
-    $request->validate([
-        'foto_profil' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    {
+        $request->validate([
+            'foto_profil' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    $user = Auth::user();
+        $user = Auth::user();
 
-    // Hapus foto lama
-    if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
-        Storage::disk('public')->delete($user->foto_profil);
+        if ($user->foto_profil && Storage::disk('public')->exists($user->foto_profil)) {
+            Storage::disk('public')->delete($user->foto_profil);
+        }
+
+        $path = $request->file('foto_profil')->store('profile_photos', 'public');
+        $user->foto_profil = $path;
+        $user->save();
+
+        return response()->json(['success' => true, 'foto' => asset('storage/' . $path)]);
     }
-
-    // Simpan foto baru
-    $path = $request->file('foto_profil')->store('profile_photos', 'public');
-    $user->foto_profil = $path;
-    $user->save();
-
-    return response()->json(['success' => true, 'foto' => asset('storage/' . $path)]);
-}
 
     public function dataview(Request $request)
     {
-        
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id;
         $totalTasks = Task::where('users_id', auth()->id())->count();
         $totalFreelancer = User::where('role', 'worker')->where('jurusan_id', $jurusanId)->count();
         $tasks = Task::with(['jurusan', 'user'])
-            ->where('status', 'open') // ✅ hanya ambil task yang status-nya "open"
+            ->where('status', 'open') 
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })
@@ -133,7 +132,6 @@ public function getTaskDetail($id)
 
         return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks', 'totalFreelancer'));
     }
-
     public function myTask_show(){
         $tasks = Task::where('users_id', auth()->id())->get();
         $likedTask = LikedTask::where('user_id', auth()->id())->pluck('task_id')->toArray();

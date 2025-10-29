@@ -1,5 +1,5 @@
-@extends('layouts.app');
-@section('title', 'profile|worker');
+@extends('layouts.app')
+@section('title', 'profile|worker')
 @section('content')
   <!-- Container -->
   <div class="max-w-[1100px] mx-auto px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">

@@ -118,23 +118,23 @@
             </div>
         </div>
 
-        <!-- Garis dekoratif di bawah carousel -->
-        <div class="relative mt-8 h-16">
-            <svg class="absolute inset-x-0 top-0 w-full h-12" viewBox="0 0 1200 60" preserveAspectRatio="none">
-                <path d="M0,30 Q150,10 300,30 T600,30 T900,30 T1200,30" fill="none" stroke="#3b82f6" stroke-width="3" opacity="0.4" />
-                <path d="M0,30 Q150,50 300,30 T600,30 T900,30 T1200,30" fill="none" stroke="#a855f7" stroke-width="3" opacity="0.4" />
-            </svg>
-            <svg class="absolute inset-x-0 top-6 w-full h-8" viewBox="0 0 1200 40" preserveAspectRatio="none">
-                <polyline points="0,20 100,10 200,20 300,10 400,20 500,10 600,20 700,10 800,20 900,10 1000,20 1100,10 1200,20"
-                    fill="none" stroke="#ec4899" stroke-width="2" opacity="0.3" />
-            </svg>
-            <svg class="absolute inset-x-0 top-10 w-full h-4" viewBox="0 0 1200 20" preserveAspectRatio="none">
-                <line x1="0" y1="10" x2="1200" y2="10" stroke="#6366f1" stroke-width="2" stroke-dasharray="8,12" opacity="0.35" />
-            </svg>
-            <div class="absolute top-4 left-1/4 w-3 h-3 bg-blue-500/50 rounded-full"></div>
-            <div class="absolute top-8 left-1/2 w-3 h-3 bg-purple-500/50 rounded-full"></div>
-            <div class="absolute top-6 right-1/4 w-3 h-3 bg-pink-500/50 rounded-full"></div>
-        </div>
+       <!-- Garis dekoratif di bawah carousel -->
+<div class="relative mt-8 w-full" style="width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+    <svg class="absolute inset-x-0 top-0 w-full h-12" viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 Q150,10 300,30 T600,30 T900,30 T1200,30" fill="none" stroke="#3b82f6" stroke-width="3" opacity="0.4" />
+        <path d="M0,30 Q150,50 300,30 T600,30 T900,30 T1200,30" fill="none" stroke="#a855f7" stroke-width="3" opacity="0.4" />
+    </svg>
+    <svg class="absolute inset-x-0 top-6 w-full h-8" viewBox="0 0 1200 40" preserveAspectRatio="none">
+        <polyline points="0,20 100,10 200,20 300,10 400,20 500,10 600,20 700,10 800,20 900,10 1000,20 1100,10 1200,20"
+            fill="none" stroke="#ec4899" stroke-width="2" opacity="0.3" />
+    </svg>
+    <svg class="absolute inset-x-0 top-10 w-full h-4" viewBox="0 0 1200 20" preserveAspectRatio="none">
+        <line x1="0" y1="10" x2="1200" y2="10" stroke="#6366f1" stroke-width="2" stroke-dasharray="8,12" opacity="0.35" />
+    </svg>
+    <div class="absolute top-4 left-1/4 w-3 h-3 bg-blue-500/50 rounded-full"></div>
+    <div class="absolute top-8 left-1/2 w-3 h-3 bg-purple-500/50 rounded-full"></div>
+    <div class="absolute top-6 right-1/4 w-3 h-3 bg-pink-500/50 rounded-full"></div>
+</div>
     </div>
 </section>
 
