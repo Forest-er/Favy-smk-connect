@@ -307,7 +307,7 @@
 
                         <button onclick="openPopup({{ $task->id_task }}); event.stopPropagation();"
                             class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-pink-200">
-                            Hire Now
+                            Lihat Detail
                         </button>
                     </div>
                 </div>

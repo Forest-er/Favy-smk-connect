@@ -166,16 +166,16 @@
               class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_3 }}</span>
           </div>
 
-          <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-            <div>
-              <p class="text-xs text-gray-500">Budget</p>
-              <p class="text-xl font-bold text-gray-900">{{ $task->budget }}</p>
-            </div>
-            <div class="text-right">
-              <p class="text-xs text-gray-500">Deadline</p>
-              <p class="text-sm font-semibold text-gray-800">{{ $task->deadline }}</p>
-            </div>
-          </div>
+              <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
+                <div>
+                  <p class="text-xs text-gray-500">Budget</p>
+                  <p class="text-xl font-bold text-gray-900">Rp {{ number_format($task->budget, 0, ',', '.')}}</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-xs text-gray-500">Deadline</p>
+                  <p class="text-sm font-semibold text-gray-800">{{ $task->deadline }}</p>
+                </div>
+              </div>
 
           <button onclick="openPopup(
                         {{ json_encode($task->judul) }},
@@ -186,7 +186,8 @@
                         {{ json_encode($task->jurusan->deskripsi_1) }},
                         {{ json_encode($task->jurusan->deskripsi_2) }},
                         {{ json_encode($task->jurusan->deskripsi_3) }},
-                        {{ json_encode(asset('storage/' . $task->foto)) }}
+                        {{ json_encode(asset('storage/' . $task->foto)) }},
+                        {{ json_encode($task->id_task) }}
                     )"
             class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-purple-200">
             Apply Now
@@ -299,9 +300,10 @@
           <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
             <h3 class="font-semibold text-gray-900 mb-4 text-xl">Fill Proposal Details</h3>
 
-            <form id="proposalForm" action="https://formspree.io/f/mjkvkavj" method="POST" enctype="multipart/form-data"
+            <form id="proposalForm" action="{{ route('proposal.store') }}" method="POST" enctype="multipart/form-data"
               class="space-y-4">
-
+              @csrf
+              <input type="hidden" name="task_id" id="task_id" value="">
               <div>
                 <label class="block text-gray-700 font-medium mb-2">Nama</label>
                 <input type="text" name="name" placeholder="Masukkan Nama Anda" required
@@ -431,7 +433,8 @@
 
   <!-- SCRIPT -->
   <script>
-    function openPopup(title, client, deadline, budget, description, req1, req2, req3, imageUrl) {
+    function openPopup(title, client, deadline, budget, description, req1, req2, req3, imageUrl, taskId) {
+      document.getElementById('task_id').value=taskId
       document.getElementById('popupTitle').textContent = title;
       document.getElementById('popupClient').textContent = client;
       document.getElementById('popupDeadline').textContent = deadline;
@@ -507,12 +510,13 @@
         submitButton.innerHTML = '<i class="bi bi-hourglass-split animate-spin"></i> Sending...';
 
         fetch(proposalForm.action, {
-            method: proposalForm.method,
-            body: formData,
-            headers: {
-              'Accept': 'application/json'
-            }
-          })
+          method: proposalForm.method,
+          body: formData,
+          headers: {
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+          }
+        })
           .then(response => {
             if (response.ok) {
               document.getElementById('formNotif').classList.remove('hidden');

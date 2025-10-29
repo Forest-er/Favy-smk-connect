@@ -318,6 +318,27 @@ namespace App\Models {
     /**
      * App\Models\Proposal
      *
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property mixed $status
+     * @property string $cv_link
+     * @property string $deskripsi
+     * @property string $email
+     * @property string $nama
+     * @property mixed $worker_id
+     * @property mixed $task_id
+     * @property int $id_proposal
+     * @property-read \App\Models\Task $task
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereIdProposal($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereTaskId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereWorkerId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereNama($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereEmail($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereDeskripsi($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereCvLink($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereStatus($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Proposal>|Proposal query()
@@ -1249,6 +1270,7 @@ namespace App\Models {
      * @property string|null $remember_token
      * @property mixed $status
      * @property string|null $portfolio
+     * @property string|null $places
      * @property string|null $bio
      * @property mixed $jurusan_id
      * @property string|null $foto_profil
@@ -1269,6 +1291,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereFotoProfil($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereJurusanId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereBio($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePlaces($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePortfolio($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRememberToken($value)
@@ -2533,6 +2556,8 @@ namespace App\Models {
      * @property int $id_task
      * @property-read \App\Models\jurusan $jurusan
      * @property-read \App\Models\User $user
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Proposal> $proposals
+     * @property-read int|null $proposals_count
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereIdTask($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereUsersId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Task>|Task whereFreelancerId($value)

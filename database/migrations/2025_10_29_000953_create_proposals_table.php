@@ -12,9 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('proposals', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+                $table->id('id_proposal');
+                $table->foreignId('task_id')->constrained('tasks', 'id_tasks')->onDelete('cascade');
+                $table->foreignId('worker_id')->constrained('users', 'id_users')->onDelete('cascade');
+                $table->string('nama');
+                $table->string('email');
+                $table->text('deskripsi');
+                $table->string('cv_link');
+                $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+                $table->timestamps();
+            });
     }
 
     /**

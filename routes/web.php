@@ -11,6 +11,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\LikedTaskController;
+use App\Http\Controllers\Freelancer\ProposalController;
 
 Route::get('/', function () {
     return view('page-guest.home');
@@ -40,10 +41,23 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
+    // Form tambah task
     Route::get('/insert/task', [TaskController::class, 'create'])->name('client.orders.task');
-    Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.task');
-    
+    Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.store');
+
+    // Form edit task
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+
+    // Update task (hasil dari form edit)
+    Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
+    // Hapus task
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
 });
+
 
 // ===== Freelancer Routes =====
 Route::middleware(['auth', 'role:worker'])->group(function () {
@@ -51,6 +65,9 @@ Route::middleware(['auth', 'role:worker'])->group(function () {
     Route::get('/worker/task/{id}', [TaskController::class, 'show'])->name('worker.task.show');
     Route::get('/worker/profile', [FreelancerController::class, 'profile'])->name('worker.profile');
     Route::get('/worker/projects', [FreelancerController::class, 'projects'])->name('worker.projects');
+    Route::post('/proposal/store', [ProposalController::class, 'store'])->name('proposal.store');
+    Route::get('/worker/tasks', [TaskController::class, 'showFreelancerTasks'])->name('worker.tasks');
+
     
 });
 
@@ -67,6 +84,10 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::post('/client/upload-photo', [ClientController::class, 'uploadPhoto'])->name('client.upload.photo');
     Route::get('client/task_show', [ClientController::class, 'myTask_show'])->name('client.task_show');
     Route::post('/tasks/{task}/like', [LikedTaskController::class, 'store'])->name('tasks.like');
+    Route::get('client/notification',[ClientController::class, 'Notif'])->name('client.notification');
+    Route::post('/proposal/approve/{id}', [ProposalController::class, 'approve'])
+    ->name('proposal.approve');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/client/client-profile', [ClientController::class, 'profile'])->name('client.profile'); 

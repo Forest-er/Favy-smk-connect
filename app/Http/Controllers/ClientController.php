@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Task;
 use App\Models\Jurusan;
 use App\Models\LikedTask;
+use App\Models\Proposal;
 
 class ClientController extends Controller
 {
@@ -149,4 +150,14 @@ class ClientController extends Controller
 
         return view('client.orders.task_show', compact('tasks', 'likedTask'));
     }
+    public function Notif() {
+        $notif = Proposal::whereHas('Task', function ($query) {
+        $query->where('users_id', Auth::id());
+        })
+        ->with('task.user')
+        ->where('status', 'pending')
+        ->get();
+        return view('client.profile.nontifikasi', compact('notif'));
+    }
 }
+
