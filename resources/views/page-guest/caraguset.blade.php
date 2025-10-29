@@ -16,14 +16,12 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- CARD 1 -->
       <div class="relative bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group max-w-full">
         <div class="relative aspect-video md:h-64 lg:h-72 bg-gray-100 overflow-hidden">
           <img id="card1Image" src="{{ asset('images/register.jpg') }}" 
                alt="Langkah 1"
                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-          <!-- Overlay deskripsi (desktop) -->
           <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 
                       translate-y-full md:group-hover:translate-y-0 
                       transition-all duration-500">
@@ -34,7 +32,6 @@
           </div>
         </div>
 
-        <!-- Deskripsi mobile -->
         <div class="p-4 md:hidden">
           <h3 id="card1TitleMobile" class="font-semibold text-base mb-1">Posting pekerjaan gratis</h3>
           <p id="card1DescMobile" class="text-sm text-gray-600">
@@ -43,7 +40,6 @@
         </div>
       </div>
 
-      <!-- CARD 2 -->
       <div class="relative bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group max-w-full">
         <div class="relative aspect-video md:h-64 lg:h-72 bg-gray-100 overflow-hidden">
           <img id="card2Image" src="{{ asset('images/review.jpg') }}" 
@@ -68,7 +64,6 @@
         </div>
       </div>
 
-      <!-- CARD 3 -->
       <div class="relative bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group max-w-full">
         <div class="relative aspect-video md:h-64 lg:h-72 bg-gray-100 overflow-hidden">
           <img id="card3Image" src="{{ asset('images/pay.jpg') }}" 
@@ -120,15 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= 3; i++) {
             const cardData = data[`card${i}`];
 
-            // Update gambar
             const img = document.getElementById(`card${i}Image`);
             if (img) img.src = cardData.img;
 
-            // Update teks desktop
             const title = document.getElementById(`card${i}Title`);
             const desc = document.getElementById(`card${i}Desc`);
             
-            // Update teks mobile
             const titleMobile = document.getElementById(`card${i}TitleMobile`);
             const descMobile = document.getElementById(`card${i}DescMobile`);
 
@@ -156,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updateContent('finding');
         });
 
-        // Inisialisasi awal
         toggleHiring.click();
     }
 });

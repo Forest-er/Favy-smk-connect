@@ -86,7 +86,7 @@
 
 <div class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
     <div class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Hero Section -->
+        <!-- Hero -->
         <div class="relative rounded-3xl mb-10 overflow-hidden shadow-2xl">
             <div class="absolute inset-0">
                 <div class="absolute inset-0 bg-[url('/images/slide1.png')] bg-cover bg-center opacity-100 slide"></div>
@@ -144,7 +144,6 @@
             }, 5000);
         </script>
 
-        <!-- Client Stats -->
         <section class="mb-12">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
@@ -180,7 +179,7 @@
             </div>
         </section>
 
-        <!-- Explore Categories -->
+        <!-- Explore  -->
         <section class="mb-12">
             <div class="flex justify-between items-center mb-6">
                 <div>
@@ -241,7 +240,7 @@
             }
         </script>
 
-        <!-- Popular Projects -->
+        <!-- Popular  -->
         <section class="mb-12">
             <div class="flex justify-between items-center mb-6">
                 <div>
@@ -255,7 +254,6 @@
                 </button>
             </div>
 
-            {{-- ✅ RESPONSIVE GRID: 1 kolom di mobile, 3 kolom di tablet+ --}}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 @foreach ($tasks as $task)
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover border border-gray-100">
@@ -324,14 +322,12 @@
     </div>
 </div>
 
-<!-- Overlay -->
 <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40" onclick="closePopup()"></div>
 
-<!-- Popup Container -->
+<!-- Popup  -->
 <div id="rightPopup" class="fixed top-0 right-0 h-full w-full md:w-[90%] lg:w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl overflow-y-auto max-h-screen">
     <div class="flex flex-col h-full">
         <div id="rightPopupContent" class="p-4">
-            <!-- Konten popup akan dimuat di sini -->
         </div>
     </div>
 </div>
@@ -356,16 +352,14 @@
         document.getElementById('rightPopup').classList.add('translate-x-full');
     }
 
-    // ✅ DETEKSI MOBILE & SET PER_PAGE
     function setPerPageOnLoad() {
         const url = new URL(window.location);
-        const isMobile = window.innerWidth < 768; // Tailwind sm:768px
+        const isMobile = window.innerWidth < 768;
         const currentPerPage = url.searchParams.get('per_page');
 
         if (isMobile) {
             if (currentPerPage !== '9') {
                 url.searchParams.set('per_page', '9');
-                // Pertahankan parameter lain
                 window.location.href = url.toString();
             }
         } else {
@@ -376,7 +370,6 @@
         }
     }
 
-    // Jalankan sekali saat halaman dimuat
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', setPerPageOnLoad);
     } else {

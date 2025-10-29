@@ -104,7 +104,6 @@
       content: "";
       position: absolute;
       inset: -4px;
-      /* membuat border di luar */
       border-radius: 1rem;
       border: 2px solid transparent;
       transition: all 0.35s ease;
@@ -112,19 +111,16 @@
 
     .card-outline-hover.blue:hover::after {
       border-color: #3b82f6;
-      /* biru */
       box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
     }
 
     .card-outline-hover.pink:hover::after {
       border-color: #ec4899;
-      /* pink */
       box-shadow: 0 0 12px rgba(236, 72, 153, 0.3);
     }
 
     .card-outline-hover.yellow:hover::after {
       border-color: #facc15;
-      /* kuning */
       box-shadow: 0 0 12px rgba(250, 204, 21, 0.3);
     }
 
@@ -133,7 +129,6 @@
     }
   </style>
 </head>
-<!-- navbar bagian 2 register -->
 
 <body class="bg-gray-50 text-gray-800">
 

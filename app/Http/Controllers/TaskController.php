@@ -10,18 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
-    /* ===============================
-       📌 BAGIAN CLIENT
-    =============================== */
-
-    // 🟣 Form membuat task baru
     public function create()
     {
         $jurusans = Jurusan::all();
         return view('client.orders.task', compact('jurusans'));
     }
 
-    // 🟣 Simpan task baru ke database
     public function store(Request $request)
     {
         $request->validate([
@@ -57,7 +51,6 @@ class TaskController extends Controller
                          ->with('success', 'Task berhasil dibuat dan dipublikasikan!');
     }
 
-    // 🟣 Lihat task milik client (dalam JSON)
     public function index()
     {
         try {
@@ -68,14 +61,11 @@ class TaskController extends Controller
         }
     }
 
-    // 🟣 Tampilkan detail task (popup/detail page)
     public function show($id)
     {
         $task = Task::findOrFail($id);
         return view('client.task-detail', compact('task'));
     }
-
-    // 🟣 Tampilkan task dalam format JSON (untuk AJAX)
     public function showJson($id)
     {
         try {
@@ -97,10 +87,6 @@ class TaskController extends Controller
             return response()->json(['error' => 'Task tidak ditemukan.'], 404);
         }
     }
-
-    /* ===============================
-       📌 BAGIAN FREELANCER
-    =============================== */
 
     public function freelancerIndex()
     {
@@ -127,7 +113,6 @@ class TaskController extends Controller
         return view('client.orders.edit', compact('task', 'jurusans'));
     }
 
-    // 🟣 Update task di database
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -163,7 +148,6 @@ class TaskController extends Controller
         return redirect()->route('client.dashboard')->with('success', 'Task berhasil diperbarui!');
     }
 
-    // 🟣 Hapus task
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
@@ -178,7 +162,6 @@ class TaskController extends Controller
     }
     public function showFreelancerTasks()
     {
-        // Ambil ID user yang sedang login
         $freelancerId = Auth::id();
 
         $tasks = Task::with(['jurusan', 'user'])
@@ -186,7 +169,6 @@ class TaskController extends Controller
             ->where('status', 'in_progress')
             ->get();
 
-        // Kirim data ke view
         return view('freelancer.projects', compact('tasks'));
     }
 }

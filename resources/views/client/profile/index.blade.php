@@ -5,11 +5,8 @@
 <div class="bg-white min-h-screen text-gray-800">
     <div class="max-w-[1100px] mx-auto px-8 py-10">
 
-        <!-- MOBILE VIEW (<768px) -->
         <div class="md:hidden space-y-10">
             @php $users = Auth::user(); @endphp
-
-            <!-- 1. Breadcrumb -->
             <div class="flex justify-between items-center text-[14px] text-gray-500">
                 <div>
                     <a href="/client/dashboard" class="text-gray-500 font-medium hover:text-gray-800">Home</a> /
@@ -19,22 +16,22 @@
                 </div>
             </div>
 
-            <!-- 2. Info Box -->
+            <!-- Info -->
             <div class="border border-pink-200 bg-gradient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
                 <div class="flex gap-3">
                     <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
                     <div>
-                            <p class="text-[15px] font-medium text-gray-800">
-                                Hai {{ $users->nama }}, selamat datang di profil clientmu ✨
-                            </p>
-                            <p class="text-gray-600 text-[14px]">
-                                Lengkapi profilmu agar klien bisa lebih mudah mengenal keahlianmu.
-                            </p>
-                        </div>
+                        <p class="text-[15px] font-medium text-gray-800">
+                            Hai {{ $users->nama }}, selamat datang di profil clientmu ✨
+                        </p>
+                        <p class="text-gray-600 text-[14px]">
+                            Lengkapi profilmu agar klien bisa lebih mudah mengenal keahlianmu.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- 3. Intro Section -->
+            <!-- Intro  -->
             <div>
                 <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
                     <span>👋</span> Perkenalkan dirimu pada freelancer
@@ -43,7 +40,7 @@
                 </p>
             </div>
 
-            <!-- 4. Profil Pengguna -->
+            <!--  Profil  -->
             <div class="flex flex-col items-center">
                 <div class="rounded-2xl p-8 shadow-sm border border-pink-200 bg-white w-full">
                     <div class="flex flex-col items-center">
@@ -78,7 +75,7 @@
                 </div>
             </div>
 
-            <!-- 5. Profile Checklist -->
+            <!--  Profile  -->
             <div class="border border-pink-200 rounded-2xl p-6 bg-white shadow-sm">
                 <h3 class="text-[17px] font-semibold text-gray-800 mb-5">Hai!!!, hari ini mau ngapain?</h3>
                 <div class="space-y-4">
@@ -92,7 +89,7 @@
                 </div>
             </div>
 
-            <!-- 6. Tombol "Lihat Dashboard" – DI BAWAH CHECKLIST -->
+            <!-- Tombol Lihat Dashboard -->
             <button
                 onclick="window.location.href='/client/dashboard'"
                 class="w-full py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition text-gray-800 font-medium flex items-center justify-center gap-2 shadow-sm">
@@ -101,9 +98,7 @@
             </button>
         </div>
 
-        <!-- DESKTOP VIEW (md and up) – TIDAK BERUBAH SAMA SEKALI -->
         <div class="hidden md:grid md:grid-cols-3 gap-10">
-            <!-- Left: Profile Info + Tombol (asli) -->
             <div class="flex flex-col items-center">
                 <div class="rounded-2xl p-8 shadow-sm border border-pink-200 bg-white w-full">
                     @php $users = Auth::user(); @endphp
@@ -137,8 +132,6 @@
                         {{ $users->bio ?? "tidak ada bio" }}
                     </p>
                 </div>
-
-                <!-- Tombol asli – hanya muncul di desktop -->
                 <button
                     onclick="window.location.href='/client/dashboard'"
                     class="mt-6 w-full py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition text-gray-800 font-medium flex items-center justify-center gap-2 shadow-sm">
@@ -147,12 +140,10 @@
                 </button>
             </div>
 
-            <!-- Right: Profile Details -->
             <div class="md:col-span-2 space-y-8">
-                <!-- Info Box -->
                 <div class="border border-pink-200 bg-gradient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
                     <div class="flex gap-3">
-                    <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
+                        <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
                         <div>
                             <p class="text-[15px] font-medium text-gray-800">
                                 Hai {{ $users->nama }}, selamat datang di profil clientmu ✨
@@ -175,8 +166,6 @@
 
                     </div>
                 </div>
-
-                <!-- Intro Section -->
                 <div>
                     <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
                         <span>👋</span> Perkenalkan dirimu pada freelancer
@@ -186,7 +175,6 @@
                     </p>
                 </div>
 
-                <!-- Profile Checklist -->
                 <div class="border border-pink-200 rounded-2xl p-6 bg-white shadow-sm">
                     <h3 class="text-[17px] font-semibold text-gray-800 mb-5">Hai!!!, hari ini mau ngapain?</h3>
                     <div class="space-y-4">
@@ -203,10 +191,8 @@
         </div>
     </div>
 </div>
-<!-- Modal dan Script (tidak berubah) -->
 <div id="addDetailModal" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
     <div class="max-w-2xl mx-auto px-5 py-4 border-b border-gray-200 flex justify-between items-center">
-        <!-- Header modal disamakan padding horizontal dengan form -->
         <h2 class="text-lg font-semibold text-gray-800">Lengkapi profil bisnismu</h2>
         <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
     </div>
@@ -262,7 +248,6 @@
 
 
 <div id="commModal" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
-    <!-- ... (tidak diubah) ... -->
 </div>
 
 <script>
@@ -299,12 +284,11 @@
     }
 
     document.querySelectorAll('button.text-pink-500').forEach(btn => {
-    btn.addEventListener('click', e => {
-        e.preventDefault();
-        openModal();
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            openModal();
+        });
     });
-});
 </script>
 
 @endsection
-

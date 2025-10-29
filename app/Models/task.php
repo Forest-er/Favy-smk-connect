@@ -25,14 +25,10 @@ class Task extends Model
         'status',
         'budget'
     ];
-
-    // Relasi ke tabel jurusan
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class, 'jurusan_id', 'id_jurusan');
     }
-
-    // Relasi ke user (client)
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id_users');

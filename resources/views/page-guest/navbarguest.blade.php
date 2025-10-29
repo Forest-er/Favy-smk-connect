@@ -1,6 +1,5 @@
 <nav id="mainNavbar"
   class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
-  <!-- Logo -->
   <div class="flex items-center space-x-3">
     <a href="/" class="flex items-center space-x-2">
       <img src="{{ asset('images/LOGO-SMK-CONNECT.png') }}" alt="SMK BM3 Logo" class="h-10 object-contain">

@@ -21,8 +21,6 @@
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-        <!-- Left: Project / Freelancer Image -->
         <div class="lg:col-span-1">
             <img src="{{ asset('storage/' . $task->foto) }}"
                  onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg'"
@@ -36,9 +34,7 @@
             </div>
         </div>
 
-        <!-- Right: Details -->
         <div class="lg:col-span-2 space-y-6">
-
             <h1 class="text-2xl font-bold text-gray-900">{{ $task->judul }}</h1>
             <div class="flex items-center gap-6 text-gray-600 text-sm">
                 <span><i class="bi bi-calendar"></i> Deadline: {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</span>
@@ -72,10 +68,7 @@
                     Back
                 </a>
             </div>
-
         </div>
-
     </div>
-
 </div>
 @endsection

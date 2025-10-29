@@ -1,10 +1,8 @@
   <footer class="relative bg-[#0B1D51] text-white pt-12 pb-8 overflow-hidden">
     <div class="container mx-auto px-6 md:px-12 lg:px-24">
 
-      <!-- Kolom Utama Footer -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        <!-- Kolom 1: Untuk Klien -->
         <div class="text-center md:text-left">
           <h3 class="text-sm font-semibold uppercase text-white mb-6">Untuk Klien</h3>
           <ul class="space-y-3">
@@ -13,7 +11,6 @@
           </ul>
         </div>
 
-        <!-- Kolom 2: Untuk Talenta -->
         <div class="text-center md:text-left">
           <h3 class="text-sm font-semibold uppercase text-white mb-6">Untuk Freelance</h3>
           <ul class="space-y-3">
@@ -23,7 +20,6 @@
           </ul>
         </div>
 
-        <!-- Kolom 3: Website -->
         <div class="text-center md:text-left">
           <h3 class="text-sm font-semibold uppercase text-white mb-6">Website</h3>
           <ul class="space-y-3">
@@ -35,7 +31,6 @@
 
       </div>
 
-      <!-- === BAGIAN MEDIA SOSIAL === -->
       <div class="mt-10 text-center">
         <div class="flex flex-col md:items-start items-center gap-4">
           <span class="text-sm">Ikuti kami di:</span>
@@ -48,7 +43,6 @@
         </div>
       </div>
 
-      <!-- Bawah Footer -->
       <div class="border-t border-gray-400 mt-8 pt-8 text-center">
         <div class="mb-4">
           <div class="flex flex-wrap justify-center gap-4 text-sm">
@@ -63,7 +57,7 @@
 
     </div>
 
-    <!-- ===== Dekorasi Latar Belakang ===== -->
+    <!-- hiasan-->
     <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
     <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-white/10 rounded-full blur-2xl"></div>
     <div class="absolute top-10 right-1/4 w-3 h-3 bg-white/30 rounded-full"></div>

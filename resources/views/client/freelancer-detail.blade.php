@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-8 mt-10 border border-gray-200">
-    <!-- Nama & Spesialisasi -->
+    <!-- Nama  -->
     <div class="flex items-center gap-6 mb-6">
         <img src="{{ $freelancer->photo ? asset('storage/' . $freelancer->photo) : 'https://via.placeholder.com/100' }}" 
              alt="{{ $freelancer->name }}" 
@@ -25,7 +25,7 @@
         <p class="text-gray-600 leading-relaxed">{{ $freelancer->description }}</p>
     </div>
 
-    <!-- Rincian Jasa -->
+    <!-- Jasa -->
     <div class="border-t border-gray-200 pt-4 mb-6">
         <h2 class="text-lg font-semibold text-gray-800 mb-3">Rincian Jasa</h2>
         <ul class="list-disc pl-6 text-gray-600 space-y-2">
@@ -35,7 +35,7 @@
         </ul>
     </div>
 
-    <!-- Harga dan Tombol -->
+    <!-- Harga -->
     <div class="flex justify-between items-center">
         <div>
             <p class="text-gray-500 text-sm">Harga mulai dari</p>

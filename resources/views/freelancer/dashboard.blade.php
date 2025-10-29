@@ -4,7 +4,7 @@
 
 <div class="max-w-7xl mx-auto px-6 py-8">
 
-  <!-- Hero Section -->
+  <!-- Hero  -->
   <div class="relative rounded-3xl mb-10 overflow-hidden shadow-2xl">
     <div class="absolute inset-0">
       <div
@@ -68,10 +68,9 @@
     }, 5000);
   </script>
 
-  <!-- Quick Stats -->
+  <!-- Stats -->
   <section class="mb-12">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- ✅ AVAILABLE PROJECTS (Total task di sistem) -->
       <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
         <div class="flex items-start justify-between mb-4">
           <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center">
@@ -116,7 +115,6 @@
     </div>
   </section>
 
-  <!-- Available Projects -->
   <section class="mb-12">
     <div class="flex justify-between items-center mb-6">
       <div>
@@ -166,16 +164,16 @@
               class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_3 }}</span>
           </div>
 
-              <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
-                <div>
-                  <p class="text-xs text-gray-500">Budget</p>
-                  <p class="text-xl font-bold text-gray-900">Rp {{ number_format($task->budget, 0, ',', '.')}}</p>
-                </div>
-                <div class="text-right">
-                  <p class="text-xs text-gray-500">Deadline</p>
-                  <p class="text-sm font-semibold text-gray-800">{{ $task->deadline }}</p>
-                </div>
-              </div>
+          <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
+            <div>
+              <p class="text-xs text-gray-500">Budget</p>
+              <p class="text-xl font-bold text-gray-900">Rp {{ number_format($task->budget, 0, ',', '.')}}</p>
+            </div>
+            <div class="text-right">
+              <p class="text-xs text-gray-500">Deadline</p>
+              <p class="text-sm font-semibold text-gray-800">{{ $task->deadline }}</p>
+            </div>
+          </div>
 
           <button onclick="openPopup(
                         {{ json_encode($task->judul) }},
@@ -209,16 +207,13 @@
     </div>
   </section>
 
-  <!-- Project Details Popup -->
   <!-- Overlay -->
   <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-40 transition-opacity"
     onclick="closePopup()"></div>
 
-  <!-- Popup Panel -->
+  <!-- Popup  -->
   <div id="rightPopup" class="fixed top-0 right-0 h-full w-full md:w-[90%] lg:w-[70%] bg-white shadow-2xl transform translate-x-full 
              transition-transform duration-500 ease-in-out z-50 overflow-y-auto rounded-l-3xl">
-
-    <!-- HEADER -->
     <div class="sticky top-0 bg-white border-b border-gray-100 p-6 flex justify-between items-center z-10 shadow-sm">
       <h3 id="popupHeader" class="text-xl font-bold text-gray-900">Project Details</h3>
       <button onclick="closePopup()"
@@ -227,26 +222,17 @@
       </button>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <div class="p-6 flex flex-col lg:flex-row gap-6">
 
-      <!-- LEFT COLUMN -->
       <div class="flex-1 space-y-6">
-
-        <!-- STEP 1 -->
         <div id="step1">
           <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 mb-6">
-
-            <!-- Project Image -->
             <div class="mb-4">
               <img id="popupImage" src="https://via.placeholder.com/600x300" alt="Project Image"
                 class="w-full h-60 object-cover rounded-2xl">
             </div>
-
-            <!-- Project Title -->
             <h2 id="popupTitle" class="text-2xl font-bold text-gray-900 mb-4">UI Design for App</h2>
-
-            <!-- Client Info -->
             <div class="flex items-center gap-3 mb-6">
               <img src="https://i.pravatar.cc/40?img=1" class="w-10 h-10 rounded-full ring-2 ring-white">
               <div>
@@ -255,7 +241,7 @@
               </div>
             </div>
 
-            <!-- Budget & Deadline Grid -->
+            <!-- Deadline -->
             <div class="grid grid-cols-2 gap-4 mb-6">
               <div class="bg-white rounded-xl p-4">
                 <p class="text-xs text-gray-500 mb-1">Budget</p>
@@ -268,7 +254,7 @@
             </div>
           </div>
 
-          <!-- DESCRIPTION -->
+          <!-- deskripsi -->
           <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
             <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
               <i class="bi bi-file-text text-purple-600"></i> Project Description
@@ -277,8 +263,6 @@
               Design a clean, minimal, and modern mobile app interface for our new product launch...
             </p>
           </div>
-
-          <!-- SKILLS -->
           <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
             <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
               <i class="bi bi-tag text-purple-600"></i> Skills Required
@@ -291,11 +275,8 @@
               <span id="popup3" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Figma</span>
             </div>
           </div>
-
-
         </div>
 
-        <!-- STEP 2 -->
         <div id="step2" class="hidden">
           <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
             <h3 class="font-semibold text-gray-900 mb-4 text-xl">Fill Proposal Details</h3>
@@ -349,10 +330,8 @@
         </div>
       </div>
 
-      <!-- RIGHT SIDEBAR -->
+      <!-- sidebar -->
       <div class="hidden lg:block lg:w-[360px] space-y-6">
-
-        <!-- Info Card -->
         <div class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-200">
           <div class="flex items-start gap-3 mb-3">
             <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
@@ -367,8 +346,6 @@
             Learn more <i class="bi bi-arrow-right"></i>
           </a>
         </div>
-
-        <!-- Actions -->
         <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-3">
           <button onclick="goToStep2()" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 
                            text-white font-bold py-4 rounded-xl transition shadow-lg shadow-purple-200 
@@ -387,7 +364,7 @@
           </button>
         </div>
 
-        <!-- About Client -->
+        <!-- About  -->
         <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
           <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             <i class="bi bi-person-circle text-purple-600"></i> About Client
@@ -417,7 +394,7 @@
           </a>
         </div>
 
-        <!-- Contact -->
+        <!-- kontak -->
         <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
           <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             <i class="bi bi-envelope text-purple-600"></i> Contact
@@ -431,10 +408,9 @@
     </div>
   </div>
 
-  <!-- SCRIPT -->
   <script>
     function openPopup(title, client, deadline, budget, description, req1, req2, req3, imageUrl, taskId) {
-      document.getElementById('task_id').value=taskId
+      document.getElementById('task_id').value = taskId
       document.getElementById('popupTitle').textContent = title;
       document.getElementById('popupClient').textContent = client;
       document.getElementById('popupDeadline').textContent = deadline;
@@ -444,7 +420,6 @@
       document.getElementById('popup2').textContent = req2;
       document.getElementById('popup3').textContent = req3;
 
-      // Set image with fallback
       const imgElement = document.getElementById('popupImage');
       imgElement.src = imageUrl;
       imgElement.onerror = function() {
@@ -455,7 +430,7 @@
       document.getElementById('step1').classList.remove('hidden');
       document.getElementById('step2').classList.add('hidden');
       document.getElementById('popupHeader').textContent = 'Project Details';
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      document.body.style.overflow = 'hidden'; 
 
       setTimeout(() => {
         document.getElementById('rightPopup').classList.remove('translate-x-full');
@@ -464,7 +439,7 @@
 
     function closePopup() {
       document.getElementById('rightPopup').classList.add('translate-x-full');
-      document.body.style.overflow = ''; // Restore scrolling
+      document.body.style.overflow = ''; 
 
       setTimeout(() => {
         document.getElementById('overlay').classList.add('hidden');
@@ -476,7 +451,6 @@
       document.getElementById('step2').classList.remove('hidden');
       document.getElementById('popupHeader').textContent = 'Proposal Form';
 
-      // Scroll to top of popup
       document.getElementById('rightPopup').scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -488,14 +462,12 @@
       document.getElementById('step1').classList.remove('hidden');
       document.getElementById('popupHeader').textContent = 'Project Details';
 
-      // Scroll to top of popup
       document.getElementById('rightPopup').scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     }
 
-    // Form submission (Formspree)
     const proposalForm = document.getElementById('proposalForm');
     if (proposalForm) {
       proposalForm.addEventListener('submit', function(e) {
@@ -505,24 +477,22 @@
         const submitButton = proposalForm.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.innerHTML;
 
-        // Disable button and show loading state
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="bi bi-hourglass-split animate-spin"></i> Sending...';
 
         fetch(proposalForm.action, {
-          method: proposalForm.method,
-          body: formData,
-          headers: {
-            'Accept': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-          }
-        })
+            method: proposalForm.method,
+            body: formData,
+            headers: {
+              'Accept': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            }
+          })
           .then(response => {
             if (response.ok) {
               document.getElementById('formNotif').classList.remove('hidden');
               proposalForm.reset();
 
-              // Auto close notification after 3 seconds
               setTimeout(() => {
                 document.getElementById('formNotif').classList.add('hidden');
                 closePopup();
@@ -535,14 +505,12 @@
             alert('Terjadi kesalahan. Silakan coba lagi.');
           })
           .finally(() => {
-            // Re-enable button
             submitButton.disabled = false;
             submitButton.innerHTML = originalButtonText;
           });
       });
     }
 
-    // Close popup with Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         const popup = document.getElementById('rightPopup');
@@ -554,7 +522,6 @@
   </script>
 
   <style>
-    /* Additional CSS for animations and hover effects */
     .card-hover {
       transition: all 0.3s ease;
     }
@@ -571,7 +538,6 @@
       overflow: hidden;
     }
 
-    /* Smooth scrollbar for popup */
     #rightPopup::-webkit-scrollbar {
       width: 8px;
     }
@@ -589,7 +555,6 @@
       background: #7e22ce;
     }
 
-    /* Animation for notification */
     #formNotif {
       animation: slideInDown 0.5s ease;
     }
@@ -606,7 +571,6 @@
       }
     }
 
-    /* Loading spinner animation */
     @keyframes spin {
       to {
         transform: rotate(360deg);

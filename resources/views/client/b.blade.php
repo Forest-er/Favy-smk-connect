@@ -4,10 +4,8 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-1">
-  <!-- Hero Section -->
+  <!-- Hero  -->
   <div class="relative rounded-3xl p-10 mb-10 overflow-hidden shadow-lg border border-black/40">
-
-    <!-- 🔹 Slides -->
     <div class="absolute inset-0 w-full h-full">
       <div
         class="absolute inset-0 w-full h-full bg-[url('/images/slide1.png')] bg-cover bg-center opacity-100 transition-opacity duration-1000 slide">
@@ -23,9 +21,7 @@
       </div>
     </div>
 
-    <!-- 🔹 Konten di atas slide -->
     <div class="relative z-10 max-w-7xl mx-auto">
-      <!-- Greeting -->
       @php
       $hour = now()->format('H');
       if ($hour < 12) {
@@ -55,7 +51,6 @@
                 <button type="submit" class=" bg-white text-black py-3 px-5 rounded-r-full z-99"><i class="bi bi-search"></i></button>
               </div>
             </form>
-
           </div>
         </div>
     </div>
@@ -73,16 +68,16 @@
 
       slides[current].classList.remove('opacity-0');
       slides[current].classList.add('opacity-100');
-    }, 4000); // ganti tiap 4 detik
+    }, 4000); 
   </script>
 
 
-  <!-- Freelancer Stats Section -->
+  <!-- Freelancer Stat -->
   <section class="max-w-7xl mx-auto mb-16 px-4-ml-1">
     <h2 class="text-2xl font-bold mb-6 text-gray-900">Client Stats</h2>
 
     <div class="flex flex-col md:flex-row gap-4">
-      <!-- Projects Posted -->
+      <!-- Posted -->
       <div class="flex-1 p-6 rounded-xl bg--to-br from-purple-50 to-white border border-gray-100 hover:shadow-md transition">
         <div class="flex items-center justify-between mb-2">
           <span class="text-sm text-gray-500">Projects Posted</span>
@@ -90,8 +85,6 @@
         </div>
         <p class="text-3xl font-bold text-gray-800">8</p>
       </div>
-
-      <!-- Total Spent -->
       <div class="flex-1 p-6 rounded-xl bg--to-br from-green-50 to-white border border-gray-100 hover:shadow-md transition">
         <div class="flex items-center justify-between mb-2">
           <span class="text-sm text-gray-500">Total Spent</span>
@@ -99,8 +92,6 @@
         </div>
         <p class="text-3xl font-bold text-gray-800">Rp5.000.000</p>
       </div>
-
-      <!-- Active Freelancers -->
       <div class="flex-1 p-6 rounded-xl bg--to-br from-yellow-50 to-white border border-gray-100 hover:shadow-md transition">
         <div class="flex items-center justify-between mb-2">
           <span class="text-sm text-gray-500">Active Freelancers</span>
@@ -111,7 +102,7 @@
     </div>
   </section>
 
-  <!-- Categories Section -->
+  <!-- kategori -->
   <div class="mb-10 flex items-center justify-between">
     <h2 class="text-2xl font-bold">Explore Categories</h2>
     <div class="flex space-x-2">
@@ -129,8 +120,6 @@
       </button>
     </div>
   </div>
-
-  <!-- Category Icons Grid -->
   <div
     class="mb-10 w-full flex flex-row items-center space-x-6 overflow-x-auto pb-10 scrollbar-thin scrollbar-hide scrollbar-thumb-gray-300">
 
@@ -186,9 +175,8 @@
   </div>
 
 
-  <!-- Category Tabs -->
+  <!-- kategori tab -->
   @php
-  // Kumpulan variasi gradient warna
   $gradients = [
   ['from' => 'from-indigo-400', 'to' => 'to-purple-400'],
   ['from' => 'from-blue-400', 'to' => 'to-indigo-400'],
@@ -224,7 +212,6 @@
   </style>
 
     <section>
-      <!-- GRID GALLERY -->
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]">
         <!-- Item 1 -->
         <div class="relative group cursor-pointer row-span-2 overflow-hidden rounded-xl">
@@ -569,8 +556,7 @@
 
         const data=await response.json();
 
-        // Isi data popup
-        document.getElementById('popupJudul').textContent=data.judul;
+=        document.getElementById('popupJudul').textContent=data.judul;
         document.getElementById('popupDeskripsi').textContent=data.deskripsi;
         document.getElementById('popupJurusan').textContent=data.jurusan;
         document.getElementById('popupDeadline').textContent=data.deadline;
@@ -579,8 +565,7 @@
         document.getElementById('popupWaktu').textContent=data.waktu_estimasi;
         document.getElementById('popupImage').src=data.foto;
 
-        // Tampilkan popup
-        document.getElementById('overlay').classList.remove('hidden');
+=        document.getElementById('overlay').classList.remove('hidden');
         document.getElementById('rightPopup').classList.remove('translate-x-full');
 
       }
@@ -598,8 +583,7 @@
 
     </script><script>function changeUrl(category){
 
-    // Ubah URL tanpa reload halaman
-    const newUrl=`$ {
+=    const newUrl=`$ {
       window.location.origin
     }
 
@@ -614,10 +598,8 @@
     `;
     history.pushState(null, '', newUrl);
 
-    // Bisa juga panggil fungsi filter task di sini:
-    console.log("Filter:", category);
-    // loadTasks(category); // misal kamu punya fungsi untuk filter
-    }
+=    console.log("Filter:", category);
+=    }
 
     </script><script>function openPopup(taskId) {
       const overlay=document.getElementById('overlay');

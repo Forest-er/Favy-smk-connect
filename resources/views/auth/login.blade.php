@@ -1,13 +1,12 @@
 @extends('component.navbar')
 @section('title', content: 'SMK-connect|freelancer')
 @section('content')
-<!-- Main Content -->
+<!-- Main  -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
   <div class="grid lg:grid-cols-2 gap-12 items-center">
 
-    <!-- Left Section - Hero Content -->
+    <!-- Hero  -->
     <div class="space-y-8 order-2 lg:order-1">
-      <!-- Tambahkan text-center sm:text-left di sini -->
       <div class="space-y-4 text-center sm:text-left">
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full card-shadow badge">
           <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
@@ -17,8 +16,6 @@
           </svg>
           <span class="text-sm font-semibold text-gray-700">Platform Freelance #1 untuk Siswa SMK</span>
         </div>
-
-        <!-- Judul besar tetap menggunakan text-center sm:text-left -->
         <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight text-center sm:text-left">
           Raih Peluang Karir <span
             class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-400">Sejak SMK</span>
@@ -67,7 +64,6 @@
       </div>
 
 
-      <!-- Testimonial -->
       <div class="card-shadow bg-white rounded-2xl p-6">
         <div class="flex items-start gap-4">
           <div
@@ -75,12 +71,10 @@
             AR
           </div>
           <div class="flex-1">
-            <!-- Nama dan asal kembali ke tampilan semula (rata kiri) -->
             <div class="flex items-center gap-2 mb-2">
               <span class="font-semibold text-gray-900">Ahmad Rizki</span>
               <span class="text-sm text-gray-500">• SMK N 1 Jakarta</span>
             </div>
-            <!-- Teks testimonial dan bintang kembali ke tampilan semula (rata kiri) -->
             <p class="text-sm text-gray-600 leading-relaxed">
               "Alhamdulillah sudah dapet 15+ project dari sini. Skill design UI/UX ku jadi makin terasah dan dapat
               pengalaman kerja real!"
@@ -117,9 +111,7 @@
       </div>
     </div>
 
-    <!-- Right Section - Login Form -->
     <div class="order-1 lg:order-2 relative flex justify-center lg:justify-end">
-      <!-- Illustration -->
       <img src="{{ asset('images/org.png') }}"
         alt="Login Illustration"
         class="w-28 lg:w-32 absolute -top-2 lg:-top-6 right-20 z-20 drop-shadow-md">

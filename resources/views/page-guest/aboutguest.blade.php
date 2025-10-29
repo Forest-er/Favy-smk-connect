@@ -1,9 +1,8 @@
-<!-- SMK Connect Introduction (Gradient Container) -->
 <section class="py-16 bg-white relative overflow-hidden">
     <div class="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
         <div class="rounded-2xl p-8 md:p-12 lg:p-16 shadow-2xl relative overflow-hidden" style="background: linear-gradient(135deg, #244c8a 0%, #eaa7f1 100%); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);">
 
-            <!-- Hiasan Dekoratif -->
+            <!-- Hiasan  -->
             <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-white/10 rounded-full blur-2xl"></div>
             <div class="absolute top-10 right-1/4 w-3 h-3 bg-white/30 rounded-full"></div>

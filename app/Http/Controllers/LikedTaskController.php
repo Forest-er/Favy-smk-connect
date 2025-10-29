@@ -10,9 +10,8 @@ class LikedTaskController extends Controller
 {
     public function store($taskId)
     {
-        $userId = Auth::id(); // ambil id user yang sedang login
+        $userId = Auth::id();
 
-        // Cegah duplikasi like
         $existing = LikedTask::where('user_id', $userId)
                              ->where('task_id', $taskId)
                              ->first();

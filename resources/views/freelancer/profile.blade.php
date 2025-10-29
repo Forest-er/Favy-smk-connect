@@ -3,31 +3,20 @@
 @section('content')
 
 <div class="bg-white min-h-screen text-gray-800">
-
-    <!-- Container -->
     <div class="max-w-[1100px] mx-auto px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
-
-        <!-- Left: Profile Info -->
         <div class="flex flex-col items-center">
-
-            <!-- Kotak Profil -->
             <div class="rounded-2xl p-8 shadow-sm border border-pink-200 bg-white w-full">
                 <div class="flex flex-col items-center">
-
                     <!-- Avatar -->
                     <img 
                         src="{{ $user->foto_profil ? asset('storage/' . $user->foto_profil) : asset('images/profile.jpeg') }}"
                         alt="Profile"
                         class="w-28 h-28 rounded-full bg-gradient-to-br from-pink-300 via-pink-400 to-rose-400 flex items-center justify-center text-white text-5xl font-bold shadow-md">
 
-                    <!-- Name -->
                     <h2 class="mt-5 text-xl font-semibold text-gray-800">{{ $user->nama }}</h2>
                     <p class="text-gray-500 text-[15px]">{{ $user->email }}</p>
                 </div>
-
                 <hr class="my-6 border-pink-100">
-
-                <!-- Info List -->
                 <div class="space-y-4 text-[15px] mb-6">
                     <div class="flex items-center gap-3 text-gray-700">
                         <i class="bi bi-briefcase text-[18px] text-pink-500"></i>
@@ -57,10 +46,9 @@
 
         </div>
 
-        <!-- Right: Profile Details -->
         <div class="md:col-span-2 space-y-8">
 
-            <!-- Info Box -->
+            <!-- Info -->
             <div class="border border-pink-200 bg-gradient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
                 <div class="flex gap-3">
                     <i class="bi bi-stars text-pink-500 text-xl mt-[2px]"></i>
@@ -84,7 +72,6 @@
                 </div>
             </div>
 
-            <!-- Intro Section -->
             <div>
                 <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
                     <span>👋</span> Perkenalkan dirimu pada klien
@@ -94,11 +81,8 @@
                 </p>
             </div>
 
-            <!-- Profile Checklist -->
             <div class="border border-pink-200 rounded-2xl p-6 bg-white shadow-sm">
                 <h3 class="text-[17px] font-semibold text-gray-800 mb-5">Langkah-langkah meningkatkan profilmu</h3>
-
-                <!-- Checklist Cards -->
                 <div class="space-y-4">
                     <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
                         <div class="flex justify-between items-center mb-1">
@@ -125,7 +109,6 @@
         </div>
     </div>
 
-    <!-- Modal Lengkapi Profil -->
     <div id="addDetailModal" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
         <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
             <h2 class="text-lg font-semibold text-gray-800">Complete your business profile</h2>
@@ -139,7 +122,6 @@
             </div>
 
             <div class="bg-white border border-gray-200 rounded-xl shadow-md p-6">
-                <!-- Avatar -->
                 <div class="flex flex-col items-center mb-8">
                     <div class="relative w-20 h-20">
                         <img
@@ -189,7 +171,6 @@
         </div>
     </div>
 
-    <!-- Modal Komunikasi -->
     <div id="commModal" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
         <div class="flex justify-center items-center min-h-screen px-4">
             <div class="bg-white rounded-xl p-6 max-w-md text-center shadow-md">
@@ -202,7 +183,6 @@
 
 </div>
 
-<!-- Script -->
 <script>
     function openModal() {
         document.getElementById('addDetailModal').classList.remove('hidden');

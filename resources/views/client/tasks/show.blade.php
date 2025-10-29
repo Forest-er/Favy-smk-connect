@@ -1,7 +1,5 @@
-<!-- Overlay -->
 <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
 
-<!-- Right Popup -->
 <div id="rightPopup" class="fixed top-0 right-0 h-full w-[700px] bg-white shadow-xl z-50 transform translate-x-full transition-transform rounded-l-3xl overflow-hidden">
 
   <!-- Header -->
@@ -9,11 +7,7 @@
     <h3 class="text-xl font-semibold text-gray-800">Project Details</h3>
     <button onclick="closePopup()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
   </div>
-
-  <!-- Content Scrollable -->
   <div class="overflow-y-auto h-[calc(100%-72px)] p-6 space-y-6">
-
-    <!-- Project Info -->
     <div class="space-y-2">
       <h2 class="text-2xl font-bold text-black">{{ $task->judul }}</h2>
       <p class="text-gray-500">{{ $task->jurusan->nama_jurusan ?? 'General' }}</p>
@@ -22,7 +16,6 @@
       <p class="text-gray-500">Deadline: {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}</p>
     </div>
 
-    <!-- Client Info -->
     <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-sm">
       <h4 class="font-semibold text-gray-800">Client</h4>
       <div class="flex items-center gap-4 mt-2">
@@ -35,7 +28,6 @@
       </div>
     </div>
 
-    <!-- Skills -->
     @if($task->user->skills)
       <div>
         <h4 class="font-semibold text-gray-800 mb-2">Skills</h4>
@@ -47,7 +39,6 @@
       </div>
     @endif
 
-    <!-- Portfolio -->
     <div>
       <h4 class="font-semibold text-gray-800 mb-3">Portfolio</h4>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -65,12 +56,9 @@
         @endif
       </div>
     </div>
-
   </div>
-
 </div>
 
-<!-- JS -->
 <script>
 function openPopup() {
     document.getElementById('overlay').classList.remove('hidden');

@@ -41,14 +41,14 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
-    // Form tambah task
+    // tambah task
     Route::get('/insert/task', [TaskController::class, 'create'])->name('client.orders.task');
     Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.store');
 
-    // Form edit task
+    // edit task
     Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 
-    // Update task (hasil dari form edit)
+    // Update task 
     Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
 
     // Hapus task

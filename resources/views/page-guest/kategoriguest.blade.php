@@ -1,9 +1,7 @@
-<!-- resources/views/carousel.blade.php -->
 <section class="py-16 bg-white relative overflow-hidden">
-    <!-- Background gradient subtle -->
-    <div class="absolute inset-0 bg-linear-to-br from-blue-50 to-indigo-50 opacity-30 pointer-events-none"></div>
 
-    <!-- Hiasan Dekoratif Background -->
+    <!-- hiasan -->
+    <div class="absolute inset-0 bg-linear-to-br from-blue-50 to-indigo-50 opacity-30 pointer-events-none"></div>
     <div class="absolute top-20 left-20 w-48 h-48 bg-blue-400/35 rounded-full blur-3xl"></div>
     <div class="absolute bottom-20 right-20 w-80 h-80 bg-purple-400/35 rounded-full blur-3xl"></div>
     <div class="absolute top-32 right-1/4 w-16 h-16 border-4 border-blue-500/50 rounded-lg rotate-12"></div>
@@ -30,12 +28,11 @@
             Kami menyediakan berbagai kategori keahlian
         </h2>
 
-        <!-- Carousel wrapper -->
         <div id="carouselWrapper" class="relative overflow-x-auto overflow-y-visible py-6 -mx-4 px-4">
             <div id="carouselTrack" class="flex flex-nowrap gap-4 md:gap-8 scroll-smooth">
                 @php
                 $colors = ['bg-pink-200','bg-blue-200','bg-orange-200','bg-green-200','bg-purple-200','bg-yellow-200'];
-                $jurusans = DB::table('jurusans')->get(); // ambil semua jurusan
+                $jurusans = DB::table('jurusans')->get();
                 @endphp
 
                 @foreach($jurusans as $index => $jurusan)
@@ -48,42 +45,28 @@
                     style="transform: rotate({{ $rotate }})"
                     data-index="{{ $index }}">
 
-                    <!-- Hiasan putih di dalam Card - lebih terlihat -->
-                    <!-- Circle blur putih dengan opacity lebih tinggi -->
+                    <!-- hiasan -->
                     <div class="absolute -top-8 -right-8 w-32 h-32 bg-white/50 rounded-full blur-2xl"></div>
                     <div class="absolute -bottom-6 -left-6 w-28 h-28 bg-white/50 rounded-full blur-2xl"></div>
-
-                    <!-- Dots putih lebih besar dan lebih terlihat -->
                     <div class="absolute top-4 right-6 w-3 h-3 bg-white/70 rounded-full"></div>
                     <div class="absolute top-8 right-4 w-2.5 h-2.5 bg-white/60 rounded-full"></div>
                     <div class="absolute bottom-6 left-4 w-3 h-3 bg-white/70 rounded-full"></div>
                     <div class="absolute bottom-10 left-6 w-2.5 h-2.5 bg-white/60 rounded-full"></div>
                     <div class="absolute top-16 left-8 w-2 h-2 bg-white/65 rounded-full"></div>
                     <div class="absolute bottom-16 right-8 w-2 h-2 bg-white/65 rounded-full"></div>
-
-                    <!-- Geometric shapes putih lebih tebal -->
                     <div class="absolute top-6 left-4 w-8 h-8 border-3 border-white/60 rounded-full rotate-45"></div>
                     <div class="absolute bottom-4 right-4 w-7 h-7 border-3 border-white/55 rotate-12" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
-
-                    <!-- Plus sign putih lebih besar -->
                     <div class="absolute top-1/4 right-8 text-lg font-bold text-white/50">+</div>
-
-                    <!-- Star putih lebih besar -->
                     <div class="absolute bottom-1/4 left-8 text-base text-white/55">★</div>
-
-                    <!-- Lines pattern putih lebih tebal -->
                     <svg class="absolute top-12 right-6 w-10 h-10 opacity-50" viewBox="0 0 100 100">
                         <line x1="0" y1="0" x2="100" y2="100" stroke="white" stroke-width="3" />
                         <line x1="0" y1="100" x2="100" y2="0" stroke="white" stroke-width="3" />
                     </svg>
-
-                    <!-- Tambahan circle kecil -->
                     <div class="absolute top-1/3 right-12 w-4 h-4 border-2 border-white/60 rounded-full"></div>
-
-                    <!-- Nama jurusan -->
                     <h3 class="font-bold text-gray-900 text-lg mb-2 relative z-10">{{ $jurusan->nama_jurusan }}</h3>
+                    <!-- hiasan -->
 
-                    <!-- Badge -->
+                    <!-- Card isi deksripsi -->
                     <div class="mb-3 w-full relative z-10">
                         <div class="flex justify-center flex-wrap gap-2 font-semibold">
                             @if($jurusan->deskripsi_1)
@@ -111,7 +94,7 @@
             </div>
         </div>
 
-        <!-- Garis dekoratif di bawah carousel -->
+        <!-- hiasan -->
         <div class="relative mt-8 w-full" style="width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
             <svg class="absolute inset-x-0 top-0 w-full h-12" viewBox="0 0 1200 60" preserveAspectRatio="none">
                 <path d="M0,30 Q150,10 300,30 T600,30 T900,30 T1200,30" fill="none" stroke="#3b82f6" stroke-width="3" opacity="0.4" />

@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Container -->
 <div class="max-w-7xl mx-auto p-6">
-  <!-- Header Section -->
   <div class="flex items-center justify-between mb-5">
     <div>
       <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
@@ -17,7 +15,6 @@
     </div>
   </div>
 
-  <!-- Stats Cards -->
   <div class="grid grid-cols-4 gap-4 mb-5">
     <div class="bg-gradient-to-br from-indigo-50 to-white p-4 rounded-lg border border-indigo-100">
       <div class="flex items-center justify-between">
@@ -65,14 +62,12 @@
     </div>
   </div>
 
-  <!-- Filter Tabs -->
   <div class="flex gap-2 mb-5 bg-gray-50 p-1 rounded-lg inline-flex">
     <button onclick="filterProjects('all')" class="filter-btn bg-white text-indigo-600 px-4 py-1.5 rounded-md font-medium text-sm shadow-sm" data-status="all">Semua</button>
     <button onclick="filterProjects('in_progress')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="in_progress">In Progress</button>
     <button onclick="filterProjects('cancelled')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="cancelled">Cancelled</button>
   </div>
 
-  <!-- Project Cards - 4 columns -->
   <div id="projectsContainer" class="grid grid-cols-4 gap-4">
     @forelse($tasks as $task)
       @php
@@ -92,7 +87,6 @@
         $badgeClass = $statusClasses[$status] ?? 'bg-gray-50 text-gray-700 border-gray-200';
         $statusLabel = $statusText[$status] ?? ucfirst($status);
         
-        // Normalisasi data client
         $clientName = $task->client_name ?? ($task->user->nama ?? 'Client');
         $clientEmail = $task->client_email ?? ($task->user->email ?? null);
         $clientPhone = $task->client_phone ?? ($task->user->phone ?? null);
@@ -100,7 +94,6 @@
       @endphp
 
       <div class="project-card bg-white rounded-lg border border-gray-200 hover:border-indigo-300 hover:shadow-lg transition-all duration-200 {{ $status == 'done' ? 'opacity-75' : '' }}" data-status="{{ $status }}" data-title="{{ strtolower($task->judul) }}" data-category="{{ strtolower($task->kategori ?? '') }}">
-        <!-- Card Header -->
         <div class="p-4 border-b border-gray-100">
           <div class="flex items-start justify-between mb-2">
             <span class="text-xs px-2 py-1 {{ $badgeClass }} border rounded-md font-medium">{{ $statusLabel }}</span>
@@ -110,7 +103,6 @@
           <p class="text-xs text-gray-500">{{ $task->kategori ?? 'Uncategorized' }}</p>
         </div>
         
-        <!-- Project Image -->
         <div class="h-24 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center">
           @if($status == 'done')
             <i class="bi bi-check-circle-fill text-3xl text-green-500"></i>
@@ -119,11 +111,9 @@
           @endif
         </div>
         
-        <!-- Card Body -->
         <div class="p-4">
           <p class="text-xs text-gray-600 mb-3 line-clamp-2">{{ Str::limit($task->deskripsi, 60) }}</p>
           
-          <!-- Budget -->
           <div class="bg-green-50 border border-green-200 rounded-lg p-2 mb-3">
             <div class="flex items-center justify-between">
               <span class="text-xs text-gray-600">Budget</span>
@@ -131,7 +121,6 @@
             </div>
           </div>
           
-          <!-- Info Grid -->
           <div class="space-y-2 mb-3 text-xs">
             <div class="flex items-center justify-between">
               <span class="text-gray-500 flex items-center gap-1">
@@ -153,7 +142,6 @@
             </div>
           </div>
 
-          <!-- Actions -->
           <div class="flex items-center gap-2 pt-3 border-t border-gray-100">
             <button onclick="openPopup({{ $task->id }})" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-2 px-3 rounded-md text-center transition">
               Detail
@@ -181,20 +169,17 @@
     @endforelse
   </div>
 
-  <!-- Empty State for Filtered Results -->
   <div id="emptyState" class="hidden col-span-4 text-center py-16">
     <i class="bi bi-search text-5xl text-gray-300"></i>
     <p class="text-gray-500 mt-3">Tidak ada proyek yang sesuai dengan filter</p>
   </div>
 </div>
 
-<!-- Overlay -->
 <div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40" onclick="closePopup()"></div>
 
-<!-- Popup Container (Slide dari Kanan) -->
+<!-- Popup -->
 <div id="rightPopup" class="fixed top-0 right-0 h-full w-[70%] bg-white shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 rounded-l-3xl overflow-y-auto">
   <div class="flex flex-col h-full">
-    <!-- Popup Header -->
     <div class="sticky top-0 bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-5 flex items-center justify-between rounded-tl-3xl z-10">
       <h3 class="text-2xl font-bold text-white flex items-center gap-3">
         <i class="bi bi-file-earmark-text-fill"></i>
@@ -205,7 +190,7 @@
       </button>
     </div>
 
-    <!-- Popup Content -->
+    <!-- Popup -->
     <div id="rightPopupContent" class="flex-1 overflow-y-auto">
       @foreach($tasks as $task)
         @php
@@ -225,7 +210,6 @@
           $badgeClass = $statusClasses[$status] ?? 'bg-gray-50 text-gray-700 border-gray-200';
           $statusLabel = $statusText[$status] ?? ucfirst($status);
           
-          // Normalisasi data client untuk popup
           $clientName = $task->client_name ?? ($task->user->nama ?? 'Client');
           $clientEmail = $task->client_email ?? ($task->user->email ?? null);
           $clientPhone = $task->client_phone ?? ($task->user->phone ?? null);
@@ -233,7 +217,6 @@
         @endphp
         
         <div id="popupTask{{ $task->id }}" class="hidden p-6">
-          <!-- Project Header -->
           <div class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-6 mb-6">
             <div class="flex items-start justify-between mb-4">
               <div class="flex-1">
@@ -250,9 +233,7 @@
             </div>
           </div>
 
-          <!-- Main Info Grid -->
           <div class="grid md:grid-cols-2 gap-5 mb-6">
-            <!-- Budget Card -->
             <div class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 border-2 border-green-200 rounded-2xl p-6 shadow-md">
               <div class="flex items-center gap-4">
                 <div class="bg-green-500 p-4 rounded-xl shadow-lg">
@@ -265,7 +246,6 @@
               </div>
             </div>
 
-            <!-- Deadline Card -->
             <div class="bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 border-2 border-indigo-200 rounded-2xl p-6 shadow-md">
               <div class="flex items-center gap-4">
                 <div class="bg-indigo-500 p-4 rounded-xl shadow-lg">
@@ -281,7 +261,7 @@
             </div>
           </div>
 
-          <!-- Info Cards -->
+          <!-- Info  -->
           <div class="grid md:grid-cols-3 gap-4 mb-6">
             <div class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-indigo-300 transition">
               <div class="flex items-center gap-3 mb-2">
@@ -314,7 +294,7 @@
             </div>
           </div>
 
-          <!-- Description -->
+          <!-- deskripsi -->
           <div class="mb-6">
             <h4 class="font-bold text-gray-800 mb-4 text-xl flex items-center gap-2">
               <div class="bg-indigo-100 p-2 rounded-lg">
@@ -327,7 +307,7 @@
             </div>
           </div>
 
-          <!-- Contact Section -->
+          <!-- Contact  -->
           @if($clientEmail || $clientPhone)
           <div class="bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 rounded-2xl p-6 mb-6">
             <h4 class="font-bold text-gray-800 mb-4 text-xl flex items-center gap-2">
@@ -356,7 +336,6 @@
       @endforeach
     </div>
 
-    <!-- Popup Footer -->
     <div class="sticky bottom-0 bg-white border-t-2 border-gray-200 px-6 py-5 flex items-center justify-end gap-4 rounded-bl-3xl shadow-lg">
       <button onclick="closePopup()" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-xl font-semibold transition shadow-sm">
         Tutup
@@ -374,7 +353,6 @@
 </footer>
 
 <script>
-// Fungsi untuk membuka popup
 function openPopup(taskId) {
   document.body.style.overflow = 'hidden';
   document.getElementById('overlay').classList.remove('hidden');
@@ -382,44 +360,37 @@ function openPopup(taskId) {
   const popup = document.getElementById('rightPopup');
   popup.classList.remove('translate-x-full');
   
-  // Sembunyikan semua konten popup
   const allContents = document.querySelectorAll('[id^="popupTask"]');
   allContents.forEach(content => content.classList.add('hidden'));
   
-  // Tampilkan konten task yang dipilih
   const selectedContent = document.getElementById('popupTask' + taskId);
   if (selectedContent) {
     selectedContent.classList.remove('hidden');
   }
   
-  // Update link tombol apply
   const applyBtn = document.getElementById('popupApplyBtn');
   if (applyBtn) {
     applyBtn.href = '/worker/task/' + taskId;
   }
 }
 
-// Fungsi untuk menutup popup
 function closePopup() {
   document.body.style.overflow = '';
   document.getElementById('overlay').classList.add('hidden');
   document.getElementById('rightPopup').classList.add('translate-x-full');
 }
 
-// Tutup popup dengan tombol ESC
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closePopup();
   }
 });
 
-// Fungsi filter proyek berdasarkan status
 function filterProjects(status) {
   const cards = document.querySelectorAll('.project-card');
   const filterButtons = document.querySelectorAll('.filter-btn');
   let visibleCount = 0;
   
-  // Update active button
   filterButtons.forEach(btn => {
     if (btn.dataset.status === status) {
       btn.classList.add('bg-white', 'text-indigo-600', 'shadow-sm');
@@ -430,7 +401,6 @@ function filterProjects(status) {
     }
   });
   
-  // Filter cards
   cards.forEach(card => {
     const cardStatus = card.dataset.status;
     if (status === 'all' || cardStatus === status) {
@@ -441,7 +411,6 @@ function filterProjects(status) {
     }
   });
   
-  // Show/hide empty state
   const emptyState = document.getElementById('emptyState');
   if (visibleCount === 0) {
     emptyState.classList.remove('hidden');
@@ -450,7 +419,6 @@ function filterProjects(status) {
   }
 }
 
-// Search functionality
 document.getElementById('searchInput').addEventListener('input', function(e) {
   const searchTerm = e.target.value.toLowerCase();
   const cards = document.querySelectorAll('.project-card');
@@ -468,7 +436,6 @@ document.getElementById('searchInput').addEventListener('input', function(e) {
     }
   });
   
-  // Show/hide empty state
   const emptyState = document.getElementById('emptyState');
   if (visibleCount === 0) {
     emptyState.classList.remove('hidden');

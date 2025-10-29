@@ -21,7 +21,7 @@
   </style>
 </head>
 
-<body class="antialiased bg-gray-50 text-gray-800"> <!-- Header -->
+<body class="antialiased bg-gray-50 text-gray-800">
   <header class="bg-white border-b">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
       <div class="flex items-center gap-4"> <a href="#" class="inline-flex items-center gap-2"> <svg
@@ -39,10 +39,10 @@
           class="inline-flex items-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-lg text-sm shadow hover:bg-pink-600">Create
           a Gig</button> </div>
     </div>
-  </header> <!-- Main content -->
+  </header> <!-- Main  -->
   <main class="max-w-7xl mx-auto px-6 py-10">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8"> <!-- Left / Main column -->
-      <section class="lg:col-span-8 space-y-6"> <!-- Title & seller -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8"> 
+      <section class="lg:col-span-8 space-y-6"> 
         <div class="bg-white p-6 rounded-2xl shadow-sm">
           <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">I will draw realistic digital painting and
             background illustrations</h1>
@@ -66,11 +66,10 @@
             </div>
           </div>
         </div>
-         <!-- Gallery -->
+         <!-- Galeri -->
         <div class="bg-white p-6 rounded-2xl shadow-sm">
           <div class="relative">
             <div id="gallery" class="aspect-[16/10] rounded-xl overflow-hidden bg-gray-100">
-              <!-- big image (use placeholder images or real assets) -->
               <img id="gallery-img" src="/mnt/data/e1e0881b-0b01-4715-b090-e4ddc4bf1211.png" alt="art sample" class="w-full h-full object-cover">
             </div>
 
@@ -91,7 +90,7 @@
             <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop" alt="thumb4" class="w-24 h-14 object-cover rounded-md cursor-pointer opacity-70" data-src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop">
           </div>
         </div>
-        <!-- Description -->
+        <!-- deskripsi -->
         <div class="bg-white p-6 rounded-2xl shadow-sm">
           <h3 class="text-lg font-semibold mb-3">About This Gig</h3>
           <p class="text-gray-700 leading-relaxed mb-4">
@@ -107,7 +106,7 @@
           </ul>
         </div>
 
-        <!-- Reviews -->
+        <!-- riviw -->
         <div class="bg-white p-6 rounded-2xl shadow-sm">
           <h4 class="font-semibold mb-3">Recent Reviews</h4>
           <div class="space-y-4 text-sm text-gray-700">
@@ -133,7 +132,7 @@
         </div>
       </section>
 
-      <!-- Right / Sidebar -->
+      <!-- Sidebar -->
       <aside class="lg:col-span-4">
         <div class="sticky top-6 space-y-4">
           <div class="bg-white p-6 rounded-2xl shadow-sm">
@@ -150,7 +149,6 @@
             </div>
 
             <hr class="my-4">
-
             <ul class="text-sm text-gray-700 space-y-2">
               <li class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-500"
                   viewBox="0 0 20 20" fill="currentColor">

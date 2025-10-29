@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Main Content -->
+<!-- Main  -->
 <div class="container mx-auto sm:px-6 lg:px-8 py-6 sm:py-8">
     <!-- Breadcrumb -->
     <nav class="flex mb-6 sm:mb-8" aria-label="Breadcrumb">
@@ -34,7 +34,6 @@
         </ol>
     </nav>
 
-    <!-- Page Header with Edit Badge -->
     <div class="mb-8">
         <div class="flex items-center gap-3 mb-2">
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
@@ -94,9 +93,7 @@
         @method('PUT')
 
         <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
-            <!-- Main Form Section -->
             <div class="lg:col-span-2 space-y-6">
-                <!-- Card: Informasi Dasar -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
                         <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
@@ -111,7 +108,6 @@
                     </div>
 
                     <div class="space-y-5">
-                        <!-- Judul Task -->
                         <div>
                             <label for="judul" class="block text-sm font-semibold text-gray-700 mb-2">
                                 Judul Task <span class="text-red-500">*</span>
@@ -129,7 +125,7 @@
                             <p class="mt-1.5 text-xs text-gray-500">Buat judul yang jelas dan menarik perhatian</p>
                         </div>
 
-                        <!-- Kategori/Jurusan -->
+                        <!-- Kategori -->
                         <div>
                             <label for="jurusan_id" class="block text-sm font-semibold text-gray-700 mb-2">
                                 Kategori/Bidang <span class="text-red-500">*</span>
@@ -169,7 +165,7 @@
                     </div>
                 </div>
 
-                <!-- Card: Budget & Timeline -->
+                <!-- CardvBudget & Timeline -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
                         <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
@@ -241,7 +237,7 @@
                     </div>
                 </div>
 
-                <!-- Card: Lampiran -->
+                <!-- Lampiran -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
                         <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
@@ -255,8 +251,7 @@
                         </div>
                     </div>
 
-                    <!-- Current Image Preview -->
-                    @if($task->foto)
+\                    @if($task->foto)
                         <div class="mb-4">
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Gambar Saat Ini</label>
                             <div class="relative inline-block">
@@ -314,15 +309,13 @@
                     </div>
                 </div>
 
-                <!-- Status Hidden -->
-                <input type="hidden" name="status" value="{{ $task->status }}">
+\                <input type="hidden" name="status" value="{{ $task->status }}">
             </div>
 
             <!-- Sidebar -->
             <div class="lg:col-span-1">
                 <div class="sticky top-24 space-y-6">
-                    <!-- Tips Card -->
-                    <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-200">
+\                    <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-200">
                         <div class="flex items-center gap-2 mb-4">
                             <svg class="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
@@ -349,7 +342,7 @@
                         </ul>
                     </div>
 
-                    <!-- Action Card -->
+                    <!-- Action  -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <h3 class="font-bold text-gray-900 mb-4">Update Task</h3>
                         <div class="space-y-4">
@@ -381,7 +374,7 @@
                         </div>
                     </div>
 
-                    <!-- Delete Card -->
+                    <!-- Delete  -->
                     <div class="bg-red-50 rounded-xl p-6 border border-red-200">
                         <div class="flex items-center gap-2 mb-3">
                             <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
@@ -403,7 +396,7 @@
         </div>
     </form>
 
-    <!-- Delete Form (Hidden) -->
+    <!-- Delete Form -->
     <form id="delete-form" 
           action="{{ route('tasks.destroy', $task->id_task) }}" 
           method="POST" 
@@ -415,7 +408,6 @@
 
 @push('scripts')
 <script>
-    // File upload preview
     const fileInput = document.getElementById('foto-upload');
     const filePreview = document.getElementById('file-preview');
     const fileName = document.getElementById('file-name');
@@ -434,24 +426,20 @@
         filePreview.classList.add('hidden');
     });
 
-    // Budget formatting
     const budgetInput = document.getElementById('budget');
     
     budgetInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
         if (value) {
-            // Format dengan thousand separator
             e.target.value = new Intl.NumberFormat('id-ID').format(value);
         }
     });
 
-    // Remove formatting before submit
     document.querySelector('form').addEventListener('submit', function(e) {
         const rawValue = budgetInput.value.replace(/\./g, '');
         budgetInput.value = rawValue;
     });
 
-    // Confirm delete function
     function confirmDelete() {
         if (confirm('Apakah Anda yakin ingin menghapus task ini? Tindakan ini tidak dapat dibatalkan.')) {
             if (confirm('Konfirmasi sekali lagi. Task akan dihapus secara permanen!')) {
