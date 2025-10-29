@@ -80,13 +80,6 @@
                     <!-- Tambahan circle kecil -->
                     <div class="absolute top-1/3 right-12 w-4 h-4 border-2 border-white/60 rounded-full"></div>
 
-                    <!-- Icon -->
-                    <div class="flex items-center justify-center mb-4 space-x-2 relative z-10">
-                        <i class="bi bi-pc-display-horizontal"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        </svg>
-                    </div>
-
                     <!-- Nama jurusan -->
                     <h3 class="font-bold text-gray-900 text-lg mb-2 relative z-10">{{ $jurusan->nama_jurusan }}</h3>
 

@@ -35,8 +35,8 @@
 
       </div>
 
-      <div class="mt-8 flex gap-3">
-        <div class="relative flex-1">
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <div class="relative w-full sm:flex-1">
           <form method="GET">
             <div class="flex flex-row">
               <input type="text" placeholder="Search projects, clients, or skills..." name="keyword"
@@ -208,496 +208,410 @@
     </div>
   </section>
 
-  <!-- Progress & Achievements -->
-  <section class="mb-12">
-    <div class="flex justify-between items-center mb-6">
-      <div>
-        <h2 class="text-2xl font-bold text-gray-900">Your Progress</h2>
-        <p class="text-gray-500 text-sm mt-1">Track your achievements and goals</p>
-      </div>
-    </div>
+  <!-- Project Details Popup -->
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-40 transition-opacity"
+    onclick="closePopup()"></div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <p class="text-gray-900 font-semibold text-lg">Profile Completion</p>
-            <p class="text-sm text-gray-500 mt-1">Keep your profile updated</p>
-          </div>
-          <div class="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center">
-            <span class="text-2xl font-bold text-purple-600">85%</span>
-          </div>
-        </div>
-        <div class="w-full bg-gray-100 rounded-full h-3">
-          <div class="bg-gradient-to-r from-purple-600 to-indigo-600 h-3 rounded-full" style="width: 85%"></div>
-        </div>
-        <p class="text-xs text-gray-500 mt-3">Add 3 more skills to reach 100%</p>
-      </div>
-
-      <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <p class="text-gray-900 font-semibold text-lg">Client Satisfaction</p>
-            <p class="text-sm text-gray-500 mt-1">Based on 23 reviews</p>
-          </div>
-          <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center">
-            <span class="text-2xl font-bold text-blue-600">4.9</span>
-          </div>
-        </div>
-        <div class="w-full bg-gray-100 rounded-full h-3">
-          <div class="bg-gradient-to-r from-blue-600 to-cyan-600 h-3 rounded-full" style="width: 98%"></div>
-        </div>
-        <div class="flex items-center gap-1 mt-3">
-          <i class="bi bi-star-fill text-yellow-400 text-sm"></i>
-          <i class="bi bi-star-fill text-yellow-400 text-sm"></i>
-          <i class="bi bi-star-fill text-yellow-400 text-sm"></i>
-          <i class="bi bi-star-fill text-yellow-400 text-sm"></i>
-          <i class="bi bi-star-fill text-yellow-400 text-sm"></i>
-          <span class="text-xs text-gray-500 ml-2">Excellent rating</span>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-hover">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <p class="text-gray-900 font-semibold text-lg">Monthly Goal</p>
-            <p class="text-sm text-gray-500 mt-1">Rp8.75M / Rp12.5M</p>
-          </div>
-          <div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center">
-            <span class="text-2xl font-bold text-green-600">70%</span>
-          </div>
-        </div>
-        <div class="w-full bg-gray-100 rounded-full h-3">
-          <div class="bg-gradient-to-r from-green-600 to-emerald-600 h-3 rounded-full" style="width: 70%"></div>
-        </div>
-        <p class="text-xs text-gray-500 mt-3">Rp3.75M left to reach your goal</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trusted Companies -->
-  <section class="mb-12">
-    <div class="bg-white rounded-2xl p-10 shadow-lg border border-gray-100">
-      <h2 class="text-2xl font-bold text-center mb-3 text-gray-900">Trusted by Leading Companies</h2>
-      <p class="text-center text-gray-500 mb-10">Join thousands of freelancers working with top brands</p>
-      <div class="flex flex-wrap justify-center items-center gap-12">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_Tokopedia.svg"
-          class="h-8 grayscale hover:grayscale-0 transition opacity-60 hover:opacity-100" alt="Tokopedia">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Shopee_logo.svg"
-          class="h-8 grayscale hover:grayscale-0 transition opacity-60 hover:opacity-100" alt="Shopee">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/GoTo_Logo.svg"
-          class="h-8 grayscale hover:grayscale-0 transition opacity-60 hover:opacity-100" alt="GoTo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Bukalapak_logo.svg"
-          class="h-8 grayscale hover:grayscale-0 transition opacity-60 hover:opacity-100" alt="Bukalapak">
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- Project Details Popup -->
-<!-- Overlay -->
-<div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-40 transition-opacity"
-  onclick="closePopup()"></div>
-
-<!-- Popup Panel -->
-<div id="rightPopup" class="fixed top-0 right-0 h-full w-full md:w-[90%] lg:w-[70%] bg-white shadow-2xl transform translate-x-full 
+  <!-- Popup Panel -->
+  <div id="rightPopup" class="fixed top-0 right-0 h-full w-full md:w-[90%] lg:w-[70%] bg-white shadow-2xl transform translate-x-full 
              transition-transform duration-500 ease-in-out z-50 overflow-y-auto rounded-l-3xl">
 
-  <!-- HEADER -->
-  <div class="sticky top-0 bg-white border-b border-gray-100 p-6 flex justify-between items-center z-10 shadow-sm">
-    <h3 id="popupHeader" class="text-xl font-bold text-gray-900">Project Details</h3>
-    <button onclick="closePopup()"
-      class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition">
-      <i class="bi bi-x-lg text-gray-600"></i>
-    </button>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <div class="p-6 flex flex-col lg:flex-row gap-6">
-
-    <!-- LEFT COLUMN -->
-    <div class="flex-1 space-y-6">
-
-      <!-- STEP 1 -->
-      <div id="step1">
-        <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 mb-6">
-
-          <!-- Project Image -->
-          <div class="mb-4">
-            <img id="popupImage" src="https://via.placeholder.com/600x300" alt="Project Image"
-              class="w-full h-60 object-cover rounded-2xl">
-          </div>
-
-          <!-- Project Title -->
-          <h2 id="popupTitle" class="text-2xl font-bold text-gray-900 mb-4">UI Design for App</h2>
-
-          <!-- Client Info -->
-          <div class="flex items-center gap-3 mb-6">
-            <img src="https://i.pravatar.cc/40?img=1" class="w-10 h-10 rounded-full ring-2 ring-white">
-            <div>
-              <p class="text-sm text-gray-500">Client</p>
-              <p id="popupClient" class="font-semibold text-gray-900">John Doe</p>
-            </div>
-          </div>
-
-          <!-- Budget & Deadline Grid -->
-          <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-white rounded-xl p-4">
-              <p class="text-xs text-gray-500 mb-1">Budget</p>
-              <p id="popupBudget" class="text-xl font-bold text-gray-900">Rp2.000.000</p>
-            </div>
-            <div class="bg-white rounded-xl p-4">
-              <p class="text-xs text-gray-500 mb-1">Deadline</p>
-              <p id="popupDeadline" class="text-xl font-bold text-gray-900">20 Nov 2025</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- DESCRIPTION -->
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
-          <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            <i class="bi bi-file-text text-purple-600"></i> Project Description
-          </h4>
-          <p id="popupDesk" class="text-gray-600 leading-relaxed">
-            Design a clean, minimal, and modern mobile app interface for our new product launch...
-          </p>
-        </div>
-
-        <!-- SKILLS -->
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
-          <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            <i class="bi bi-tag text-purple-600"></i> Skills Required
-          </h4>
-          <div class="flex flex-wrap gap-2">
-            <span id="popup1" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UI
-              Design</span>
-            <span id="popup2" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UX
-              Design</span>
-            <span id="popup3" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Figma</span>
-          </div>
-        </div>
-
-
-      </div>
-
-      <!-- STEP 2 -->
-      <div id="step2" class="hidden">
-        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h3 class="font-semibold text-gray-900 mb-4 text-xl">Fill Proposal Details</h3>
-
-          <form id="proposalForm" action="https://formspree.io/f/mjkvkavj" method="POST" enctype="multipart/form-data"
-            class="space-y-4">
-
-            <div>
-              <label class="block text-gray-700 font-medium mb-2">Nama</label>
-              <input type="text" name="name" placeholder="Masukkan Nama Anda" required
-                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent">
-            </div>
-
-            <div>
-              <label class="block text-gray-700 font-medium mb-2">Email</label>
-              <input type="email" name="email" placeholder="Masukkan Email Anda" required
-                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent">
-            </div>
-
-            <div>
-              <label class="block text-gray-700 font-medium mb-2">Deskripsi</label>
-              <textarea name="message" placeholder="Masukkan Deskripsi Proposal / Portofolio" required rows="5"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent"></textarea>
-            </div>
-
-            <div>
-              <label class="block text-gray-700 font-medium mb-2">Link CV (Google Drive / Dropbox)</label>
-              <input type="url" name="cv_link" placeholder="Masukkan link CV Anda" required
-                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent">
-            </div>
-
-            <div class="flex gap-3 mt-3 justify-center">
-              <button onclick="backToStep1()"
-                class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-8 py-3 rounded-xl transition flex items-center justify-center gap-2 text-base">
-                <i class="bi bi-arrow-left"></i> Back
-              </button>
-
-              <button type="submit"
-                class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 
-               text-white font-semibold px-8 py-3 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
-                <i class="bi bi-send"></i> Submit Proposal
-              </button>
-            </div>
-
-            <div id="formNotif" class="hidden text-green-600 font-semibold mt-2 text-center bg-green-50 p-3 rounded-lg">
-              ✓ Proposal berhasil dikirim!
-            </div>
-
-        </div>
-      </div>
+    <!-- HEADER -->
+    <div class="sticky top-0 bg-white border-b border-gray-100 p-6 flex justify-between items-center z-10 shadow-sm">
+      <h3 id="popupHeader" class="text-xl font-bold text-gray-900">Project Details</h3>
+      <button onclick="closePopup()"
+        class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition">
+        <i class="bi bi-x-lg text-gray-600"></i>
+      </button>
     </div>
 
-    <!-- RIGHT SIDEBAR -->
-    <div class="hidden lg:block lg:w-[360px] space-y-6">
+    <!-- MAIN CONTENT -->
+    <div class="p-6 flex flex-col lg:flex-row gap-6">
 
-      <!-- Info Card -->
-      <div class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-200">
-        <div class="flex items-start gap-3 mb-3">
-          <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
-            <i class="bi bi-info-circle text-purple-600 text-xl"></i>
+      <!-- LEFT COLUMN -->
+      <div class="flex-1 space-y-6">
+
+        <!-- STEP 1 -->
+        <div id="step1">
+          <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-6 mb-6">
+
+            <!-- Project Image -->
+            <div class="mb-4">
+              <img id="popupImage" src="https://via.placeholder.com/600x300" alt="Project Image"
+                class="w-full h-60 object-cover rounded-2xl">
+            </div>
+
+            <!-- Project Title -->
+            <h2 id="popupTitle" class="text-2xl font-bold text-gray-900 mb-4">UI Design for App</h2>
+
+            <!-- Client Info -->
+            <div class="flex items-center gap-3 mb-6">
+              <img src="https://i.pravatar.cc/40?img=1" class="w-10 h-10 rounded-full ring-2 ring-white">
+              <div>
+                <p class="text-sm text-gray-500">Client</p>
+                <p id="popupClient" class="font-semibold text-gray-900">John Doe</p>
+              </div>
+            </div>
+
+            <!-- Budget & Deadline Grid -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="bg-white rounded-xl p-4">
+                <p class="text-xs text-gray-500 mb-1">Budget</p>
+                <p id="popupBudget" class="text-xl font-bold text-gray-900">Rp2.000.000</p>
+              </div>
+              <div class="bg-white rounded-xl p-4">
+                <p class="text-xs text-gray-500 mb-1">Deadline</p>
+                <p id="popupDeadline" class="text-xl font-bold text-gray-900">20 Nov 2025</p>
+              </div>
+            </div>
           </div>
-          <div>
-            <p class="font-semibold text-gray-900 mb-1">Need Connects to Bid</p>
-            <p class="text-gray-600 text-sm">Connects show clients you're serious about the project.</p>
+
+          <!-- DESCRIPTION -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
+            <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <i class="bi bi-file-text text-purple-600"></i> Project Description
+            </h4>
+            <p id="popupDesk" class="text-gray-600 leading-relaxed">
+              Design a clean, minimal, and modern mobile app interface for our new product launch...
+            </p>
+          </div>
+
+          <!-- SKILLS -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
+            <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+              <i class="bi bi-tag text-purple-600"></i> Skills Required
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span id="popup1" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UI
+                Design</span>
+              <span id="popup2" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">UX
+                Design</span>
+              <span id="popup3" class="px-3 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Figma</span>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="step2" class="hidden">
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+            <h3 class="font-semibold text-gray-900 mb-4 text-xl">Fill Proposal Details</h3>
+
+            <form id="proposalForm" action="https://formspree.io/f/mjkvkavj" method="POST" enctype="multipart/form-data"
+              class="space-y-4">
+
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Nama</label>
+                <input type="text" name="name" placeholder="Masukkan Nama Anda" required
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent">
+              </div>
+
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Email</label>
+                <input type="email" name="email" placeholder="Masukkan Email Anda" required
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent">
+              </div>
+
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Deskripsi</label>
+                <textarea name="message" placeholder="Masukkan Deskripsi Proposal / Portofolio" required rows="5"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Link CV (Google Drive / Dropbox)</label>
+                <input type="url" name="cv_link" placeholder="Masukkan link CV Anda" required
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent">
+              </div>
+
+              <div class="flex gap-3 mt-3 justify-center">
+                <button onclick="backToStep1()"
+                  class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-8 py-3 rounded-xl transition flex items-center justify-center gap-2 text-base">
+                  <i class="bi bi-arrow-left"></i> Back
+                </button>
+
+                <button type="submit"
+                  class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 
+               text-white font-semibold px-8 py-3 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-base">
+                  <i class="bi bi-send"></i> Submit Proposal
+                </button>
+              </div>
+
+              <div id="formNotif" class="hidden text-green-600 font-semibold mt-2 text-center bg-green-50 p-3 rounded-lg">
+                ✓ Proposal berhasil dikirim!
+              </div>
+
           </div>
         </div>
-        <a href="#" class="text-purple-600 text-sm font-semibold hover:text-purple-700 inline-flex items-center gap-1">
-          Learn more <i class="bi bi-arrow-right"></i>
-        </a>
       </div>
 
-      <!-- Actions -->
-      <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-3">
-        <button onclick="goToStep2()" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 
+      <!-- RIGHT SIDEBAR -->
+      <div class="hidden lg:block lg:w-[360px] space-y-6">
+
+        <!-- Info Card -->
+        <div class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-200">
+          <div class="flex items-start gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0">
+              <i class="bi bi-info-circle text-purple-600 text-xl"></i>
+            </div>
+            <div>
+              <p class="font-semibold text-gray-900 mb-1">Need Connects to Bid</p>
+              <p class="text-gray-600 text-sm">Connects show clients you're serious about the project.</p>
+            </div>
+          </div>
+          <a href="#" class="text-purple-600 text-sm font-semibold hover:text-purple-700 inline-flex items-center gap-1">
+            Learn more <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Actions -->
+        <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 space-y-3">
+          <button onclick="goToStep2()" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 
                            text-white font-bold py-4 rounded-xl transition shadow-lg shadow-purple-200 
                            flex items-center justify-center gap-2">
-          <i class="bi bi-send-fill"></i> Request to Order
-        </button>
+            <i class="bi bi-send-fill"></i> Request to Order
+          </button>
 
-        <button class="w-full border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-4 
+          <button class="w-full border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-4 
                            rounded-xl flex items-center justify-center gap-2 transition">
-          <i class="bi bi-heart"></i> Save Project
-        </button>
+            <i class="bi bi-heart"></i> Save Project
+          </button>
 
-        <button class="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-4 
+          <button class="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-4 
                            rounded-xl flex items-center justify-center gap-2 transition">
-          <i class="bi bi-share"></i> Share
-        </button>
-      </div>
-
-      <!-- About Client -->
-      <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
-        <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <i class="bi bi-person-circle text-purple-600"></i> About Client
-        </h5>
-        <p class="text-gray-700 text-sm leading-relaxed mb-4">
-          Experienced professional looking for talented freelancers. Committed to clear communication and fair payment.
-        </p>
-
-        <div class="space-y-3 pt-4 border-t border-gray-100">
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-600">Member since</span>
-            <span class="font-semibold text-gray-900">Jan 2022</span>
-          </div>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-600">Projects posted</span>
-            <span class="font-semibold text-gray-900">35</span>
-          </div>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-600">Hire rate</span>
-            <span class="font-semibold text-green-600">95%</span>
-          </div>
+            <i class="bi bi-share"></i> Share
+          </button>
         </div>
 
-        <a href="#"
-          class="mt-4 inline-flex items-center gap-2 text-purple-600 font-semibold text-sm hover:text-purple-700 transition">
-          View Full Profile <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
+        <!-- About Client -->
+        <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+          <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <i class="bi bi-person-circle text-purple-600"></i> About Client
+          </h5>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">
+            Experienced professional looking for talented freelancers. Committed to clear communication and fair payment.
+          </p>
 
-      <!-- Contact -->
-      <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
-        <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <i class="bi bi-envelope text-purple-600"></i> Contact
-        </h5>
-        <button
-          class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2">
-          <i class="bi bi-chat-dots"></i> Send Message
-        </button>
+          <div class="space-y-3 pt-4 border-t border-gray-100">
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-600">Member since</span>
+              <span class="font-semibold text-gray-900">Jan 2022</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-600">Projects posted</span>
+              <span class="font-semibold text-gray-900">35</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-gray-600">Hire rate</span>
+              <span class="font-semibold text-green-600">95%</span>
+            </div>
+          </div>
+
+          <a href="#"
+            class="mt-4 inline-flex items-center gap-2 text-purple-600 font-semibold text-sm hover:text-purple-700 transition">
+            View Full Profile <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Contact -->
+        <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+          <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <i class="bi bi-envelope text-purple-600"></i> Contact
+          </h5>
+          <button
+            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2">
+            <i class="bi bi-chat-dots"></i> Send Message
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- SCRIPT -->
-<script>
-  function openPopup(title, client, deadline, budget, description, req1, req2, req3, imageUrl) {
-    document.getElementById('popupTitle').textContent = title;
-    document.getElementById('popupClient').textContent = client;
-    document.getElementById('popupDeadline').textContent = deadline;
-    document.getElementById('popupBudget').textContent = budget;
-    document.getElementById('popupDesk').textContent = description;
-    document.getElementById('popup1').textContent = req1;
-    document.getElementById('popup2').textContent = req2;
-    document.getElementById('popup3').textContent = req3;
+  <!-- SCRIPT -->
+  <script>
+    function openPopup(title, client, deadline, budget, description, req1, req2, req3, imageUrl) {
+      document.getElementById('popupTitle').textContent = title;
+      document.getElementById('popupClient').textContent = client;
+      document.getElementById('popupDeadline').textContent = deadline;
+      document.getElementById('popupBudget').textContent = budget;
+      document.getElementById('popupDesk').textContent = description;
+      document.getElementById('popup1').textContent = req1;
+      document.getElementById('popup2').textContent = req2;
+      document.getElementById('popup3').textContent = req3;
 
-    // Set image with fallback
-    const imgElement = document.getElementById('popupImage');
-    imgElement.src = imageUrl;
-    imgElement.onerror = function() {
-      this.src = 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg';
-    };
+      // Set image with fallback
+      const imgElement = document.getElementById('popupImage');
+      imgElement.src = imageUrl;
+      imgElement.onerror = function() {
+        this.src = 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg';
+      };
 
-    document.getElementById('overlay').classList.remove('hidden');
-    document.getElementById('step1').classList.remove('hidden');
-    document.getElementById('step2').classList.add('hidden');
-    document.getElementById('popupHeader').textContent = 'Project Details';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      document.getElementById('overlay').classList.remove('hidden');
+      document.getElementById('step1').classList.remove('hidden');
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('popupHeader').textContent = 'Project Details';
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
 
-    setTimeout(() => {
-      document.getElementById('rightPopup').classList.remove('translate-x-full');
-    }, 10);
-  }
+      setTimeout(() => {
+        document.getElementById('rightPopup').classList.remove('translate-x-full');
+      }, 10);
+    }
 
-  function closePopup() {
-    document.getElementById('rightPopup').classList.add('translate-x-full');
-    document.body.style.overflow = ''; // Restore scrolling
+    function closePopup() {
+      document.getElementById('rightPopup').classList.add('translate-x-full');
+      document.body.style.overflow = ''; // Restore scrolling
 
-    setTimeout(() => {
-      document.getElementById('overlay').classList.add('hidden');
-    }, 500);
-  }
+      setTimeout(() => {
+        document.getElementById('overlay').classList.add('hidden');
+      }, 500);
+    }
 
-  function goToStep2() {
-    document.getElementById('step1').classList.add('hidden');
-    document.getElementById('step2').classList.remove('hidden');
-    document.getElementById('popupHeader').textContent = 'Proposal Form';
+    function goToStep2() {
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
+      document.getElementById('popupHeader').textContent = 'Proposal Form';
 
-    // Scroll to top of popup
-    document.getElementById('rightPopup').scrollTo({
-      top: 0,
-      behavior: 'smooth'
+      // Scroll to top of popup
+      document.getElementById('rightPopup').scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    function backToStep1() {
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('step1').classList.remove('hidden');
+      document.getElementById('popupHeader').textContent = 'Project Details';
+
+      // Scroll to top of popup
+      document.getElementById('rightPopup').scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Form submission (Formspree)
+    const proposalForm = document.getElementById('proposalForm');
+    if (proposalForm) {
+      proposalForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(proposalForm);
+        const submitButton = proposalForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+
+        // Disable button and show loading state
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="bi bi-hourglass-split animate-spin"></i> Sending...';
+
+        fetch(proposalForm.action, {
+            method: proposalForm.method,
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              document.getElementById('formNotif').classList.remove('hidden');
+              proposalForm.reset();
+
+              // Auto close notification after 3 seconds
+              setTimeout(() => {
+                document.getElementById('formNotif').classList.add('hidden');
+                closePopup();
+              }, 3000);
+            } else {
+              alert('Gagal mengirim proposal. Silakan coba lagi.');
+            }
+          })
+          .catch(() => {
+            alert('Terjadi kesalahan. Silakan coba lagi.');
+          })
+          .finally(() => {
+            // Re-enable button
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+          });
+      });
+    }
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const popup = document.getElementById('rightPopup');
+        if (!popup.classList.contains('translate-x-full')) {
+          closePopup();
+        }
+      }
     });
-  }
+  </script>
 
-  function backToStep1() {
-    document.getElementById('step2').classList.add('hidden');
-    document.getElementById('step1').classList.remove('hidden');
-    document.getElementById('popupHeader').textContent = 'Project Details';
+  <style>
+    /* Additional CSS for animations and hover effects */
+    .card-hover {
+      transition: all 0.3s ease;
+    }
 
-    // Scroll to top of popup
-    document.getElementById('rightPopup').scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
 
-  // Form submission (Formspree)
-  const proposalForm = document.getElementById('proposalForm');
-  if (proposalForm) {
-    proposalForm.addEventListener('submit', function(e) {
-      e.preventDefault();
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-      const formData = new FormData(proposalForm);
-      const submitButton = proposalForm.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.innerHTML;
+    /* Smooth scrollbar for popup */
+    #rightPopup::-webkit-scrollbar {
+      width: 8px;
+    }
 
-      // Disable button and show loading state
-      submitButton.disabled = true;
-      submitButton.innerHTML = '<i class="bi bi-hourglass-split animate-spin"></i> Sending...';
+    #rightPopup::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
 
-      fetch(proposalForm.action, {
-          method: proposalForm.method,
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        })
-        .then(response => {
-          if (response.ok) {
-            document.getElementById('formNotif').classList.remove('hidden');
-            proposalForm.reset();
+    #rightPopup::-webkit-scrollbar-thumb {
+      background: #9333ea;
+      border-radius: 4px;
+    }
 
-            // Auto close notification after 3 seconds
-            setTimeout(() => {
-              document.getElementById('formNotif').classList.add('hidden');
-              closePopup();
-            }, 3000);
-          } else {
-            alert('Gagal mengirim proposal. Silakan coba lagi.');
-          }
-        })
-        .catch(() => {
-          alert('Terjadi kesalahan. Silakan coba lagi.');
-        })
-        .finally(() => {
-          // Re-enable button
-          submitButton.disabled = false;
-          submitButton.innerHTML = originalButtonText;
-        });
-    });
-  }
+    #rightPopup::-webkit-scrollbar-thumb:hover {
+      background: #7e22ce;
+    }
 
-  // Close popup with Escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const popup = document.getElementById('rightPopup');
-      if (!popup.classList.contains('translate-x-full')) {
-        closePopup();
+    /* Animation for notification */
+    #formNotif {
+      animation: slideInDown 0.5s ease;
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
-  });
-</script>
 
-<style>
-  /* Additional CSS for animations and hover effects */
-  .card-hover {
-    transition: all 0.3s ease;
-  }
-
-  .card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* Smooth scrollbar for popup */
-  #rightPopup::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  #rightPopup::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-
-  #rightPopup::-webkit-scrollbar-thumb {
-    background: #9333ea;
-    border-radius: 4px;
-  }
-
-  #rightPopup::-webkit-scrollbar-thumb:hover {
-    background: #7e22ce;
-  }
-
-  /* Animation for notification */
-  #formNotif {
-    animation: slideInDown 0.5s ease;
-  }
-
-  @keyframes slideInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
+    /* Loading spinner animation */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    .animate-spin {
+      animation: spin 1s linear infinite;
     }
-  }
+  </style>
 
-  /* Loading spinner animation */
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .animate-spin {
-    animation: spin 1s linear infinite;
-  }
-</style>
-
-@endsection
+  @endsection

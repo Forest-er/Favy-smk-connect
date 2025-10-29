@@ -76,18 +76,13 @@ class ClientController extends Controller
         if ($request->hasFile('foto_profil')) {
             if ($user->foto_profil && file_exists(storage_path('app/public/' . $user->foto_profil))) {
                 unlink(storage_path('app/public/' . $user->foto_profil));
-                \Log::info('[DEBUG] Foto lama dihapus: ' . $user->foto_profil);
             }
 
             $path = $request->file('foto_profil')->store('profile_pictures', 'public');
             $user->foto_profil = $path;
-            \Log::info('[DEBUG] Foto baru disimpan ke: ' . $path);
         }
 
         $user->save();
-
-        \Log::info('Setelah save, foto_profil di DB: ' . ($user->foto_profil ?? 'MASIH KOSONG'));
-        \Log::info('========== [DEBUG] Akhir update ==========');
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
@@ -115,26 +110,41 @@ class ClientController extends Controller
     {
         $search = $request->keyword;
         $jurusanId = $request->jurusan_id;
+
+        // Tentukan jumlah item per halaman: default 9 (desktop), mobile bisa 4
+        $perPage = $request->get('per_page', 9);
+        $perPage = in_array($perPage, [4, 9]) ? (int) $perPage : 9;
+
         $totalTasks = Task::where('users_id', auth()->id())->count();
-        $totalFreelancer = User::where('role', 'worker')->where('jurusan_id', $jurusanId)->count();
+        $totalFreelancer = User::where('role', 'worker')
+            ->when($jurusanId, fn($q) => $q->where('jurusan_id', $jurusanId))
+            ->count();
+
         $tasks = Task::with(['jurusan', 'user'])
-            ->where('status', 'open') 
+            ->where('status', 'open')
             ->when($search, function ($query) use ($search) {
                 $query->where('judul', 'like', "%{$search}%");
             })
             ->when($jurusanId, function ($query, $jurusanId) {
                 $query->where('jurusan_id', $jurusanId);
             })
-            ->get();
+            ->paginate($perPage)
+            ->appends(array_filter([
+                'keyword' => $search,
+                'jurusan_id' => $jurusanId,
+                'per_page' => $perPage,
+            ]));
 
         $jurusans = Jurusan::all();
         $myTasks = Task::where('users_id', auth()->id())->get();
 
         return view('client.dashboard', compact('jurusans', 'tasks', 'jurusanId', 'totalTasks', 'myTasks', 'totalFreelancer'));
     }
-    public function myTask_show(){
+
+    public function myTask_show()
+    {
         $tasks = Task::where('users_id', auth()->id())->get();
-       $likedTaskIds = LikedTask::where('user_id', Auth::id())->pluck('task_id');
+        $likedTaskIds = LikedTask::where('user_id', Auth::id())->pluck('task_id');
         $likedTask = Task::whereIn('id_task', $likedTaskIds)->get();
 
         return view('client.orders.task_show', compact('tasks', 'likedTask'));
