@@ -120,7 +120,7 @@
   </nav>
 
   {{-- Konten utama --}}
-  <main class="my-10">
+  <main>
     @yield('content')
   </main>
 
