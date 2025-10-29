@@ -12,7 +12,7 @@
       <p class="text-sm text-gray-500 mt-1">Kelola dan pantau semua proyek Anda</p>
     </div>
     <div class="relative">
-      <input type="text" placeholder="Cari proyek..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm w-64">
+      <input type="text" id="searchInput" placeholder="Cari proyek..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm w-64">
       <i class="bi bi-search absolute left-3 top-2.5 text-gray-400"></i>
     </div>
   </div>
@@ -67,15 +67,15 @@
 
   <!-- Filter Tabs -->
   <div class="flex gap-2 mb-5 bg-gray-50 p-1 rounded-lg inline-flex">
-    <button class="bg-white text-indigo-600 px-4 py-1.5 rounded-md font-medium text-sm shadow-sm">Semua</button>
-    <button class="text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition">Open</button>
-    <button class="text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition">In Progress</button>
-    <button class="text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition">Done</button>
-    <button class="text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition">Cancelled</button>
+    <button onclick="filterProjects('all')" class="filter-btn bg-white text-indigo-600 px-4 py-1.5 rounded-md font-medium text-sm shadow-sm" data-status="all">Semua</button>
+    <button onclick="filterProjects('open')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="open">Open</button>
+    <button onclick="filterProjects('in_progress')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="in_progress">In Progress</button>
+    <button onclick="filterProjects('done')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="done">Done</button>
+    <button onclick="filterProjects('cancelled')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="cancelled">Cancelled</button>
   </div>
 
   <!-- Project Cards - 4 columns -->
-  <div class="grid grid-cols-4 gap-4">
+  <div id="projectsContainer" class="grid grid-cols-4 gap-4">
     @forelse($tasks as $task)
       @php
         $statusClasses = [
@@ -93,9 +93,15 @@
         $status = $task->status ?? 'open';
         $badgeClass = $statusClasses[$status] ?? 'bg-gray-50 text-gray-700 border-gray-200';
         $statusLabel = $statusText[$status] ?? ucfirst($status);
+        
+        // Normalisasi data client
+        $clientName = $task->client_name ?? ($task->user->nama ?? 'Client');
+        $clientEmail = $task->client_email ?? ($task->user->email ?? null);
+        $clientPhone = $task->client_phone ?? ($task->user->phone ?? null);
+        $estimasiWaktu = $task->waktu_estimasi ?? ($task->estimasi ?? '-');
       @endphp
 
-      <div class="bg-white rounded-lg border border-gray-200 hover:border-indigo-300 hover:shadow-lg transition-all duration-200 {{ $status == 'done' ? 'opacity-75' : '' }}">
+      <div class="project-card bg-white rounded-lg border border-gray-200 hover:border-indigo-300 hover:shadow-lg transition-all duration-200 {{ $status == 'done' ? 'opacity-75' : '' }}" data-status="{{ $status }}" data-title="{{ strtolower($task->judul) }}" data-category="{{ strtolower($task->kategori ?? '') }}">
         <!-- Card Header -->
         <div class="p-4 border-b border-gray-100">
           <div class="flex items-start justify-between mb-2">
@@ -139,13 +145,13 @@
               <span class="text-gray-500 flex items-center gap-1">
                 <i class="bi bi-clock"></i> Estimasi
               </span>
-              <span class="font-medium text-gray-700">{{ $task->waktu_estimasi ?? '-' }}</span>
+              <span class="font-medium text-gray-700">{{ $estimasiWaktu }}</span>
             </div>
             <div class="flex items-center justify-between">
               <span class="text-gray-500 flex items-center gap-1">
                 <i class="bi bi-person"></i> Client
               </span>
-              <span class="font-medium text-gray-700">{{ Str::limit($task->user->nama ?? 'Client', 12) }}</span>
+              <span class="font-medium text-gray-700">{{ Str::limit($clientName, 12) }}</span>
             </div>
           </div>
 
@@ -155,13 +161,13 @@
               Detail
             </button>
             <div class="flex gap-1">
-              @if(isset($task->client_email))
-                <a href="mailto:{{ $task->client_email }}" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-md transition" title="Email">
+              @if($clientEmail)
+                <a href="mailto:{{ $clientEmail }}" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-md transition" title="Email">
                   <i class="bi bi-envelope text-sm text-gray-600"></i>
                 </a>
               @endif
-              @if(isset($task->client_phone))
-                <a href="https://wa.me/{{ $task->client_phone }}" target="_blank" class="bg-green-100 hover:bg-green-200 p-2 rounded-md transition" title="WhatsApp">
+              @if($clientPhone)
+                <a href="https://wa.me/{{ $clientPhone }}" target="_blank" class="bg-green-100 hover:bg-green-200 p-2 rounded-md transition" title="WhatsApp">
                   <i class="bi bi-whatsapp text-sm text-green-600"></i>
                 </a>
               @endif
@@ -175,6 +181,12 @@
         <p class="text-gray-500 mt-3">Belum ada proyek tersedia</p>
       </div>
     @endforelse
+  </div>
+
+  <!-- Empty State for Filtered Results -->
+  <div id="emptyState" class="hidden col-span-4 text-center py-16">
+    <i class="bi bi-search text-5xl text-gray-300"></i>
+    <p class="text-gray-500 mt-3">Tidak ada proyek yang sesuai dengan filter</p>
   </div>
 </div>
 
@@ -214,6 +226,12 @@
           $status = $task->status ?? 'open';
           $badgeClass = $statusClasses[$status] ?? 'bg-gray-50 text-gray-700 border-gray-200';
           $statusLabel = $statusText[$status] ?? ucfirst($status);
+          
+          // Normalisasi data client untuk popup
+          $clientName = $task->client_name ?? ($task->user->nama ?? 'Client');
+          $clientEmail = $task->client_email ?? ($task->user->email ?? null);
+          $clientPhone = $task->client_phone ?? ($task->user->phone ?? null);
+          $estimasiWaktu = $task->waktu_estimasi ?? ($task->estimasi ?? '-');
         @endphp
         
         <div id="popupTask{{ $task->id }}" class="hidden p-6">
@@ -274,7 +292,7 @@
                 </div>
                 <span class="text-xs text-gray-600 font-semibold uppercase">Estimasi Waktu</span>
               </div>
-              <p class="text-xl font-bold text-gray-800">{{ $task->estimasi ?? '-' }}</p>
+              <p class="text-xl font-bold text-gray-800">{{ $estimasiWaktu }}</p>
             </div>
 
             <div class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-indigo-300 transition">
@@ -284,7 +302,7 @@
                 </div>
                 <span class="text-xs text-gray-600 font-semibold uppercase">Client</span>
               </div>
-              <p class="text-xl font-bold text-gray-800">{{ $task->client_name ?? 'Client' }}</p>
+              <p class="text-xl font-bold text-gray-800">{{ $clientName }}</p>
             </div>
 
             <div class="bg-white border-2 border-gray-200 rounded-xl p-5 hover:border-indigo-300 transition">
@@ -312,7 +330,7 @@
           </div>
 
           <!-- Contact Section -->
-          @if(isset($task->client_email) || isset($task->client_phone))
+          @if($clientEmail || $clientPhone)
           <div class="bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 rounded-2xl p-6 mb-6">
             <h4 class="font-bold text-gray-800 mb-4 text-xl flex items-center gap-2">
               <div class="bg-indigo-500 p-2 rounded-lg">
@@ -321,14 +339,14 @@
               Kontak Client
             </h4>
             <div class="grid md:grid-cols-2 gap-4">
-              @if(isset($task->client_email))
-                <a href="mailto:{{ $task->client_email }}" class="bg-white hover:bg-gray-50 border-2 border-gray-300 text-gray-700 py-4 px-5 rounded-xl font-semibold transition flex items-center justify-center gap-3 shadow-sm hover:shadow-md">
+              @if($clientEmail)
+                <a href="mailto:{{ $clientEmail }}" class="bg-white hover:bg-gray-50 border-2 border-gray-300 text-gray-700 py-4 px-5 rounded-xl font-semibold transition flex items-center justify-center gap-3 shadow-sm hover:shadow-md">
                   <i class="bi bi-envelope-fill text-2xl text-indigo-600"></i>
                   <span>Email Client</span>
                 </a>
               @endif
-              @if(isset($task->client_phone))
-                <a href="https://wa.me/{{ $task->client_phone }}?text=Halo, saya tertarik dengan proyek {{ $task->judul }}" target="_blank" class="bg-green-500 hover:bg-green-600 text-white py-4 px-5 rounded-xl font-semibold transition flex items-center justify-center gap-3 shadow-md hover:shadow-lg">
+              @if($clientPhone)
+                <a href="https://wa.me/{{ $clientPhone }}?text=Halo, saya tertarik dengan proyek {{ urlencode($task->judul) }}" target="_blank" class="bg-green-500 hover:bg-green-600 text-white py-4 px-5 rounded-xl font-semibold transition flex items-center justify-center gap-3 shadow-md hover:shadow-lg">
                   <i class="bi bi-whatsapp text-2xl"></i>
                   <span>WhatsApp</span>
                 </a>
@@ -358,38 +376,106 @@
 </footer>
 
 <script>
+// Fungsi untuk membuka popup
 function openPopup(taskId) {
-  document.body.style.overflow = 'hidden'; // 🔒 kunci scroll body
+  document.body.style.overflow = 'hidden';
   document.getElementById('overlay').classList.remove('hidden');
-  document.getElementById('rightPopup').classList.remove('translate-x-full');
   
-  // Hide all popup contents
+  const popup = document.getElementById('rightPopup');
+  popup.classList.remove('translate-x-full');
+  
+  // Sembunyikan semua konten popup
   const allContents = document.querySelectorAll('[id^="popupTask"]');
   allContents.forEach(content => content.classList.add('hidden'));
   
-  // Show selected task content
+  // Tampilkan konten task yang dipilih
   const selectedContent = document.getElementById('popupTask' + taskId);
   if (selectedContent) {
     selectedContent.classList.remove('hidden');
   }
   
-  // Update apply button link
+  // Update link tombol apply
   const applyBtn = document.getElementById('popupApplyBtn');
   if (applyBtn) {
     applyBtn.href = '/worker/task/' + taskId;
   }
 }
 
+// Fungsi untuk menutup popup
 function closePopup() {
-  document.body.style.overflow = ''; // 🔓 aktifkan scroll lagi
+  document.body.style.overflow = '';
   document.getElementById('overlay').classList.add('hidden');
   document.getElementById('rightPopup').classList.add('translate-x-full');
 }
 
-// Close popup on ESC key
+// Tutup popup dengan tombol ESC
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closePopup();
+  }
+});
+
+// Fungsi filter proyek berdasarkan status
+function filterProjects(status) {
+  const cards = document.querySelectorAll('.project-card');
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  let visibleCount = 0;
+  
+  // Update active button
+  filterButtons.forEach(btn => {
+    if (btn.dataset.status === status) {
+      btn.classList.add('bg-white', 'text-indigo-600', 'shadow-sm');
+      btn.classList.remove('text-gray-600');
+    } else {
+      btn.classList.remove('bg-white', 'text-indigo-600', 'shadow-sm');
+      btn.classList.add('text-gray-600');
+    }
+  });
+  
+  // Filter cards
+  cards.forEach(card => {
+    const cardStatus = card.dataset.status;
+    if (status === 'all' || cardStatus === status) {
+      card.style.display = 'block';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Show/hide empty state
+  const emptyState = document.getElementById('emptyState');
+  if (visibleCount === 0) {
+    emptyState.classList.remove('hidden');
+  } else {
+    emptyState.classList.add('hidden');
+  }
+}
+
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  const searchTerm = e.target.value.toLowerCase();
+  const cards = document.querySelectorAll('.project-card');
+  let visibleCount = 0;
+  
+  cards.forEach(card => {
+    const title = card.dataset.title;
+    const category = card.dataset.category;
+    
+    if (title.includes(searchTerm) || category.includes(searchTerm)) {
+      card.style.display = 'block';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Show/hide empty state
+  const emptyState = document.getElementById('emptyState');
+  if (visibleCount === 0) {
+    emptyState.classList.remove('hidden');
+  } else {
+    emptyState.classList.add('hidden');
   }
 });
 </script>
