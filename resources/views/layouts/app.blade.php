@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +9,38 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
     body {
       font-family: 'Inter', sans-serif;
     }
-        .slide { transition: opacity 1.5s ease-in-out; }
-    
+
+    .slide {
+      transition: opacity 1.5s ease-in-out;
+    }
+
     .card-hover {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     .card-hover:hover {
       transform: translateY(-8px);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     }
-    
+
     .gradient-bg {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
-    
+
     .glass-effect {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
     }
-    
+
     .stat-card {
       position: relative;
       overflow: hidden;
     }
-    
+
     .stat-card::before {
       content: '';
       position: absolute;
@@ -43,10 +48,10 @@
       right: 0;
       width: 100px;
       height: 100px;
-      background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.1) 50%);
+      background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.1) 50%);
       border-radius: 0 0 0 100%;
     }
-    
+
     .project-badge {
       display: inline-flex;
       align-items: center;
@@ -56,12 +61,12 @@
       font-size: 12px;
       font-weight: 500;
     }
-    
+
     .shimmer {
       position: relative;
       overflow: hidden;
     }
-    
+
     .shimmer::after {
       content: '';
       position: absolute;
@@ -69,12 +74,14 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       animation: shimmer 3s infinite;
     }
-    
+
     @keyframes shimmer {
-      to { left: 100%; }
+      to {
+        left: 100%;
+      }
     }
   </style>
 </head>
@@ -88,17 +95,27 @@
     class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
 
     <!-- Logo -->
-    <div class="flex items-center space-x-4">
-      <img src="{{ asset('images/smkbm3.png') }}" alt="SMK BM3 Logo" class="h-10">
-      <h1 class="text-lg font-bold text-gray-800">SMK Connect</h1>
+    <div class="flex items-center">
+      <a
+        href="{{ Auth::check() ? route(Auth::user()->role . '.dashboard') : route('login') }}"
+        class="flex items-center gap-2">
+        <img
+          src="{{ asset('images/LOGO-SMK-CONNECT.png') }}"
+          alt="SMK BM3 Logo"
+          class="h-10 w-auto object-contain">
+        <h1 class="text-lg font-bold text-gray-800 leading-tight translate-y-[1px]">
+          SMK Connect
+        </h1>
+      </a>
     </div>
+
 
     <!-- Profile Dropdown -->
     <div class="relative" x-data="{ open: false }">
       <button onclick="toggleDropdown()" id="profileButton"
         class="focus:outline-none flex items-center space-x-2">
-        <img 
-          src="{{ $user && $user->foto_profil ? asset('storage/' . $user->foto_profil) : asset('images/profile.jpeg') }}" 
+        <img
+          src="{{ $user && $user->foto_profil ? asset('storage/' . $user->foto_profil) : asset('images/profile.jpeg') }}"
           alt="Profile"
           class="w-10 h-10 rounded-full border-2 border-gray-300 object-cover">
       </button>
@@ -120,7 +137,7 @@
   </nav>
 
   {{-- Konten utama --}}
-  <main class="my-10">
+  <main>
     @yield('content')
   </main>
 
@@ -128,52 +145,43 @@
   <footer class="relative bg-[#0B1D51] text-white pt-12 pb-8 overflow-hidden">
     <div class="container mx-auto px-6 md:px-12 lg:px-24">
 
-      <!-- Main Footer Columns -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h3 class="text-sm font-semibold uppercase text-white mb-6">For Clients</h3>
+      <!-- Kolom Utama Footer -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Kolom 1: Untuk Klien -->
+        <div class="text-center md:text-left">
+          <h3 class="text-sm font-semibold uppercase text-white mb-6">Untuk Klien</h3>
           <ul class="space-y-3">
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">How to hire</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Talent Marketplace</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Project Catalog</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Cara merekrut</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Freelance Marketplace</a></li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-sm font-semibold uppercase text-white mb-6">For Talent</h3>
+        <!-- Kolom 2: Untuk Talenta -->
+        <div class="text-center md:text-left">
+          <h3 class="text-sm font-semibold uppercase text-white mb-6">Untuk Freelance</h3>
           <ul class="space-y-3">
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">How to find work</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Direct Contracts</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Find freelance jobs worldwide</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Find freelance jobs in the USA</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Cara mencari pekerjaan</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Kontrak Langsung</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Cari pekerjaan freelance di seluruh dunia</a></li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-sm font-semibold uppercase text-white mb-6">Resources</h3>
+        <!-- Kolom 3: Website -->
+        <div class="text-center md:text-left">
+          <h3 class="text-sm font-semibold uppercase text-white mb-6">Website</h3>
           <ul class="space-y-3">
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Help & support</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Upwork reviews</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Resources</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Tentang kami</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Karir</a></li>
+            <li><a href="#" class="text-sm hover:text-gray-100 transition">Hubungi kami</a></li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-sm font-semibold uppercase text-white mb-6">Company</h3>
-          <ul class="space-y-3">
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">About us</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Leadership</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Careers</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Our impact</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Contact us</a></li>
-            <li><a href="#" class="text-sm hover:text-gray-100 transition">Partners</a></li>
-          </ul>
-        </div>
       </div>
 
-      <!-- Social Media -->
-      <div class="mt-10 text-center md:text-left">
-        <div class="flex flex-col md:flex-row items-center justify-start gap-4 text-white">
+      <!-- === BAGIAN MEDIA SOSIAL === -->
+      <div class="mt-10 text-center">
+        <div class="flex flex-col md:items-start items-center gap-4">
           <span class="text-sm">Ikuti kami di:</span>
           <div class="flex space-x-4">
             <a href="#" class="text-white hover:text-gray-100 transition"><i class="bi bi-facebook text-xl"></i></a>
@@ -184,22 +192,22 @@
         </div>
       </div>
 
-      <!-- Footer Bottom -->
-      <div class="border-t border-gray-400 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white">
-        <div>
-          &copy; {{ date('Y') }} SMK Connect. All rights reserved.
+      <!-- Bawah Footer -->
+      <div class="border-t border-gray-400 mt-8 pt-8 text-center">
+        <div class="mb-4">
+          <div class="flex flex-wrap justify-center gap-4 text-sm">
+            <a href="#" class="hover:text-gray-100 transition">Kebijakan Privasi</a>
+            <a href="#" class="hover:text-gray-100 transition">Syarat Layanan</a>
+            <a href="#" class="hover:text-gray-100 transition">Kebijakan Cookie</a>
+            <a href="#" class="hover:text-gray-100 transition">Aksesibilitas</a>
+          </div>
         </div>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a href="#" class="hover:text-gray-100 transition">Privacy Policy</a>
-          <a href="#" class="hover:text-gray-100 transition">Terms of Service</a>
-          <a href="#" class="hover:text-gray-100 transition">Cookie Policy</a>
-          <a href="#" class="hover:text-gray-100 transition">Accessibility</a>
-        </div>
+        <p class="text-sm text-white">&copy; {{ date('Y') }} SMK Connect. Semua hak dilindungi.</p>
       </div>
 
     </div>
 
-    <!-- Decorative Backgrounds -->
+    <!-- ===== Dekorasi Latar Belakang ===== -->
     <div class="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
     <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-white/10 rounded-full blur-2xl"></div>
     <div class="absolute top-10 right-1/4 w-3 h-3 bg-white/30 rounded-full"></div>
@@ -230,4 +238,5 @@
     });
   </script>
 </body>
+
 </html>

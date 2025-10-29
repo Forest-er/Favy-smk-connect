@@ -15,15 +15,6 @@
     <!-- Popular Projects -->
     <section class="mb-12">
         <div class="flex justify-between items-center mb-6">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                    Popular Projects <span class="text-3xl">🔥</span>
-                </h2>
-                <p class="text-gray-500 text-sm mt-1">Trending projects this week</p>
-            </div>
-            <button class="text-pink-600 hover:text-pink-700 font-semibold text-sm flex items-center gap-2 transition">
-                View All <i class="bi bi-arrow-right"></i>
-            </button>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -87,7 +78,7 @@
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-                    Disukai <span class="text-3xl">❤️</span>
+                    Favorit <span class="text-3xl">❤️</span>
                 </h2>
                 <p class="text-gray-500 text-sm mt-1">Tugas-tugas yang anda sukai</p>
             </div>
@@ -153,12 +144,18 @@
     class="fixed top-0 right-0 h-full w-full md:w-[90%] lg:w-[75%] xl:w-[70%] bg-gray-50 shadow-2xl transform translate-x-full transition-all duration-500 ease-out z-50 overflow-y-auto">
 
     <header class="bg-white shadow-sm py-4 px-6 md:px-12 lg:px-24 flex justify-between items-center sticky top-0 z-50 transition-all duration-300">
-        <h1 class="text-xl md:text-2xl font-semibold text-gray-800">Detail Task Saya</h1>
-        <button onclick="closePopup()" 
-            class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-all">
-            <i class="bi bi-x-lg text-gray-700 text-xl"></i>
-        </button>
-    </header>
+    <!-- Judul Header -->
+    <h1 class="text-xl md:text-2xl font-semibold text-gray-800">
+        Detail Task Saya
+    </h1>
+
+    <!-- Tombol Tutup -->
+    <button onclick="closePopup()" 
+        class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-300">
+        <i class="bi bi-x-lg text-gray-700 text-xl"></i>
+    </button>
+</header>
+
 
     <!-- MAIN CONTENT -->
     <div id="mainScrollClient" class="flex-1 overflow-y-auto bg-gray-50">

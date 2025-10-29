@@ -24,23 +24,22 @@
                 <div class="flex gap-3">
                     <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
                     <div>
-                        <p class="text-[15px] font-medium text-gray-800">This is your client profile</p>
-                        <p class="text-gray-600 text-[14px]">
-                            For your freelancer profile click
-                            <a href="{{ route('auth.register.freelancer') }}" class="text-pink-500 hover:underline">here</a>. or
-                            <a href="{{ route('login') }}" class="text-blue-500 hover:underline"> login </a>
-                        </p>
-                    </div>
+                            <p class="text-[15px] font-medium text-gray-800">
+                                Hai {{ $users->nama }}, selamat datang di profil clientmu ✨
+                            </p>
+                            <p class="text-gray-600 text-[14px]">
+                                Lengkapi profilmu agar klien bisa lebih mudah mengenal keahlianmu.
+                            </p>
+                        </div>
                 </div>
             </div>
 
             <!-- 3. Intro Section -->
             <div>
                 <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
-                    <span>👋</span> Hi, Let's help freelancers get to know you
+                    <span>👋</span> Perkenalkan dirimu pada freelancer
                 </h1>
-                <p class="text-gray-600 mt-2 text-[15px] leading-relaxed">
-                    Get the most out of Fiverr by sharing a bit more about yourself and how you prefer to work with freelancers.
+                <p class="text-gray-600 mt-2 text-[15px] leading-relaxed">Ceritakan sedikit tentang pengalaman, bidang usaha, atau cara komunikasi yang kamu sukai agar proses kolaborasi menjadi lebih lancar dan sesuai harapan.
                 </p>
             </div>
 
@@ -85,26 +84,19 @@
                 <div class="space-y-4">
                     <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
                         <div class="flex justify-between items-center mb-1">
-                            <p class="text-gray-800 font-medium text-[15px]">Add details for your profile</p>
-                            <button class="text-pink-500 text-[13px] hover:underline">Add</button>
+                            <p class="text-gray-800 font-medium text-[15px]">Tambahkan detail profilmu</p>
+                            <button class="text-pink-500 text-[13px] hover:underline">Tambah</button>
                         </div>
-                        <p class="text-gray-500 text-[13px]">Upload a photo and info for a more tailored experience.</p>
-                    </div>
-                    <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="text-gray-800 font-medium text-[15px]">Set your communication preferences</p>
-                            <button class="text-pink-500 text-[13px] hover:underline">Add</button>
-                        </div>
-                        <p class="text-gray-500 text-[13px]">Let freelancers know your collaboration preferences.</p>
+                        <p class="text-gray-500 text-[13px]">UUnggah foto dan info untuk pengalaman yang lebih sesuai.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 6. Tombol "lihat Dashboard" – DI BAWAH CHECKLIST -->
+            <!-- 6. Tombol "Lihat Dashboard" – DI BAWAH CHECKLIST -->
             <button
                 onclick="window.location.href='/client/dashboard'"
                 class="w-full py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition text-gray-800 font-medium flex items-center justify-center gap-2 shadow-sm">
-                lihat Dashboard
+                Lihat Dashboard
                 <i class="bi bi-arrow-right-circle"></i>
             </button>
         </div>
@@ -150,7 +142,7 @@
                 <button
                     onclick="window.location.href='/client/dashboard'"
                     class="mt-6 w-full py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition text-gray-800 font-medium flex items-center justify-center gap-2 shadow-sm">
-                    lihat Dashboard
+                    Lihat Dashboard
                     <i class="bi bi-arrow-right-circle"></i>
                 </button>
             </div>
@@ -160,13 +152,13 @@
                 <!-- Info Box -->
                 <div class="border border-pink-200 bg-gradient-to-r from-pink-50 via-rose-50 to-white rounded-2xl px-6 py-4 flex justify-between items-start shadow-sm">
                     <div class="flex gap-3">
-                        <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
+                    <i class="bi bi-info-circle text-pink-500 text-xl mt-[2px]"></i>
                         <div>
-                            <p class="text-[15px] font-medium text-gray-800">This is your client profile</p>
+                            <p class="text-[15px] font-medium text-gray-800">
+                                Hai {{ $users->nama }}, selamat datang di profil clientmu ✨
+                            </p>
                             <p class="text-gray-600 text-[14px]">
-                                For your freelancer profile click
-                                <a href="{{ route('auth.register.freelancer') }}" class="text-pink-500 hover:underline">here</a>. or
-                                <a href="{{ route('login') }}" class="text-blue-500 hover:underline"> login </a>
+                                Lengkapi profilmu agar klien bisa lebih mudah mengenal keahlianmu.
                             </p>
                         </div>
                     </div>
@@ -185,10 +177,10 @@
                 <!-- Intro Section -->
                 <div>
                     <h1 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
-                        <span>👋</span> Hi, Let's help freelancers get to know you
+                        <span>👋</span> Perkenalkan dirimu pada freelancer
                     </h1>
                     <p class="text-gray-600 mt-2 text-[15px] leading-relaxed">
-                        Get the most out of Fiverr by sharing a bit more about yourself and how you prefer to work with freelancers.
+                        Ceritakan sedikit tentang pengalaman, bidang usaha, atau cara komunikasi yang kamu sukai agar proses kolaborasi menjadi lebih lancar dan sesuai harapan.
                     </p>
                 </div>
 
@@ -198,17 +190,10 @@
                     <div class="space-y-4">
                         <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
                             <div class="flex justify-between items-center mb-1">
-                                <p class="text-gray-800 font-medium text-[15px]">Add details for your profile</p>
-                                <button class="text-pink-500 text-[13px] hover:underline">Add</button>
+                                <p class="text-gray-800 font-medium text-[15px]">Tambahkan detail profilmu</p>
+                                <button class="text-pink-500 text-[13px] hover:underline">Tambah</button>
                             </div>
-                            <p class="text-gray-500 text-[13px]">Upload a photo and info for a more tailored experience.</p>
-                        </div>
-                        <div class="border border-pink-100 rounded-xl p-5 hover:shadow-md transition bg-gradient-to-br from-white to-pink-50/40">
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-gray-800 font-medium text-[15px]">Set your communication preferences</p>
-                                <button class="text-pink-500 text-[13px] hover:underline">Add</button>
-                            </div>
-                            <p class="text-gray-500 text-[13px]">Let freelancers know your collaboration preferences.</p>
+                            <p class="text-gray-500 text-[13px]">Unggah foto dan info untuk pengalaman yang lebih sesuai.</p>
                         </div>
                     </div>
                 </div>
@@ -216,17 +201,17 @@
         </div>
     </div>
 </div>
-
 <!-- Modal dan Script (tidak berubah) -->
 <div id="addDetailModal" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
-    <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-        <h2 class="text-lg font-semibold text-gray-800">Complete your business profile</h2>
+    <div class="max-w-2xl mx-auto px-5 py-4 border-b border-gray-200 flex justify-between items-center">
+        <!-- Header modal disamakan padding horizontal dengan form -->
+        <h2 class="text-lg font-semibold text-gray-800">Lengkapi profil bisnismu</h2>
         <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">&times;</button>
     </div>
     <div class="max-w-2xl mx-auto px-5 py-8">
         <div class="text-center mb-8">
-            <h1 class="text-2xl font-bold text-gray-900 mb-2">Tell us about your business ✨</h1>
-            <p class="text-gray-500 text-sm">Fill out the details below so we can personalize your experience.</p>
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">Ceritakan tentang bisnismu ✨</h1>
+            <p class="text-gray-500 text-sm">Isi detail di bawah ini agar kami bisa menyesuaikan pengalamanmu.</p>
         </div>
         <div class="bg-white border border-gray-200 rounded-xl shadow-md p-6">
             <div class="flex flex-col items-center mb-8">
@@ -273,6 +258,7 @@
     </div>
 </div>
 
+
 <div id="commModal" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto transition-all duration-300 ease-in-out">
     <!-- ... (tidak diubah) ... -->
 </div>
@@ -294,30 +280,29 @@
         document.getElementById('addDetailModal').classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
     }
+
     function closeModal() {
         document.getElementById('addDetailModal').classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
     }
+
     function openCommModal() {
         document.getElementById('commModal').classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
     }
+
     function closeCommModal() {
         document.getElementById('commModal').classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
     }
 
     document.querySelectorAll('button.text-pink-500').forEach(btn => {
-        btn.addEventListener('click', e => {
-            e.preventDefault();
-            const parentText = btn.closest('div').querySelector('p').innerText;
-            if (parentText.includes('Add details for your profile')) {
-                openModal();
-            } else if (parentText.includes('Set your communication preferences')) {
-                openCommModal();
-            }
-        });
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+        openModal();
     });
+});
 </script>
 
 @endsection
+
