@@ -178,7 +178,9 @@
                         <a href="/client/dashboard" class="text-gray-500 font-medium hover:text-gray-800">Home</a> /
                         <a href="/client/profile" class="text-gray-500 font-medium hover:text-gray-800">My Profile</a> /
                         <a href="/insert/task" class="text-gray-500 font-medium hover:text-gray-800">My Tasks</a>/
-                        <a href="/client/task_show" class="text-gray-500 font-medium hover:text-gray-800">Tugas Saya</a>
+                        <a href="/client/task_show" class="text-gray-500 font-medium hover:text-gray-800">Tugas Saya</a>/
+                        <a href="/client/notification" class="text-gray-500 font-medium hover:text-gray-800">Notifikasi</a>/
+
                     </div>
                 </div>
 

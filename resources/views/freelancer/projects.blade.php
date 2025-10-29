@@ -68,9 +68,7 @@
   <!-- Filter Tabs -->
   <div class="flex gap-2 mb-5 bg-gray-50 p-1 rounded-lg inline-flex">
     <button onclick="filterProjects('all')" class="filter-btn bg-white text-indigo-600 px-4 py-1.5 rounded-md font-medium text-sm shadow-sm" data-status="all">Semua</button>
-    <button onclick="filterProjects('open')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="open">Open</button>
     <button onclick="filterProjects('in_progress')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="in_progress">In Progress</button>
-    <button onclick="filterProjects('done')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="done">Done</button>
     <button onclick="filterProjects('cancelled')" class="filter-btn text-gray-600 px-4 py-1.5 rounded-md font-medium text-sm hover:bg-white hover:text-indigo-600 transition" data-status="cancelled">Cancelled</button>
   </div>
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientProfileController;
 use App\Http\Controllers\LikedTaskController;
+use App\Http\Controllers\Freelancer\ProposalController;
 
 Route::get('/', function () {
     return view('page-guest.home');
@@ -51,6 +52,8 @@ Route::middleware(['auth', 'role:worker'])->group(function () {
     Route::get('/worker/task/{id}', [TaskController::class, 'show'])->name('worker.task.show');
     Route::get('/worker/profile', [FreelancerController::class, 'profile'])->name('worker.profile');
     Route::get('/worker/projects', [FreelancerController::class, 'projects'])->name('worker.projects');
+    Route::post('/proposal/store', [ProposalController::class, 'store'])->name('proposal.store');
+
     
 });
 
@@ -67,6 +70,10 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 Route::post('/client/upload-photo', [ClientController::class, 'uploadPhoto'])->name('client.upload.photo');
     Route::get('client/task_show', [ClientController::class, 'myTask_show'])->name('client.task_show');
     Route::post('/tasks/{task}/like', [LikedTaskController::class, 'store'])->name('tasks.like');
+    Route::get('client/notification',[ClientController::class, 'Notif'])->name('client.notification');
+    Route::post('/proposal/approve/{id}', [ProposalController::class, 'approve'])
+    ->name('proposal.approve');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/client/client-profile', [ClientController::class, 'profile'])->name('client.profile'); 

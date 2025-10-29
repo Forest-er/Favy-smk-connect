@@ -15,6 +15,7 @@ class Task extends Model
 
     protected $fillable = [
         'users_id',
+        'freelancer_id',
         'judul',
         'foto',
         'deskripsi',
@@ -35,5 +36,9 @@ class Task extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id_users');
+    }
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class, 'task_id', 'id_task');
     }
 }

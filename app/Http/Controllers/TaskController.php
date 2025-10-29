@@ -124,4 +124,8 @@ class TaskController extends Controller
         $task = Task::with(['jurusan', 'user'])->findOrFail($id);
         return view('freelancer.task-detail', compact('task'));
     }
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'users_id', 'id_users');
+    }
 }
