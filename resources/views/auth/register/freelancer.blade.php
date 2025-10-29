@@ -64,9 +64,9 @@
     <!-- Right Side - Registration Form -->
     <div class="relative flex justify-center">
       <!-- Ilustrasi Freelancer (Optional) -->
-      <img src="/images/register_freelancer.png"
+      <img src="/images/register_client.png"
            alt="Ilustrasi freelancer"
-           class="hidden lg:block absolute -right-12 top-1/2 -translate-y-1/2 w-40 drop-shadow-lg z-0">
+           class="hidden lg:block absolute -right-20 top-1/2 -translate-y-1/2 w-40 drop-shadow-lg z-0">
 
       <!-- Form Card -->
       <div class="bg-white rounded-3xl shadow-xl p-6 lg:p-8 border border-blue-100 relative z-10 max-w-2xl w-full">

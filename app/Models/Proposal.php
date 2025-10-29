@@ -16,7 +16,7 @@ class Proposal extends Model
         'worker_id',
         'nama',
         'email',
-        'status',
+        'status',   
         'deskripsi',
         'cv_link',
     ];

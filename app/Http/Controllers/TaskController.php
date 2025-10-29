@@ -36,13 +36,11 @@ class TaskController extends Controller
 
         $data = $request->all();
 
-        // Upload file jika ada
         if ($request->hasFile('foto')) {
             $path = $request->file('foto')->store('tasks', 'public');
             $data['foto'] = $path;
         }
 
-        // Simpan data task baru
         $task = new Task();
         $task->users_id = Auth::id();
         $task->judul = $data['judul'];
@@ -104,12 +102,10 @@ class TaskController extends Controller
        📌 BAGIAN FREELANCER
     =============================== */
 
-    // 🟢 Lihat semua task (untuk freelancer)
     public function freelancerIndex()
     {
         $tasks = Task::with(['jurusan', 'user'])->orderBy('created_at', 'desc')->get();
 
-        // Statistik sederhana
         $total = $tasks->count();
         $open = $tasks->where('status', 'open')->count();
         $progress = $tasks->where('status', 'in_progress')->count();
@@ -118,14 +114,79 @@ class TaskController extends Controller
         return view('freelancer.projects', compact('tasks', 'total', 'open', 'progress', 'done'));
     }
 
-    // 🟢 Lihat detail task dari sisi freelancer
     public function freelancerShow($id)
     {
         $task = Task::with(['jurusan', 'user'])->findOrFail($id);
         return view('freelancer.task-detail', compact('task'));
     }
-    public function user()
+    public function edit($id)
     {
-        return $this->belongsTo(\App\Models\User::class, 'users_id', 'id_users');
+        $task = Task::findOrFail($id);
+        $jurusans = Jurusan::all();
+
+        return view('client.orders.edit', compact('task', 'jurusans'));
+    }
+
+    // 🟣 Update task di database
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'jurusan_id' => 'required|exists:jurusans,id_jurusan',
+            'deskripsi' => 'nullable|string',
+            'budget' => 'nullable|numeric',
+            'deadline' => 'nullable|date|after_or_equal:today',
+            'waktu_estimasi' => 'nullable|string|max:50',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:5120',
+        ]);
+
+        $task = Task::findOrFail($id);
+
+        $task->judul = $request->judul;
+        $task->jurusan_id = $request->jurusan_id;
+        $task->deskripsi = $request->deskripsi;
+        $task->budget = $request->budget;
+        $task->deadline = $request->deadline;
+        $task->waktu_estimasi = $request->waktu_estimasi;
+
+        if ($request->hasFile('foto')) {
+            if ($task->foto && Storage::disk('public')->exists($task->foto)) {
+                Storage::disk('public')->delete($task->foto);
+            }
+
+            $path = $request->file('foto')->store('tasks', 'public');
+            $task->foto = $path;
+        }
+
+        $task->save();
+
+        return redirect()->route('client.dashboard')->with('success', 'Task berhasil diperbarui!');
+    }
+
+    // 🟣 Hapus task
+    public function destroy($id)
+    {
+        $task = Task::findOrFail($id);
+
+        if ($task->foto && Storage::disk('public')->exists($task->foto)) {
+            Storage::disk('public')->delete($task->foto);
+        }
+
+        $task->delete();
+
+        return redirect()->route('client.dashboard')->with('success', 'Task berhasil dihapus!');
+    }
+    public function showFreelancerTasks()
+    {
+        // Ambil ID user yang sedang login
+        $freelancerId = Auth::id();
+
+        $tasks = Task::with(['jurusan', 'user'])
+            ->where('freelancer_id', $freelancerId)
+            ->where('status', 'in_progress')
+            ->get();
+
+        // Kirim data ke view
+        return view('freelancer.projects', compact('tasks'));
     }
 }

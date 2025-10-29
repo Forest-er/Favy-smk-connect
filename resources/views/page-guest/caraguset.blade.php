@@ -2,15 +2,15 @@
 <section class="py-16 bg-white">
   <div class="container mx-auto px-6 md:px-12 lg:px-24">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
-      <h2 class="text-2xl font-bold text-gray-900">How it works</h2>
+      <h2 class="text-2xl font-bold text-gray-900">Bagaimana Caranya Rekrut/Dapat Kerjaan?</h2>
       <div class="flex rounded-full border border-gray-300 overflow-hidden shadow-sm">
         <button id="toggleHiring"
           class="px-6 py-3 bg-gray-100 text-gray-800 font-medium hover:bg-gray-200 transition active:bg-white active:border-b-2 active:border-blue-500">
-          For hiring
+          Cara rekrutmen
         </button>
         <button id="toggleFinding"
           class="px-6 py-3 text-gray-700 font-medium hover:bg-gray-100 transition">
-          For finding work
+          Cara mencari kerja
         </button>
       </div>
     </div>

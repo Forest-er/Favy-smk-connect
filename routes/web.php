@@ -41,10 +41,23 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
+    // Form tambah task
     Route::get('/insert/task', [TaskController::class, 'create'])->name('client.orders.task');
-    Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.task');
-    
+    Route::post('/insert/task', [TaskController::class, 'store'])->name('client.orders.store');
+
+    // Form edit task
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+
+    // Update task (hasil dari form edit)
+    Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
+    // Hapus task
+    Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
 });
+
 
 // ===== Freelancer Routes =====
 Route::middleware(['auth', 'role:worker'])->group(function () {
@@ -53,6 +66,7 @@ Route::middleware(['auth', 'role:worker'])->group(function () {
     Route::get('/worker/profile', [FreelancerController::class, 'profile'])->name('worker.profile');
     Route::get('/worker/projects', [FreelancerController::class, 'projects'])->name('worker.projects');
     Route::post('/proposal/store', [ProposalController::class, 'store'])->name('proposal.store');
+    Route::get('/worker/tasks', [TaskController::class, 'showFreelancerTasks'])->name('worker.tasks');
 
     
 });

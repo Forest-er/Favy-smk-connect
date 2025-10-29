@@ -1,4 +1,4 @@
-{{-- resources/views/tasks/form.blade.php --}}
+{{-- resources/views/client/orders/edit.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
@@ -8,7 +8,7 @@
     <nav class="flex mb-6 sm:mb-8" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
             <li class="inline-flex items-center">
-                <a href="{{ route(Auth::user()->role . '.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-pink-600 transition">
+                <a href="{{ route('client.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-pink-600 transition">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
                     </svg>
@@ -20,7 +20,7 @@
                     <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
                     </svg>
-                    <a href="{{ route('worker.dashboard') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-pink-600 transition md:ml-2">Tasks</a>
+                    <a href="{{ route('client.dashboard') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-pink-600 transition md:ml-2">Tasks</a>
                 </div>
             </li>
             <li aria-current="page">
@@ -28,21 +28,27 @@
                     <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
                     </svg>
-                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">
-                        {{ isset($task) ? 'Edit Task' : 'Buat Task Baru' }}
-                    </span>
+                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">Edit Task</span>
                 </div>
             </li>
         </ol>
     </nav>
 
-    <!-- Page Header -->
+    <!-- Page Header with Edit Badge -->
     <div class="mb-8">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-            {{ isset($task) ? 'Edit Task' : 'Buat Task Baru' }}
-        </h1>
+        <div class="flex items-center gap-3 mb-2">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
+                Edit Task
+            </h1>
+            <span class="px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-bold flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                </svg>
+                Mode Edit
+            </span>
+        </div>
         <p class="text-sm sm:text-base text-gray-600">
-            {{ isset($task) ? 'Perbarui informasi task Anda' : 'Posting project Anda dan dapatkan penawaran dari freelancer profesional' }}
+            Perbarui informasi task Anda
         </p>
     </div>
 
@@ -81,13 +87,11 @@
         </div>
     @endif
 
-    <form action="{{ isset($task) ? route('tasks.update', $task->id_task) : route('tasks.store') }}" 
+    <form action="{{ route('tasks.update', $task->id_task) }}" 
           method="POST" 
           enctype="multipart/form-data">
         @csrf
-        @if(isset($task))
-            @method('PUT')
-        @endif
+        @method('PUT')
 
         <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
             <!-- Main Form Section -->
@@ -115,7 +119,7 @@
                             <input type="text" 
                                    name="judul" 
                                    id="judul"
-                                   value="{{ old('judul', $task->judul ?? '') }}"
+                                   value="{{ old('judul', $task->judul) }}"
                                    placeholder="Contoh: Desain Logo untuk Brand Kopi" 
                                    required
                                    class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('judul') border-red-500 @enderror">
@@ -137,7 +141,7 @@
                                 <option value="">Pilih kategori yang sesuai</option>
                                 @foreach($jurusans as $jurusan)
                                     <option value="{{ $jurusan->id_jurusan }}" 
-                                        {{ old('jurusan_id', $task->jurusan_id ?? '') == $jurusan->id_jurusan ? 'selected' : '' }}>
+                                        {{ old('jurusan_id', $task->jurusan_id) == $jurusan->id_jurusan ? 'selected' : '' }}>
                                         {{ $jurusan->nama_jurusan }}
                                     </option>
                                 @endforeach
@@ -156,7 +160,7 @@
                                       id="deskripsi"
                                       rows="6" 
                                       placeholder="Jelaskan detail task, requirement, ekspektasi hasil, dan informasi penting lainnya..."
-                                      class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition resize-none @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi', $task->deskripsi ?? '') }}</textarea>
+                                      class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition resize-none @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi', $task->deskripsi) }}</textarea>
                             @error('deskripsi')
                                 <p class="mt-1.5 text-sm text-red-500">{{ $message }}</p>
                             @enderror
@@ -193,7 +197,7 @@
                                 <input type="text" 
                                        name="budget" 
                                        id="budget"
-                                       value="{{ old('budget', isset($task) ? number_format($task->budget, 0, ',', '.') : '') }}"
+                                       value="{{ old('budget', number_format($task->budget, 0, ',', '.')) }}"
                                        placeholder="1.000.000" 
                                        class="w-full pl-11 pr-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('budget') border-red-500 @enderror">
                             </div>
@@ -210,7 +214,7 @@
                             <input type="date" 
                                    name="deadline" 
                                    id="deadline"
-                                   value="{{ old('deadline', isset($task) ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : '') }}"
+                                   value="{{ old('deadline', $task->deadline) }}"
                                    min="{{ date('Y-m-d') }}"
                                    class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('deadline') border-red-500 @enderror">
                             @error('deadline')
@@ -226,7 +230,7 @@
                             <input type="text" 
                                    name="waktu_estimasi" 
                                    id="waktu_estimasi"
-                                   value="{{ old('waktu_estimasi', $task->waktu_estimasi ?? '') }}"
+                                   value="{{ old('waktu_estimasi', $task->waktu_estimasi) }}"
                                    placeholder="Contoh: 2 minggu, 1 bulan, 3 hari"
                                    maxlength="50"
                                    class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('waktu_estimasi') border-red-500 @enderror">
@@ -247,12 +251,12 @@
                         </div>
                         <div>
                             <h2 class="text-lg font-bold text-gray-900">Lampiran</h2>
-                            <p class="text-sm text-gray-500">Upload gambar pendukung {{ isset($task) ? '(opsional - kosongkan jika tidak ingin mengubah)' : '(opsional)' }}</p>
+                            <p class="text-sm text-gray-500">Upload gambar pendukung (opsional - kosongkan jika tidak ingin mengubah)</p>
                         </div>
                     </div>
 
-                    <!-- Current Image Preview (for edit mode) -->
-                    @if(isset($task) && $task->foto)
+                    <!-- Current Image Preview -->
+                    @if($task->foto)
                         <div class="mb-4">
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Gambar Saat Ini</label>
                             <div class="relative inline-block">
@@ -273,7 +277,7 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-3">
-                            {{ isset($task) ? 'Upload Gambar Baru' : 'Upload Gambar/File' }}
+                            Upload Gambar Baru
                         </label>
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-pink-500 transition cursor-pointer bg-gray-50 @error('foto') border-red-500 @enderror">
                             <input type="file" 
@@ -311,7 +315,7 @@
                 </div>
 
                 <!-- Status Hidden -->
-                <input type="hidden" name="status" value="{{ $task->status ?? 'open' }}">
+                <input type="hidden" name="status" value="{{ $task->status }}">
             </div>
 
             <!-- Sidebar -->
@@ -323,9 +327,7 @@
                             <svg class="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                             </svg>
-                            <h3 class="font-bold text-gray-900">
-                                {{ isset($task) ? 'Tips Edit Task' : 'Tips Membuat Task' }}
-                            </h3>
+                            <h3 class="font-bold text-gray-900">Tips Edit Task</h3>
                         </div>
                         <ul class="space-y-3 text-sm text-gray-700">
                             <li class="flex items-start gap-2">
@@ -349,14 +351,12 @@
 
                     <!-- Action Card -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <h3 class="font-bold text-gray-900 mb-4">
-                            {{ isset($task) ? 'Update Task' : 'Publish Task' }}
-                        </h3>
+                        <h3 class="font-bold text-gray-900 mb-4">Update Task</h3>
                         <div class="space-y-4">
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-gray-600">Status</span>
                                 <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-                                    {{ isset($task) ? ucfirst($task->status) : 'Open' }}
+                                    {{ ucfirst($task->status) }}
                                 </span>
                             </div>
                             <div class="flex items-center justify-between text-sm">
@@ -368,26 +368,20 @@
                                     class="w-full bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 active:scale-95">
                                     <span class="flex items-center justify-center gap-2">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                            @if(isset($task))
-                                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
-                                            @else
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd"/>
-                                            @endif
+                                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
                                         </svg>
-                                        {{ isset($task) ? 'Update Task' : 'Publish Task' }}
+                                        Update Task
                                     </span>
                                 </button>
-                                <button type="button" 
-                                    onclick="window.history.back()"
-                                    class="w-full bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 rounded-lg border border-gray-300 transition">
+                                <a href="{{ route('client.dashboard') }}"
+                                    class="w-full block text-center bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 rounded-lg border border-gray-300 transition">
                                     Batal
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
 
-                    @if(isset($task))
-                    <!-- Delete Card (Only for Edit Mode) -->
+                    <!-- Delete Card -->
                     <div class="bg-red-50 rounded-xl p-6 border border-red-200">
                         <div class="flex items-center gap-2 mb-3">
                             <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
@@ -404,13 +398,11 @@
                             Hapus Task
                         </button>
                     </div>
-                    @endif
                 </div>
             </div>
         </div>
     </form>
 
-    @if(isset($task))
     <!-- Delete Form (Hidden) -->
     <form id="delete-form" 
           action="{{ route('tasks.destroy', $task->id_task) }}" 
@@ -419,7 +411,6 @@
         @csrf
         @method('DELETE')
     </form>
-    @endif
 </div>
 
 @push('scripts')
@@ -460,7 +451,6 @@
         budgetInput.value = rawValue;
     });
 
-    @if(isset($task))
     // Confirm delete function
     function confirmDelete() {
         if (confirm('Apakah Anda yakin ingin menghapus task ini? Tindakan ini tidak dapat dibatalkan.')) {
@@ -469,7 +459,6 @@
             }
         }
     }
-    @endif
 </script>
 @endpush
 @endsection
