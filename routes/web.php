@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClientProfileController;
+use App\Http\Controllers\LikedTaskController;
 
 Route::get('/', function () {
     return view('page-guest.home');
@@ -65,6 +66,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::put('/client/update', [ClientController::class, 'update'])->name('client.update');
 Route::post('/client/upload-photo', [ClientController::class, 'uploadPhoto'])->name('client.upload.photo');
     Route::get('client/task_show', [ClientController::class, 'myTask_show'])->name('client.task_show');
+    Route::post('/tasks/{task}/like', [LikedTaskController::class, 'store'])->name('tasks.like');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/client/client-profile', [ClientController::class, 'profile'])->name('client.profile'); 

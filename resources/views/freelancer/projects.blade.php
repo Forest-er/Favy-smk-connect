@@ -1,20 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Navbar -->
-<nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
-    <h1 class="text-xl font-bold text-indigo-600">Freelancer Panel</h1>
-    <ul class="flex items-center gap-6 text-sm text-gray-600 font-medium">
-      <li><a href="/freelancer/dashboard" class="hover:text-indigo-600 transition">Dashboard</a></li>
-      <li><a href="/freelancer/projects" class="text-indigo-600 font-semibold">Proyek</a></li>
-      <li><a href="/freelancer/tasks" class="hover:text-indigo-600 transition">My Tasks</a></li>
-      <li><a href="/freelancer/offers" class="hover:text-indigo-600 transition">Penawaran</a></li>
-      <li><a href="/freelancer/profile" class="hover:text-indigo-600 transition">Profil</a></li>
-    </ul>
-  </div>
-</nav>
-
 <!-- Container -->
 <div class="max-w-7xl mx-auto p-6">
   <!-- Header Section -->

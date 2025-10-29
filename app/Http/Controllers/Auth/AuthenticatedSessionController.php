@@ -52,7 +52,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         if ($user->role === 'worker') {
-            return redirect()->route('freelancer.dashboard');
+            return redirect()->route('worker.dashboard');
         } elseif ($user->role === 'client') {
             return redirect()->route('client.dashboard');
         } elseif ($user->role === 'admin') {
