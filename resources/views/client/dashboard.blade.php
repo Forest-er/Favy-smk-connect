@@ -101,7 +101,7 @@
                             <i class="bi bi-sun"></i> {{ $greeting }}
                         </div>
                         <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">selamat datang, {{ Auth::user()->nama }}! 👋</h1>
-                        <p class="text-white/90 text-lg">Find the perfect freelancer for your next project</p>
+                        <p class="text-white/90 text-lg">Temukan freelancer terbaik untuk proyek Anda berikutnya</p>
                     </div>
                     
                     <div class="flex flex-col gap-3">
@@ -312,7 +312,7 @@
                             
                             <button onclick="openPopup({{ $task->id_task }}); event.stopPropagation();"
                                 class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-pink-200">
-                                Hire Now
+                                Mulai Kerjasama
                             </button>
                         </div>
                     </div>
@@ -415,16 +415,17 @@
 </div>
 
 <!-- Overlay -->
-<div id="overlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
+<div id="overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-40 transition-all duration-300"></div>
 
 <!-- Popup Container -->
-<div id="rightPopup" class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans rounded-l-3xl overflow-y-auto max-h-screen">
+<div id="rightPopup" class="fixed top-0 right-0 h-full w-[70%] bg-white backdrop-blur-xl shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 text-gray-800 font-sans overflow-y-auto max-h-screen">
     <div class="flex flex-col h-full">
-      <div id="rightPopupContent" class="p-4">
+      <div id="rightPopupContent">
         <!-- Konten popup akan dimuat di sini -->
       </div>
     </div>
 </div>
+
 
   <script>
    function openPopup(taskId) {

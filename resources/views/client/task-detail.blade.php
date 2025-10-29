@@ -1,13 +1,21 @@
 <!-- HEADER -->
+<!-- HEADER -->
 <div class="sticky top-0 z-20 bg-white border-b border-gray-200 shadow-sm">
     <div class="flex items-center justify-between px-6 py-4">
-        <h3 class="text-xl font-bold text-gray-900">Project Details</h3>
+        <h3 class="text-xl font-bold text-gray-900 text-left flex items-center gap-2">
+            <i class="bi bi-kanban text-purple-600 text-lg"></i>
+
+            Detail Profile
+        </h3>
         <button onclick="closePopup()" 
-            class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition group">
+            class="w-10 h-10 hover:bg-gray-100 flex items-center justify-center transition group">
             <i class="bi bi-x-lg text-gray-600 group-hover:text-gray-900 text-lg"></i>
         </button>
     </div>
 </div>
+
+
+
 
 <!-- MAIN CONTENT -->
 <div id="mainScroll" class="flex-1 overflow-y-auto bg-gray-50 h-[calc(100vh-73px)]">
@@ -84,7 +92,7 @@
                 <div class="mb-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
                         <i class="bi bi-file-text text-purple-600"></i>
-                        Description
+                        Deskripsi Proyek
                     </h3>
                     <p class="text-gray-700 leading-relaxed">{{ $task->deskripsi }}</p>
                 </div>
@@ -123,7 +131,7 @@
             <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                     <i class="bi bi-stars text-purple-600"></i>
-                    Skills Required
+                    Keahlian yang Dibutuhkan
                 </h3>
                 <div class="flex flex-wrap gap-2">
                     @php
@@ -134,40 +142,6 @@
                             {{ $skill }}
                         </span>
                     @endforeach
-                </div>
-            </div>
-
-            <!-- Comments Section -->
-            <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
-                        <i class="bi bi-chat-dots text-purple-600"></i>
-                        Comments & Feedback
-                        <span class="ml-2 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold">
-                            {{ count($comments ?? []) }}
-                        </span>
-                    </h3>
-                </div>
-
-                <div class="space-y-4">
-                    @forelse ($comments ?? [] as $comment)
-                        <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition">
-                            <img src="{{ $comment['avatar'] ?? 'https://i.pravatar.cc/100?u=' . $comment['nama'] }}"
-                                class="w-12 h-12 rounded-full object-cover shadow-md ring-2 ring-white">
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-2">
-                                    <h6 class="font-semibold text-gray-900">{{ $comment['nama'] }}</h6>
-                                    <span class="text-xs text-gray-500">{{ $comment['waktu'] }}</span>
-                                </div>
-                                <p class="text-gray-700 text-sm leading-relaxed">{{ $comment['komentar'] }}</p>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="text-center py-8">
-                            <i class="bi bi-chat-text text-4xl text-gray-300 mb-3"></i>
-                            <p class="text-gray-500">No comments yet. Be the first to comment!</p>
-                        </div>
-                    @endforelse
                 </div>
             </div>
         </div>
@@ -182,8 +156,8 @@
                         <i class="bi bi-info-circle text-purple-600 text-xl"></i>
                     </div>
                     <div>
-                        <p class="font-semibold text-gray-900 mb-1">Need Connects to Bid</p>
-                        <p class="text-gray-600 text-sm">Connects show clients you're serious about the project.</p>
+<p class="font-semibold text-gray-900 mb-1">Butuh Connects?</p>
+<p class="text-gray-600 text-sm">Connects membantu klien melihat bahwa kamu serius dan siap mengerjakan proyek ini.</p>
                     </div>
                 </div>
                 <a href="#" class="text-purple-600 text-sm font-semibold hover:text-purple-700 inline-flex items-center gap-1">
@@ -198,7 +172,7 @@
                     <button type="submit"
                         class="w-full border-2 border-pink-400 text-pink-600 hover:bg-pink-50 font-semibold py-4 
                             rounded-xl flex items-center justify-center gap-2 transition">
-                        <i class="bi bi-heart"></i> Save Project
+                        <i class="bi bi-heart"></i> Simpan Projek
                     </button>
                 </form>
             </div>
@@ -207,43 +181,29 @@
             <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
                 <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                     <i class="bi bi-person-circle text-purple-600"></i>
-                    About Freelancer
+                    Tentang Client
                 </h5>
                 <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                    {{ $task->user->bio ?? 'Experienced professional with a passion for delivering high-quality work. Committed to meeting deadlines and exceeding client expectations.' }}
+                    {{ $task->user->bio ?? 'No bio available' }}
                 </p>
-                
-                <div class="space-y-3 pt-4 border-t border-gray-100">
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-600">Member since</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-600">Completed projects</span>
-                        <span class="font-semibold text-gray-900">{{ rand(10, 50) }}</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-600">Success rate</span>
-                        <span class="font-semibold text-green-600">{{ rand(95, 100) }}%</span>
-                    </div>
-                </div>
 
-                <a href="/client/explore.show"
-                    class="mt-4 inline-flex items-center gap-2 text-purple-600 font-semibold text-sm hover:text-purple-700 transition">
-                    View Full Profile <i class="bi bi-arrow-right"></i>
-                </a>
             </div>
 
             <!-- Contact Info -->
-            <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
-                <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <i class="bi bi-envelope text-purple-600"></i>
-                    Contact
-                </h5>
-                <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2">
-                    <i class="bi bi-chat-dots"></i>
-                    Send Message
-                </button>
-            </div>
+          <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100">
+    <h5 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <i class="bi bi-envelope text-purple-600"></i>
+        Kontak
+    </h5>
+    <a href="https://wa.me/6282299240772?text=Halo%2C%20saya%20ingin%20menghubungi%20Anda" 
+       target="_blank" 
+       class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 text-center">
+        <i class="bi bi-chat-dots"></i>
+        Kirim Pesan
+    </a>
+</div>
+
+
         </div>
     </div>
 </div>

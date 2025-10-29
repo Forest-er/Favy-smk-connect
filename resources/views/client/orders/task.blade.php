@@ -1,14 +1,14 @@
-{{-- resources/views/tasks/create.blade.php --}}
+{{-- resources/views/tasks/form.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
 <!-- Main Content -->
-<div class="container mx-auto sm:px-6 lg:px-8 py-6 sm:py-8 ">
+<div class="container mx-auto sm:px-6 lg:px-8 py-6 sm:py-8">
     <!-- Breadcrumb -->
     <nav class="flex mb-6 sm:mb-8" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
             <li class="inline-flex items-center">
-                <a href="" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-pink-600 transition">
+                <a href="{{ route(Auth::user()->role . '.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-pink-600 transition">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
                     </svg>
@@ -20,7 +20,7 @@
                     <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
                     </svg>
-                    <a href="" class="ml-1 text-sm font-medium text-gray-700 hover:text-pink-600 transition md:ml-2">Tasks</a>
+                    <a href="{{ route('worker.dashboard') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-pink-600 transition md:ml-2">Tasks</a>
                 </div>
             </li>
             <li aria-current="page">
@@ -28,7 +28,9 @@
                     <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
                     </svg>
-                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">Buat Task Baru</span>
+                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">
+                        {{ isset($task) ? 'Edit Task' : 'Buat Task Baru' }}
+                    </span>
                 </div>
             </li>
         </ol>
@@ -36,8 +38,12 @@
 
     <!-- Page Header -->
     <div class="mb-8">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Buat Task Baru</h1>
-        <p class="text-sm sm:text-base text-gray-600">Posting project Anda dan dapatkan penawaran dari freelancer profesional</p>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+            {{ isset($task) ? 'Edit Task' : 'Buat Task Baru' }}
+        </h1>
+        <p class="text-sm sm:text-base text-gray-600">
+            {{ isset($task) ? 'Perbarui informasi task Anda' : 'Posting project Anda dan dapatkan penawaran dari freelancer profesional' }}
+        </p>
     </div>
 
     @if ($errors->any())
@@ -60,8 +66,28 @@
         </div>
     @endif
 
-    <form action="" method="POST" enctype="multipart/form-data">
+    @if(session('success'))
+        <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+            <div class="flex">
+                <div class="flex shrink-0">
+                    <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium text-green-800">{{ session('success') }}</p>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <form action="{{ isset($task) ? route('tasks.update', $task->id_task) : route('tasks.store') }}" 
+          method="POST" 
+          enctype="multipart/form-data">
         @csrf
+        @if(isset($task))
+            @method('PUT')
+        @endif
 
         <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
             <!-- Main Form Section -->
@@ -89,7 +115,7 @@
                             <input type="text" 
                                    name="judul" 
                                    id="judul"
-                                   value="{{ old('judul') }}"
+                                   value="{{ old('judul', $task->judul ?? '') }}"
                                    placeholder="Contoh: Desain Logo untuk Brand Kopi" 
                                    required
                                    class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('judul') border-red-500 @enderror">
@@ -110,7 +136,8 @@
                                     class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('jurusan_id') border-red-500 @enderror">
                                 <option value="">Pilih kategori yang sesuai</option>
                                 @foreach($jurusans as $jurusan)
-                                    <option value="{{ $jurusan->id_jurusan }}" {{ old('jurusan_id') == $jurusan->id_jurusan ? 'selected' : '' }}>
+                                    <option value="{{ $jurusan->id_jurusan }}" 
+                                        {{ old('jurusan_id', $task->jurusan_id ?? '') == $jurusan->id_jurusan ? 'selected' : '' }}>
                                         {{ $jurusan->nama_jurusan }}
                                     </option>
                                 @endforeach
@@ -129,7 +156,7 @@
                                       id="deskripsi"
                                       rows="6" 
                                       placeholder="Jelaskan detail task, requirement, ekspektasi hasil, dan informasi penting lainnya..."
-                                      class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition resize-none @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi') }}</textarea>
+                                      class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition resize-none @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi', $task->deskripsi ?? '') }}</textarea>
                             @error('deskripsi')
                                 <p class="mt-1.5 text-sm text-red-500">{{ $message }}</p>
                             @enderror
@@ -166,7 +193,7 @@
                                 <input type="text" 
                                        name="budget" 
                                        id="budget"
-                                       value="{{ old('budget') }}"
+                                       value="{{ old('budget', isset($task) ? number_format($task->budget, 0, ',', '.') : '') }}"
                                        placeholder="1.000.000" 
                                        class="w-full pl-11 pr-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('budget') border-red-500 @enderror">
                             </div>
@@ -183,7 +210,7 @@
                             <input type="date" 
                                    name="deadline" 
                                    id="deadline"
-                                   value="{{ old('deadline') }}"
+                                   value="{{ old('deadline', isset($task) ? \Carbon\Carbon::parse($task->deadline)->format('Y-m-d') : '') }}"
                                    min="{{ date('Y-m-d') }}"
                                    class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('deadline') border-red-500 @enderror">
                             @error('deadline')
@@ -199,7 +226,7 @@
                             <input type="text" 
                                    name="waktu_estimasi" 
                                    id="waktu_estimasi"
-                                   value="{{ old('waktu_estimasi') }}"
+                                   value="{{ old('waktu_estimasi', $task->waktu_estimasi ?? '') }}"
                                    placeholder="Contoh: 2 minggu, 1 bulan, 3 hari"
                                    maxlength="50"
                                    class="w-full px-4 py-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition @error('waktu_estimasi') border-red-500 @enderror">
@@ -220,12 +247,34 @@
                         </div>
                         <div>
                             <h2 class="text-lg font-bold text-gray-900">Lampiran</h2>
-                            <p class="text-sm text-gray-500">Upload gambar pendukung (opsional)</p>
+                            <p class="text-sm text-gray-500">Upload gambar pendukung {{ isset($task) ? '(opsional - kosongkan jika tidak ingin mengubah)' : '(opsional)' }}</p>
                         </div>
                     </div>
 
+                    <!-- Current Image Preview (for edit mode) -->
+                    @if(isset($task) && $task->foto)
+                        <div class="mb-4">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Gambar Saat Ini</label>
+                            <div class="relative inline-block">
+                                <img src="{{ asset('storage/' . $task->foto) }}" 
+                                     alt="Current task image" 
+                                     class="w-48 h-48 object-cover rounded-lg border-2 border-gray-200"
+                                     id="current-image">
+                                <button type="button" 
+                                        onclick="document.getElementById('current-image').classList.toggle('hidden')"
+                                        class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-1.5 transition">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    @endif
+
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">Upload Gambar/File</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">
+                            {{ isset($task) ? 'Upload Gambar Baru' : 'Upload Gambar/File' }}
+                        </label>
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-pink-500 transition cursor-pointer bg-gray-50 @error('foto') border-red-500 @enderror">
                             <input type="file" 
                                    name="foto" 
@@ -262,19 +311,21 @@
                 </div>
 
                 <!-- Status Hidden -->
-                <input type="hidden" name="status" value="open">
+                <input type="hidden" name="status" value="{{ $task->status ?? 'open' }}">
             </div>
 
             <!-- Sidebar -->
             <div class="lg:col-span-1">
                 <div class="sticky top-24 space-y-6">
                     <!-- Tips Card -->
-                    <div class="bg-linear-to-br from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-200">
+                    <div class="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-200">
                         <div class="flex items-center gap-2 mb-4">
                             <svg class="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                             </svg>
-                            <h3 class="font-bold text-gray-900">Tips Membuat Task</h3>
+                            <h3 class="font-bold text-gray-900">
+                                {{ isset($task) ? 'Tips Edit Task' : 'Tips Membuat Task' }}
+                            </h3>
                         </div>
                         <ul class="space-y-3 text-sm text-gray-700">
                             <li class="flex items-start gap-2">
@@ -298,11 +349,15 @@
 
                     <!-- Action Card -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                        <h3 class="font-bold text-gray-900 mb-4">Publish Task</h3>
+                        <h3 class="font-bold text-gray-900 mb-4">
+                            {{ isset($task) ? 'Update Task' : 'Publish Task' }}
+                        </h3>
                         <div class="space-y-4">
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-gray-600">Status</span>
-                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Open</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+                                    {{ isset($task) ? ucfirst($task->status) : 'Open' }}
+                                </span>
                             </div>
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-gray-600">Visibilitas</span>
@@ -310,12 +365,16 @@
                             </div>
                             <div class="pt-4 border-t border-gray-200 space-y-3">
                                 <button type="submit" 
-                                    class="w-full bg-linear-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 active:scale-95">
+                                    class="w-full bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white font-bold py-3 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-200 active:scale-95">
                                     <span class="flex items-center justify-center gap-2">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd"/>
+                                            @if(isset($task))
+                                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                                            @else
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd"/>
+                                            @endif
                                         </svg>
-                                        Publish Task
+                                        {{ isset($task) ? 'Update Task' : 'Publish Task' }}
                                     </span>
                                 </button>
                                 <button type="button" 
@@ -326,10 +385,41 @@
                             </div>
                         </div>
                     </div>
+
+                    @if(isset($task))
+                    <!-- Delete Card (Only for Edit Mode) -->
+                    <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+                        <div class="flex items-center gap-2 mb-3">
+                            <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <h3 class="font-bold text-red-900">Danger Zone</h3>
+                        </div>
+                        <p class="text-sm text-red-700 mb-4">
+                            Hapus task ini secara permanen. Tindakan ini tidak dapat dibatalkan.
+                        </p>
+                        <button type="button" 
+                            onclick="confirmDelete()"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 rounded-lg transition">
+                            Hapus Task
+                        </button>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </form>
+
+    @if(isset($task))
+    <!-- Delete Form (Hidden) -->
+    <form id="delete-form" 
+          action="{{ route('tasks.destroy', $task->id_task) }}" 
+          method="POST" 
+          class="hidden">
+        @csrf
+        @method('DELETE')
+    </form>
+    @endif
 </div>
 
 @push('scripts')
@@ -369,6 +459,17 @@
         const rawValue = budgetInput.value.replace(/\./g, '');
         budgetInput.value = rawValue;
     });
+
+    @if(isset($task))
+    // Confirm delete function
+    function confirmDelete() {
+        if (confirm('Apakah Anda yakin ingin menghapus task ini? Tindakan ini tidak dapat dibatalkan.')) {
+            if (confirm('Konfirmasi sekali lagi. Task akan dihapus secara permanen!')) {
+                document.getElementById('delete-form').submit();
+            }
+        }
+    }
+    @endif
 </script>
 @endpush
 @endsection
