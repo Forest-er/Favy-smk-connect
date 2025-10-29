@@ -76,65 +76,55 @@
     </script>
 
     <!-- Quick Stats -->
-    <section class="mb-12">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-              <i class="bi bi-briefcase text-blue-600 text-xl"></i>
-            </div>
-            <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">+2 this week</span>
-          </div>
-          <p class="text-gray-500 text-sm mb-1 font-medium">Active Projects</p>
-          <p class="text-4xl font-bold text-gray-900 mb-2">{{ $OrderedTask }}</p>
+   <section class="mb-12">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> <!-- 3 kolom di layar besar -->
+    
+    <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100 min-h-[180px]">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+          <i class="bi bi-briefcase text-blue-600 text-xl"></i>
         </div>
-
-        <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
-              <i class="bi bi-wallet2 text-green-600 text-xl"></i>
-            </div>
-            <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">+15%</span>
-          </div>
-          <p class="text-gray-500 text-sm mb-1 font-medium">Total Earnings</p>
-          <p class="text-4xl font-bold text-gray-900 mb-2">Rp12.5M</p>
-          <p class="text-xs text-gray-500">Rp2.5M this month</p>
-        </div>
-
-        <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
-              <i class="bi bi-check-circle text-purple-600 text-xl"></i>
-            </div>
-            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">All time</span>
-          </div>
-          <p class="text-gray-500 text-sm mb-1 font-medium">Completed</p>
-          <p class="text-4xl font-bold text-gray-900 mb-2">{{ $CompletedTask }}</p>
-          <p class="text-xs text-gray-500">100% on-time delivery</p>
-        </div>
-
-        <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center">
-              <i class="bi bi-star-fill text-yellow-500 text-xl"></i>
-            </div>
-            <span class="text-xs font-semibold text-yellow-600 bg-yellow-50 px-2 py-1 rounded-full">Top rated</span>
-          </div>
-          <p class="text-gray-500 text-sm mb-1 font-medium">Success Rate</p>
-          <p class="text-4xl font-bold text-gray-900 mb-2">98%</p>
-          <div class="flex items-center text-xs text-yellow-500">
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <i class="bi bi-star-fill"></i>
-            <span class="ml-2 text-gray-500">(4.9/5.0)</span>
-          </div>
-        </div>
+        <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">+2 this week</span>
       </div>
-    </section>
+      <p class="text-gray-500 text-sm mb-1 font-medium">Active Projects</p>
+      <p class="text-4xl font-bold text-gray-900 mb-2">{{ $OrderedTask }}</p>
+    </div>
 
-    <!-- Available Projects -->
+    <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100 min-h-[180px]">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
+          <i class="bi bi-check-circle text-purple-600 text-xl"></i>
+        </div>
+        <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">All time</span>
+      </div>
+      <p class="text-gray-500 text-sm mb-1 font-medium">Completed</p>
+      <p class="text-4xl font-bold text-gray-900 mb-2">{{ $CompletedTask }}</p>
+      <p class="text-xs text-gray-500">100% on-time delivery</p>
+    </div>
+
+    <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100 min-h-[180px]">
+      <div class="flex items-start justify-between mb-4">
+        <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center">
+          <i class="bi bi-star-fill text-yellow-500 text-xl"></i>
+        </div>
+        <span class="text-xs font-semibold text-yellow-600 bg-yellow-50 px-2 py-1 rounded-full">Top rated</span>
+      </div>
+      <p class="text-gray-500 text-sm mb-1 font-medium">Success Rate</p>
+      <p class="text-4xl font-bold text-gray-900 mb-2">98%</p>
+      <div class="flex items-center text-xs text-yellow-500">
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <span class="ml-2 text-gray-500">(4.9/5.0)</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <!-- Available Projects with Categories -->
     <section class="mb-12">
       <div class="flex justify-between items-center mb-6">
         <div>
@@ -146,6 +136,38 @@
           View All <i class="bi bi-arrow-right"></i>
         </a>
       </div>
+
+      <!-- Categories Pills -->
+      <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-4 mb-6">
+        @php
+          $gradients = [
+            ['from' => 'from-blue-500', 'via' => 'via-blue-600', 'to' => 'to-indigo-600'],
+            ['from' => 'from-purple-500', 'via' => 'via-purple-600', 'to' => 'to-pink-600'],
+            ['from' => 'from-pink-500', 'via' => 'via-rose-600', 'to' => 'to-red-600'],
+            ['from' => 'from-orange-500', 'via' => 'via-orange-600', 'to' => 'to-yellow-600'],
+            ['from' => 'from-green-500', 'via' => 'via-emerald-600', 'to' => 'to-teal-600'],
+            ['from' => 'from-cyan-500', 'via' => 'via-sky-600', 'to' => 'to-blue-600'],
+            ['from' => 'from-violet-500', 'via' => 'via-purple-600', 'to' => 'to-indigo-600'],
+            ['from' => 'from-fuchsia-500', 'via' => 'via-pink-600', 'to' => 'to-rose-600'],
+          ];
+        @endphp
+        
+        @forelse ($jurusans as $index => $jurusan)
+          @php $gradient = $gradients[$index % count($gradients)]; @endphp
+          <button 
+            onclick="filterByJurusan('{{ $jurusan->id }}')"
+            class="category-btn px-6 py-3 rounded-full text-gray-700 text-sm font-medium border border-gray-300 bg-white transition-all duration-300 hover:text-white hover:border-transparent hover:shadow-lg whitespace-nowrap hover:scale-105"
+            data-gradient="{{ $gradient['from'] }} {{ $gradient['via'] }} {{ $gradient['to'] }}"
+            onmouseenter="this.classList.add('bg-gradient-to-r', '{{ $gradient['from'] }}', '{{ $gradient['via'] }}', '{{ $gradient['to'] }}')"
+            onmouseleave="this.classList.remove('bg-gradient-to-r', '{{ $gradient['from'] }}', '{{ $gradient['via'] }}', '{{ $gradient['to'] }}')">
+            {{ $jurusan->nama_jurusan }}
+          </button>
+        @empty
+          <p class="text-gray-500 text-sm">No categories available</p>
+        @endforelse
+      </div>
+
+      <!-- Projects Grid -->
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse ($tasks as $task)
@@ -178,10 +200,8 @@
               <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ $task->deskripsi }}</p>
 
               <div class="flex flex-wrap gap-2 mb-4">
-                <span
-                  class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_2 }}</span>
-                <span
-                  class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_3 }}</span>
+                <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_2 }}</span>
+                <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">{{ $task->jurusan->deskripsi_3 }}</span>
               </div>
 
               <div class="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
@@ -195,17 +215,18 @@
                 </div>
               </div>
 
-              <button onclick="openPopup(
-                        {{ json_encode($task->judul) }},
-                        {{ json_encode($task->user->nama) }},
-                        {{ json_encode($task->deadline) }},
-                        {{ json_encode($task->budget) }},
-                        {{ json_encode($task->deskripsi) }},
-                        {{ json_encode($task->jurusan->deskripsi_1) }},
-                        {{ json_encode($task->jurusan->deskripsi_2) }},
-                        {{ json_encode($task->jurusan->deskripsi_3) }},
-                        {{ json_encode(asset('storage/' . $task->foto)) }}
-                    )"
+              <button
+                onclick="openPopup(
+                    {{ json_encode($task->judul) }},
+                    {{ json_encode($task->user->nama) }},
+                    {{ json_encode($task->deadline) }},
+                    {{ json_encode($task->budget) }},
+                    {{ json_encode($task->deskripsi) }},
+                    {{ json_encode($task->jurusan->deskripsi_1) }},
+                    {{ json_encode($task->jurusan->deskripsi_2) }},
+                    {{ json_encode($task->jurusan->deskripsi_3) }},
+                    {{ json_encode(asset('storage/' . $task->foto)) }}
+                )"
                 class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-purple-200">
                 Apply Now
               </button>
@@ -225,6 +246,7 @@
         {{ $tasks->links('pagination::tailwind') }}
       </div>
     </section>
+
 
     <!-- Progress & Achievements -->
     <section class="mb-12">
