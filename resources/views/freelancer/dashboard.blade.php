@@ -39,7 +39,7 @@
         <div class="relative w-full sm:flex-1">
           <form method="GET">
             <div class="flex flex-row">
-              <input type="text" placeholder="Search projects, clients, or skills..." name="keyword"
+              <input type="text" placeholder="Telusuri projek, client, atau keahlian..." name="keyword"
                 class="w-full pl-14 pr-5 py-4 rounded-l-2xl border-0 focus:ring-2 focus:ring-purple-400 shadow-lg text-gray-700">
               <button type="submit"
                 class="rounded-r-2xl bg-purple-600 text-white px-6 py-2 hover:bg-purple-700 transition">
@@ -77,9 +77,9 @@
           <div class="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center">
             <i class="bi bi-clipboard-data text-indigo-600 text-xl"></i>
           </div>
-          <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full">All open</span>
+          <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full">Semua tersedia</span>
         </div>
-        <p class="text-gray-500 text-sm mb-1 font-medium">Available Projects</p>
+        <p class="text-gray-500 text-sm mb-1 font-medium"> Projek Tersedia</p>
         <p class="text-4xl font-bold text-gray-900 mb-2">{{ $totalAvailableTasks }}</p>
       </div>
 
@@ -88,11 +88,11 @@
           <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
             <i class="bi bi-check-circle text-purple-600 text-xl"></i>
           </div>
-          <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">All time</span>
+          <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">Sepanjang waktu</span>
         </div>
-        <p class="text-gray-500 text-sm mb-1 font-medium">Completed</p>
+        <p class="text-gray-500 text-sm mb-1 font-medium">Selesai</p>
         <p class="text-4xl font-bold text-gray-900 mb-2">{{ $CompletedTask }}</p>
-        <p class="text-xs text-gray-500">100% on-time delivery</p>
+        <p class="text-xs text-gray-500">100% tepat waktu</p>
       </div>
 
       <div class="stat-card bg-white rounded-2xl p-6 shadow-lg card-hover border border-gray-100">
@@ -120,8 +120,8 @@
   <section class="mb-12">
     <div class="flex justify-between items-center mb-6">
       <div>
-        <h2 class="text-2xl font-bold text-gray-900">Featured Opportunities</h2>
-        <p class="text-gray-500 text-sm mt-1">Hand-picked projects matching your skills</p>
+        <h2 class="text-2xl font-bold text-gray-900">Projek Unggulan</h2>
+        <p class="text-gray-500 text-sm mt-1">Projek yang dipilih secara khusus sesuai dengan keahlian Anda</p>
       </div>
       <a href="{{ route('worker.dashboard') }}"
         class="text-purple-600 hover:text-purple-700 font-semibold text-sm flex items-center gap-2 transition">
