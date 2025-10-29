@@ -288,7 +288,7 @@
                             <div class="flex items-center gap-2 mb-4">
                                 <img src="https://i.pravatar.cc/150?u={{ $task->users_id }}" class="w-8 h-8 rounded-full ring-2 ring-gray-100">
                                 <div>
-                                    <p class="text-md text-gray-800">{{ $task->user->nama ?? 'Freelancer' }}</p>
+                                    <p class="text-md text-gray-800">{{ $task->user->nama ?? 'Client' }}</p>
                                 </div>
                             </div>
                             
